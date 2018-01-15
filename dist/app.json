@@ -1,0 +1,12 @@
+{
+  "pages": [
+    "pages/privateMember/courseCustom",
+    "pages/privateMember/privateMember"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#2f2d45",
+    "navigationBarTitleText": "WeChat",
+    "navigationBarTextStyle": "white"
+  }
+}

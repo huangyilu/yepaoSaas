@@ -1,0 +1,35 @@
+
+.private-cell {
+    height: 120rpx;
+    background-color: #2f2d45;
+    color: white;
+    margin-top: 10rpx;
+}
+
+.private-cell .left-p {
+    font-size: 32rpx;
+    height: 100%;
+}
+.private-cell .left-p text {
+    float: left;
+    margin-top: 40rpx;
+    margin-left: 30rpx;
+}
+.private-cell .left-p image{
+    width: 90rpx;
+    height: 90rpx;
+    border-radius: 50%;
+    margin-left: 30rpx;
+    float: left;
+    margin-top: 17.5rpx;
+}
+
+.private-cell .right-p {
+    font-size: 30rpx;
+    text-align: right;
+    height: 100%;
+}
+.private-cell .right-p text {
+    margin: 42rpx 20rpx 0;
+    float: right;
+}

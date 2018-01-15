@@ -1,0 +1,49 @@
+/**app.wxss**/
+
+@import 'styles/weui.wxss';
+
+page {
+    width: 100%;
+    background-color: #262439;
+}
+
+.bg-view {
+    /* width: 100%;
+    height: 100%; */
+    /* background-color: #262439; */
+    color: #ffffff;
+    font-size: 30rpx;
+}
+
+/* 字体 大小 */
+.fs32 {
+    font-size: 32rpx;
+}
+.fs30 {
+    font-size: 30rpx;
+}
+.fs28 {
+    font-size: 28rpx;
+}
+
+/* icon  */
+.right-icon {
+    width: 20rpx;
+    height: 35rpx;
+    float: right;
+    margin-top: 48rpx;
+    margin-right: 30rpx;
+}
+.no-data-view image {
+    width: 204rpx;
+    height: 128rpx;
+    margin: 140rpx auto 80rpx;
+    display: block;
+}
+.no-data-view text {
+    font-size: 34rpx;
+    color: #afafaf;
+    display: block;
+    margin: auto;
+    text-align: center;
+}
