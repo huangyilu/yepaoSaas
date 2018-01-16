@@ -1,0 +1,64 @@
+<!--pages/privateMember/courseTraining.wxml-->
+
+<import src="../../templates/courseTraining-item/courseTraining-item.wxml"/>
+
+<view class='bg-view' hidden='{{ !showVideoHidden }}'>
+
+  <!-- 头部 -->
+  <view class='title-view'>
+    <view class='course-item-view'>
+      <block wx:for='{{ courseItem }}' wx:key='{{ index }}'>
+        <view class='course-item'>{{ item }}</view>
+      </block>
+    </view>
+    <view class='course-level-view'>
+      <view>训练强度：{{ courseLevel }}</view>
+      <view class='second-txt-fscolor'>
+        训练间的休息时长：{{ courseRTime }}
+        <image class='shareIcon' src='../../images/share.png' bindtap='bindCourseSharedTap'></image>
+      </view>
+    </view>
+  </view>
+
+  <!-- 课程 cell -->
+  <view class='course-cell-view'>
+    
+    <template is="courseTraining-item" data="{{ courseTrainingList, courseShare }}"/>
+
+  </view>
+
+  <!-- foot-view -->
+  <view class='foot-btn-view' bindtap='bindMakeUpTap'>
+    {{ courseShare ? '立即分享' : '开始' }}
+  </view>
+
+  <!-- 分享 成功 提醒 -->
+  <view wx:if='{{ courseShareSuccess }}' class='share-success-remind-view'>
+    <view class='share-success-remind-btn'>您已将选中视频分享给张三</view>
+  </view>
+
+</view>
+
+<!-- 视频 弹窗 -->
+<view class='popUps-bgview' hidden='{{ showVideoHidden }}'>
+  <!-- 收起按钮 -->
+  <image class='popUps-cancel-btn' src='../../images/delete_back.png' bindtap='bindCloseVideoShowTap'></image>
+
+  <!-- 视频 -->
+  <view class="we-container">
+    <view class="we-wrapper"
+      bindtouchstart="touchstart"
+      bindtouchmove="touchmove"
+      bindtouchend="touchend"
+      animation="{{ animationData }}">
+      <block wx:for="{{ videoUrlsBrowse }}" wx:key="{{ index }}">
+      <view class="we-slide" >
+        <video class='video' autoplay='true' id="{{ index }}" src="{{ item.url }}" bindended='bindVideoPalyEnded'></video>
+      </view>
+      </block>
+    </view> 
+  </view> 
+  
+</view>
+
+

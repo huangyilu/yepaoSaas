@@ -26,46 +26,25 @@
 
   <!-- 全身定制 -->
   <view class='personal-view' >
-    <!-- bg img -->
-    <image class='personal-bgimg' src='../../images/person_bg.png'></image>
     <!-- btn -->
-    <!-- 全身 -->
-    <view class='course-btn-item top-btn' bindtap=''>
-      <view class='course-btn-icon' style='{{ all.selected ? "border-style: none;" : "border: 1px #ffffff solid;" }}'>
-        <image hidden='{{ !all.selected }}' src='../../images/checked.png'></image>
+    <view class='personal-btn-view'>
+      <!-- 全身 -->
+      <block wx:for='{{ bodyItem }}' wx:key='{{ index }}'>
+      <view class='course-btn-item {{ item.styles }}' id='{{ index }}' bindtap='bindCourseBtnItemTap'>
+        <view class='course-btn-icon' style='{{ item.selected ? "border-style: none;" : "border: 1px #ffffff solid;" }}'>
+          <image hidden='{{ !item.selected }}' src='../../images/checked.png'></image>
+        </view>
+        <text>{{ item.body }}</text>
       </view>
-      <text>{{ all.body }}</text>
-    </view>
-    <!-- 两肩 -->
-    <view class='course-btn-item top-left-btn' bindtap=''>
-      <view class='course-btn-icon' style='{{ all.selected ? "border-style: none;" : "border: 1px #ffffff solid;" }}'>
-        <image hidden='{{ !all.selected }}' src='../../images/checked.png'></image>
-      </view>
-      <text>{{ all.body }}</text>
-    </view>
-    <view class='course-btn-item top-right-btn' bindtap=''>
-      <view class='course-btn-icon' style='{{ all.selected ? "border-style: none;" : "border: 1px #ffffff solid;" }}'>
-        <image hidden='{{ !all.selected }}' src='../../images/checked.png'></image>
-      </view>
-      <text>{{ all.body }}</text>
-    </view>
-    <!-- 核心 -->
-    <view class='course-btn-item center-btn' bindtap=''>
-      <view class='course-btn-icon' style='{{ all.selected ? "border-style: none;" : "border: 1px #ffffff solid;" }}'>
-        <image hidden='{{ !all.selected }}' src='../../images/checked.png'></image>
-      </view>
-      <text>{{ all.body }}</text>
-    </view>
-    <!-- 下半身 -->
-    <view class='course-btn-item bottom-left-btn' bindtap=''>
-      <view class='course-btn-icon' style='{{ all.selected ? "border-style: none;" : "border: 1px #ffffff solid;" }}'>
-        <image hidden='{{ !all.selected }}' src='../../images/checked.png'></image>
-      </view>
-      <text>{{ all.body }}</text>
+      </block>
+    
     </view>
 
+    <!-- bg img -->
+    <image class='personal-bgimg' src='../../images/person_bg.png'></image>
+
     <!-- foot-view -->
-    <view class='foot-btn-view'>生成</view>
+    <view class='foot-btn-view' bindtap='bindMakeUpTap'>生成</view>
 
   </view>
 
