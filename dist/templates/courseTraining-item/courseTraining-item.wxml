@@ -13,7 +13,7 @@
   <view class="weui-flex__item">
     <text class='kind-list-title__text' >{{ outItem.title }}</text>
   </view>
-  <image class="kind-list__img" style='{{ outItem.open ? "transform:rotate(180deg);" : "transform:rotate(0deg);" }}' src="../../images/arrow_down.png"></image> 
+  <image class="kind-list__img" style='{{ outItem.open ? "transform:rotate(180deg);" : "transform:rotate(0deg);" }}' src="../../../images/icon/arrow_down.png"></image> 
 </view>
 <!-- title -->
 
@@ -27,11 +27,11 @@
 
     <view data-outIndex='{{ outIndex }}' data-inIndex='{{ inIndex }}' data-name='{{ inItem.name }}' bindtap=''>
       <image class='cellImg' src='{{ inItem.imgUrl }}' mode='aspectFill'></image>
-      <image class='cellIcon' src='../../images/video_play.png'></image>
+      <image class='cellIcon' src='../../../images/icon/video_play.png'></image>
       <text class='text'>{{ inItem.name }}</text>
     </view>
     
-    <image wx:if='{{ courseShare }}' data-outIndex='{{ outIndex }}' data-inIndex='{{ inIndex }}' class='cellChoosedIcon' src='{{ inItem.choosed ? "../../images/video_choose.png" : "../../images/video_unchoose.png" }}' bindtap=''></image>
+    <image wx:if='{{ courseShare }}' data-outIndex='{{ outIndex }}' data-inIndex='{{ inIndex }}' class='cellChoosedIcon' src='{{ inItem.choosed ? "../../../images/icon/video_choose.png" : "../../../images/icon/video_unchoose.png" }}' bindtap=''></image>
     
   </view>
   </block>

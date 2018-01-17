@@ -1,0 +1,43 @@
+/* pages/home/personalTrainer.wxss */
+
+.personal-cell-view {
+    background-color: #2f2d45;
+}
+.personal-cell {
+    padding: 30rpx;
+}
+.personal-headimg {
+    width: 64rpx;
+    height: 64rpx;
+    border-radius: 50%;
+    /* float: left; */
+}
+.name-view {
+    margin-left: 30rpx;
+}
+.tag-view {
+    margin-left: 30rpx;
+    font-size: 26rpx;
+    color: #848296;
+}
+.tag-item {
+    border: 1rpx #fcf428 solid; 
+    color: #fcf428;
+    display: inline-block;
+    padding: 0 8rpx;
+    font-size: 26rpx;
+    border-radius: 6rpx;
+}
+.appt-btn {
+    padding: 5rpx 20rpx;
+    background-color: #fcf428;
+    border-radius: 6rpx;
+    color: black;
+}
+
+.personal-cell-imgs-view {
+    padding: 0 25rpx;
+}
+.personal-cell-imgs {
+    margin: 10rpx 5rpx;
+}

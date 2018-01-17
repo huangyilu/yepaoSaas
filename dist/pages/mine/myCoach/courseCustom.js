@@ -1,7 +1,7 @@
-// pages/privateMember/courseCustom.js
+// pages/myCoach/courseCustom.js
 
-import moment from '../../utils/npm/moment';
-import * as privatedata from '../../utils/privatedata-format';
+import moment from '../../../utils/npm/moment';
+import * as privatedata from '../../../utils/privatedata-format';
 
 Page({
 

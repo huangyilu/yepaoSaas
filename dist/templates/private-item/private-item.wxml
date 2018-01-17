@@ -9,7 +9,7 @@
     <text>{{ item.name }}</text>
   </view>
   <view class='weui-flex__item right-p'>
-    <image class='right-icon' mode='aspectFill' src='../../images/arrow_right.png'></image>
+    <image class='right-icon' mode='aspectFill' src='../../../images/icon/arrow_right.png'></image>
     <text>剩余课时 {{ item.period.surplus }}/{{ item.period.total }}</text>
   </view>
 </view>

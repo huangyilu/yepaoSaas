@@ -1,0 +1,18 @@
+
+.imgText-cell {
+    margin-bottom: 5rpx;
+    padding: 30rpx;
+    background-color: #2f2d45;
+}
+.left-icon {
+    width: 50rpx;
+    height: 50rpx;
+    float: left;
+}
+.imgText-cell text {
+    margin-left: 20rpx;
+}
+.right-icon {
+    margin-top: 8rpx;
+    margin-right: 0;
+}

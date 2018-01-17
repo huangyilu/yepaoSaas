@@ -1,6 +1,6 @@
-// pages/privateMember/courseTraining.js
+// pages/myCoach/courseTraining.js
 
-import weSwiper from '../../utils/weSwiper/weSwiper.js'
+import weSwiper from '../../../utils/weSwiper/weSwiper.js'
 
 Page({
 
@@ -20,13 +20,13 @@ Page({
         courseList: [
           {
             name: '全膝俯卧撑',
-            imgUrl: '../../images/1.jpg',
+            imgUrl: 'http://img2.imgtn.bdimg.com/it/u=3390152407,4060777889&fm=27&gp=0.jpg',
             videoUrl: '',
             choosed: true,
           },
           {
             name: '全膝俯卧撑',
-            imgUrl: '../../images/1.jpg',
+            imgUrl: 'http://img2.imgtn.bdimg.com/it/u=3390152407,4060777889&fm=27&gp=0.jpg',
             videoUrl: '',
             choosed: false,
           }
@@ -39,13 +39,13 @@ Page({
         courseList: [
           {
             name: '全膝俯卧撑',
-            imgUrl: '../../images/1.jpg',
+            imgUrl: 'http://img2.imgtn.bdimg.com/it/u=3390152407,4060777889&fm=27&gp=0.jpg',
             videoUrl: '',
             choosed: false,
           },
           {
             name: '全膝俯卧撑',
-            imgUrl: '../../images/1.jpg',
+            imgUrl: 'http://img2.imgtn.bdimg.com/it/u=3390152407,4060777889&fm=27&gp=0.jpg',
             videoUrl: '',
             choosed: false,
           }
@@ -57,16 +57,16 @@ Page({
     courseShareSuccess: false,
 
     // 浏览视频
-    showVideoHidden: false,
+    showVideoHidden: true,
     videoIndex: 1,
     videoUrlsBrowse: [
       {
         name: '',
-        url: 'http://xiqingfengbao-sp.oss-cn-hangzhou.aliyuncs.com/qd-sp/1515403272068.mp4?Expires=1516107921&OSSAccessKeyId=LTAIGdDLarpYm7lf&Signature=3SKCnjw%2F5pmIFZEFnoFKyX51FKg%3D'
+        url: 'http://xiqingfengbao-sp.oss-cn-hangzhou.aliyuncs.com/qd-sp/1515403272068.mp4?Expires=1516159406&OSSAccessKeyId=LTAIGdDLarpYm7lf&Signature=NFb5LLOh0u8hpjGJ6%2Fq6zNdztFc%3D'
       },
       {
         name: '',
-        url: 'http://xiqingfengbao-sp.oss-cn-hangzhou.aliyuncs.com/qd-sp/1515403272068.mp4?Expires=1516107921&OSSAccessKeyId=LTAIGdDLarpYm7lf&Signature=3SKCnjw%2F5pmIFZEFnoFKyX51FKg%3D'
+        url: 'http://xiqingfengbao-sp.oss-cn-hangzhou.aliyuncs.com/qd-sp/1515403272068.mp4?Expires=1516159406&OSSAccessKeyId=LTAIGdDLarpYm7lf&Signature=NFb5LLOh0u8hpjGJ6%2Fq6zNdztFc%3D'
       }
     ]
   },

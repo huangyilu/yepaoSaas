@@ -1,6 +1,6 @@
 /**privateMember.wxss**/
 
-@import '../../templates/private-item/private-item.wxss';
+@import '../../../templates/private-item/private-item.wxss';
 
 page {
     /* height: 100%; */

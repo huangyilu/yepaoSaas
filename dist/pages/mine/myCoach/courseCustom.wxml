@@ -1,4 +1,4 @@
-<!--pages/privateMember/courseCustom.wxml-->
+<!--pages/myCoach/courseCustom.wxml-->
 
 <view class='bg-view'>
   
@@ -17,7 +17,7 @@
     <view class='weui-flex__item' wx:for='{{ levelItem }}' wx:key='{{ index }}'>
       <view class='course-btn-item' id='{{ index }}' bindtap='bindCourseBtnTap'>
         <view class='course-btn-icon' style='{{ item.selected ? "border-style: none;" : "border: 1px #ffffff solid;" }}'>
-          <image hidden='{{ !item.selected }}' src='../../images/checked.png'></image>
+          <image hidden='{{ !item.selected }}' src='../../../images/icon/checked.png'></image>
         </view>
         <text>{{ item.level }}</text>
       </view>
@@ -32,7 +32,7 @@
       <block wx:for='{{ bodyItem }}' wx:key='{{ index }}'>
       <view class='course-btn-item {{ item.styles }}' id='{{ index }}' bindtap='bindCourseBtnItemTap'>
         <view class='course-btn-icon' style='{{ item.selected ? "border-style: none;" : "border: 1px #ffffff solid;" }}'>
-          <image hidden='{{ !item.selected }}' src='../../images/checked.png'></image>
+          <image hidden='{{ !item.selected }}' src='../../../images/icon/checked.png'></image>
         </view>
         <text>{{ item.body }}</text>
       </view>
@@ -41,7 +41,7 @@
     </view>
 
     <!-- bg img -->
-    <image class='personal-bgimg' src='../../images/person_bg.png'></image>
+    <image class='personal-bgimg' src='../../../images/bg_img/person_bg.png'></image>
 
     <!-- foot-view -->
     <view class='foot-btn-view' bindtap='bindMakeUpTap'>生成</view>

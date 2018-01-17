@@ -1,0 +1,48 @@
+/* pages/home/home.wxss */
+
+.logo-view {
+    width: 100%;
+    text-align: center;
+}
+.logo-view .logo-img {
+    width: 620rpx;
+    height: 150rpx;
+    margin: 50rpx 0;
+}
+
+/* .title-view {
+    height: 80rpx;
+    width: 100%;
+    line-height: 80rpx;
+    text-align: center;
+    background-color: #2f2d45;
+} */
+
+.tab-view {
+    margin: 50rpx 50rpx 0;
+}
+.tab-item {
+    text-align: center;
+    padding: 60rpx 0;
+    border-bottom: 1rpx #848296 solid;
+}
+.tab-icon-buyvip {
+    width: 47rpx;
+    height: 35rpx;
+}
+.tab-icon-mycar {
+    width: 43rpx;
+    height: 45rpx;
+}
+.tab-icon-gclass {
+    width: 49rpx;
+    height: 42rpx;
+}
+.tab-icon-private_trainer {
+    width: 50rpx;
+    height: 41rpx;
+}
+.tab-icon-recomclass {
+    width: 49rpx;
+    height: 49rpx;
+}

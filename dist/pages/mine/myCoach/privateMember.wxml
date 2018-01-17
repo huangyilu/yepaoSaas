@@ -1,6 +1,6 @@
 <!--privateMember.wxml-->
 
-<import src="../../templates/private-item/private-item.wxml"/>
+<import src="../../../templates/private-item/private-item.wxml"/>
 
 
 <view class='bg-view'>
@@ -8,7 +8,7 @@
   <template is="private-item" data="{{ privateMemberList }}"/>
   
   <view class='no-data-view' wx:if='{{ privateMemberList.length <= 0 }}'>
-    <image class='no-data-icon' src='../../images/no_data.png'></image>
+    <image class='no-data-icon' src='../../../images/bg_img/no_data.png'></image>
     <text>暂无私教会员</text>
   </view>
 

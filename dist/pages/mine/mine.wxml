@@ -1,0 +1,37 @@
+<!--pages/mine/mine.wxml-->
+
+<import src="../../templates/imgText-item/imgText-item.wxml"/>
+
+
+<view class='bg-view'>
+
+  <!-- head -->
+  <view class='head-view'>
+    <view class='head-img-view'>
+      <image mode='aspectFill' class='head-img' src='http://img2.imgtn.bdimg.com/it/u=3390152407,4060777889&fm=27&gp=0.jpg'></image>
+    </view>
+    <view class='text'>猫腻</view>
+  </view>
+
+  <!-- x 排列 item-->
+  <view class='x-item-view'>
+    <view class='weui-flex'>
+      <view class='weui-flex__item mine-x-item' bindtap='bindFitLcTap'>
+        <image class='x-item-icon' src='../../images/icon/mine/fit_lc.png'></image>
+        <view>健身历程</view>
+      </view>
+      <view class='weui-flex__item mine-x-item' bindtap='bindFitDataTap'>
+        <image class='x-item-icon' src='../../images/icon/mine/fit_data.png'></image>
+        <view>体测数据</view>
+      </view>
+    </view>
+  </view>
+
+  <!-- y 排列 item-->
+  <view class='y-item-view'>
+  
+    <template is="imgText-item" data="{{ yItems }}"/>
+
+  </view>
+
+</view>

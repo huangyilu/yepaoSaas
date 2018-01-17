@@ -1,4 +1,4 @@
-/* pages/privateMember/courseCustom.wxss */
+/* pages/myCoach/courseCustom.wxss */
 
 /* 日历 */
 .calendar-bgview {

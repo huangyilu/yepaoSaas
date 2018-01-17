@@ -13,7 +13,7 @@ export const FORMATNUMTOCHNESE = {
 export const privateMemberList = [
   {
     name: '朱有为',
-    headimg: '../../images/1.jpg',
+    headimg: 'http://img2.imgtn.bdimg.com/it/u=3390152407,4060777889&fm=27&gp=0.jpg',
     period: {
       surplus: 8,
       total: 12
@@ -21,7 +21,7 @@ export const privateMemberList = [
   },
   {
     name: '朱有为',
-    headimg: '../../images/1.jpg',
+    headimg: 'http://img2.imgtn.bdimg.com/it/u=3390152407,4060777889&fm=27&gp=0.jpg',
     period: {
       surplus: 8,
       total: 12
@@ -35,7 +35,7 @@ export function formatPrivateMemberList(list) {
 export function formatPrivateMemberListItem() {
   return {
     name: '朱有为',
-    headimg: '../../images/1.jpg',
+    headimg: 'http://img2.imgtn.bdimg.com/it/u=3390152407,4060777889&fm=27&gp=0.jpg',
     period: {
       surplus: 8,
       total: 12

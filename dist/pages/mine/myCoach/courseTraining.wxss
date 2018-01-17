@@ -1,7 +1,7 @@
-/* pages/privateMember/courseTraining.wxss */
+/* pages/myCoach/courseTraining.wxss */
 
-@import '../../templates/courseTraining-item/courseTraining-item.wxss';
-@import '../../utils/weSwiper/weSwiper.wxss';
+@import '../../../templates/courseTraining-item/courseTraining-item.wxss';
+@import '../../../utils/weSwiper/weSwiper.wxss';
 
 .title-view {
     height: 224rpx;

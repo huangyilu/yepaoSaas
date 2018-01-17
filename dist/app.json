@@ -1,8 +1,14 @@
 {
   "pages": [
-    "pages/privateMember/courseTraining",
-    "pages/privateMember/courseCustom",
-    "pages/privateMember/privateMember"
+    "pages/mine/mine",
+    "pages/home/personalTrainer",
+    "pages/home/home",
+    "pages/fitnessCircle/fitnessCircle",
+    "pages/club/club",
+    
+    "pages/mine/myCoach/privateMember",
+    "pages/mine/myCoach/courseTraining",
+    "pages/mine/myCoach/courseCustom"
     
   ],
   "window": {
@@ -10,5 +16,36 @@
     "navigationBarBackgroundColor": "#2f2d45",
     "navigationBarTitleText": "WeChat",
     "navigationBarTextStyle": "white"
+  },
+  "tabBar": {
+    "backgroundColor": "#2f2d45",
+    "borderStyle": "white",
+    "selectedColor": "#fcf428",
+    "list": [
+      {
+        "pagePath": "pages/home/home",
+        "text": "主页",
+        "iconPath": "images/icon/tabBar_icon/home.png",
+        "selectedIconPath": "images/icon/tabBar_icon/home_y.png"
+      },
+      {
+        "pagePath": "pages/fitnessCircle/fitnessCircle",
+        "text": "健身圈",
+        "iconPath": "images/icon/tabBar_icon/msg.png",
+        "selectedIconPath": "images/icon/tabBar_icon/msg_y.png"
+      },
+      {
+        "pagePath": "pages/club/club",
+        "text": "俱乐部",
+        "iconPath": "images/icon/tabBar_icon/club.png",
+        "selectedIconPath": "images/icon/tabBar_icon/club_y.png"
+      },
+      {
+        "pagePath": "pages/mine/mine",
+        "text": "我的",
+        "iconPath": "images/icon/tabBar_icon/mine.png",
+        "selectedIconPath": "images/icon/tabBar_icon/mine_y.png"
+      }
+    ]
   }
 }

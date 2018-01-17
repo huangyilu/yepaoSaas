@@ -1,6 +1,6 @@
-<!--pages/privateMember/courseTraining.wxml-->
+<!--pages/myCoach/courseTraining.wxml-->
 
-<import src="../../templates/courseTraining-item/courseTraining-item.wxml"/>
+<import src="../../../templates/courseTraining-item/courseTraining-item.wxml"/>
 
 <view class='bg-view' hidden='{{ !showVideoHidden }}'>
 
@@ -15,7 +15,7 @@
       <view>训练强度：{{ courseLevel }}</view>
       <view class='second-txt-fscolor'>
         训练间的休息时长：{{ courseRTime }}
-        <image class='shareIcon' src='../../images/share.png' bindtap='bindCourseSharedTap'></image>
+        <image class='shareIcon' src='../../../images/icon/share.png' bindtap='bindCourseSharedTap'></image>
       </view>
     </view>
   </view>
@@ -42,7 +42,7 @@
 <!-- 视频 弹窗 -->
 <view class='popUps-bgview' hidden='{{ showVideoHidden }}'>
   <!-- 收起按钮 -->
-  <image class='popUps-cancel-btn' src='../../images/delete_back.png' bindtap='bindCloseVideoShowTap'></image>
+  <image class='popUps-cancel-btn' src='../../../images/icon/delete_back.png' bindtap='bindCloseVideoShowTap'></image>
 
   <!-- 视频 -->
   <view class="we-container">

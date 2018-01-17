@@ -1,0 +1,46 @@
+<!--pages/home/personalTrainer.wxml-->
+
+<import src="../../templates/star-item/star-item.wxml"/>
+
+<view class='bg-view'>
+
+  <view class='personal-cell-view'>
+    <view class='personal-cell'>
+
+      <view class='weui-flex'>
+        <!-- 1 -->
+        <view >
+          <image class='personal-headimg' src='../../images/icon/default_headimg.png'></image>
+        </view>
+        <!-- 2 -->
+        <view class='weui-flex__item'>
+          <!-- 名字 -->
+          <view class='name-view'>
+            <text>叽叽喳喳</text>
+            <template is='star-item' data='{{ score, starUrl, emptUrl }}'/>
+          </view>
+          <!-- 标签 -->
+          <view class='tag-view'>
+            <view class='tag-item'>腹肌男，阳光，帅气</view>
+            <view>暂无标签</view>
+          </view>
+        </view>
+        <!-- 3 -->
+        <view >
+          <view class='appt-btn'>预约</view> 
+        </view>
+      </view>
+
+      <!-- 照片 -->
+      <view class='personal-cell-imgs-view'>
+        <view class='personal-cell-imgs' wx:for='{{ imgs }}' wx:key='*this'>
+          <image style='width:{{  }}' src='{{ item }}' mode='aspectFill' style='width:{{ windowWidth*0.225 }}px;height:{{ windowWidth*0.225 }}px;'></image>
+        </view>
+      </view>
+
+
+
+    </view>
+  </view>
+
+</view>

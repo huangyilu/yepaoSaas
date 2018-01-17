@@ -1,0 +1,14 @@
+
+<template name="imgText-item">
+
+  <block wx:for='{{ yItems }}' wx:key='*this'>
+  <navigator class='imgText-cell' hidden='{{ item.ishidden }}' style='{{ item.style }}' url="{{ item.navigateUrl }}" hover-class="none">
+  
+    <image class='left-icon' src='{{ item.iconUrl }}'></image>
+    <text>{{ item.name }}</text>
+    <image class='right-icon' src='../../images/icon/arrow_right.png'></image>
+  
+  </navigator>
+  </block>
+
+</template>
