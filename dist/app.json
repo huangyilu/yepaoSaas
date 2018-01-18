@@ -1,25 +1,31 @@
 {
   "pages": [
+
+    "pages/mine/courseShare/courseShareDetails",
     "pages/mine/mine",
-    "pages/home/personalTrainer",
     "pages/home/home",
+    "pages/home/personalTrainer",
+    "pages/home/classSchedule",
     "pages/fitnessCircle/fitnessCircle",
     "pages/club/club",
-    
     "pages/mine/myCoach/privateMember",
     "pages/mine/myCoach/courseTraining",
-    "pages/mine/myCoach/courseCustom"
+    "pages/mine/myCoach/courseCustom",
+    "pages/mine/courseShare/courseShare"
+    
     
   ],
   "window": {
+    "backgroundColor": "#262439",
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#2f2d45",
     "navigationBarTitleText": "WeChat",
     "navigationBarTextStyle": "white"
   },
   "tabBar": {
+    "color": "#ffffff",
     "backgroundColor": "#2f2d45",
-    "borderStyle": "white",
+    "borderStyle": "#ffffff",
     "selectedColor": "#fcf428",
     "list": [
       {

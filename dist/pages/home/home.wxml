@@ -36,7 +36,7 @@
     </view>
 
     <view class='weui-flex'>
-      <navigator class='weui-flex__item tab-item border-right'>
+      <navigator url='classSchedule' class='weui-flex__item tab-item border-right'>
         <image class='tab-icon-gclass' src='../../images/icon/home/gclass.png'></image>
         <view>课程表</view>
       </navigator>

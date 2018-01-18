@@ -1,6 +1,7 @@
 <!--pages/myCoach/courseTraining.wxml-->
 
 <import src="../../../templates/courseTraining-item/courseTraining-item.wxml"/>
+<import src="../../../templates/videoPopups-item/videoPopups-item.wxml"/>
 
 <view class='bg-view' hidden='{{ !showVideoHidden }}'>
 
@@ -40,11 +41,14 @@
 </view>
 
 <!-- 视频 弹窗 -->
+
+<!-- <template is="videoPopups-item" data="{{ showVideoHidden, videoUrlsBrowse, videoIconUrl  }}"/> -->
+
 <view class='popUps-bgview' hidden='{{ showVideoHidden }}'>
-  <!-- 收起按钮 -->
+   <!-- 收起按钮  -->
   <image class='popUps-cancel-btn' src='../../../images/icon/delete_back.png' bindtap='bindCloseVideoShowTap'></image>
 
-  <!-- 视频 -->
+   <!-- 视频  -->
   <view class="we-container">
     <view class="we-wrapper"
       bindtouchstart="touchstart"
@@ -59,6 +63,6 @@
     </view> 
   </view> 
   
-</view>
+</view> 
 
 

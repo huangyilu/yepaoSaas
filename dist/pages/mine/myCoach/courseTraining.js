@@ -57,16 +57,17 @@ Page({
     courseShareSuccess: false,
 
     // 浏览视频
+    videoIconUrl: '../../../images/icon/delete_back.png',
     showVideoHidden: true,
     videoIndex: 1,
     videoUrlsBrowse: [
       {
         name: '',
-        url: 'http://xiqingfengbao-sp.oss-cn-hangzhou.aliyuncs.com/qd-sp/1515403272068.mp4?Expires=1516159406&OSSAccessKeyId=LTAIGdDLarpYm7lf&Signature=NFb5LLOh0u8hpjGJ6%2Fq6zNdztFc%3D'
+        url: 'http://xiqingfengbao-sp.oss-cn-hangzhou.aliyuncs.com/qd-sp/1515403272068.mp4?Expires=1516280515&OSSAccessKeyId=LTAIGdDLarpYm7lf&Signature=bS2Rrvs88iD%2FoTY%2BO6TpWtasu38%3D'
       },
       {
         name: '',
-        url: 'http://xiqingfengbao-sp.oss-cn-hangzhou.aliyuncs.com/qd-sp/1515403272068.mp4?Expires=1516159406&OSSAccessKeyId=LTAIGdDLarpYm7lf&Signature=NFb5LLOh0u8hpjGJ6%2Fq6zNdztFc%3D'
+        url: 'http://xiqingfengbao-sp.oss-cn-hangzhou.aliyuncs.com/qd-sp/1515403272068.mp4?Expires=1516280515&OSSAccessKeyId=LTAIGdDLarpYm7lf&Signature=bS2Rrvs88iD%2FoTY%2BO6TpWtasu38%3D'
       }
     ]
   },

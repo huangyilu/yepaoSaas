@@ -1,4 +1,5 @@
 
+import moment from './npm/moment';
 
 export const FORMATNUMTOCHNESE = {
   '1': '一',
@@ -41,4 +42,26 @@ export function formatPrivateMemberListItem() {
       total: 12
     }
   }
+}
+
+// 判断 日期 属于 今天 昨天 不是今年
+export function formatDifferentTypesDate (timeStr) {
+  // +timeStr 
+  var newStr = '';
+  var nowStr = moment().format('YYYY-MM-DD');
+  var oldStr = moment(+timeStr).format('YYYY-MM-DD');
+
+  var isBeforeToday = moment(oldStr).isBefore(nowStr);
+  var isBeforeThisYear = moment(oldStr).isBefore(nowStr, 'year');
+
+  if (isBeforeToday) {
+    newStr = moment(oldStr).format('MM-DD');
+  } else {
+    newStr = moment(+timeStr).format('HH:mm');
+  }
+  if (isBeforeThisYear) {
+    newStr = moment(oldStr).format('YYYY-MM-DD');
+  }
+  console.log('newStr ... ' + newStr);
+  return newStr;
 }

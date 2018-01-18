@@ -1,0 +1,43 @@
+/* pages/home/classSchedule.wxss */
+
+.weui-tab__panel {
+    margin-top: 62px;  
+    padding-top: 0;
+}
+.weui-tab__content {
+    height: 100%;  
+    margin-bottom: 80rpx;
+}
+.weui-navbar {
+    position: fixed;
+    font-size: 30rpx;
+    color: #848296;
+    border-style: none;
+}
+.weui-navbar__item {
+    padding: 15rpx 0; 
+    margin-right: 2rpx;
+    background-color: #2f2d45;
+    border-style: none;
+}
+.weui-navbar__item.weui-bar__item_on {
+    color: #848296;
+    /* border-bottom: 1px #fcf428 solid; */
+}
+.weui-navbar__slider {
+    background-color: #fcf428;
+    height: 1px;
+    /* width: 4em; */
+    /* margin-left: 2.9em; */
+}
+.weui-navbar__title {
+    padding: 0 15rpx;
+    display: block;
+}
+.weui-navbar__title.weui-bar__item_on {
+    border-bottom-style: none; 
+}
+.navbar-cal-icon {
+    width: 64rpx;
+    height: 64rpx;
+}

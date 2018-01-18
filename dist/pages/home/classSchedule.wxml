@@ -1,0 +1,73 @@
+<!--pages/home/classSchedule.wxml-->
+
+<import src="../../templates/empty-view/empty-view.wxml"/>
+
+<view class='bg-view'>
+
+<view class="weui-tab">
+  <!-- tab  -->
+  <view class="weui-navbar">
+      <block wx:for-items="{{ navbarTabs }}" wx:key="{{ index }}">
+          <view id="{{ index }}" class="weui-navbar__item {{ activeIndex == index ? 'weui-bar__item_on' : ''}}" bindtap="bindNavbarTabTap">
+            <view class="weui-navbar__title">
+              {{ item.date }}
+              <image wx:if='{{ item.date == "" }}' class='navbar-cal-icon' src='../../images/icon/home/calendar.png'></image>
+            </view>
+            <view class="weui-navbar__title {{ activeIndex == index ? 'weui-bar__item_on' : ''}}">{{ item.name }}</view>
+          </view>
+      </block>
+      <view class="weui-navbar__slider" style="left: {{ sliderLeft }}px; transform: translateX({{ sliderOffset }}px); -webkit-transform: translateX({{ sliderOffset }}px);"></view>
+  </view>
+
+  <!-- panel -->
+  <view class="weui-tab__panel">
+
+<!-- 选项一 开始 -->
+    <view class="weui-tab__content" hidden="{{ activeIndex != 0 }}">
+      <!-- 选项一 内容 -->
+      1
+      <!-- <template is="dishes-item" data="{{ disheList }}"/> -->
+      <!--无 更多 -->
+      <template is='empty-view' data='{{ emptyText, emptyIcon }}'/>
+    </view>
+<!-- 选项一 结束 -->
+
+<!-- 选项二 开始 -->
+    <view class="weui-tab__content" hidden="{{ activeIndex != 1 }}">
+      <!-- 选项二 内容 -->
+      2
+      <!-- <template is="talent-item" data="{{ leftTabs,talentList,windowHeight,itemSelectIndex }}"/> -->
+      <!-- 无 更多 -->
+      <template is='empty-view' data='{{ emptyText, emptyIcon }}'/>
+    </view>
+<!-- 选项二结束 -->
+
+<!-- 选项三 开始 -->
+    <view class="weui-tab__content" hidden="{{ activeIndex != 2 }}">
+      <!-- 选项三 内容 -->
+      3
+      <!-- <template is="celebration-item" data="{{ celebrationList }}"/> -->
+      <!-- 无 更多 -->
+      <template is='empty-view' data='{{ emptyText, emptyIcon }}'/>
+    </view>
+<!-- 选项三 结束 -->
+
+<!-- 选项四 开始 -->
+    <view class="weui-tab__content" hidden="{{ activeIndex != 3 }}">
+      <!-- 选项四 内容 -->
+      4
+      <!-- <template is="celebration-item" data="{{ celebrationList }}"/> -->
+      <!-- 无 更多 -->
+      <template is='empty-view' data='{{ emptyText, emptyIcon }}'/>
+    </view>
+<!-- 选项四 结束 -->
+
+  </view>
+</view>
+
+
+
+
+
+
+</view>

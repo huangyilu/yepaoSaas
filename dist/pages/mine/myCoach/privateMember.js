@@ -1,19 +1,22 @@
 //privateMember.js
 //获取应用实例
 
-import * as privatedata from '../../../utils/privatedata-format';
+import * as minedata from '../../../utils/minedata-format';
 import * as mineService from '../../../services/mine-service';
 
 const app = getApp()
 
 Page({
   data: {
+    emptyText: '暂无私教会员',
+    emptyIcon: '../../../images/bg_img/no_data.png',
+
     privateMemberList: []
   },
   onLoad: function () {
 
     this.setData({
-      privateMemberList: privatedata.formatPrivateMemberList(privatedata.privateMemberList)
+      privateMemberList: minedata.formatPrivateMemberList(minedata.privateMemberList)
     })
 
     

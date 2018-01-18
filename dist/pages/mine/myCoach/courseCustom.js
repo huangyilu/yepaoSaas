@@ -1,7 +1,7 @@
 // pages/myCoach/courseCustom.js
 
 import moment from '../../../utils/npm/moment';
-import * as privatedata from '../../../utils/privatedata-format';
+import * as minedata from '../../../utils/minedata-format';
 
 Page({
 
@@ -72,7 +72,7 @@ Page({
       var w = moment().add(i, 'days').format('E');
       var d = moment().add(i, 'days').format('DD');
       weekData.push({
-        week: privatedata.FORMATNUMTOCHNESE[w],
+        week: minedata.FORMATNUMTOCHNESE[w],
         day: d,
         selected: false
       })

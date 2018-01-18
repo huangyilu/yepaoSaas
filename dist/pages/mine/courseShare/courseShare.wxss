@@ -1,0 +1,11 @@
+/* pages/mine/courseShare/courseShare.wxss */
+
+.courseShare-cell {
+    padding: 30rpx;
+    margin-top: 10rpx;
+    background-color: #2f2d45;
+}
+.courseShare-cell .time {
+    float: right;
+    margin-top: -25rpx;
+}

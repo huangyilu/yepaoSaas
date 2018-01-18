@@ -1,14 +1,26 @@
 
 <template name="imgText-item">
 
-  <block wx:for='{{ yItems }}' wx:key='*this'>
+  <!-- 我的 带向右按钮的 cell -->
+  <block wx:if='{{ yItems }}' wx:for='{{ yItems }}' wx:key='*this'>
   <navigator class='imgText-cell' hidden='{{ item.ishidden }}' style='{{ item.style }}' url="{{ item.navigateUrl }}" hover-class="none">
   
     <image class='left-icon' src='{{ item.iconUrl }}'></image>
     <text>{{ item.name }}</text>
-    <image class='right-icon' src='../../images/icon/arrow_right.png'></image>
+    <image hidden='{{ rightItemHidden }}' class='right-icon' src='{{ rightItemHidden ? "" : "../../images/icon/arrow_right.png" }}'></image>
   
   </navigator>
+  </block>
+
+  <!-- 共享详情 带 视频icon 的cell -->
+  <block wx:if='{{ details }}' wx:for='{{ details }}' wx:key='*this'>
+  <view class='imgImgText-cell' hover-class="none" bindtap='bindVideoCellTap'>
+  
+    <image class='left-icon' src='{{ item.imgUrl }}'></image>
+    <image class='cellIcon' src='../../../images/icon/video_play.png'></image>
+    <text>{{ item.name }}</text>
+  
+  </view>
   </block>
 
 </template>

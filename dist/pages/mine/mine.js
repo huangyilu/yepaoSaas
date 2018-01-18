@@ -12,7 +12,7 @@ Page({
       {
         iconUrl: '../../images/icon/mine/fit_calen.png',
         name: '健身计划',
-        navigateUrl: 'myCoach/privateMember',
+        navigateUrl: '',
         ishidden: false
       },
       {
@@ -24,26 +24,26 @@ Page({
       {
         iconUrl: '../../images/icon/mine/member.png',
         name: '课程共享',
-        navigateUrl: 'myCoach/privateMember',
-        ishidden: true
+        navigateUrl: 'courseShare/courseShare',
+        ishidden: false
       },
       {
         iconUrl: '../../images/icon/mine/recommend.png',
         name: '会员推荐',
-        navigateUrl: 'myCoach/privateMember',
+        navigateUrl: '',
         ishidden: false
       },
       {
         iconUrl: '../../images/icon/mine/myorder.png',
         name: '我的订单',
-        navigateUrl: 'myCoach/privateMember',
+        navigateUrl: '',
         ishidden: false
       },
       {
         iconUrl: '../../images/icon/mine/setting.png',
         name: '设置',
         style: 'margin-top:20rpx;',
-        navigateUrl: 'myCoach/privateMember',
+        navigateUrl: '',
         ishidden: false
       }
     ]
