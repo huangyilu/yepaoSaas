@@ -14,7 +14,10 @@
 
   <!-- 共享详情 带 视频icon 的cell -->
   <block wx:if='{{ details }}' wx:for='{{ details }}' wx:key='*this'>
-  <view class='imgImgText-cell' hover-class="none" bindtap='bindVideoCellTap'>
+  <view class='imgImgText-cell' 
+        hover-class="none" 
+        id='{{ index }}'
+        bindtap='bindVideoCellTap'>
   
     <image class='left-icon' src='{{ item.imgUrl }}'></image>
     <image class='cellIcon' src='../../../images/icon/video_play.png'></image>

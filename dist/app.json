@@ -1,19 +1,18 @@
 {
   "pages": [
-
+    "pages/home/classSchedule",
+    "pages/home/home",
+    
     "pages/mine/courseShare/courseShareDetails",
     "pages/mine/mine",
-    "pages/home/home",
     "pages/home/personalTrainer",
-    "pages/home/classSchedule",
-    "pages/fitnessCircle/fitnessCircle",
+    "pages/message/message",
     "pages/club/club",
     "pages/mine/myCoach/privateMember",
     "pages/mine/myCoach/courseTraining",
     "pages/mine/myCoach/courseCustom",
-    "pages/mine/courseShare/courseShare"
-    
-    
+    "pages/mine/courseShare/courseShare",
+    "pages/mine/myCoach/myCoachListView"
   ],
   "window": {
     "backgroundColor": "#262439",
@@ -35,8 +34,8 @@
         "selectedIconPath": "images/icon/tabBar_icon/home_y.png"
       },
       {
-        "pagePath": "pages/fitnessCircle/fitnessCircle",
-        "text": "健身圈",
+        "pagePath": "pages/message/message",
+        "text": "消息",
         "iconPath": "images/icon/tabBar_icon/msg.png",
         "selectedIconPath": "images/icon/tabBar_icon/msg_y.png"
       },

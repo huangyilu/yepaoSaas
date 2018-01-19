@@ -7,7 +7,7 @@
           indicator-color="#ffffff"
           indicator-active-color="#fcf428"
           autoplay="true" >
-  <block wx:for="{{ swiperImgUrls }}">
+  <block wx:for="{{ swiperImgUrls }}" wx:key='{{ index }}'>
     <swiper-item>
       <image mode='aspectFill' class='swiper-img' src="{{ item }}"/>
     </swiper-item>

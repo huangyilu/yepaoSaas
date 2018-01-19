@@ -164,6 +164,7 @@ Page({
       this.setData({
         courseShareSuccess: true
       })
+      // 分享成功之后 收起 提醒 已经选择框？
 
     } else {
       // 开始 从头 播放视频

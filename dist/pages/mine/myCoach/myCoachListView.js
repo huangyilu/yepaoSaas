@@ -1,4 +1,4 @@
-// pages/fitnessCircle/fitnessCircle.js
+// pages/mine/myCoach/myCoachListView.js
 Page({
 
   /**

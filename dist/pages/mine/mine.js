@@ -18,7 +18,7 @@ Page({
       {
         iconUrl: '../../images/icon/mine/coach.png',
         name: '我是教练',
-        navigateUrl: 'myCoach/privateMember',
+        navigateUrl: 'myCoach/myCoachListView',
         ishidden: false
       },
       {

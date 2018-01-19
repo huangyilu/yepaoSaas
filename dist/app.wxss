@@ -2,6 +2,7 @@
 
 @import 'styles/weui.wxss';
 @import 'styles/icon.wxss';
+@import 'styles/calculate.wxss';
 @import 'templates/star-item/star-item.wxss';
 @import 'templates/empty-view/empty-view.wxss';
 @import 'templates/imgText-item/imgText-item.wxss';
@@ -63,6 +64,11 @@ page {
 }
 .fs28 {
     font-size: 28rpx;
+}
+
+/* 居中 */
+.txt-center {
+    text-align: center;
 }
 
 /* 二级文字 */

@@ -27,7 +27,7 @@ Page({
 
     bodyItem: [
       {
-        body: '全身',
+        body: '有氧',
         selected: true,
         styles: ''
       },
@@ -110,8 +110,7 @@ Page({
     var index = e.currentTarget.id;
     var bodyItem = this.data.bodyItem;
     bodyItem.forEach(item => {
-      item.selected = false;
-      bodyItem[index].selected = true;
+      bodyItem[index].selected = !bodyItem[index].selected;
     })
     this.setData({
       bodyItem: bodyItem

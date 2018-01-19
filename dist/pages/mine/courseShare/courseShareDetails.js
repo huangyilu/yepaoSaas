@@ -48,13 +48,15 @@ Page({
     videoUrlsBrowse: [
       {
         name: '',
-        url: 'http://xiqingfengbao-sp.oss-cn-hangzhou.aliyuncs.com/qd-sp/1515403272068.mp4?Expires=1516280515&OSSAccessKeyId=LTAIGdDLarpYm7lf&Signature=bS2Rrvs88iD%2FoTY%2BO6TpWtasu38%3D'
+        url: 'http://xiqingfengbao-sp.oss-cn-hangzhou.aliyuncs.com/qd-sp/1515403272068.mp4?Expires=1516332176&OSSAccessKeyId=LTAIGdDLarpYm7lf&Signature=j92EmKs9sPB7lmujSWhpmS9r6fs%3D'
       },
       {
         name: '',
-        url: 'http://xiqingfengbao-sp.oss-cn-hangzhou.aliyuncs.com/qd-sp/1515403272068.mp4?Expires=1516280515&OSSAccessKeyId=LTAIGdDLarpYm7lf&Signature=bS2Rrvs88iD%2FoTY%2BO6TpWtasu38%3D'
+        url: 'http://xiqingfengbao-sp.oss-cn-hangzhou.aliyuncs.com/qd-sp/1515403272068.mp4?Expires=1516332176&OSSAccessKeyId=LTAIGdDLarpYm7lf&Signature=j92EmKs9sPB7lmujSWhpmS9r6fs%3D'
       }
-    ]
+    ],
+
+    videoContext: null
   },
 
   /**
@@ -102,10 +104,13 @@ Page({
     var index = +e.currentTarget.id;
     if (index < this.data.videoUrlsBrowse.length - 1) {
       index = index + 1;
+      this.videoContext = wx.createVideoContext('' + index);
+      this.videoContext.play();
+      this.weswiper.slideTo(index);
+      console.log('bindVideoPalyEnded ...' + index);
     }
-    this.weswiper.slideTo(index);
-
-    console.log('bindVideoPalyEnded ...' + index);
+    
+    console.log(' ... end');
 
   },
   bindCloseVideoShowTap(e) {
@@ -117,11 +122,14 @@ Page({
   },
 
   bindVideoCellTap (e) {
-    
+    var index = e.currentTarget.id;
 
     this.setData({
       showVideoHidden: false
     })
+    this.weswiper.slideTo(+index);
+    this.videoContext = wx.createVideoContext(index);
+    this.videoContext.play();
 
   }
 
