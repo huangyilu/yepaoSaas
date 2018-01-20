@@ -36,7 +36,32 @@ Page({
     courseList: [],
 
     // 日历
+    calendarData: {
+      // 当前显示的年月
+      cur_year: '',
+      cur_month: '',
+      // 今天所在年月
+      this_year: '',
+      this_month: '',
+      // 周 列表
+      weeks_ch: '',
+      
+      // 默认选的今天
+      chooseDates: '',
+      chooseMonth: '',
+      chooseYear: '',
+      chooseDay: '',
 
+      // 日期 数组
+      calculatedays: [],
+      hasNextMonthGrid: '',
+      nextMonthDaysGrids: [],
+      hasLastMonthGrid: '',
+      lastMonthDaysGrids: [],
+
+      // 上次选的日期 的index
+      oldChooseDayIndex: '',
+    }
   },
 
   /**
@@ -49,7 +74,7 @@ Page({
       sliderLeft: (res.windowWidth / this.data.navbarTabs.length - sliderWidth) / 2
     })
 
-    // 日历
+    // 日历 初始化
     this.initDataOnCalendar();
   
   },
@@ -73,23 +98,22 @@ Page({
     this.calculateEmptyGrids(cur_year, cur_month);
     this.calculateDays(cur_year, cur_month);
 
-    var start_date = cur_year + '-' + cur_month + '-' + date.getDate();
+    var chooseDates = cur_year + '-' + cur_month + '-' + date.getDate();
     var this_year = cur_year;
     var this_month = cur_month;
 
     this.setData({
-      cur_year,
-      cur_month,
-      this_year,
-      this_month,
-      weeks_ch,
-      start_date,
-      chooseDates: start_date,
+      'calendarData.cur_year': cur_year,
+      'calendarData.cur_month': cur_month,
+      'calendarData.this_year': this_year,
+      'calendarData.this_month': this_month,
+      'calendarData.weeks_ch': weeks_ch,
+      'calendarData.chooseDates': chooseDates,
 
       // 默认选的今天
-      chooseDay: date.getDate(),
-      chooseMonth: cur_month,
-      chooseYear: cur_year
+      'calendarData.chooseDay': date.getDate(),
+      'calendarData.chooseMonth': cur_month,
+      'calendarData.chooseYear': cur_year
     });
   },
   getThisMonthDays(year, month) {
@@ -103,22 +127,6 @@ Page({
   },
   calculateEmptyGrids(year, month) {
     
-    // let empytGrids = [];
-    // if (firstDayOfWeek > 0) {
-    //   for (let i = 1; i < firstDayOfWeek; i++) {
-    //     empytGrids.push(i);
-    //   }
-    //   this.setData({
-    //     hasEmptyGrid: true,
-    //     empytGrids
-    //   });
-    // } else {
-    //   this.setData({
-    //     hasEmptyGrid: false,
-    //     empytGrids: []
-    //   });
-    // }
-
     // 下个月 的天数
     var nextMonth = month;
     var nextYear = year;
@@ -132,26 +140,22 @@ Page({
     //下个月 第一天是周几
     var lastDayOfWeek = this.getFirstDayOfWeek(nextYear, nextMonth);
     var nextMonthDaysGrids = [];
-    if (lastDayOfWeek >= 1) {
+    var hasNextMonthGrid = false;
+    if (lastDayOfWeek == 0) {
+      lastDayOfWeek = 7;
+    }
+    if (lastDayOfWeek > 0) {
       lastDayOfWeek = 8 - lastDayOfWeek;
       for (var n = 1; n <= lastDayOfWeek; n++) {
         nextMonthDaysGrids.push(n);
       }
-      this.setData({
-        hasNextMonthGrid: true,
-        nextMonthDaysGrids,
-      })
-    } else if (lastDayOfWeek == 0) {
-      this.setData({
-        hasNextMonthGrid: true,
-        nextMonthDaysGrids: [1],
-      }) 
-    } else {
-      this.setData({
-        hasNextMonthGrid: false,
-        nextMonthDaysGrids,
-      }) 
+      hasNextMonthGrid = true;
     }
+
+    this.setData({
+      'calendarData.hasNextMonthGrid': hasNextMonthGrid,
+      'calendarData.nextMonthDaysGrids': nextMonthDaysGrids,
+    }) 
 
     // 上个月 剩几天
     var lastMonth = month;
@@ -163,30 +167,25 @@ Page({
       lastMonth = month - 1;
     }
     var lastMonthDays = this.getThisMonthDays(lastYear, lastMonth);
-    var firstDayOfWeek = this.getFirstDayOfWeek(year, year);
+    var firstDayOfWeek = this.getFirstDayOfWeek(year, month);
     var lastMonthDaysGrids = [];
+    var hasLastMonthGrid = false;
 
     if (firstDayOfWeek == 0) {
       firstDayOfWeek = 7;
     }
-    if (firstDayOfWeek > 1) {
+    if (firstDayOfWeek > 0) {
       for (var l=lastMonthDays,i=1 ; i < firstDayOfWeek; l--,i++) {
         lastMonthDaysGrids.push(l);
       }
       lastMonthDaysGrids.reverse();
-      this.setData({
-        hasLastMonthGrid: true,
-        lastMonthDaysGrids,
-      })
-    } else {
-      this.setData({
-        hasLastMonthGrid: false,
-        lastMonthDaysGrids,
-      })
+      hasLastMonthGrid = true;
     }
 
-
-
+    this.setData({
+      'calendarData.hasLastMonthGrid': hasLastMonthGrid,
+      'calendarData.lastMonthDaysGrids': lastMonthDaysGrids
+    })
 
 
   },
@@ -200,18 +199,18 @@ Page({
       var unChecked = false; //false 可以预约
 
       // 日期
-      if (!this.data.chooseDay) {
+      if (!this.data.calendarData.chooseDay) {
         if (i == dayStr && month == date.getMonth() + 1 && year == date.getFullYear()) {
           choosed = true;
           this.setData({
-            oldChooseDayIndex: i - 1
+            'calendarData.oldChooseDayIndex': i - 1
           })
         }
       } else {
-        if (i == this.data.chooseDay && month == this.data.chooseMonth && year == this.data.chooseYear) {
+        if (i == this.data.calendarData.chooseDay && month == this.data.calendarData.chooseMonth && year == this.data.calendarData.chooseYear) {
           choosed = true;
           this.setData({
-            oldChooseDayIndex: i - 1
+            'calendarData.oldChooseDayIndex': i - 1
           })
         }
       }
@@ -229,14 +228,14 @@ Page({
     }
 
     this.setData({
-      calculatedays
+      'calendarData.calculatedays': calculatedays
     });
   },
   
   tapDayItem(e) {
     const idx = e.currentTarget.dataset.idx;
-    const calculatedays = this.data.calculatedays;
-    var oldChooseDayIndex = this.data.oldChooseDayIndex;
+    const calculatedays = this.data.calendarData.calculatedays;
+    var oldChooseDayIndex = this.data.calendarData.oldChooseDayIndex;
     const date = new Date();
 
     if (!calculatedays[idx].notOptional) {
@@ -247,26 +246,26 @@ Page({
       calculatedays[idx].choosed = true;
 
       this.setData({
-        calculatedays,
-        oldChooseDayIndex: idx,
-        chooseDates: this.data.cur_year + '-' + this.data.cur_month + '-' + (idx + 1),
-        chooseMonth: this.data.cur_month,
-        chooseYear: this.data.cur_year,
-        chooseDay: idx+1,
+        'calendarData.calculatedays': calculatedays,
+        'calendarData.oldChooseDayIndex': idx,
+        'calendarData.chooseDates': this.data.calendarData.cur_year + '-' + this.data.calendarData.cur_month + '-' + (idx + 1),
+        'calendarData.chooseMonth': this.data.calendarData.cur_month,
+        'calendarData.chooseYear': this.data.calendarData.cur_year,
+        'calendarData.chooseDay': idx+1,
       });
     }
 
   },
   bindCalendarMonthTap (e) {
     var taptype = e.currentTarget.dataset.taptype;
-    var newYear = this.data.cur_year;
-    var newMonth = this.data.cur_month;
+    var newYear = this.data.calendarData.cur_year;
+    var newMonth = this.data.calendarData.cur_month;
 
     if (newMonth > 12) {
       newMonth = 1;
     }
     if (taptype == 'pre') {
-      if (newMonth != this.data.this_month) {
+      if (newMonth != this.data.calendarData.this_month) {
         newMonth = newMonth - 1;
       }
     } else {
@@ -276,11 +275,11 @@ Page({
   },
   bindCalendarYearTap (e) {
     var taptype = e.currentTarget.dataset.taptype;
-    var newYear = this.data.cur_year;
-    var newMonth = this.data.cur_month;
+    var newYear = this.data.calendarData.cur_year;
+    var newMonth = this.data.calendarData.cur_month;
 
     if (taptype == 'pre') {
-      if (newYear != this.data.this_year) {
+      if (newYear != this.data.calendarData.this_year) {
         newYear = newYear - 1;
       }
     } else {
@@ -293,8 +292,8 @@ Page({
     this.calculateEmptyGrids(newYear, newMonth);
 
     this.setData({
-      cur_month: newMonth,
-      cur_year: newYear
+      'calendarData.cur_month': newMonth,
+      'calendarData.cur_year': newYear
     });
   },
 

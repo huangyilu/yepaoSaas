@@ -41,7 +41,7 @@
         <view>课程表</view>
       </navigator>
       <navigator url='' hover-class="none" class='weui-flex__item tab-item'>
-        <image class='tab-icon-gclass' src='../../images/icon/home/gclass.png'></image>
+        <image class='tab-icon-appt' src='../../images/icon/home/my_appt.png'></image>
         <view>我的约课</view>
       </navigator>
     </view>

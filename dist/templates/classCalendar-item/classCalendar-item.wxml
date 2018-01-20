@@ -1,0 +1,61 @@
+
+<template name='classCalendar-item'>
+
+
+<view class='weui-flex classCalendar-cell'>
+  <!-- 左 -->
+  <view class='title-view'>
+    <view class='time-text'>10:00-11:00</view>
+    <view>
+      <image mode='aspectFill' class='title-img' src='http://img2.imgtn.bdimg.com/it/u=3390152407,4060777889&fm=27&gp=0.jpg'></image>
+    </view>
+  </view>
+  <!-- 右 -->
+  <view class='weui-flex__item'>
+    <!-- 上 -->
+    <view class='up-text-view'>
+      <text>肚皮舞</text>
+      <text class='right-text'>查看详情</text>
+    </view>
+    <!-- 下 -->
+    <view class='weui-flex down-view'>
+      <!-- 左 -->
+      <view class='name-view weui-flex__item'>
+        <view class='name-headview weui-flex'>
+          <!-- 头像 -->
+          <view >
+            <image class='head-img' src='http://img2.imgtn.bdimg.com/it/u=3390152407,4060777889&fm=27&gp=0.jpg'></image>
+          </view>
+          <view class='weui-flex__item'>
+            <view>藏冬雨</view>
+            <!-- 评分 -->
+            <view class='star-view'>
+            <block wx:for='{{ ["star","star","star","star",""] }}' wx:key='*this'>
+              <image wx:if='{{ item == "star" }}' class='star-icon' src='../../images/icon/home/star_pink.png'></image>
+              <image wx:if='{{ item == "" }}' class='star-icon' src='../../images/icon/star_g.png'></image>
+            </block>
+            </view>
+          </view>
+        </view>
+
+        <!-- 团课 还可报名 -->
+        <view class='otherinfo-view'>
+          <image class='cell-icon' src='../../images/icon/share.png'></image>
+          <text class='text'>团课</text>
+          <image class='cell-icon' src='../../images/icon/share.png'></image>
+          <text class='text'>还可报名 <text class='yeColor'>10</text>人</text>
+        </view>
+      </view>
+
+      <!-- 右 -->
+      <view>
+        <view class='appt-btn'>预约</view>
+      </view>
+
+    </view>
+  </view>
+
+</view>
+
+
+</template>

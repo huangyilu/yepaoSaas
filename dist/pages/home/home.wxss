@@ -38,6 +38,10 @@
     width: 49rpx;
     height: 42rpx;
 }
+.tab-icon-appt {
+    width: 47rpx;
+    height: 47rpx;
+}
 .tab-icon-private_trainer {
     width: 50rpx;
     height: 41rpx;

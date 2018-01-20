@@ -2,7 +2,6 @@
 
 @import 'styles/weui.wxss';
 @import 'styles/icon.wxss';
-@import 'styles/calculate.wxss';
 @import 'templates/star-item/star-item.wxss';
 @import 'templates/empty-view/empty-view.wxss';
 @import 'templates/imgText-item/imgText-item.wxss';
@@ -65,6 +64,17 @@ page {
 .fs28 {
     font-size: 28rpx;
 }
+.fs26 {
+    font-size: 26rpx;
+}
+
+/* 灰色 */
+.gryColor {
+    color: #BAB9C7;
+}
+.yeColor {
+    color: #fcf428;
+}
 
 /* 居中 */
 .txt-center {
@@ -75,6 +85,15 @@ page {
 .second-txt-fscolor {
     font-size: 28rpx;
     color: #848296;
+}
+
+/* 浮 右 */
+.ft-right {
+    float: right;
+}
+/* 浮 左 */
+.ft-left {
+    float: left;
 }
 
 /* 线条 */
