@@ -55,6 +55,9 @@ page {
 }
 
 /* 字体 大小 */
+.fs34 {
+    font-size: 34rpx;
+}
 .fs32 {
     font-size: 32rpx;
 }
@@ -69,8 +72,11 @@ page {
 }
 
 /* 灰色 */
-.gryColor {
+.deepGryColor {
     color: #BAB9C7;
+}
+.gryColor {
+    color: #848296;
 }
 .yeColor {
     color: #fcf428;

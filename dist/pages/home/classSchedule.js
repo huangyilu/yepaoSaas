@@ -1,6 +1,10 @@
 // pages/home/classSchedule.js
 
+import moment from '../../utils/npm/moment';
+
+
 var sliderWidth = 90; // 需要设置slider的宽度，用于计算中间位置
+
 
 Page({
 
@@ -16,15 +20,15 @@ Page({
     sliderLeft: 0,
     navbarTabs: [
       {
-        date: '12.26',
+        date: '',
         name: '今天'
       },
       {
-        date: '12.26',
+        date: '',
         name: '明天'
       },
       {
-        date: '12.26',
+        date: '',
         name: '后天'
       },
       {
@@ -33,7 +37,18 @@ Page({
       }
     ],
 
-    courseList: [],
+    // 课程列表
+    courseList: [
+      {
+        classImg: 'http://img2.imgtn.bdimg.com/it/u=3390152407,4060777889&fm=27&gp=0.jpg',
+        headimg: 'http://img2.imgtn.bdimg.com/it/u=3390152407,4060777889&fm=27&gp=0.jpg',
+        className: '肚皮舞',
+        classTime: '10:00-11:00',
+        teacherName: '藏冬雨',
+        teacherScore: ['star', 'star', 'star', 'star',''],
+        allowSignUp: 10
+      }
+    ],
 
     // 日历
     calendarData: {
@@ -76,6 +91,9 @@ Page({
 
     // 日历 初始化
     this.initDataOnCalendar();
+
+    // 前三天 日期 初始化
+    this.initTopThreeDate();
   
   },
 
@@ -88,6 +106,15 @@ Page({
     });
   },
 
+  initTopThreeDate() {
+    var navbarTabs = this.data.navbarTabs;
+    for (var i=0 ; i<3; i++) {
+      navbarTabs[i].date = moment().add(i, 'days').format('M.D')
+    }
+    this.setData({
+      navbarTabs: navbarTabs
+    })
+  },
   // 日历
   initDataOnCalendar() {
     const date = new Date();

@@ -14,11 +14,11 @@
   <view class='tab-view'>
   
     <view class='weui-flex'>
-      <navigator url='' hover-class="none" class='weui-flex__item tab-item border-right'>
+      <navigator url='buyMembershipCard' hover-class="none" class='weui-flex__item tab-item border-right'>
         <image class='tab-icon-buyvip' src='../../images/icon/home/buyvip.png'></image>
         <view>在线购卡</view>
       </navigator> 
-      <navigator url='' hover-class="none" class='weui-flex__item tab-item'>
+      <navigator url='membershipCard' hover-class="none" class='weui-flex__item tab-item'>
         <image class='tab-icon-mycar' src='../../images/icon/home/mycar.png'></image>
         <view>我的会员卡</view>
       </navigator>
@@ -29,7 +29,7 @@
         <image class='tab-icon-private_trainer' src='../../images/icon/home/private_trainer.png'></image>
         <view>私人教练</view>
       </navigator>
-      <navigator url='' hover-class="none" class='weui-flex__item tab-item'>
+      <navigator url='recommendedCourses' hover-class="none" class='weui-flex__item tab-item'>
         <image class='tab-icon-recomclass' src='../../images/icon/home/recomclass.png'></image>
         <view>推荐课程</view>
       </navigator>
@@ -40,7 +40,7 @@
         <image class='tab-icon-gclass' src='../../images/icon/home/gclass.png'></image>
         <view>课程表</view>
       </navigator>
-      <navigator url='' hover-class="none" class='weui-flex__item tab-item'>
+      <navigator url='myClass' hover-class="none" class='weui-flex__item tab-item'>
         <image class='tab-icon-appt' src='../../images/icon/home/my_appt.png'></image>
         <view>我的约课</view>
       </navigator>

@@ -1,0 +1,24 @@
+
+<template name='recoCourse-item'>
+
+  <view class='recocell-view weui-flex'>
+
+    <view class='head-img-view'>
+      <image mode='aspectFill' src='{{ headimg }}'></image>
+    </view>
+
+    <view class='weui-flex__item'>
+      <view class='name-text'>{{ courseName }}</view>
+      <view class='info-text'> 
+        ¥{{ price }}
+        <text>共{{ courseTime }}课时</text>
+      </view>
+    </view>
+
+    <view class='btn-view' bindtap='bindBuyTap'>
+      <view>购买</view>
+    </view>
+    
+  </view>
+
+</template>

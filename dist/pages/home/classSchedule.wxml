@@ -14,6 +14,8 @@
       <view id="{{ index }}" class="weui-navbar__item {{ activeIndex == index ? 'weui-bar__item_on' : ''}}" bindtap="bindNavbarTabTap">
         <view class="weui-navbar__title">
           {{ item.date }}
+          <!-- 占位 -->
+          <view style='height:25rpx;' wx:if='{{ item.date == "" }}'></view>
           <image wx:if='{{ item.date == "" }}' class='navbar-cal-icon' src='../../images/icon/home/calendar.png'></image>
         </view>
         <view class="weui-navbar__title {{ activeIndex == index ? 'weui-bar__item_on' : ''}}">{{ item.name }}</view>
@@ -28,40 +30,35 @@
 <!-- 选项一 开始 -->
     <view class="weui-tab__content" hidden="{{ activeIndex != 0 }}">
       <!-- 选项一 内容 -->
-      <template is="classCalendar-item" data="{{ classList }}"/> 
+      <template wx:if='{{ courseList.length > 0 }}' is="classCalendar-item" data="{{ courseList }}"/> 
       <!--无 更多 -->
-      <template is='empty-view' data='{{ emptyText, emptyIcon }}'/>
+      <template wx:else is='empty-view' data='{{ emptyText, emptyIcon }}'/>
     </view>
 <!-- 选项一 结束 -->
 
 <!-- 选项二 开始 -->
     <view class="weui-tab__content" hidden="{{ activeIndex != 1 }}">
       <!-- 选项二 内容 -->
-      2
-      <!-- <template is="talent-item" data="{{ leftTabs,talentList,windowHeight,itemSelectIndex }}"/> -->
+      <template wx:if='{{ courseList.length > 0 }}' is="classCalendar-item" data="{{ courseList }}"/> 
       <!-- 无 更多 -->
-      <template is='empty-view' data='{{ emptyText, emptyIcon }}'/>
+      <template wx:else is='empty-view' data='{{ emptyText, emptyIcon }}'/>
     </view>
 <!-- 选项二结束 -->
 
 <!-- 选项三 开始 -->
     <view class="weui-tab__content" hidden="{{ activeIndex != 2 }}">
       <!-- 选项三 内容 -->
-      3
-      <!-- <template is="celebration-item" data="{{ celebrationList }}"/> -->
-      <!-- 无 更多 -->
-      <template is='empty-view' data='{{ emptyText, emptyIcon }}'/>
+      <template wx:if='{{ courseList.length > 0 }}' is="classCalendar-item" data="{{ courseList }}"/> 
+      <template wx:else is='empty-view' data='{{ emptyText, emptyIcon }}'/>
     </view>
 <!-- 选项三 结束 -->
 
 <!-- 选项四 开始 -->
     <view class="weui-tab__content" hidden="{{ activeIndex != 3 }}">
       <!-- 选项四 内容 -->
-      4
+      <template wx:if='{{ courseList.length > 0 }}' is="classCalendar-item" data="{{ courseList }}"/> 
       <!-- 无 更多 -->
-      <template is='empty-view' data='{{ emptyText, emptyIcon }}'/>
-
-
+      <template wx:else is='empty-view' data='{{ emptyText, emptyIcon }}'/>
     </view>
 <!-- 选项四 结束 -->
 

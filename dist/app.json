@@ -1,8 +1,13 @@
 {
   "pages": [
-    "pages/home/classSchedule",
     "pages/home/home",
+    "pages/home/recommendedCourses",
     
+    "pages/home/membershipCardDetails",
+    "pages/home/buyMembershipCard",
+    "pages/home/membershipCard",
+    "pages/home/myClass",
+    "pages/home/classSchedule",
     "pages/mine/courseShare/courseShareDetails",
     "pages/mine/mine",
     "pages/home/personalTrainer",
@@ -13,6 +18,7 @@
     "pages/mine/myCoach/courseCustom",
     "pages/mine/courseShare/courseShare",
     "pages/mine/myCoach/myCoachListView"
+    
   ],
   "window": {
     "backgroundColor": "#262439",

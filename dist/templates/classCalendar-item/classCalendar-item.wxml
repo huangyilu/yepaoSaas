@@ -1,20 +1,20 @@
 
 <template name='classCalendar-item'>
 
-
+<block wx:for='{{ courseList }}' wx:key='{{ index }}'>
 <view class='weui-flex classCalendar-cell'>
   <!-- 左 -->
   <view class='title-view'>
-    <view class='time-text'>10:00-11:00</view>
+    <view class='time-text'>{{ item.classTime }}</view>
     <view>
-      <image mode='aspectFill' class='title-img' src='http://img2.imgtn.bdimg.com/it/u=3390152407,4060777889&fm=27&gp=0.jpg'></image>
+      <image mode='aspectFill' class='title-img' src='{{ item.classImg }}'></image>
     </view>
   </view>
   <!-- 右 -->
   <view class='weui-flex__item'>
     <!-- 上 -->
     <view class='up-text-view'>
-      <text>肚皮舞</text>
+      <text>{{ item.className }}</text>
       <text class='right-text'>查看详情</text>
     </view>
     <!-- 下 -->
@@ -24,14 +24,14 @@
         <view class='name-headview weui-flex'>
           <!-- 头像 -->
           <view >
-            <image class='head-img' src='http://img2.imgtn.bdimg.com/it/u=3390152407,4060777889&fm=27&gp=0.jpg'></image>
+            <image mode='aspectFill' class='head-img' src='{{ item.headimg }}'></image>
           </view>
           <view class='weui-flex__item'>
-            <view>藏冬雨</view>
+            <view>{{ item.teacherName }}</view>
             <!-- 评分 -->
             <view class='star-view'>
-            <block wx:for='{{ ["star","star","star","star",""] }}' wx:key='*this'>
-              <image wx:if='{{ item == "star" }}' class='star-icon' src='../../images/icon/home/star_pink.png'></image>
+            <block wx:for='{{ item.teacherScore }}' wx:key='{{ index }}'>
+              <image wx:if='{{ item == "star" }}' class='star-icon' src='../../images/icon/home/star_red.png'></image>
               <image wx:if='{{ item == "" }}' class='star-icon' src='../../images/icon/star_g.png'></image>
             </block>
             </view>
@@ -40,10 +40,10 @@
 
         <!-- 团课 还可报名 -->
         <view class='otherinfo-view'>
-          <image class='cell-icon' src='../../images/icon/share.png'></image>
+          <image class='cell-icon-class' src='../../images/icon/home/league_class.png'></image>
           <text class='text'>团课</text>
-          <image class='cell-icon' src='../../images/icon/share.png'></image>
-          <text class='text'>还可报名 <text class='yeColor'>10</text>人</text>
+          <image class='cell-icon-enro' src='../../images/icon/home/enrolment.png'></image>
+          <text class='text'>还可报名 <text class='yeColor'>{{ item.allowSignUp }}</text>人</text>
         </view>
       </view>
 
@@ -56,6 +56,6 @@
   </view>
 
 </view>
-
+</block>
 
 </template>

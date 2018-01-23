@@ -51,9 +51,9 @@
     text-align: center;
 }
 .star-view .star-icon {
-    width: 20rpx;
-    height: 18rpx;
-    margin-right: 5rpx;
+    width: 18rpx;
+    height: 16rpx;
+    margin-right: 10rpx;
 }
 .star-view {
     margin-left: 0;
@@ -65,9 +65,14 @@
     font-size: 26rpx;
     margin-top: -10rpx;
 }
-.otherinfo-view .cell-icon{
-    width: 30rpx;
+.otherinfo-view .cell-icon-class{
+    width: 25rpx;
     height: 25rpx;
+    margin-right: 10rpx;
+}
+.otherinfo-view .cell-icon-enro{
+    width: 27rpx;
+    height: 22rpx;
     margin-right: 10rpx;
 }
 .otherinfo-view .text {
