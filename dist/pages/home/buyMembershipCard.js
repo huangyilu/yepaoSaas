@@ -8,19 +8,18 @@ Page({
     carList: [
       {
         bgimg: '../../images/icon/home/car/card_bg.png',
-        carPrice: 1000,
+        carPrice: 4000,
         carName: '一年卡',
         checked: false
       },
       {
         bgimg: '../../images/icon/home/car/card_bg.png',
-        carPrice: 2000,
+        carPrice: 1000,
         carName: '月卡',
         checked: false
       }
     ],
     totalPrice: 0,
-    protocolChecked: true
   },
 
   /**

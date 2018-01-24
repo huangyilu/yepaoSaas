@@ -8,17 +8,24 @@ Page({
    * 页面的初始数据
    */
   data: {
+    rightItemHidden: false,
     yItems: [
       {
         iconUrl: '../../images/icon/mine/fit_calen.png',
         name: '健身计划',
         navigateUrl: '',
-        ishidden: false
+        ishidden: true
       },
       {
         iconUrl: '../../images/icon/mine/coach.png',
         name: '我是教练',
         navigateUrl: 'myCoach/myCoachListView',
+        ishidden: false
+      },
+      {
+        iconUrl: '../../images/icon/mine/coach.png',
+        name: '我是会籍',
+        navigateUrl: 'myMember/myMember',
         ishidden: false
       },
       {

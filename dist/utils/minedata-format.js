@@ -11,6 +11,7 @@ export const FORMATNUMTOCHNESE = {
   '7': '日',
 }
 
+// 我是教练
 export const privateMemberList = [
   {
     name: '朱有为',
@@ -29,16 +30,17 @@ export const privateMemberList = [
     }
   }
 ]
-
+// app_head
 export function formatPrivateMemberList(list) {
   return list.map(item => this.formatPrivateMemberListItem(item))
 }
-export function formatPrivateMemberListItem() {
+export function formatPrivateMemberListItem(item) {
   return {
-    name: '朱有为',
-    headimg: 'http://img2.imgtn.bdimg.com/it/u=3390152407,4060777889&fm=27&gp=0.jpg',
+    memId: item.id,
+    name: item.mem_name,
+    headimg: item.app_head ? item.app_head : '../../../images/icon/default_headimg.png',
     period: {
-      surplus: 8,
+      last: 8,
       total: 12
     }
   }
@@ -64,4 +66,17 @@ export function formatDifferentTypesDate (timeStr) {
   }
   console.log('newStr ... ' + newStr);
   return newStr;
+}
+
+// 课程训练
+export function formatCourseTraining(list) {
+  return list.map(item => this.formatCourseTrainingItem(item))
+}
+export function formatCourseTrainingItem(item) {
+  return {
+    id: 0,
+    title: '热身',
+    open: false,
+    courseList: []
+  }
 }

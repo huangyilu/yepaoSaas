@@ -15,9 +15,7 @@ Page({
   },
   onLoad: function () {
 
-    this.setData({
-      privateMemberList: minedata.formatPrivateMemberList(minedata.privateMemberList)
-    })
+
 
     
     this.getMyMembers();
@@ -25,11 +23,16 @@ Page({
   },
 
   // 取数据
-  getMyMembers (e) {
+  getMyMembers () {
 
     mineService.queryMyMembers().then((result) => {
 
-      console.log('queryMyMembers *** ');
+      console.log('queryMyMembers *** ' + JSON.stringify(result) );
+      if (result.rs == 'Y') {
+        this.setData({
+          privateMemberList: minedata.formatPrivateMemberList(result.result)
+        })
+      }
 
     }).catch((error) => {
       console.log(error);
@@ -38,9 +41,10 @@ Page({
   },
 
   bindPrivateMemberTap (e) {
+    var id = e.currentTarget.id;
 
     wx.navigateTo({
-      url: 'courseCustom',
+      url: 'courseCustom?memid=' + id,
     })
 
   }

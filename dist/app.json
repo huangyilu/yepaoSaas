@@ -1,8 +1,11 @@
 {
   "pages": [
     "pages/home/home",
+    "pages/mine/myMember/memberInfoRegistration",
+    "pages/mine/myMember/customerTracking",
+   
+    "pages/mine/myMember/myMember",
     "pages/home/recommendedCourses",
-    
     "pages/home/membershipCardDetails",
     "pages/home/buyMembershipCard",
     "pages/home/membershipCard",
@@ -50,6 +53,12 @@
         "text": "俱乐部",
         "iconPath": "images/icon/tabBar_icon/club.png",
         "selectedIconPath": "images/icon/tabBar_icon/club_y.png"
+      },
+      {
+        "pagePath": "pages/club/club",
+        "text": "待办",
+        "iconPath": "images/icon/tabBar_icon/need_deal.png",
+        "selectedIconPath": "images/icon/tabBar_icon/need_deal_y.png"
       },
       {
         "pagePath": "pages/mine/mine",

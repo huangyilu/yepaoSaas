@@ -1,18 +1,11 @@
-// pages/mine/myCoach/myCoachListView.js
+// pages/mine/myMember/memberInfoRegistration.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    rightItemHidden: true,
-    yItems: [
-      {
-        iconUrl: '../../../images/icon/mine/member_registration.png',
-        name: '私教会员',
-        navigateUrl: 'privateMember'
-      }
-    ]
+  
   },
 
   /**

@@ -30,7 +30,7 @@
   <!-- y 排列 item-->
   <view class='y-item-view'>
   
-    <template is="imgText-item" data="{{ yItems }}"/>
+    <template is="imgText-item" data="{{ yItems,rightItemHidden }}"/>
 
   </view>
 

@@ -1,6 +1,8 @@
 // pages/myCoach/courseTraining.js
 
 import weSwiper from '../../../utils/weSwiper/weSwiper.js'
+import * as minedata from '../../../utils/minedata-format';
+import * as mineService from '../../../services/mine-service';
 
 Page({
 
@@ -20,8 +22,8 @@ Page({
         courseList: [
           {
             name: '全膝俯卧撑',
-            imgUrl: 'http://img2.imgtn.bdimg.com/it/u=3390152407,4060777889&fm=27&gp=0.jpg',
-            videoUrl: '',
+            imgUrl: 'http://new-saas.oss-cn-hangzhou.aliyuncs.com/tpsp/1516760632644.png?Expires=1516765216&OSSAccessKeyId=TMP.AQHugnu6EoynL7XR0r6j6dxpCZNyX1b7e3_6WZeD5KOBYn9rC2cNzRheIdhGADAtAhUAxIihf4XROCRw-q4yXG0rGHTQTGcCFAUoCYB0ZWJMdYjMfCOClx3RqVym&Signature=dAMBTB9oZisNFxDQ9RWxmdrmraU%3D',
+            videoUrl: 'http://new-saas.oss-cn-hangzhou.aliyuncs.com/tpsp/1516760661079.mp4?Expires=1516765240&OSSAccessKeyId=TMP.AQHugnu6EoynL7XR0r6j6dxpCZNyX1b7e3_6WZeD5KOBYn9rC2cNzRheIdhGADAtAhUAxIihf4XROCRw-q4yXG0rGHTQTGcCFAUoCYB0ZWJMdYjMfCOClx3RqVym&Signature=D7Gp9ZQx9bDPUu8IwrqgYSuetkg%3D',
             choosed: true,
           },
           {
@@ -63,7 +65,7 @@ Page({
     videoUrlsBrowse: [
       {
         name: '',
-        url: 'http://xiqingfengbao-sp.oss-cn-hangzhou.aliyuncs.com/qd-sp/1515403272068.mp4?Expires=1516280515&OSSAccessKeyId=LTAIGdDLarpYm7lf&Signature=bS2Rrvs88iD%2FoTY%2BO6TpWtasu38%3D'
+        url: 'http://new-saas.oss-cn-hangzhou.aliyuncs.com/tpsp/1516760661079.mp4?Expires=1516765240&OSSAccessKeyId=TMP.AQHugnu6EoynL7XR0r6j6dxpCZNyX1b7e3_6WZeD5KOBYn9rC2cNzRheIdhGADAtAhUAxIihf4XROCRw-q4yXG0rGHTQTGcCFAUoCYB0ZWJMdYjMfCOClx3RqVym&Signature=D7Gp9ZQx9bDPUu8IwrqgYSuetkg%3D'
       },
       {
         name: '',
@@ -78,6 +80,30 @@ Page({
   onLoad: function (options) {
   
     this.initWeSwiper(this.data.videoUrlsBrowse);
+
+    this.setData({
+      memId: options.memId ? options.memId : null,
+      customizeDateString: options.customizeDateString ? options.customizeDateString : null
+    })
+
+    this.getCourseCustomizationDetail();
+  },
+
+  // 取数据
+  getCourseCustomizationDetail() {
+
+    mineService.queryCourseCustomizationDetail(this.data.customizeDateString, this.data.memId).then((result) => {
+
+      console.log('queryCourseCustomizationDetail *** ' + JSON.stringify(result));
+      if (result.length > 0) {
+        // this.setData({
+        //   courseTrainingList: minedata.formatCourseTraining(result.result)
+        // })
+      }
+
+    }).catch((error) => {
+      console.log(error);
+    })
 
   },
 

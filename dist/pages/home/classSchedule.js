@@ -47,6 +47,15 @@ Page({
         teacherName: '藏冬雨',
         teacherScore: ['star', 'star', 'star', 'star',''],
         allowSignUp: 10
+      },
+      {
+        classImg: 'http://img2.imgtn.bdimg.com/it/u=3390152407,4060777889&fm=27&gp=0.jpg',
+        headimg: 'http://img2.imgtn.bdimg.com/it/u=3390152407,4060777889&fm=27&gp=0.jpg',
+        className: '肚皮舞',
+        classTime: '10:00-11:00',
+        teacherName: '藏冬雨',
+        teacherScore: ['star', 'star', 'star', 'star', ''],
+        allowSignUp: 10
       }
     ],
 

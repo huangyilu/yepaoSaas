@@ -8,7 +8,7 @@
       <!-- 周 -->
       <view>{{ item.week }}</view>
       <!-- 日期 -->
-      <view class="{{ item.selected ? 'today__item' : 'day__item' }}" id='{{ index }}' bindtap='bindCalendarTodayTap'>{{ item.day }}</view>
+      <view class="{{ item.selected ? 'today__item' : 'day__item' }}" data-yearmonthday='{{ item.yearMonthDay }}' id='{{ index }}' bindtap='bindCalendarTodayTap'>{{ item.day }}</view>
     </view>
   </view>
 
@@ -44,7 +44,7 @@
     <image class='personal-bgimg' src='../../../images/bg_img/person_bg.png'></image>
 
     <!-- foot-view -->
-    <view class='foot-btn-view' bindtap='bindMakeUpTap'>生成</view>
+    <view class='foot-btn-view' bindtap='bindMakeUpTap'>{{ footBtnTitle }}</view>
 
   </view>
 

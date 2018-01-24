@@ -26,3 +26,39 @@ export function queryMyMembers() {
 }
 
 // 我是教练
+
+
+// 定制课程 memId 私教会员ID ptId 教练ID
+export function queryCourseCustomization(customizeDateString, memId) {
+  return jsonGetRequest('getCourseCustomization', {
+    custName: "zjs",
+    gym: "zjs",
+    ptId: '59ba4cc655040f3865e14b64',
+    memId: memId,
+    customizeDateString: customizeDateString
+  })
+}
+
+// 存入 定制的 课程
+export function uploadCourseCustomization(customizeDateString, memId, customizeLevel, customizeParts) {
+  return urlencodePostRequest('saveCourseCustomization', {
+    custName: "zjs",
+    gym: "zjs",
+    ptId: '59ba4cc655040f3865e14b64',
+    memId: memId,
+    customizeDateString: customizeDateString,
+    customizeLevel: customizeLevel,
+    customizeParts: customizeParts
+  })
+}
+
+// 查看定制的课程
+export function queryCourseCustomizationDetail(customizeDateString, memId) {
+  return jsonGetRequest('getCourseCustomizationDetail', {
+    custName: "zjs",
+    gym: "zjs",
+    ptId: '59ba4cc655040f3865e14b64',
+    memId: memId,
+    customizeDateString: customizeDateString
+  })
+}

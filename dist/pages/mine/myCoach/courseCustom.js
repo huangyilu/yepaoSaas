@@ -2,6 +2,7 @@
 
 import moment from '../../../utils/npm/moment';
 import * as minedata from '../../../utils/minedata-format';
+import * as mineService from '../../../services/mine-service';
 
 Page({
 
@@ -9,6 +10,8 @@ Page({
    * 页面的初始数据
    */
   data: {
+    // 当前所选日期
+    yearMonthDay: '',
     weekData:[],
     levelItem: [
       {
@@ -17,7 +20,7 @@ Page({
       },
       {
         level: '中级',
-        selected: true,
+        selected: false,
       },
       {
         level: '高级',
@@ -28,7 +31,7 @@ Page({
     bodyItem: [
       {
         body: '有氧',
-        selected: true,
+        selected: false,
         styles: ''
       },
       {
@@ -51,7 +54,14 @@ Page({
         selected: false,
         styles: 'bottom-left-btn'
       }
-    ]
+    ],
+
+    // 初 中 高
+    customizeLevel: '',
+    // 全身 
+    customizeParts: '',
+
+    footBtnTitle: '生成'
   },
 
   /**
@@ -61,7 +71,71 @@ Page({
 
     // 初始化 周历
     this.initWeekCalendar();
+
+    
+    var yearMonthDay = moment().add(0, 'days').format('YYYY-MM-DD');
+    var memId = options.memid ? options.memid : null;
+
+    this.setData({
+      yearMonthDay: yearMonthDay,
+      memId: memId
+    })
+    this.getCourseCustomization();
+
+    console.log(' memId .. ' + memId);
   
+  },
+
+  // 取数据
+  getCourseCustomization() {
+
+    var customizeDateString = this.data.yearMonthDay;
+    var memId = this.data.memId;
+    var bodyItem = this.data.bodyItem;
+    var levelItem = this.data.levelItem;
+    var footBtnTitle = this.data.footBtnTitle;
+    mineService.queryCourseCustomization(customizeDateString, memId).then((result) => {
+
+      console.log('queryCourseCustomization *** ' + JSON.stringify(result));
+      if (result.result.length > 0) {
+
+        var bodys = result.result[0].customize_parts.split(',');
+        levelItem.forEach(item => {
+          if (item.level == result.result[0].customize_level) {
+            item.selected = true;
+          }
+        })
+
+        bodys.forEach(resItem => {
+          bodyItem.forEach(item => {
+            if (item.body == resItem) {
+              item.selected = true;
+            }
+          })
+        })
+
+        footBtnTitle = '查看';
+
+      } else {
+        levelItem.forEach(item => {
+          item.selected = false;
+        })
+        bodyItem.forEach(item => {
+          item.selected = false;
+        })
+        footBtnTitle = '生成';
+      }
+
+      this.setData({
+        levelItem: levelItem,
+        bodyItem: bodyItem,
+        footBtnTitle: footBtnTitle
+      })
+
+    }).catch((error) => {
+      console.log(error);
+    })
+
   },
 
   // 初始化
@@ -74,7 +148,8 @@ Page({
       weekData.push({
         week: minedata.FORMATNUMTOCHNESE[w],
         day: d,
-        selected: false
+        selected: false,
+        yearMonthDay: moment().add(i, 'days').format('YYYY-MM-DD')
       })
       weekData[0].selected = true;
     }
@@ -84,17 +159,6 @@ Page({
   },
 
   // 点击事件
-  bindCourseBtnTap (e) {
-    var index = e.currentTarget.id;
-    var levelItem = this.data.levelItem;
-    levelItem.forEach(item => {
-      item.selected = false;
-      levelItem[index].selected = true;
-    })
-    this.setData({
-      levelItem: levelItem
-    })
-  },
   bindCalendarTodayTap (e) {
     var index = e.currentTarget.id;
     var weekData = this.data.weekData;
@@ -103,7 +167,22 @@ Page({
       weekData[index].selected = true;
     })
     this.setData({
-      weekData: weekData
+      weekData: weekData,
+      yearMonthDay: weekData[index].yearMonthDay
+    })
+
+    this.getCourseCustomization();
+  },
+  bindCourseBtnTap(e) {
+    var index = e.currentTarget.id;
+    var levelItem = this.data.levelItem;
+    levelItem.forEach(item => {
+      item.selected = false;
+      levelItem[index].selected = true;
+    })
+    this.setData({
+      levelItem: levelItem,
+      customizeLevel: levelItem[index].level
     })
   },
   bindCourseBtnItemTap (e) {
@@ -118,9 +197,40 @@ Page({
   },
   bindMakeUpTap (e) {
     // 生成
-    wx.navigateTo({
-      url: 'courseTraining',
-    })
+
+    var bodyItem = this.data.bodyItem;
+    var customizeParts;
+    var customizePartsArr = [];
+
+    var footBtnTitle = this.data.footBtnTitle;
+
+    if (footBtnTitle == '生成') {
+      bodyItem.forEach(item => {
+        if (item.selected == true) {
+          customizePartsArr.push(item.body);
+          customizeParts = customizePartsArr.join(',');
+        }
+      })
+
+      mineService.uploadCourseCustomization(this.data.yearMonthDay, this.data.memId, this.data.customizeLevel, customizeParts).then((result) => {
+
+        console.log('uploadCourseCustomization *** ' + JSON.stringify(result));
+        if (result.rs == 'Y') {
+          wx.navigateTo({
+            url: 'courseTraining?memId=' + this.data.memId + '&customizeDateString=' + this.data.yearMonthDay,
+          })
+        }
+
+      }).catch((error) => {
+        console.log(error);
+      })
+    } else {
+      wx.navigateTo({
+        url: 'courseTraining?memId=' + this.data.memId + '&customizeDateString=' + this.data.yearMonthDay,
+      })
+    }
+
+
   }
 
 })
