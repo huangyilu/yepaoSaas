@@ -23,10 +23,10 @@
 
 <!-- 内层循环 -->
   <block wx:for="{{ outItem.courseList }}" wx:for-item="inItem" wx:for-index="inIndex" wx:key="{{ inIndex }}">
-  <view class='inside-cell' data-outIndex='{{ outIndex }}' data-inIndex='{{ inIndex }}' data-name='{{ inItem.name }}' bindtap='{{ courseShare ? "bindKindToggleInsideCellChoosedTap" : "bingKindToggleInsideCellTap" }}'>
+  <view class='inside-cell' data-outindex='{{ outIndex }}' data-inindex='{{ inIndex }}' data-name='{{ inItem.name }}' bindtap='{{ courseShare ? "bindKindToggleInsideCellChoosedTap" : "bingKindToggleInsideCellTap" }}'>
 
     <view data-outIndex='{{ outIndex }}' data-inIndex='{{ inIndex }}' data-name='{{ inItem.name }}' bindtap=''>
-      <image class='cellImg' src='{{ inItem.imgUrl }}' mode='aspectFill'></image>
+      <image class='cellImg' src='{{ inItem.imgString }}' mode='aspectFill'></image>
       <image class='cellIcon' src='../../../images/icon/video_play.png'></image>
       <text class='text'>{{ inItem.name }}</text>
     </view>

@@ -1,5 +1,6 @@
 
 import moment from './npm/moment';
+import { flattenDeep, groupBy } from './npm/lodash-wx';
 
 export const FORMATNUMTOCHNESE = {
   '1': '一',
@@ -69,14 +70,37 @@ export function formatDifferentTypesDate (timeStr) {
 }
 
 // 课程训练
-export function formatCourseTraining(list) {
-  return list.map(item => this.formatCourseTrainingItem(item))
-}
-export function formatCourseTrainingItem(item) {
+export function formatCourseTraining(item) {
+  var courseTrainingList = [];
+  courseTrainingList = [
+    {
+      id: 0,
+      title: '热身',
+      open: true,
+      courseList: item.warmUpMediaList
+    },
+    {
+      id: 1,
+      title: '正式训练',
+      open: false,
+      courseList: item.officialMediaList
+    },
+    {
+      id: 2,
+      title: '拉伸',
+      open: false,
+      courseList: item.stretchMediaList
+    }
+  ]
+  var videoUrlsBrowse = [];
+  videoUrlsBrowse.push(item.warmUpMediaList);
+  videoUrlsBrowse.push(item.officialMediaList);
+  videoUrlsBrowse.push(item.stretchMediaList);
+
+  videoUrlsBrowse = flattenDeep(videoUrlsBrowse);
+
   return {
-    id: 0,
-    title: '热身',
-    open: false,
-    courseList: []
+    courseTrainingList: courseTrainingList,
+    videoUrlsBrowse: videoUrlsBrowse
   }
 }

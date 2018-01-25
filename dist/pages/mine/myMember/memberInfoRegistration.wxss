@@ -1,1 +1,8 @@
 /* pages/mine/myMember/memberInfoRegistration.wxss */
+
+@import '../../../templates/textInput-item/textInput-item.wxss';
+
+
+.input-view {
+    padding-top: 5rpx;
+}

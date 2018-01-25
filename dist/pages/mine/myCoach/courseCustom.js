@@ -28,6 +28,7 @@ Page({
       }
     ],
 
+    muscleManImg: '',
     bodyItem: [
       {
         body: '有氧',
@@ -61,7 +62,10 @@ Page({
     // 全身 
     customizeParts: '',
 
-    footBtnTitle: '生成'
+    footBtnTitle: '生成',
+    isAllowCreate: false,
+    isSelectedLevel: false,
+    isSelectedBody: false
   },
 
   /**
@@ -103,6 +107,8 @@ Page({
         levelItem.forEach(item => {
           if (item.level == result.result[0].customize_level) {
             item.selected = true;
+          } else {
+            item.selected = false;
           }
         })
 
@@ -127,6 +133,7 @@ Page({
       }
 
       this.setData({
+        muscleManImg: result.muscleManImg,
         levelItem: levelItem,
         bodyItem: bodyItem,
         footBtnTitle: footBtnTitle
@@ -166,12 +173,18 @@ Page({
       item.selected = false;
       weekData[index].selected = true;
     })
+    var bodyItem = this.data.bodyItem;
+    bodyItem.forEach(item => {
+      item.selected = false;
+    })
     this.setData({
       weekData: weekData,
-      yearMonthDay: weekData[index].yearMonthDay
+      yearMonthDay: weekData[index].yearMonthDay,
+      bodyItem: bodyItem
     })
 
     this.getCourseCustomization();
+
   },
   bindCourseBtnTap(e) {
     var index = e.currentTarget.id;
@@ -182,48 +195,47 @@ Page({
     })
     this.setData({
       levelItem: levelItem,
-      customizeLevel: levelItem[index].level
+      customizeLevel: levelItem[index].level,
+      isSelectedLevel: true
     })
   },
   bindCourseBtnItemTap (e) {
     var index = e.currentTarget.id;
     var bodyItem = this.data.bodyItem;
+    var isSelectedBody;
+    bodyItem[index].selected = !bodyItem[index].selected;
     bodyItem.forEach(item => {
-      bodyItem[index].selected = !bodyItem[index].selected;
+      if (item.selected == true) {
+        isSelectedBody = true;
+      }
     })
     this.setData({
-      bodyItem: bodyItem
+      bodyItem: bodyItem,
+      isSelectedBody: isSelectedBody
     })
   },
   bindMakeUpTap (e) {
     // 生成
 
-    var bodyItem = this.data.bodyItem;
-    var customizeParts;
-    var customizePartsArr = [];
-
     var footBtnTitle = this.data.footBtnTitle;
 
     if (footBtnTitle == '生成') {
-      bodyItem.forEach(item => {
-        if (item.selected == true) {
-          customizePartsArr.push(item.body);
-          customizeParts = customizePartsArr.join(',');
-        }
-      })
 
-      mineService.uploadCourseCustomization(this.data.yearMonthDay, this.data.memId, this.data.customizeLevel, customizeParts).then((result) => {
+      if (!this.data.isSelectedLevel) {
+        wx.showModal({
+          title: '提示',
+          content: '请选择训练级别！',
+        })
+      } else if (!this.data.isSelectedBody) {
+        wx.showModal({
+          title: '提示',
+          content: '请选择训练部位！',
+        })
+      } else {
 
-        console.log('uploadCourseCustomization *** ' + JSON.stringify(result));
-        if (result.rs == 'Y') {
-          wx.navigateTo({
-            url: 'courseTraining?memId=' + this.data.memId + '&customizeDateString=' + this.data.yearMonthDay,
-          })
-        }
+        this.uploadCourseCustom();
+      }
 
-      }).catch((error) => {
-        console.log(error);
-      })
     } else {
       wx.navigateTo({
         url: 'courseTraining?memId=' + this.data.memId + '&customizeDateString=' + this.data.yearMonthDay,
@@ -231,6 +243,33 @@ Page({
     }
 
 
+  },
+
+  uploadCourseCustom() {
+
+    var bodyItem = this.data.bodyItem;
+    var customizeParts;
+    var customizePartsArr = [];
+
+    bodyItem.forEach(item => {
+      if (item.selected == true) {
+        customizePartsArr.push(item.body);
+        customizeParts = customizePartsArr.join(',');
+      }
+    })
+
+    mineService.uploadCourseCustomization(this.data.yearMonthDay, this.data.memId, this.data.customizeLevel, customizeParts).then((result) => {
+
+      console.log('uploadCourseCustomization *** ' + JSON.stringify(result));
+      if (result.rs == 'Y') {
+        wx.navigateTo({
+          url: 'courseTraining?memId=' + this.data.memId + '&customizeDateString=' + this.data.yearMonthDay,
+        })
+      }
+
+    }).catch((error) => {
+      console.log(error);
+    })
   }
 
 })

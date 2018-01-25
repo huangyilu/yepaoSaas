@@ -9,9 +9,24 @@ Page({
     yItems: [
       {
         iconUrl: '../../../images/icon/mine/member_registration.png',
+        name: '登记客户资料',
+        navigateUrl: 'privateMember'
+      },
+      {
+        iconUrl: '../../../images/icon/mine/customer_tracking.png',
+        name: '客户跟踪',
+        navigateUrl: 'privateMember'
+      },
+      {
+        iconUrl: '../../../images/icon/mine/work_transfer.png',
+        name: '资料移交',
+        navigateUrl: 'privateMember'
+      },
+      {
+        iconUrl: '../../../images/icon/mine/private_member.png',
         name: '私教会员',
         navigateUrl: 'privateMember'
-      }
+      },
     ]
   },
 

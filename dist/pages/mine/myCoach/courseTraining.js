@@ -10,50 +10,11 @@ Page({
    * 页面的初始数据
    */
   data: {
-    courseItem: ['上半身', '核心'],
-    courseLevel: '中级',
+    courseItem: null,
+    courseLevel: '',
     courseRTime: '25s',
 
-    courseTrainingList: [
-      {
-        id: 0,
-        title: '热身',
-        open: true,
-        courseList: [
-          {
-            name: '全膝俯卧撑',
-            imgUrl: 'http://new-saas.oss-cn-hangzhou.aliyuncs.com/tpsp/1516760632644.png?Expires=1516765216&OSSAccessKeyId=TMP.AQHugnu6EoynL7XR0r6j6dxpCZNyX1b7e3_6WZeD5KOBYn9rC2cNzRheIdhGADAtAhUAxIihf4XROCRw-q4yXG0rGHTQTGcCFAUoCYB0ZWJMdYjMfCOClx3RqVym&Signature=dAMBTB9oZisNFxDQ9RWxmdrmraU%3D',
-            videoUrl: 'http://new-saas.oss-cn-hangzhou.aliyuncs.com/tpsp/1516760661079.mp4?Expires=1516765240&OSSAccessKeyId=TMP.AQHugnu6EoynL7XR0r6j6dxpCZNyX1b7e3_6WZeD5KOBYn9rC2cNzRheIdhGADAtAhUAxIihf4XROCRw-q4yXG0rGHTQTGcCFAUoCYB0ZWJMdYjMfCOClx3RqVym&Signature=D7Gp9ZQx9bDPUu8IwrqgYSuetkg%3D',
-            choosed: true,
-          },
-          {
-            name: '全膝俯卧撑',
-            imgUrl: 'http://img2.imgtn.bdimg.com/it/u=3390152407,4060777889&fm=27&gp=0.jpg',
-            videoUrl: '',
-            choosed: false,
-          }
-        ]
-      },
-      {
-        id: 0,
-        title: '热身',
-        open: false,
-        courseList: [
-          {
-            name: '全膝俯卧撑',
-            imgUrl: 'http://img2.imgtn.bdimg.com/it/u=3390152407,4060777889&fm=27&gp=0.jpg',
-            videoUrl: '',
-            choosed: false,
-          },
-          {
-            name: '全膝俯卧撑',
-            imgUrl: 'http://img2.imgtn.bdimg.com/it/u=3390152407,4060777889&fm=27&gp=0.jpg',
-            videoUrl: '',
-            choosed: false,
-          }
-        ]
-      }
-    ],
+    courseTrainingList: [],
 
     courseShare: false,
     courseShareSuccess: false,
@@ -62,16 +23,7 @@ Page({
     videoIconUrl: '../../../images/icon/delete_back.png',
     showVideoHidden: true,
     videoIndex: 1,
-    videoUrlsBrowse: [
-      {
-        name: '',
-        url: 'http://new-saas.oss-cn-hangzhou.aliyuncs.com/tpsp/1516760661079.mp4?Expires=1516765240&OSSAccessKeyId=TMP.AQHugnu6EoynL7XR0r6j6dxpCZNyX1b7e3_6WZeD5KOBYn9rC2cNzRheIdhGADAtAhUAxIihf4XROCRw-q4yXG0rGHTQTGcCFAUoCYB0ZWJMdYjMfCOClx3RqVym&Signature=D7Gp9ZQx9bDPUu8IwrqgYSuetkg%3D'
-      },
-      {
-        name: '',
-        url: 'http://xiqingfengbao-sp.oss-cn-hangzhou.aliyuncs.com/qd-sp/1515403272068.mp4?Expires=1516280515&OSSAccessKeyId=LTAIGdDLarpYm7lf&Signature=bS2Rrvs88iD%2FoTY%2BO6TpWtasu38%3D'
-      }
-    ]
+    videoUrlsBrowse: []
   },
 
   /**
@@ -79,14 +31,14 @@ Page({
    */
   onLoad: function (options) {
   
-    this.initWeSwiper(this.data.videoUrlsBrowse);
-
     this.setData({
       memId: options.memId ? options.memId : null,
       customizeDateString: options.customizeDateString ? options.customizeDateString : null
     })
 
     this.getCourseCustomizationDetail();
+
+    
   },
 
   // 取数据
@@ -95,10 +47,16 @@ Page({
     mineService.queryCourseCustomizationDetail(this.data.customizeDateString, this.data.memId).then((result) => {
 
       console.log('queryCourseCustomizationDetail *** ' + JSON.stringify(result));
-      if (result.length > 0) {
-        // this.setData({
-        //   courseTrainingList: minedata.formatCourseTraining(result.result)
-        // })
+      if (result.result.length > 0) {
+        var formatlist = minedata.formatCourseTraining(result.result[0]);
+        this.setData({
+          courseTrainingList: formatlist.courseTrainingList,
+          videoUrlsBrowse: formatlist.videoUrlsBrowse,
+          courseItem: result.result[0].customize_parts.split(','),
+          courseLevel: result.result[0].customize_level
+        })
+
+        this.initWeSwiper(formatlist.videoUrlsBrowse);
       }
 
     }).catch((error) => {
@@ -124,6 +82,16 @@ Page({
         me.setData({
           videoIndex: weswiper.activeIndex + 1,
         })
+
+        var videoIndex = weswiper.activeIndex + 1;
+        var videoContext = wx.createVideoContext(videoIndex,me);
+        videoContext.pause();
+
+        if (index < this.data.videoUrlsBrowse.length - 1) {
+          var videoContext = wx.createVideoContext(videoIndex+1,me);
+          videoContext.pause();
+        }
+
       },
 
     })
@@ -162,7 +130,15 @@ Page({
   },
   // 点击 视频
   bingKindToggleInsideCellTap (e) {
-    console.log('播放 视频 。。。');
+    
+    var x = e.currentTarget.dataset.outindex;
+    var y = e.currentTarget.dataset.inindex;
+
+    var index = x * 2 + y + 1;
+    console.log('播放 视频 。。。' + index);
+    
+    this.weswiper.slideTo(index);
+
     this.setData({
       showVideoHidden: false
     })
@@ -205,9 +181,17 @@ Page({
   bindVideoPalyEnded (e) {
     
     var index = +e.currentTarget.id;
-    if (index < this.data.videoUrlsBrowse.length-1) {
+
+    // pause
+    var videoContext = wx.createVideoContext(index,this);
+    videoContext.pause();
+
+    if (index < this.data.videoUrlsBrowse.length - 1) {
       index = index + 1;
+      var videoContext = wx.createVideoContext(index,this);
+      videoContext.pause();
     }
+
     this.weswiper.slideTo(index);
 
     console.log('bindVideoPalyEnded ...' + index);

@@ -1,0 +1,40 @@
+
+.textInput-view {
+    height: 90rpx;
+    width: 100%;
+    line-height: 90rpx;
+    background-color: #2F2D45;
+    padding: 0 30rpx;
+    margin-bottom: 5rpx;
+}
+
+.textInput-view .title-view {
+    width: 200rpx;
+    float: left;
+}
+.textInput-view input {
+    margin-top: 50rpx;
+    display: inline-block;
+}
+
+.textInput-view .checked-view {
+    width: 29rpx;
+    height: 29rpx;
+    border: 1rpx white solid;
+    border-radius: 50%;
+    position: absolute;
+    margin-top: 28rpx;
+    /* margin-right: 15rpx; */
+}
+.textInput-view .checked-icon {
+    width: 30rpx;
+    height: 30rpx;
+    position: absolute;
+    margin-top: 28rpx;
+    /* margin-left: -45rpx; */
+}
+
+.gender-view {
+    display: inline-block;
+    margin-right: 20rpx;
+}

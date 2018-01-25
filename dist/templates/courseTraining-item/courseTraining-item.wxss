@@ -1,4 +1,8 @@
 
+
+.bg-view {
+    padding-bottom: 110rpx;
+}
 /* 向下展开 */
 .weui-flex {
     -webkit-box-align: center;
@@ -68,7 +72,7 @@
 
 
 .inside-cell {
-    height: 100rpx;
+    height: 140rpx;
     width: 100%;
     border-bottom: 1px #262439 solid;
 }
@@ -78,10 +82,10 @@
     width: 80%;
 }
 .inside-cell .cellImg {
-    width: 90rpx;
-    height: 70rpx;
+    width: 150rpx;
+    height: 100rpx;
     margin-left: 30rpx;
-    margin-top: 15rpx;
+    margin-top: 20rpx;
     float: left;
     position: absolute;
 }
@@ -90,12 +94,12 @@
     height: 40rpx;
     float: left;
     position: absolute;
-    margin-top:30rpx;
-    margin-left:55rpx;
+    margin-top: 50rpx;
+    margin-left: 85rpx;
 }
 .inside-cell .text {
-    margin-left: 160rpx;
-    margin-top: 15rpx;
+    margin-left: 220rpx;
+    margin-top: 35rpx;
     height: 70rpx;
     line-height: 70rpx;
     display: inline-block;

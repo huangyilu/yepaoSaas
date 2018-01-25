@@ -1,9 +1,10 @@
 {
   "pages": [
+
     "pages/home/home",
     "pages/mine/myMember/memberInfoRegistration",
     "pages/mine/myMember/customerTracking",
-   
+    
     "pages/mine/myMember/myMember",
     "pages/home/recommendedCourses",
     "pages/home/membershipCardDetails",
@@ -19,8 +20,8 @@
     "pages/mine/myCoach/privateMember",
     "pages/mine/myCoach/courseTraining",
     "pages/mine/myCoach/courseCustom",
-    "pages/mine/courseShare/courseShare",
-    "pages/mine/myCoach/myCoachListView"
+    "pages/mine/myCoach/myCoachListView",
+    "pages/mine/courseShare/courseShare"
     
   ],
   "window": {

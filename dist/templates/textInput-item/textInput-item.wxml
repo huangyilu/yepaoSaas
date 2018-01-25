@@ -1,0 +1,26 @@
+ 
+
+<template name='textInput-item'>
+
+  <view wx:if='{{ !gender }}' class='textInput-view'>
+    <view class='title-view'>{{ title }}</view>
+    <input placeholder-style='color:#848296;' placeholder='{{ placeholder }}'></input>
+  </view>
+
+  <!-- 性别选择 -->
+  <view wx:if='{{ gender }}' class='textInput-view'>
+    <view class='title-view'>{{ title }}</view>
+    <view class='gender-view'>
+      <view class='checked-view'></view>
+      <image class='checked-icon' src='../../../images/icon/checked.png'></image>
+      <text>男</text>
+    </view>
+    <view class='gender-view'>
+      <view class='checked-view'></view>
+      <image class='checked-icon' src='../../../images/icon/checked.png'></image>
+      <text>女</text>
+    </view>
+
+  </view>
+
+</template>

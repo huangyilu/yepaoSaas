@@ -1,2 +1,15 @@
 <!--pages/mine/myMember/memberInfoRegistration.wxml-->
-<text>pages/mine/myMember/memberInfoRegistration.wxml</text>
+
+<import src="../../../templates/textInput-item/textInput-item.wxml"/>
+
+<view class='bg-view'>
+
+  <view class='input-view'>
+    
+    <block wx:for='{{ textInputItems }}' wx:for-item='textInput' wx:key='{{ index }}'>
+    <template is='textInput-item' data='{{ ...textInput }}'/>
+    </block>
+
+  </view>
+
+</view>

@@ -57,7 +57,7 @@
       animation="{{ animationData }}">
       <block wx:for="{{ videoUrlsBrowse }}" wx:key="{{ index }}">
       <view class="we-slide" >
-        <video class='video' autoplay='true' id="{{ index }}" src="{{ item.url }}" bindended='bindVideoPalyEnded'></video>
+        <video class='video' autoplay='false' id="{{ index }}" src="{{ item.srcString }}" bindended='bindVideoPalyEnded'></video>
       </view>
       </block>
     </view> 

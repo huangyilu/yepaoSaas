@@ -41,7 +41,7 @@
     </view>
 
     <!-- bg img -->
-    <image class='personal-bgimg' src='../../../images/bg_img/person_bg.png'></image>
+    <image class='personal-bgimg' src='{{ muscleManImg }}'></image>
 
     <!-- foot-view -->
     <view class='foot-btn-view' bindtap='bindMakeUpTap'>{{ footBtnTitle }}</view>
