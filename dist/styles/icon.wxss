@@ -5,6 +5,6 @@
     width: 20rpx;
     height: 35rpx;
     float: right;
-    margin-top: 48rpx;
+    margin-top: 45rpx;
     margin-right: 30rpx;
 }

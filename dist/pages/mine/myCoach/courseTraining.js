@@ -162,10 +162,8 @@ Page({
     if (this.data.courseShare) {
       
       // 立即分享
+      this.uploadCourse();
 
-      this.setData({
-        courseShareSuccess: true
-      })
       // 分享成功之后 收起 提醒 已经选择框？
 
     } else {
@@ -201,6 +199,35 @@ Page({
 
     this.setData({
       showVideoHidden: true
+    })
+
+  },
+
+  uploadCourse () {
+
+    var courseTrainingList = this.data.courseTrainingList;
+    var courIds = [];
+    var courIdsString = '';
+    courseTrainingList.forEach(couTra => {
+      couTra.courseList.forEach(item => {
+        if (item.choosed == true) {
+          courIds.push(item.id);
+        }
+      })
+    })
+    courIdsString = courIds.join(',');
+
+    mineService.uploadShareCourse(courIdsString, this.data.memId).then((result) => {
+
+      console.log('uploadShareCourse *** ' + JSON.stringify(result));
+      if (result.rs == 'Y') { 
+        this.setData({
+          courseShareSuccess: true
+        })
+      }
+
+    }).catch((error) => {
+      console.log(error);
     })
 
   }

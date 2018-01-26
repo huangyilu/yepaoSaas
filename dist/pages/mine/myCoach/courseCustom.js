@@ -132,8 +132,13 @@ Page({
         footBtnTitle = '生成';
       }
 
+      if (this.data.muscleManImg == '') {
+        this.setData({
+          muscleManImg: result.muscleManImg
+        })
+      }
+
       this.setData({
-        muscleManImg: result.muscleManImg,
         levelItem: levelItem,
         bodyItem: bodyItem,
         footBtnTitle: footBtnTitle

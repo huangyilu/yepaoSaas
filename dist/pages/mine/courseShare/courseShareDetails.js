@@ -1,6 +1,8 @@
 // pages/mine/courseShare/courseShareDetails.js
 
-import weSwiper from '../../../utils/weSwiper/weSwiper.js'
+import weSwiper from '../../../utils/weSwiper/weSwiper.js';
+import * as minedata from '../../../utils/minedata-format';
+import * as mineService from '../../../services/mine-service';
 
 Page({
 
@@ -10,51 +12,13 @@ Page({
   data: {
     rightItemHidden: true,
 
-    shareDetailList: [
-      {
-        ishidden: false,
-        time: '12:10',
-        details: [
-          {
-            imgUrl: 'http://img2.imgtn.bdimg.com/it/u=3390152407,4060777889&fm=27&gp=0.jpg',
-            name: '俯撑开合跳'
-          },
-          {
-            imgUrl: 'http://img2.imgtn.bdimg.com/it/u=3390152407,4060777889&fm=27&gp=0.jpg',
-            name: '俯撑开合跳'
-          }
-        ]
-      },
-      {
-        ishidden: false,
-        time: '12:10',
-        details: [
-          {
-            imgUrl: 'http://img2.imgtn.bdimg.com/it/u=3390152407,4060777889&fm=27&gp=0.jpg',
-            name: '俯撑开合跳'
-          },
-          {
-            imgUrl: 'http://img2.imgtn.bdimg.com/it/u=3390152407,4060777889&fm=27&gp=0.jpg',
-            name: '俯撑开合跳'
-          }
-        ]
-      }
-    ],
+    shareDetailList: [],
 
     // 浏览视频
     videoIconUrl: '../../../images/icon/delete_back.png',
     showVideoHidden: true,
     videoIndex: 1,
-    videoUrlsBrowse: [
-      {
-        name: '',
-        url: 'http://xiqingfengbao-sp.oss-cn-hangzhou.aliyuncs.com/qd-sp/1515403272068.mp4?Expires=1516332176&OSSAccessKeyId=LTAIGdDLarpYm7lf&Signature=j92EmKs9sPB7lmujSWhpmS9r6fs%3D'
-      },
-      {
-        name: '',
-        url: 'http://xiqingfengbao-sp.oss-cn-hangzhou.aliyuncs.com/qd-sp/1515403272068.mp4?Expires=1516332176&OSSAccessKeyId=LTAIGdDLarpYm7lf&Signature=j92EmKs9sPB7lmujSWhpmS9r6fs%3D'
-      }
-    ],
+    videoUrlsBrowse: [],
 
     videoContext: null
   },
@@ -63,9 +27,29 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
-    this.initWeSwiper(this.data.videoUrlsBrowse);
 
+    this.getCourseShareDetails();
+
+  },
+
+  getCourseShareDetails() {
+    mineService.queryShareCourseDetail().then((result) => {
+
+      // console.log('queryShareCourseDetail *** ' + JSON.stringify(result));
+      if (result.rs == 'Y') {
+        var formatList = minedata.formatShareCourseDetails(result.courseShareDetailList);
+        this.setData({
+          shareDetailList: formatList.courseList,
+          videoUrlsBrowse: formatList.videoList
+        })
+        // console.log('queryShareCourseDetail *** ' + JSON.stringify(this.data.shareDetailList));
+
+        this.initWeSwiper(formatList.videoList);
+      }
+
+    }).catch((error) => {
+      console.log(error);
+    })
   },
 
   // weswiper 事件

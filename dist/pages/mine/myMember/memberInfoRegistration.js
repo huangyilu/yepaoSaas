@@ -8,55 +8,98 @@ Page({
 
     textInputItems: [
       {
+        id: 0,
         title: '姓名',
-        placeholder: '请填写会员姓名'
+        placeholder: '请填写会员姓名',
+        types: "txtInput",
+        value: ''
       },
       {
+        id: 1,
         title: '性别',
-        placeholder: '',
-        gender: true
+        placeholder: 'girl',
+        types: "other",
+        value: ''
       },
       {
+        id: 2,
         title: '生日',
-        placeholder: '请选择出生日期'
+        placeholder: '请选择出生日期',
+        types: "txtPicker",
+        value: ''
       },
       {
+        id: 3,
         title: '手机号码',
-        placeholder: '请填写手机号码'
+        placeholder: '请填写手机号码',
+        types: "txtInput",
+        value: ''
       },
       {
+        id: 4,
         title: '客户体态',
-        placeholder: '请填写客户体态'
+        placeholder: '请填写客户体态',
+        types: "txtInput",
+        value: ''
       },
       {
+        id: 5,
         title: '健身目的',
-        placeholder: '请填写健身目的'
+        placeholder: '请填写健身目的',
+        types: "txtInput",
+        value: ''
       },
       {
+        id: 6,
         title: '意向卡',
-        placeholder: '请选择意向卡'
+        placeholder: '请选择意向卡',
+        types: "txtPicker",
+        pickerArr: ['通用月卡', '通用三年卡','震泽1000次卡'],
+        value: ''
       },
       {
+        id: 7,
         title: '健身时间',
-        placeholder: '请选择健身时间'
+        placeholder: '请选择健身时间',
+        types: "txtPicker",
+        pickerArr: ['上午', '中午', '下午', '晚上'],
+        value: ''
       },
       {
+        id: 8,
         title: '客户来源',
-        placeholder: '请选择客户来源'
+        placeholder: '请选择客户来源',
+        types: "txtPicker",
+        pickerArr: ['定金客户', '自然访客', '外场资源', '电话咨询', '转客户介绍', '其他请备注'],
+        value: ''
       },
       {
+        id: 9,
         title: '客户类型',
-        placeholder: '请选择客户类型'
+        placeholder: '请选择客户类型',
+        types: "txtPicker",
+        pickerArr: ['重要客户', '次要客户', '一般客户'],
+        value: ''
       },
       {
+        id: 10,
         title: '登记地址',
-        placeholder: '请填写登记地址'
+        placeholder: '请填写登记地址',
+        types: "txtInput",
+        value: ''
       },
       {
+        id: 11,
         title: '备注信息',
-        placeholder: ''
+        placeholder: '',
+        types: "txtInput",
+        value: ''
       }
-    ]
+    ],
+
+    pickerViewHidden: true,
+    pickerValueTitle: '',
+    pickerList: []
   },
 
   /**
@@ -64,54 +107,125 @@ Page({
    */
   onLoad: function (options) {
   
+    
+
+  },
+  
+  // 点击 选择框 
+  bindTextPickerTap (e) {
+    var index = e.currentTarget.id;
+    var textInputItems = this.data.textInputItems;
+    var pickerList = [];
+
+    if (index == 2) {
+      this.setThisMonthPicArr();
+      this.setData({
+        pickerViewHidden: false,
+        pickerValueTitle: textInputItems[index].placeholder
+      })
+    } else {
+      pickerList.push(textInputItems[index].pickerArr);
+      this.setData({
+        pickerViewHidden: false,
+        pickerList: pickerList,
+        pickerValueTitle: textInputItems[index].placeholder
+      })
+    }
+
+    
+
+  },
+  // 取消 、确定选择器
+  bindPickerConfirmTap () {
+    this.setData({
+      pickerViewHidden: true
+    })
+
+    // 保存 选择信息
+    var textInputItems = this.data.textInputItems;
+    
+
+  },
+  bindPickerCancelTap () {
+    this.setData({
+      pickerViewHidden: true
+    })
   },
 
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-  
+  // 选择器 变化
+  bindPickerChange (e) {
+
+    var val = e.detail.value;
+    var textInputItems = this.data.textInputItems;
+    var pickerList = this.data.pickerList;
+    var title = e.currentTarget.dataset.title;
+
+    var chooseYear = '',
+        chooseMonth = '',
+        chooseDay = '';
+    
+    if (title == '请选择出生日期') {
+      chooseYear = pickerList[0][val[0]];
+      chooseMonth = pickerList[1][val[1]];
+      chooseDay = pickerList[2][val[2]];
+      this.setData({
+        'textInputItems[2].value': chooseYear + '-' + chooseMonth + '-' + chooseDay
+      })
+    } else {
+
+      textInputItems.forEach(item => {
+        if (title == item.placeholder) {
+          item.value = pickerList[0][val[0]];
+        }
+      })
+
+      this.setData({
+        textInputItems: textInputItems
+      })
+
+    }
+
   },
 
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-  
+  // 日期选择器
+  getThisMonthDays(year, month) {
+    return new Date(year, month, 0).getDate();
+  },
+  setThisMonthPicArr() {
+    var date = new Date();
+    var now_year = date.getFullYear(),
+      now_month = date.getMonth() + 1,
+      now_day = date.getDate();
+
+    var picker_year = [],
+      picker_month = [],
+      picker_day = [];
+    for (var i = (now_year - 100); i <= now_year; i++) {
+      picker_year.push(i);
+    }
+    for (var i = 1; i <= 12; i++) {
+      if (i < 10) {
+        i = '0' + i;
+      }
+      picker_month.push(i);
+    }
+    var end_day = this.getThisMonthDays(now_year, now_month);
+    for (var i = 1; i <= end_day; i++) {
+      if (i < 10) {
+        i = '0' + i;
+      }
+      picker_day.push(i);
+    }
+    var idx_year = picker_year.indexOf(now_year);
+    var idx_month = picker_month.indexOf(now_month);
+    var idx_day = picker_day.indexOf(now_day);
+
+    var pickerList = [picker_year, picker_month, picker_day];
+
+    this.setData({
+      // pickerValue: [idx_year, idx_month, idx_day],
+      pickerList: pickerList
+    });
   },
 
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-  
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-  
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-  
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-  
-  }
 })

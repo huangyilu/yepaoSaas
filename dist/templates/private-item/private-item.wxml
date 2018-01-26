@@ -4,12 +4,13 @@
 <!-- 私教会员列表 -->
 <block wx:for='{{ privateMemberList }}' wx:key='{{ index }}'> 
 <view class='weui-flex private-cell' id='{{ item.memId }}' bindtap='bindPrivateMemberTap' >
-  <view class='weui-flex__item left-p'>
+  <view class='left-p'>
     <image mode='aspectFill' src='{{ item.headimg }}'></image>
     <text>{{ item.name }}</text>
   </view>
   <view class='weui-flex__item right-p'>
     <image class='right-icon' mode='aspectFill' src='../../../images/icon/arrow_right.png'></image>
+    <text>{{ item.cardName }}</text>
     <text>剩余课时 {{ item.period.last }}/{{ item.period.total }}</text>
   </view>
 </view>

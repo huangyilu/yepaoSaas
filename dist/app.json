@@ -1,10 +1,10 @@
 {
   "pages": [
 
-    "pages/home/home",
+    
     "pages/mine/myMember/memberInfoRegistration",
     "pages/mine/myMember/customerTracking",
-    
+    "pages/home/home",
     "pages/mine/myMember/myMember",
     "pages/home/recommendedCourses",
     "pages/home/membershipCardDetails",

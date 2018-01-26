@@ -10,7 +10,7 @@ Page({
       {
         iconUrl: '../../../images/icon/mine/member_registration.png',
         name: '会员登记',
-        navigateUrl: ''
+        navigateUrl: 'memberInfoRegistration'
       },
       {
         iconUrl: '../../../images/icon/mine/customer_tracking.png',

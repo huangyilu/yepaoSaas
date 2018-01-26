@@ -33,7 +33,7 @@
       <view class='course-btn-item {{ item.styles }}' id='{{ index }}' bindtap='bindCourseBtnItemTap'>
         <view class='course-btn-icon' style='{{ item.selected ? "border-style: none;" : "border: 1px #ffffff solid;" }}'>
           <image hidden='{{ !item.selected }}' src='../../../images/icon/checked.png'></image>
-        </view>
+        </view>                        
         <text>{{ item.body }}</text>
       </view>
       </block>

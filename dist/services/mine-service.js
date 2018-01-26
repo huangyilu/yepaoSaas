@@ -62,3 +62,34 @@ export function queryCourseCustomizationDetail(customizeDateString, memId) {
     customizeDateString: customizeDateString
   })
 }
+
+// 共享定制的课程
+export function uploadShareCourse(shareCourseIds, memId) {
+  return urlencodePostRequest('shareCourse', {
+    custName: "zjs",
+    gym: "zjs",
+    ptId: '59ba4cc655040f3865e14b64',
+    memId: memId,
+    shareCourseIds: shareCourseIds
+  })
+}
+
+
+/** 课程共享 */
+// 获取 课程共享 列表
+export function queryShareCourse(memId) {
+  return jsonGetRequest('getShareCourseList', {
+    custName: "zjs",
+    gym: "zjs",
+    memId: '59e8636e3d20231e641ac64f'
+  })
+}
+// 课程共享 详情
+export function queryShareCourseDetail(memId) {
+  return jsonGetRequest('getShareCourseDetail', {
+    custName: "zjs",
+    gym: "zjs",
+    ptId: '59ba4cc655040f3865e14b64',
+    memId: '59e8636e3d20231e641ac64f',
+  })
+}

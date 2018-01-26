@@ -44,7 +44,6 @@ page {
     background-color: #262439; 
     height: 100%; 
     width: 100%;
-    color: white;
     position: fixed;
 }
 .popUps-cancel-btn {
@@ -53,6 +52,18 @@ page {
     margin-left: 30rpx;
     margin-top: 30rpx;
 }
+
+/* 选择框背景 */
+.picker-bgview {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(1, 1, 1, 0.6);
+    position: fixed;
+    bottom: 0;
+    z-index: 10;
+    color: white;
+}
+
 
 /* 字体 大小 */
 .fs34 {

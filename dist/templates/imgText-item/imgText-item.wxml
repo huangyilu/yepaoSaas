@@ -19,7 +19,7 @@
         id='{{ index }}'
         bindtap='bindVideoCellTap'>
   
-    <image class='left-icon' src='{{ item.imgUrl }}'></image>
+    <image class='left-icon' src='{{ item.imgString }}'></image>
     <image class='cellIcon' src='../../../images/icon/video_play.png'></image>
     <text>{{ item.name }}</text>
   

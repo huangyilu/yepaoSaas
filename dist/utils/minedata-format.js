@@ -31,7 +31,7 @@ export const privateMemberList = [
     }
   }
 ]
-// app_head
+// 私教会员
 export function formatPrivateMemberList(list) {
   return list.map(item => this.formatPrivateMemberListItem(item))
 }
@@ -43,7 +43,8 @@ export function formatPrivateMemberListItem(item) {
     period: {
       last: 8,
       total: 12
-    }
+    },
+    cardName: item.card_name ? item.card_name : ''
   }
 }
 
@@ -102,5 +103,38 @@ export function formatCourseTraining(item) {
   return {
     courseTrainingList: courseTrainingList,
     videoUrlsBrowse: videoUrlsBrowse
+  }
+}
+
+
+/**课程共享 */
+export function formatShareCourseList(list) {
+  return list.map(item => this.formatShareCourseListItem(item))
+}
+export function formatShareCourseListItem(item) {
+  return {
+    id: item.ptId,
+    title: '教练' + item.teacherName + '的课程共享',
+    time: this.formatDifferentTypesDate(item.create_date)
+  }
+}
+
+// 课程共享 详情
+export function formatShareCourseDetails(list) {
+  var newList = [];
+  var videoList = [];
+  list.forEach(item => {
+    newList.push({
+      ishidden: false,
+      time: this.formatDifferentTypesDate(item.create_date),
+      details: item.mediaUrlList
+    })
+    videoList.push(item.mediaUrlList);
+  })
+  videoList = flattenDeep(videoList);
+
+  return {
+    courseList: newList,
+    videoList: videoList
   }
 }

@@ -1,7 +1,6 @@
 
 .textInput-view {
     height: 90rpx;
-    width: 100%;
     line-height: 90rpx;
     background-color: #2F2D45;
     padding: 0 30rpx;
@@ -9,12 +8,13 @@
 }
 
 .textInput-view .title-view {
-    width: 200rpx;
+    width: 180rpx;
     float: left;
 }
 .textInput-view input {
-    margin-top: 50rpx;
+    margin-top: 20rpx;
     display: inline-block;
+    width: 400rpx;
 }
 
 .textInput-view .checked-view {
@@ -24,17 +24,32 @@
     border-radius: 50%;
     position: absolute;
     margin-top: 28rpx;
-    /* margin-right: 15rpx; */
 }
 .textInput-view .checked-icon {
     width: 30rpx;
     height: 30rpx;
     position: absolute;
     margin-top: 28rpx;
-    /* margin-left: -45rpx; */
 }
 
 .gender-view {
     display: inline-block;
     margin-right: 20rpx;
+}
+.gender-view text {
+    margin-left: 50rpx;
+}
+
+.textInput-view .text-view {
+    display: inline-block;
+    color: #848296;
+}
+.textInput-view .textValue-view {
+    display: inline-block;
+    color: white;
+}
+
+.right-icon {
+    margin-top: 30rpx;
+    margin-right: 0;
 }
