@@ -12,6 +12,10 @@
 
   </view> 
 
+  <view class='save-view'>
+    <view class='save-btn' bindtap='bindSaveInfoBtnTap'>保存信息</view>
+  </view>
+
     <!-- 弹窗 选择框-->
   <view class='picker-bgview' hidden='{{ pickerViewHidden }}'>
     

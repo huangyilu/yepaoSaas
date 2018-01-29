@@ -33,6 +33,7 @@ Page({
         title: '手机号码',
         placeholder: '请填写手机号码',
         types: "txtInput",
+        inputType: 'number',
         value: ''
       },
       {
@@ -132,19 +133,12 @@ Page({
       })
     }
 
-    
-
   },
   // 取消 、确定选择器
-  bindPickerConfirmTap () {
+  bindPickerConfirmTap (e) {
     this.setData({
       pickerViewHidden: true
     })
-
-    // 保存 选择信息
-    var textInputItems = this.data.textInputItems;
-    
-
   },
   bindPickerCancelTap () {
     this.setData({
@@ -156,14 +150,21 @@ Page({
   bindPickerChange (e) {
 
     var val = e.detail.value;
+
+    this.setPickerTextInputItemValue(val);
+
+  },
+
+  setPickerTextInputItemValue(val) {
+
     var textInputItems = this.data.textInputItems;
     var pickerList = this.data.pickerList;
-    var title = e.currentTarget.dataset.title;
+    var title = this.data.pickerValueTitle;
 
     var chooseYear = '',
-        chooseMonth = '',
-        chooseDay = '';
-    
+      chooseMonth = '',
+      chooseDay = '';
+
     if (title == '请选择出生日期') {
       chooseYear = pickerList[0][val[0]];
       chooseMonth = pickerList[1][val[1]];
@@ -178,11 +179,9 @@ Page({
           item.value = pickerList[0][val[0]];
         }
       })
-
       this.setData({
         textInputItems: textInputItems
       })
-
     }
 
   },
@@ -227,5 +226,31 @@ Page({
       pickerList: pickerList
     });
   },
+
+  // 监听 输入框
+  bindTextKeyInput (e) {
+    
+    var val = e.detail.value;
+    
+    var textInputItems = this.data.textInputItems;
+    var title = e.currentTarget.dataset.title;
+
+    textInputItems.forEach(item => {
+      if (title == item.title) {
+        item.value = val;
+      }
+    })
+    this.setData({
+      textInputItems: textInputItems
+    })
+
+  },
+  // 保存信息按钮
+  bindSaveInfoBtnTap() {
+
+    var textInputItems = this.data.textInputItems;
+    
+
+  }
 
 })

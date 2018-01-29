@@ -1,2 +1,12 @@
 <!--pages/fitnessCircle/fitnessCircle.wxml-->
-<text>pages/fitnessCircle/fitnessCircle.wxml</text>
+
+<import src="../../templates/article-item/article-item.wxml"/>
+
+
+<view class='bg-view'>
+
+  <block wx:for='{{ articleItems }}' wx:for-item='arts' wx:key='{{ index }}'>
+    <template is='article-item' data='{{ ...arts, index }}'/>
+  </block>
+
+</view>

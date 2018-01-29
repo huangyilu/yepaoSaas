@@ -14,7 +14,7 @@
 .textInput-view input {
     margin-top: 20rpx;
     display: inline-block;
-    width: 400rpx;
+    width: 450rpx;
 }
 
 .textInput-view .checked-view {

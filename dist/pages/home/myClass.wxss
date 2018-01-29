@@ -22,6 +22,7 @@
 .info-view .name-text{
     font-size: 34rpx;
     margin-bottom: 10rpx;
+    color: white;
 }
 
 .myclass-cell {

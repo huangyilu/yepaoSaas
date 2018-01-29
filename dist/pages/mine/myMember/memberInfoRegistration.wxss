@@ -31,3 +31,13 @@
     line-height: 80rpx;
     padding: 0 30rpx;
 }
+
+.save-btn {
+    width: 100%;
+    height: 100rpx;
+    line-height: 100rpx;
+    text-align: center;
+    background-color: #fcf428;
+    color: black;
+    font-size: 32rpx;
+}

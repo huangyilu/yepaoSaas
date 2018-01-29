@@ -5,7 +5,7 @@
   <!-- 标题 输入框 -->
   <view wx:if='{{ types == "txtInput" }}' id='{{ id }}' class='textInput-view'>
     <view class='title-view'>{{ title }}</view>
-    <input value='{{ value }}' placeholder-style='color:#848296;' placeholder='{{ placeholder }}'></input>
+    <input type='{{ inputType ? inputType : "text" }}' data-title='{{ title }}' bindinput='bindTextKeyInput' value='{{ value }}' placeholder-style='color:#848296;' placeholder='{{ placeholder }}'></input>
   </view>
 
   <!-- 性别选择 -->

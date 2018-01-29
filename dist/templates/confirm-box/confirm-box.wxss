@@ -1,0 +1,30 @@
+
+.confirm-bgview {
+    background-color: rgba(1, 1, 1, 0.3);
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    top: 0;
+}
+
+.confirm-view {
+    background-color: #2f2d45;
+    width: 80%;
+    margin: 45% 10%;
+    border-radius: 4%;
+    text-align: center;
+}
+
+.confirm-view .text-view {
+    padding: 70rpx;
+}
+.confirm-view .btn {
+    padding: 25rpx 0;
+    border-top: 2rpx #262439 solid;
+    color: #BAB9C7;
+}
+.confirm-view .confirmBtn {
+    color: #fcf428;
+    margin-left: 2rpx;
+    border-left: 2rpx #262439 solid;
+}
