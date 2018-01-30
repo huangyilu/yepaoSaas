@@ -6,9 +6,9 @@ export function formatBuyMemCard(list) {
 }
 export function formatBuyMemCardItem(item) {
   return {
-    bgimg: '../../images/icon/home/car/card_bg.png',
-    carPrice: 4000,
-    carName: '一年卡',
+    bgimg: item.picUrlString ? item.picUrlString : '',
+    carPrice: item.fee ? +item.fee : 0,
+    carName: item.card_name ? item.card_name : '',
     checked: false
   }
 }
@@ -19,18 +19,25 @@ export function formatMyMemCard(list) {
 }
 export function formatMyMemCardItem(item) {
   return {
-    bgimg: '../../images/icon/home/car/card_bg.png',
-    carType: '天数卡',
-    carName: '一年卡'
+    cardId: item.id ? item.id : '', 
+    bgimg: item.picUrlString ? item.picUrlString : '',
+    carType: item.cardTypeString ? item.cardTypeString : '',
+    carName: item.card_name ? item.card_name : ''
   }
 }
 
 // 会员卡详情
-// export function formatMyMemCardDetails(item) {
-//   return {
-    
-//   }
-// }
+export function formatMyMemCardDetails(item) {
+  return {
+    bgimg: '../../images/icon/home/car/card_bg.png',
+    carPrice: 1000,
+    carName: '一年卡',
+    carType: '年卡',
+    timeLeft: '365',
+    effectiveTime: '2019.01.09',
+    openingTime: '2018.01.09'
+  }
+}
 
 // 私人教练
 export function formatPersonalTrainer(list) {

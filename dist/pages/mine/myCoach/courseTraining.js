@@ -46,7 +46,6 @@ Page({
 
     mineService.queryCourseCustomizationDetail(this.data.customizeDateString, this.data.memId).then((result) => {
 
-      console.log('queryCourseCustomizationDetail *** ' + JSON.stringify(result));
       if (result.result.length > 0) {
         var formatlist = minedata.formatCourseTraining(result.result[0]);
         this.setData({
@@ -57,6 +56,8 @@ Page({
         })
 
         this.initWeSwiper(formatlist.videoUrlsBrowse);
+
+        console.log('formatlist.videoUrlsBrowse *** ' + JSON.stringify(formatlist.videoUrlsBrowse));
       }
 
     }).catch((error) => {
@@ -137,7 +138,7 @@ Page({
     var index = x * 2 + y + 1;
     console.log('播放 视频 。。。' + index);
     
-    this.weswiper.slideTo(index);
+    this.weswiper.slideTo(index-1);
 
     this.setData({
       showVideoHidden: false
@@ -224,6 +225,13 @@ Page({
         this.setData({
           courseShareSuccess: true
         })
+
+        setTimeout((function callback() {
+          this.setData({
+            courseShareSuccess: false,
+            courseShare: false
+          })
+        }).bind(this), 2000);
       }
 
     }).catch((error) => {

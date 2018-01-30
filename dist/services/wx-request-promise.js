@@ -71,3 +71,6 @@ export function wxUrlencodedBackendRequestP(method, endpoint, data = {}) {
 export function wxUrlencodedBackenPostRequestP(endpoint, data) {
   return wxUrlencodedBackendRequestP('POST', endpoint, data)
 }
+export function wxUrlencodedBackenGetRequestP(endpoint, data) {
+  return wxUrlencodedBackendRequestP('GET', endpoint, data)
+}

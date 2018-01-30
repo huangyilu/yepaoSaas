@@ -44,3 +44,7 @@
     float: right;
     margin-top: 80rpx;
 }
+.cancel {
+    color: #BAB9C7;
+    border: 1rpx #BAB9C7 solid;
+}

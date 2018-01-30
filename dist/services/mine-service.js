@@ -15,6 +15,10 @@ import {
 }
   from 'wx-request-promise';
 
+import {
+  wxUrlencodedBackenGetRequestP as urlencodeGetRequest
+}
+  from 'wx-request-promise';
 
 // teacher / get-mem  fit-exchange-gym
 // 我是教练 查询 私教会员  /fit-login-backend

@@ -1,30 +1,20 @@
-// pages/home/myClass.js
+// pages/mine/myMember/selectedMem.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    myclassList: [
+    searchList: [
       {
+        name: '马敏',
         headimg: 'http://img2.imgtn.bdimg.com/it/u=3390152407,4060777889&fm=27&gp=0.jpg',
-        className: '肚皮舞',
-        classType: '团',
-        teacherName: '子不语',
-        finishedPeriod: '0',
-        totalPeriod: '2',
-        classTime: '2018-01-20 14:00-15:00',
-        classStatus: '取消团课'
+        tel: 'tel: 188****7126'
       },
       {
+        name: '马敏',
         headimg: 'http://img2.imgtn.bdimg.com/it/u=3390152407,4060777889&fm=27&gp=0.jpg',
-        className: '肚皮舞',
-        classType: '团',
-        teacherName: '子不语',
-        finishedPeriod: '2',
-        totalPeriod: '2',
-        classTime: '2018-01-20 14:00-15:00',
-        classStatus: '已取消'
+        tel: 'tel: 188****7126'
       }
     ]
   },

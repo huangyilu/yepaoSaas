@@ -1,0 +1,19 @@
+
+
+.search-cell {
+    padding: 30rpx 35rpx;
+    background-color: #2f2d45;
+    margin-top: 2rpx;
+}
+.head-img {
+    height: 60rpx;
+    width: 60rpx;
+    border-radius: 50%;
+    float: left;
+    margin-right: 20rpx;
+    margin-top: -5rpx;
+}
+
+.name-text {
+    margin-right: 80rpx;
+}

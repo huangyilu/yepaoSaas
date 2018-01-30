@@ -1,0 +1,43 @@
+<!--pages/home/classScheduleDetails.wxml-->
+
+<import src="../../templates/star-item/star-item.wxml"/>
+
+<view class='bg-view'>
+
+  <view>
+    <image mode='aspectFill' class='title-img' src='http://img2.imgtn.bdimg.com/it/u=3390152407,4060777889&fm=27&gp=0.jpg'></image>
+  </view>
+
+  <view class='classinfo-view'>
+    <view class='whiteColor fs36'>肚皮舞·12月27日 10：00-11：00</view>
+    <view class='info-text weui-flex'>
+      <view class='weui-flex__item'>
+        <image class='league_class' src='../../images/icon/home/league_class.png'></image>
+        <text>团课</text>
+      </view>
+      <view class='weui-flex__item'>
+        <image class='enrolment' src='../../images/icon/home/enrolment.png'></image>
+        <text>还可报名<text></text>人</text>
+      </view>
+    </view>
+    <view>
+      <image class='locale' src='../../images/icon/home/locale.png'></image>
+      <text>苏州市高新区47号</text>
+    </view>
+
+  </view>
+
+
+  <view class='coachinfo-view'>
+    <view >
+      <image class='coach-headimg' src='http://img2.imgtn.bdimg.com/it/u=3390152407,4060777889&fm=27&gp=0.jpg'></image>
+      <text class='fs36'>藏冬雨</text>
+
+      <template is='star-item' data='{{ score, starUrl, emptUrl }}'/>
+      
+      
+    </view>
+  
+  </view>
+
+</view>

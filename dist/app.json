@@ -1,6 +1,11 @@
 {
   "pages": [
     "pages/home/home",
+    "pages/home/onlinePaymentForClass",
+    
+    "pages/home/onlinePaymentForCard",
+    "pages/home/classScheduleDetails",
+    "pages/mine/selectedMem",
     "pages/mine/infoTransfer",
     "pages/mine/myMember/memberInfoRegistration",
     "pages/mine/myMember/customerTracking",
@@ -22,6 +27,7 @@
     "pages/mine/myCoach/myCoachListView",
     "pages/mine/courseShare/courseShare",
     "pages/message/messageDetails"
+    
   ],
   "window": {
     "backgroundColor": "#262439",

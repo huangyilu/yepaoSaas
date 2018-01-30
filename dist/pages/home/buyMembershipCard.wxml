@@ -5,7 +5,7 @@
   <view class='car-cell-view'>
     <block wx:for='{{ carList }}' wx:key='{{ index }}'>
     <view class='car-cell' id='{{ index }}' bindtap='bindCarCellTap'>
-      <image class='bg-img' src='{{ item.bgimg }}'></image>
+      <image mode='aspectFill' class='bg-img' src='{{ item.bgimg }}'></image>
       <view class='info-view'>
         <view><image class='icon-img' src='../../images/icon/home/car/yepao_logo.png'></image></view>
         
@@ -20,10 +20,12 @@
   <view class='foot-view'>
     <view class='weui-flex check-view'>
       
-      <view class='check-icon-view' bindtap='bindProtocolCheckedTap'> 
-        <image wx:if='{{ protocolChecked }}' class='check-icon' src='../../images/icon/checked.png'></image>
+      <view bindtap='bindProtocolCheckedTap'>
+        <image class='check-icon' src='../../images/icon/{{ protocolChecked ? "checked" : "unchecked" }}.png'></image>
       </view>
-      阅读并同意 <text class='yeColor'>《会员卡购买协议》</text>
+      
+      <view class='check-text weui-flex__item'>阅读并同意<text class='yeColor'>《会员卡购买协议》</text></view>
+
     </view>
     <view class='weui-flex buy-view'>
       <view class='weui-flex__item'>

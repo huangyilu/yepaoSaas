@@ -53,8 +53,12 @@ Page({
     })
 
   },
-  // 指定移交
+  // 指定移交 去选择 会员 指定移交
   bindSpecifiedTap (e) {
+
+    wx.navigateTo({
+      url: '',
+    })
 
   }
 

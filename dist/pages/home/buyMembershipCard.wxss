@@ -3,6 +3,7 @@
 .car-cell-view {
     position: relative;
     padding-top: 30rpx; 
+    padding-bottom: 190rpx;
 }
 .car-cell {
     position: relative;
@@ -41,24 +42,25 @@
     position: fixed;
     bottom: 0;
     width: 100%;
+    height: auto;
     background-color: #2f2d45;
+    line-height: 0;
 }
 .check-view {
-    padding: 20rpx 30rpx;
+    padding: 30rpx;
     font-size: 28rpx;
+    text-align: left;
 }
-.foot-view .check-icon-view {
-    width: 30rpx;
+.check-text {
     height: 30rpx;
-    margin-top: 6rpx;
-    margin-right: 20rpx;
-    border: 1px white solid;
-    border-radius: 50%;
+    line-height: 30rpx;
 }
 .foot-view .check-icon {
     width: 30rpx;
     height: 30rpx;
     float: left;
+    margin-right: 20rpx;
+    margin-top: 1rpx;
 }
 .buy-view {
     text-align: center;

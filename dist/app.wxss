@@ -8,6 +8,7 @@
 @import 'templates/videoPopups-item/videoPopups-item.wxss';
 @import 'templates/confirm-box/confirm-box.wxss';
 @import 'templates/article-item/article-item.wxss';
+@import 'templates/search-item/search-item.wxss';
 
 @import 'utils/weSwiper/weSwiper.wxss';
 
@@ -80,6 +81,9 @@ page {
 
 
 /* 字体 大小 */
+.fs36 {
+    font-size: 36rpx;
+}
 .fs34 {
     font-size: 34rpx;
 }
@@ -97,6 +101,9 @@ page {
 }
 
 /* 灰色 */
+.whiteColor {
+    color: white;
+}
 .deepGryColor {
     color: #BAB9C7;
 }

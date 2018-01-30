@@ -5,11 +5,11 @@
 
     <view class='up-view'>
       <image class='left-icon' src='../../images/icon/message/news_icon.png'></image>
-      <text>付费请假</text>
-      <text class='time-text'>16:37</text>
+      <text>{{ title }}</text>
+      <text class='time-text'>{{ time }}</text>
     </view>
   
-    <view class='down-view'>您已经请假，请假时间为【2018-01-30至2018-02-03 15:28】,由于您请假天数超出范围，需要付费请假，费用为【0】。</view>
+    <view class='down-view'>{{ content }}</view>
     
   </view>
 

@@ -18,7 +18,7 @@
           <view>已完成：<text class='yeColor'>{{ item.finishedPeriod }}</text> /{{ item.totalPeriod }}节</view>
         </view>
         <view>
-          <view class='btn'>取消团课</view>
+          <view class='btn {{ item.classStatus == "取消团课" ? "" : "cancel" }}'>{{ item.classStatus }}</view>
         </view>
       </view>
       <!-- 下 -->

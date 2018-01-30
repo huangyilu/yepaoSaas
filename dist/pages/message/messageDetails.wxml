@@ -6,8 +6,8 @@
 
 <view class='bg-view'>
 
-  <!-- <block wx:for='{{ mesgCarItems }}' wx:for-item='mesg' wx:key='{{ index }}'> -->
+   <block wx:for='{{ mesgCarItems }}' wx:for-item='mesg' wx:key='{{ index }}'> 
     <template is='mesgCar-item' data='{{ ...mesg, index }}'/>
-  <!-- </block> -->
+   </block> 
 
 </view>

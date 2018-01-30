@@ -1,31 +1,36 @@
 // pages/home/buyMembershipCard.js
+import * as homedata from '../../utils/homedata-format';
+import * as homeService from '../../services/home-service';
+
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    carList: [
-      {
-        bgimg: '../../images/icon/home/car/card_bg.png',
-        carPrice: 4000,
-        carName: '一年卡',
-        checked: false
-      },
-      {
-        bgimg: '../../images/icon/home/car/card_bg.png',
-        carPrice: 1000,
-        carName: '月卡',
-        checked: false
-      }
-    ],
+    carList: [],
     totalPrice: 0,
+
+    protocolChecked: true
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+
+    homeService.queryOnlineCards().then((result) => {
+
+      console.log('queryOnlineCards *** ' + JSON.stringify(result));
+      if (result.rs == 'Y') {
+        this.setData({
+          carList: homedata.formatBuyMemCard(result.cards)
+        })
+      }
+
+    }).catch((error) => {
+      console.log(error);
+    })
   
   },
 
