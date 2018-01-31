@@ -1,6 +1,8 @@
 // pages/home/recommendedCourses.js
 
-var sliderWidth = 96; // 需要设置slider的宽度，用于计算中间位置
+var sliderWidth = 140; // 需要设置slider的宽度，用于计算中间位置
+import * as homedata from '../../utils/homedata-format';
+import * as homeService from '../../services/home-service';
 
 Page({
 
@@ -14,22 +16,10 @@ Page({
     activeIndex: 0,
     sliderOffset: 0,
     sliderLeft: 0,
-    navbarTabs: ['团课','私教课','单次入场券'],
+    navbarTabs: ['私教课','单次入场券'],
 
-    groupClassList: [
-      {
-        headimg: 'http://img2.imgtn.bdimg.com/it/u=3390152407,4060777889&fm=27&gp=0.jpg',
-        courseName: '搏击训练',
-        price: 20,
-        courseTime: 1
-      },
-      {
-        headimg: 'http://img2.imgtn.bdimg.com/it/u=3390152407,4060777889&fm=27&gp=0.jpg',
-        courseName: '搏击训练',
-        price: 80,
-        courseTime: 12
-      }
-    ],
+    personalClassList: [],
+    singleClassList: []
 
   },
 
@@ -42,7 +32,38 @@ Page({
     this.setData({
       sliderLeft: (res.windowWidth / this.data.navbarTabs.length - sliderWidth) / 2
     })
+
+    this.getPersonalClassList();
   
+  },
+
+  getPersonalClassList() {
+    homeService.queryRecomdCourse('006').then((result) => {
+
+      console.log('queryRecomdCourse *** ' + JSON.stringify(result));
+      if (result.rs == 'Y') {
+        this.setData({
+          personalClassList: homedata.formatRecommendCourse(result.cardList)
+        })
+      }
+
+    }).catch((error) => {
+      console.log(error);
+    })
+  },
+  getSingleClassList() {
+    homeService.queryRecomdCourse('005').then((result) => {
+
+      console.log('queryRecomdCourse *** ' + JSON.stringify(result));
+      if (result.rs == 'Y') {
+        this.setData({
+          singleClassList: homedata.formatRecommendCourse(result.cardList)
+        })
+      }
+
+    }).catch((error) => {
+      console.log(error);
+    })
   },
 
   // 点击事件 navbar
@@ -52,10 +73,24 @@ Page({
       activeIndex: e.currentTarget.id,
       sliderOffset: e.currentTarget.offsetLeft
     });
+
+    if (e.currentTarget.id == 0) {
+      this.getPersonalClassList();
+    } else {
+      this.getSingleClassList();
+    }
+    
+  },
+
+  bindRecoCellTap(e) {
+      var index = e.currentTarget.id;
+      
+      wx.navigateTo({
+        url: 'onlinePaymentForClass?id=' + index,
+      })
   },
 
   bindBuyTap () {
-
     
-  }
+  },
 })

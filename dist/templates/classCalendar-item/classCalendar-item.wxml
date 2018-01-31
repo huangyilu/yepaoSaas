@@ -3,17 +3,10 @@
 
 <block wx:for='{{ courseList }}' wx:key='{{ index }}'>
 <view class='weui-flex classCalendar-cell'>
-  <!-- 左 -->
-  <view class='title-view'>
-    <view class='time-text'>{{ item.classTime }}</view>
-    <view>
-      <image mode='aspectFill' class='title-img' src='{{ item.classImg }}'></image>
-    </view>
-  </view>
-  <!-- 右 -->
   <view class='weui-flex__item'>
     <!-- 上 -->
-    <view class='up-text-view'>
+    <view class='up-text-view' id='{{ index }}' bindtap='bindClassDetails'>
+      <text class='time-text'>{{ item.classTime }}</text>
       <text>{{ item.className }}</text>
       <text class='right-text'>查看详情</text>
     </view>
@@ -31,8 +24,7 @@
             <!-- 评分 -->
             <view class='star-view'>
             <block wx:for='{{ item.teacherScore }}' wx:key='{{ index }}'>
-              <image wx:if='{{ item == "star" }}' class='star-icon' src='../../images/icon/home/star_red.png'></image>
-              <image wx:if='{{ item == "" }}' class='star-icon' src='../../images/icon/star_g.png'></image>
+              <image class='star-icon' src='../../images/icon/home/star_{{ item == "star" ? "red" : "g" }}.png'></image>
             </block>
             </view>
           </view>

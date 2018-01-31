@@ -5,11 +5,11 @@
 <view class='bg-view'>
 
   <view>
-    <image mode='aspectFill' class='title-img' src='http://img2.imgtn.bdimg.com/it/u=3390152407,4060777889&fm=27&gp=0.jpg'></image>
+    <image mode='aspectFill' class='title-img' src='{{ classDetails.titleImg }}'></image>
   </view>
 
   <view class='classinfo-view'>
-    <view class='whiteColor fs36'>肚皮舞·12月27日 10：00-11：00</view>
+    <view class='whiteColor fs36'>{{ classDetails.className }}·{{ classDetails.classTime }}</view>
     <view class='info-text weui-flex'>
       <view class='weui-flex__item'>
         <image class='league_class' src='../../images/icon/home/league_class.png'></image>
@@ -17,12 +17,12 @@
       </view>
       <view class='weui-flex__item'>
         <image class='enrolment' src='../../images/icon/home/enrolment.png'></image>
-        <text>还可报名<text></text>人</text>
+        <text>还可报名<text>{{ classDetails.classPepoNum }}</text>人</text>
       </view>
     </view>
     <view>
       <image class='locale' src='../../images/icon/home/locale.png'></image>
-      <text>苏州市高新区47号</text>
+      <text>{{ classDetails.address }}</text>
     </view>
 
   </view>
@@ -30,13 +30,17 @@
 
   <view class='coachinfo-view'>
     <view >
-      <image class='coach-headimg' src='http://img2.imgtn.bdimg.com/it/u=3390152407,4060777889&fm=27&gp=0.jpg'></image>
-      <text class='fs36'>藏冬雨</text>
+      <image mode='aspectFill' class='coach-headimg' src='{{ classDetails.coachHeadImg }}'></image>
+      <text class='fs36'>{{ classDetails.coachName }}</text>
 
       <template is='star-item' data='{{ score, starUrl, emptUrl }}'/>
-      
-      
     </view>
+
+    <view class='title-view'>教练介绍</view>
+    <view class='content-view'>{{ classDetails.coachIntroduction }}</view>
+
+    <view class='fs36 title-view'>课程介绍</view>
+    <view class='content-view'>{{ classDetails.classDetail }}</view>
   
   </view>
 

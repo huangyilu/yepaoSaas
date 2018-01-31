@@ -1,47 +1,41 @@
 /* pages/home/personalTrainer.wxss */
 
-.personal-cell-view {
-    background-color: #2f2d45;
-}
+
+
 .personal-cell {
-    padding: 30rpx;
+    padding: 0 30rpx 15rpx;
+    background-color: #2f2d45;
+    margin-bottom: 15rpx;
 }
 .personal-headimg {
-    width: 64rpx;
-    height: 64rpx;
+    width: 60rpx;
+    height: 60rpx;
     border-radius: 50%;
-    /* float: left; */
+    float: left;
+    margin-right: 15rpx;
+    margin-top: 16rpx;
 }
-.name-view {
-    margin-left: 30rpx;
+.head-view {
+    border-bottom: 2rpx #262439 solid;
+    font-size: 32rpx;
+    height: 100rpx;
+    line-height: 100rpx;
 }
-.tag-view {
-    margin-left: 30rpx;
-    font-size: 26rpx;
-    color: #848296;
-}
-.tag-item {
-    border: 1rpx #fcf428 solid; 
-    color: #fcf428;
-    display: inline-block;
-    padding: 0 8rpx;
-    font-size: 26rpx;
-    border-radius: 6rpx;
-}
-.appt-btn {
-    padding: 5rpx 20rpx;
-    background-color: #fcf428;
-    border-radius: 6rpx;
-    color: black;
+.tel-icon {
+    width: 42rpx;
+    height: 42rpx;
+    float: right;
+    margin-top: 25rpx;
 }
 
-.personal-cell-imgs-view {
-    margin-top: 10rpx;
+.class-view {
+    color: #BAB9C7;
 }
-.weui-grids {
-    border-style: none;
+.class-view view {
+    padding: 20rpx 0 0;
 }
-.weui-grid {
-    padding: 0 0 15rpx;
-    border-style: none;
+
+.remind-text {
+    padding: 30rpx;
+    color: #BAB9C7;
 }

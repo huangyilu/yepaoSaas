@@ -47,3 +47,21 @@ export function queryMyCardsDetail(cardId) {
     memId: '59e8636e3d20231e641ac64f'
   })
 }
+
+// 私人教练
+export function queryMyPersonalCoach() {
+  return jsonGetRequest('yp-xcx-getMyPrivateTeacher', {
+    custName: "zjs",
+    gym: "zjs",
+    id: '59e8636e3d20231e641ac64f', // 实际上是 memId
+  })
+}
+
+// 课程购买 
+export function queryRecomdCourse(cardType) {
+  return jsonGetRequest('yp-xcx-getRecommendCourse', {
+    custName: "zjs",
+    gym: "zjs",
+    cardType: cardType
+  })
+}

@@ -1,5 +1,7 @@
 <!--pages/home/onlinePaymentForClass.wxml-->
 
+<import src="../../templates/remind-box/remind-box.wxml"/>
+
 <view class='bg-view'>
 
   <view class='recocell-view weui-flex'>
@@ -18,17 +20,27 @@
     
   </view>
 
-
   <view class='order-cell-view'>
-    <view>
+    <view bindtap='bindSelectCoach'>
       教练选择
-      <text>朱永磊</text>
+      <image class='right-icon' src='../../images/icon/arrow_right.png'></image>
+      <text class='yeColor'>{{ classInfo.coachName }}</text>
     </view>
-    <view>课程类型 <text>私教课</text> </view>
-    <view>订单号 <text>909309e02343</text> </view>
-    <view>订单金额 <text>¥{{ classInfo.price }}</text> </view>
+    <view>课程类型 <text class='whiteColor'>{{ classInfo.classType }}</text> </view>
+    <view>订单号 <text class='whiteColor'>{{ classInfo.orderId }}</text> </view>
+    <view>订单金额 <text class='yeColor'>¥{{ classInfo.price }}</text> </view>
   </view>
 
-  <view class='check-text weui-flex__item'>阅读并同意<text class='yeColor'>《会员卡购买协议》</text></view>
+  <view class='check-text weui-flex__item' bindtap='bindCheckedTap'>
+    <image class='checked-icon' src='../../images/icon/{{ classInfo.checked ? "checked" : "unchecked" }}.png'></image>
+    阅读并同意<text class='yeColor'>《课程购买协议》</text>
+  </view>
+
+  <view class='foot-btn-view' bindtap='bindPaymentTap'>微信支付</view>
+
+  <!-- 提醒 -->
+  <view>
+    <template is='remind-box' data='{{ remindText }}'/>
+  </view>
 
 </view>

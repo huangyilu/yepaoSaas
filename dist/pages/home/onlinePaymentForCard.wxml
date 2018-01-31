@@ -17,7 +17,7 @@
       <view wx:for='{{ vouchers }}' wx:key='{{ index }}' id='{{ index }}' bindtap='bindVouchersTap'>
         <image class='vouchers' src='../../images/icon/home/vouchers.png'></image>
         <text>{{ item.name }}</text>
-        <image class='checked' src='../../images/icon/{{ item.checked ? "checked" : "unchecked" }}.png'></image>
+        <image class='checked-icon' src='../../images/icon/{{ item.checked ? "checked" : "unchecked" }}.png'></image>
       </view>
     </view>
 

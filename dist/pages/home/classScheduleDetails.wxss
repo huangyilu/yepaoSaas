@@ -48,6 +48,7 @@
     height: 80rpx;
     float: right;
     border-radius: 50%;
+    margin-top: 13rpx;
 }
 
 .star-view {
@@ -58,4 +59,15 @@
     width: 18rpx;
     height: 16rpx;
     margin-right: 5rpx;
+}
+
+.title-view {
+    padding-top: 10rpx;
+    font-size: 32rpx;
+}
+.content-view {
+    padding: 10rpx 0;
+    font-size: 26rpx;
+    color: #BAB9C7;
+    border-bottom: 2rpx #262439 solid;
 }

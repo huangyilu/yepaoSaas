@@ -39,17 +39,19 @@ export function formatMyMemCardDetails(item) {
   }
 }
 
-// 私人教练
+// 私人教练 buy_times,remain_times,teacherName,teacherPhone,remainDays,card_name
 export function formatPersonalTrainer(list) {
   return list.map(item => this.formatPersonalTrainerItem(item))
 }
 export function formatPersonalTrainerItem(item) {
   return {
-    headImg: 'http://img2.imgtn.bdimg.com/it/u=3390152407,4060777889&fm=27&gp=0.jpg',
-    name: '叽叽喳喳',
-    score: 3,
-    tags: '腹肌男，阳光，帅气',
-    imgs: ['http://img2.imgtn.bdimg.com/it/u=3390152407,4060777889&fm=27&gp=0.jpg', 'http://img2.imgtn.bdimg.com/it/u=3390152407,4060777889&fm=27&gp=0.jpg', 'http://img2.imgtn.bdimg.com/it/u=3390152407,4060777889&fm=27&gp=0.jpg', 'http://img2.imgtn.bdimg.com/it/u=3390152407,4060777889&fm=27&gp=0.jpg']
+    headImg: item.picUrlString ? item.picUrlString : '',
+    coachName: item.teacherName ? item.teacherName : '',
+    className: item.card_name ? item.card_name : '',
+    remainTimes: item.remain_times ? item.remain_times : 0,
+    buyTimes: item.buy_times ? item.buy_times : 0,
+    remainDays: item.remainDays ? item.remainDays : 0,
+    telephone: item.teacherPhone ? item.teacherPhone : 0
   }
 }
 
@@ -57,12 +59,12 @@ export function formatPersonalTrainerItem(item) {
 export function formatRecommendCourse(list) {
   return list.map(item => this.formatRecommendCourseItem(item))
 }
-export function formatRecommendCourseItem() {
+export function formatRecommendCourseItem(item) {
   return {
-    headimg: 'http://img2.imgtn.bdimg.com/it/u=3390152407,4060777889&fm=27&gp=0.jpg',
-    courseName: '搏击训练',
-    price: 20,
-    courseTime: 1
+    headimg: item.headUrlString ? item.headUrlString : '',
+    courseName: item.card_name ? item.card_name : '',
+    price: item.app_amt ? item.app_amt : 0,
+    courseTime: item.times ? item.times : 0
   }
 }
 

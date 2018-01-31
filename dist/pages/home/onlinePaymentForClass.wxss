@@ -35,9 +35,30 @@
     height: 100rpx;
     line-height: 100rpx;
     font-size: 32rpx;
+    background-color: #2f2d45;
+    margin-top: 4rpx;
+    color: #BAB9C7;
+}
+.order-cell-view text {
+    float: right;
 }
 
 .check-text {
+    margin-top: 30rpx;
+    background-color: #2f2d45;
+    padding: 30rpx;
     height: 30rpx;
     line-height: 30rpx;
+}
+
+.right-icon {
+    margin-top: 33rpx;
+    margin-left: 20rpx;
+    margin-right: 0;
+}
+
+.checked-icon {
+    float: left;
+    margin-top: -2rpx;
+    margin-right: 20rpx;
 }

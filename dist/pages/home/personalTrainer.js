@@ -1,4 +1,8 @@
 // pages/home/personalTrainer.js
+
+import * as homedata from '../../utils/homedata-format';
+import * as homeService from '../../services/home-service';
+
 Page({
 
   /**
@@ -11,29 +15,7 @@ Page({
     starUrl: '../../images/icon/home/star_pink.png',
     emptUrl: '../../images/icon/star_g.png',
 
-    personalList: [
-      {
-        headImg: '',
-        name: '叽叽喳喳',
-        score: 4,
-        tags: '腹肌男',
-        imgs: []
-      },
-      {
-        headImg: 'http://img2.imgtn.bdimg.com/it/u=3390152407,4060777889&fm=27&gp=0.jpg',
-        name: '叽叽喳喳',
-        score: 3,
-        tags: '腹肌男，阳光，帅气',
-        imgs: ['http://img2.imgtn.bdimg.com/it/u=3390152407,4060777889&fm=27&gp=0.jpg', 'http://img2.imgtn.bdimg.com/it/u=3390152407,4060777889&fm=27&gp=0.jpg', 'http://img2.imgtn.bdimg.com/it/u=3390152407,4060777889&fm=27&gp=0.jpg', 'http://img2.imgtn.bdimg.com/it/u=3390152407,4060777889&fm=27&gp=0.jpg']
-      },
-      {
-        headImg: '',
-        name: '叽叽喳喳',
-        score: 5,
-        tags: '',
-        imgs: []
-      }
-    ]
+    personalList: []
   },
 
   /**
@@ -44,6 +26,19 @@ Page({
     var res = wx.getSystemInfoSync();
     this.setData({
       windowWidth: res.windowWidth
+    })
+
+    homeService.queryMyPersonalCoach().then((result) => {
+
+      console.log('queryMyPersonalCoach *** ' + JSON.stringify(result));
+      if (result.rs == 'Y') {
+        this.setData({
+          personalList: homedata.formatPersonalTrainer(result.cards)
+        })
+      }
+
+    }).catch((error) => {
+      console.log(error);
     })
     
   },

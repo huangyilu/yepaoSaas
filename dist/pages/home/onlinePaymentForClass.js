@@ -10,64 +10,69 @@ Page({
       headimg: 'http://img2.imgtn.bdimg.com/it/u=3390152407,4060777889&fm=27&gp=0.jpg',
       courseName: '搏击训练',
       price: 100,
-      courseTime: 2
-    }
+      courseTime: 2,
+      coachName: '朱永磊',
+      classType: '私教课',
+      orderId: '909309e02343',
+      checked: true
+    },
 
+    remindText: '',
+
+    buyCourseSelectCoach: {}
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+
   
   },
 
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-  
+  onShow: function (options) {
+    if (wx.getStorageSync('buyCourseSelectCoach')) {
+      console.log('buyCourseSelectCoach .. ' + JSON.stringify(wx.getStorageSync('buyCourseSelectCoach')));
+      var coach = wx.getStorageSync('buyCourseSelectCoach');
+      this.setData({
+        buyCourseSelectCoach: coach,
+        'classInfo.name': coach.name
+      })
+      wx.removeStorage({
+        key: 'buyCourseSelectCoach',
+      })
+    }
   },
 
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-  
+  // 教练选择
+  bindSelectCoach () {
+    wx.navigateTo({
+      url: 'selectedCoach',
+    })
+  },
+   
+  // 勾选购买协议
+  bindCheckedTap () {
+    this.setData({
+      'classInfo.checked': !this.data.classInfo.checked
+    })
   },
 
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-  
-  },
+  // 微信支付
+  bindPaymentTap () {
+    if (this.data.classInfo.checked) {
 
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-  
-  },
+    } else {
+      this.setData({
+        remindText: '您未同意课程购买协议！'
+      })
 
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-  
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-  
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-  
+      setTimeout((function callback() {
+        this.setData({
+          remindText: ''
+        })
+      }).bind(this), 2000);
+    }
   }
+
 })

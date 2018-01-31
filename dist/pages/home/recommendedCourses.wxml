@@ -29,9 +29,9 @@
 <!-- 选项一 开始 -->
     <view class="weui-tab__content" hidden="{{ activeIndex != 0 }}">
       <!-- 选项一 内容 -->
-      <block wx:if='{{ groupClassList.length > 0 }}'>
-      <block wx:for='{{ groupClassList }}' wx:for-item='group' wx:key='{{ index }}'>
-        <template is="recoCourse-item" data="{{ ...group }}"/>
+      <block wx:if='{{ personalClassList.length > 0 }}'>
+      <block wx:for='{{ personalClassList }}' wx:for-item='personal'  wx:key='{{ index }}'>
+        <template is="recoCourse-item" data="{{ ...personal, index }}"/>
       </block>
       </block>
       
@@ -43,28 +43,15 @@
 <!-- 选项二 开始 -->
     <view class="weui-tab__content" hidden="{{ activeIndex != 1 }}">
       <!-- 选项二 内容 -->
-      <block wx:if='{{ groupClassList.length > 0 }}'>
-      <block wx:for='{{ groupClassList }}' wx:for-item='group' wx:key='{{ index }}'>
-        <template is="recoCourse-item" data="{{ ...group }}"/>
+      <block wx:if='{{ singleClassList.length > 0 }}'>
+      <block wx:for='{{ singleClassList }}' wx:for-item='single' wx:key='{{ index }}'>
+        <template is="recoCourse-item" data="{{ ...single, index }}"/>
       </block>
       </block>
       <!-- 无 更多 -->
       <template wx:else is='empty-view' data='{{ emptyText, emptyIcon }}'/> 
     </view>
 <!-- 选项二结束 -->
-
-<!-- 选项三 开始 -->
-    <view class="weui-tab__content" hidden="{{ activeIndex != 2 }}">
-      <!-- 选项三 内容 -->
-      <block wx:if='{{ groupClassList.length > 0 }}'>
-      <block wx:for='{{ groupClassList }}' wx:for-item='group' wx:key='{{ index }}'>
-        <template is="recoCourse-item" data="{{ ...group }}"/>
-      </block>
-      </block>
-      <!-- 无 更多 -->
-      <template wx:else is='empty-view' data='{{ emptyText, emptyIcon }}'/> 
-    </view>
-<!-- 选项三 结束 -->
 
   </view>
 </view>

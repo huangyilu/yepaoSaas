@@ -5,17 +5,10 @@
     padding: 0 30rpx;
     margin-top: 20rpx;
 }
-.classCalendar-cell .title-img {
-    width: 150rpx;
-    height: 150rpx;
+.classCalendar-cell .up-text-view .time-text {
+    margin-right: 20rpx;
 }
-.classCalendar-cell .title-view {
-    margin-right: 30rpx;
-}
-.classCalendar-cell .title-view .time-text {
-    padding: 13rpx 0;
-}
-.classCalendar-cell .up-text-view{
+.classCalendar-cell .up-text-view {
     border-bottom: 1rpx #262439 solid;
     font-size: 34rpx;
     padding: 10rpx 0;

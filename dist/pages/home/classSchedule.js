@@ -45,7 +45,7 @@ Page({
         className: '肚皮舞',
         classTime: '10:00-11:00',
         teacherName: '藏冬雨',
-        teacherScore: ['star', 'star', 'star', 'star',''],
+        teacherScore: ['star', 'star', 'star', 'star','star'],
         allowSignUp: 10
       },
       {
@@ -54,7 +54,7 @@ Page({
         className: '肚皮舞',
         classTime: '10:00-11:00',
         teacherName: '藏冬雨',
-        teacherScore: ['star', 'star', 'star', 'star', ''],
+        teacherScore: ['star', 'star', 'star', 'star', 'star'],
         allowSignUp: 10
       }
     ],
@@ -113,6 +113,11 @@ Page({
       activeIndex: e.currentTarget.id,
       sliderOffset: e.currentTarget.offsetLeft
     });
+  },
+  bindClassDetails(e) {
+    wx.navigateTo({
+      url: 'classScheduleDetails?classid=' + e.currentTarget.id,
+    })
   },
 
   initTopThreeDate() {

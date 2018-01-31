@@ -1,55 +1,33 @@
 <!--pages/home/personalTrainer.wxml-->
 
-<import src="../../templates/star-item/star-item.wxml"/>
-
 <view class='bg-view'>
 
+  <view class='remind-text'>请在剩余期限内上完私教课</view>
+
   <view class='personal-cell-view'>
-    <block wx:for='{{ personalList }}' wx:for-item='persl' wx:key='{{ index }}'>
+
+    <block wx:for='{{ personalList }}' wx:key='{{ index }}'>
     <view class='personal-cell'>
-
-      <view class='weui-flex'>
-        <!-- 头像 -->
-        <view >
-          <image class='personal-headimg'
+      <!-- 头像 -->
+      <view class='head-view'>
+        <image class='personal-headimg'
                 mode='aspectFill'
-                src='{{ persl.headImg != "" ? persl.headImg : "../../images/icon/default_headimg.png" }}'></image>
-        </view>
-        <!-- 名字 信息 等文字 -->
-        <view class='weui-flex__item'>
-          <!-- 名字 -->
-          <view class='name-view'>
-            <text>{{ persl.name }}</text>
-            <template is='star-item' data='{{ ...persl, starUrl, emptUrl }}'/>
-          </view>
-          <!-- 标签 -->
-          <view class='tag-view'>
-            <view wx:if='{{ persl.tags != "" }}' class='tag-item'>{{ persl.tags }}</view>
-            <view wx:if='{{ persl.tags == "" }}'>暂无标签</view>
-          </view>
-        </view>
-        <!-- 预约 按钮 -->
-        <view >
-          <view class='appt-btn'>预约</view> 
-        </view>
+                src='{{ item.headImg != "" ? item.headImg : "../../images/icon/default_headimg.png" }}'></image>
+        <text>{{ item.coachName }}</text>
+        <image data-telephone='{{ item.telephone }}' class='tel-icon' src='../../images/icon/telephone.png'></image>
       </view>
 
-      <!-- 照片 -->
-      <view class='personal-cell-imgs-view'>
-        <view class="weui-grids">
-          <block wx:for-items="{{ persl.imgs }}" wx:key="{{ index }}">
-            <view class="weui-grid"> 
-              <image class="weui-grid__icon" 
-                    src="{{ item }}"
-                    mode='aspectFill' 
-                    style='width:{{ windowWidth*0.29 }}px;height:{{ windowWidth*0.29 }}px;' />
-            </view> 
-          </block>
+      <view class='class-view'>
+        <view class='fs34'>私教课程： <text class='whiteColor'>{{ item.className }}</text> </view>
+        <view class='fs30'>
+          剩余： <text class='whiteColor'> <text class='yeColor'>{{ item.remainTimes }}</text> /{{ item.buyTimes }}节</text>
+          <text class='fs28 ft-right'>剩余期限：{{ item.remainDays }}天</text>
         </view>
       </view>
-
+      
     </view>
     </block>
+  
   </view>
 
 </view>
