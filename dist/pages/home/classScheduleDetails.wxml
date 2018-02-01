@@ -2,7 +2,7 @@
 
 <import src="../../templates/star-item/star-item.wxml"/>
 
-<view class='bg-view'>
+<view class='bg-view' wx:if='{{ classDetails != "" }}'>
 
   <view>
     <image mode='aspectFill' class='title-img' src='{{ classDetails.titleImg }}'></image>
@@ -17,7 +17,8 @@
       </view>
       <view class='weui-flex__item'>
         <image class='enrolment' src='../../images/icon/home/enrolment.png'></image>
-        <text>还可报名<text>{{ classDetails.classPepoNum }}</text>人</text>
+        <text wx:if='{{ classDetails.classPepoNum != -1 }}' class='text'>还可报名 <text>{{ classDetails.classPepoNum }}</text>人</text>
+        <text wx:else class='text'>不限报名人数</text>
       </view>
     </view>
     <view>
@@ -43,5 +44,7 @@
     <view class='content-view'>{{ classDetails.classDetail }}</view>
   
   </view>
+
+  <view class='foot-btn-view' bindtap='bindClassScheduleApptTap'>预约</view>
 
 </view>

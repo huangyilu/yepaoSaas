@@ -12,7 +12,7 @@ Page({
     // 屏幕宽度
     windowWidth: 0,
 
-    starUrl: '../../images/icon/home/star_pink.png',
+    starUrl: '../../images/icon/star_pink.png',
     emptUrl: '../../images/icon/star_g.png',
 
     personalList: []

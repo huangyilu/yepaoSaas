@@ -1,7 +1,8 @@
 {
   "pages": [
-    "pages/home/classSchedule",
     "pages/home/home",
+    "pages/home/classSchedule",
+    
     "pages/home/classScheduleDetails",
     
     "pages/home/myClassDetails",

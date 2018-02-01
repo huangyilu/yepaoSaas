@@ -74,13 +74,30 @@ export function formatClassSchedule(list) {
 }
 export function formatClassScheduleItem(item) {
   return {
+    planId: item.plan_id ? item.plan_id : 0,
+    planDetailId: item.plan_detail_id ? item.plan_detail_id : 0,
     classImg: 'http://img2.imgtn.bdimg.com/it/u=3390152407,4060777889&fm=27&gp=0.jpg',
     headimg: 'http://img2.imgtn.bdimg.com/it/u=3390152407,4060777889&fm=27&gp=0.jpg',
-    className: '肚皮舞',
-    classTime: '10:00-11:00',
-    teacherName: '藏冬雨',
+    className: item.plan_name ? item.plan_name : '',
+    classTime: item.start_time + '-' + item.end_time,
+    teacherName: item.privateTeacher ? item.privateTeacher.name : '',
     teacherScore: ['star', 'star', 'star', 'star', ''],
-    allowSignUp: 10
+    allowSignUp: item.remainNum ? item.remainNum : 0
+  }
+}
+
+// 课程表详情
+export function formatClassScheduleDetail(item) {
+  return {
+    titleImg: item.plan.picUrlString,
+    className: item.plan.plan_name,
+    classTime: item.plan.lesson_time + ' ' + item.plan.start_time + '-' + item.plan.end_time,
+    classPepoNum: item.remainNum,
+    classDetail: item.plan.summary,
+    address: item.plan.addr_name,
+    coachHeadImg: item.privateTeacher.appHeadString ? item.privateTeacher.appHeadString : 'http://img2.imgtn.bdimg.com/it/u=3390152407,4060777889&fm=27&gp=0.jpg',
+    coachName: item.privateTeacher.name,
+    coachIntroduction: item.privateTeacher.summary,
   }
 }
 

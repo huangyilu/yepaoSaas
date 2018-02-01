@@ -5,7 +5,7 @@
 <view class='weui-flex classCalendar-cell'>
   <view class='weui-flex__item'>
     <!-- 上 -->
-    <view class='up-text-view' id='{{ index }}' bindtap='bindClassDetails'>
+    <view class='up-text-view' data-planid='{{ item.planId }}' data-plandetailid='{{ item.planDetailId }}' id='{{ index }}' bindtap='bindClassDetails'>
       <text class='time-text'>{{ item.classTime }}</text>
       <text>{{ item.className }}</text>
       <text class='right-text'>查看详情</text>
@@ -24,7 +24,7 @@
             <!-- 评分 -->
             <view class='star-view'>
             <block wx:for='{{ item.teacherScore }}' wx:key='{{ index }}'>
-              <image class='star-icon' src='../../images/icon/home/star_{{ item == "star" ? "red" : "g" }}.png'></image>
+              <image class='star-icon' src='../../images/icon/star_{{ item == "star" ? "red" : "g" }}.png'></image>
             </block>
             </view>
           </view>
@@ -35,7 +35,8 @@
           <image class='cell-icon-class' src='../../images/icon/home/league_class.png'></image>
           <text class='text'>团课</text>
           <image class='cell-icon-enro' src='../../images/icon/home/enrolment.png'></image>
-          <text class='text'>还可报名 <text class='yeColor'>{{ item.allowSignUp }}</text>人</text>
+          <text wx:if='{{ item.allowSignUp != -1 }}' class='text'>还可报名 <text class='yeColor'>{{ item.allowSignUp }}</text>人</text>
+          <text wx:else class='text'>不限报名人数</text>
         </view>
       </view>
 

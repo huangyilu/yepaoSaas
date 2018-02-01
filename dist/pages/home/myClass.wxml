@@ -1,6 +1,10 @@
 <!--pages/home/myClass.wxml-->
 
+<import src="../../templates/empty-view/empty-view.wxml"/>
+
 <view class='bg-view'>
+
+  <view wx:if='{{ myclassList.length > 0 }}'>
 
   <view class='title-view'>请尽快到店里参加您所需要的课程</view>
 
@@ -26,5 +30,9 @@
     </view>
     </block>
   </view>
+
+  </view>
+
+  <template wx:else is='empty-view' data='{{ emptyText, emptyIcon }}'/> 
 
 </view>

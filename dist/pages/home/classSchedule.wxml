@@ -11,7 +11,7 @@
   <!-- tab  -->
   <view class="weui-navbar">
     <block wx:for-items="{{ navbarTabs }}" wx:key="{{ index }}">
-      <view id="{{ index }}" class="weui-navbar__item {{ activeIndex == index ? 'weui-bar__item_on' : ''}}" bindtap="bindNavbarTabTap">
+      <view id="{{ index }}" class="weui-navbar__item {{ activeIndex == index ? 'weui-bar__item_on' : ''}}" data-datestring='{{ item.datestring }}' bindtap="bindNavbarTabTap">
         <view class="weui-navbar__title">
           {{ item.date }}
           <!-- 占位 -->

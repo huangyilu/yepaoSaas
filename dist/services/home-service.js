@@ -65,3 +65,36 @@ export function queryRecomdCourse(cardType) {
     cardType: cardType
   })
 }
+
+// 课程表
+export function queryClassSchedule(dateString) {
+  return jsonGetRequest('yp-xcx-showPlan', {
+    custName: "zjs",
+    gym: "zjs",
+    dateString: dateString
+  })
+}
+
+// 课程详情
+export function queryClassScheduleDetail(planId, planDetailId) {
+  return jsonGetRequest('yp-xcx-detailPlan', {
+    custName: "zjs",
+    gym: "zjs",
+    planId: planId,
+    planDetailId: planDetailId
+  })
+}
+
+// 课程预约
+export function uploadMemJoinClassSchedule() {
+  // return 
+}
+
+// 我的约课
+export function queryMyClass() {
+  return jsonGetRequest('/yp-xcx-getMyLesson', {
+    custName: "zjs",
+    gym: "zjs",
+    memId: '59e8636e3d20231e641ac64f'
+  })
+}

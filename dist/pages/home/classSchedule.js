@@ -1,10 +1,10 @@
 // pages/home/classSchedule.js
 
 import moment from '../../utils/npm/moment';
-
+import * as homedata from '../../utils/homedata-format';
+import * as homeService from '../../services/home-service';
 
 var sliderWidth = 90; // 需要设置slider的宽度，用于计算中间位置
-
 
 Page({
 
@@ -21,43 +21,28 @@ Page({
     navbarTabs: [
       {
         date: '',
+        dateString: '',
         name: '今天'
       },
       {
         date: '',
+        dateString: '',
         name: '明天'
       },
       {
         date: '',
+        dateString: '',
         name: '后天'
       },
       {
         date: '',
+        dateString: '',
         name: ''
       }
     ],
 
     // 课程列表
-    courseList: [
-      {
-        classImg: 'http://img2.imgtn.bdimg.com/it/u=3390152407,4060777889&fm=27&gp=0.jpg',
-        headimg: 'http://img2.imgtn.bdimg.com/it/u=3390152407,4060777889&fm=27&gp=0.jpg',
-        className: '肚皮舞',
-        classTime: '10:00-11:00',
-        teacherName: '藏冬雨',
-        teacherScore: ['star', 'star', 'star', 'star','star'],
-        allowSignUp: 10
-      },
-      {
-        classImg: 'http://img2.imgtn.bdimg.com/it/u=3390152407,4060777889&fm=27&gp=0.jpg',
-        headimg: 'http://img2.imgtn.bdimg.com/it/u=3390152407,4060777889&fm=27&gp=0.jpg',
-        className: '肚皮舞',
-        classTime: '10:00-11:00',
-        teacherName: '藏冬雨',
-        teacherScore: ['star', 'star', 'star', 'star', 'star'],
-        allowSignUp: 10
-      }
-    ],
+    courseList: [],
 
     // 日历
     calendarData: {
@@ -106,28 +91,64 @@ Page({
   
   },
 
+  // 获取当天课程
+  getClassData() {
+    
+    var chooseDates = this.data.calendarData.chooseDates;
+
+    console.log('chooseDates .. ' + JSON.stringify(chooseDates));
+
+    homeService.queryClassSchedule(chooseDates).then((result) => {
+
+      console.log('queryClassSchedule *** ' + JSON.stringify(result));
+      if (result.rs == 'Y') {
+        this.setData({
+          courseList: homedata.formatClassSchedule(result.planList)
+        })
+      }
+
+    }).catch((error) => {
+      console.log(error);
+    })
+
+  },
+
   // 点击事件 navbar
   bindNavbarTabTap (e) {
 
+    var navbarTabs = this.data.navbarTabs;
+
     this.setData({
       activeIndex: e.currentTarget.id,
-      sliderOffset: e.currentTarget.offsetLeft
+      sliderOffset: e.currentTarget.offsetLeft,
+      'calendarData.chooseDates': navbarTabs[e.currentTarget.id].dateString,
     });
+
+    this.getClassData();
+
   },
   bindClassDetails(e) {
+
+    var planId = e.currentTarget.dataset.planid;
+    var planDetailId = e.currentTarget.dataset.plandetailid;
+
     wx.navigateTo({
-      url: 'classScheduleDetails?classid=' + e.currentTarget.id,
+      url: 'classScheduleDetails?planId=' + planId + '&planDetailId=' + planDetailId
     })
   },
 
   initTopThreeDate() {
     var navbarTabs = this.data.navbarTabs;
     for (var i=0 ; i<3; i++) {
-      navbarTabs[i].date = moment().add(i, 'days').format('M.D')
+      navbarTabs[i].date = moment().add(i, 'days').format('M.D');
+      navbarTabs[i].dateString = moment().add(i, 'days').format('YYYY-MM-DD');
     }
     this.setData({
-      navbarTabs: navbarTabs
+      navbarTabs: navbarTabs,
+      'calendarData.chooseDates': navbarTabs[0].dateString,
     })
+
+    this.getClassData();
   },
   // 日历
   initDataOnCalendar() {
@@ -296,6 +317,7 @@ Page({
       });
     }
 
+    this.getClassData();
   },
   bindCalendarMonthTap (e) {
     var taptype = e.currentTarget.dataset.taptype;
