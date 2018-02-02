@@ -8,4 +8,4 @@
 export const apiBase = 'http://192.168.1.38:8080/Saas/'
 
 export const appId = 'wx9dbce51a48d1428f'
-// export const hotelId = '13100738632'
+export const custName = 'zjs'

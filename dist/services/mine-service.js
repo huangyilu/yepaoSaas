@@ -24,7 +24,7 @@ import {
 // 我是教练 查询 私教会员  /fit-login-backend
 export function queryMyMembers() {
   return jsonGetRequest('getMem', {
-    custName: "zjs",
+    custName: appConfig.custName,
     gym: "zjs"
   })
 }
@@ -35,7 +35,7 @@ export function queryMyMembers() {
 // 定制课程 memId 私教会员ID ptId 教练ID
 export function queryCourseCustomization(customizeDateString, memId) {
   return jsonGetRequest('getCourseCustomization', {
-    custName: "zjs",
+    custName: appConfig.custName,
     gym: "zjs",
     ptId: '59ba4cc655040f3865e14b64',
     memId: memId,
@@ -46,7 +46,7 @@ export function queryCourseCustomization(customizeDateString, memId) {
 // 存入 定制的 课程
 export function uploadCourseCustomization(customizeDateString, memId, customizeLevel, customizeParts) {
   return urlencodePostRequest('saveCourseCustomization', {
-    custName: "zjs",
+    custName: appConfig.custName,
     gym: "zjs",
     ptId: '59ba4cc655040f3865e14b64',
     memId: memId,
@@ -59,7 +59,7 @@ export function uploadCourseCustomization(customizeDateString, memId, customizeL
 // 查看定制的课程
 export function queryCourseCustomizationDetail(customizeDateString, memId) {
   return jsonGetRequest('getCourseCustomizationDetail', {
-    custName: "zjs",
+    custName: appConfig.custName,
     gym: "zjs",
     ptId: '59ba4cc655040f3865e14b64',
     memId: memId,
@@ -70,7 +70,7 @@ export function queryCourseCustomizationDetail(customizeDateString, memId) {
 // 共享定制的课程
 export function uploadShareCourse(shareCourseIds, memId) {
   return urlencodePostRequest('shareCourse', {
-    custName: "zjs",
+    custName: appConfig.custName,
     gym: "zjs",
     ptId: '59ba4cc655040f3865e14b64',
     memId: memId,
@@ -83,7 +83,7 @@ export function uploadShareCourse(shareCourseIds, memId) {
 // 获取 课程共享 列表
 export function queryShareCourse(memId) {
   return jsonGetRequest('getShareCourseList', {
-    custName: "zjs",
+    custName: appConfig.custName,
     gym: "zjs",
     memId: '59e8636e3d20231e641ac64f'
   })
@@ -91,9 +91,17 @@ export function queryShareCourse(memId) {
 // 课程共享 详情
 export function queryShareCourseDetail(memId) {
   return jsonGetRequest('getShareCourseDetail', {
-    custName: "zjs",
+    custName: appConfig.custName,
     gym: "zjs",
     ptId: '59ba4cc655040f3865e14b64',
     memId: '59e8636e3d20231e641ac64f',
+  })
+}
+
+// 我的订单
+export function queryMyOrder() {
+  return jsonGetRequest('', {
+    custName: appConfig.custName,
+    gym: "zjs",
   })
 }

@@ -30,27 +30,14 @@ var storeE = {
 };
 
 export function saveAuthInfo(authInfo, userProfile) {
-  // let subscriberInfo = authInfo.subscriberInfo;
-  // let userProfile = authInfo.userProfile;
   let openId = authInfo.openId;
-  // let credentials = authInfo.credentials;
-
-  // storeE.set('subscriberInfo', subscriberInfo, EXPIRATION_MILLISECONDS);
   storeE.set('userProfile', userProfile.userInfo, EXPIRATION_MILLISECONDS);
   storeE.set('openid', openId, EXPIRATION_MILLISECONDS);
-  // storeE.set('credentials', credentials, EXPIRATION_MILLISECONDS);
 }
 
 export function clearAuthInfo(authInfo) {
-  // wx.removeStorageSync('subscriberInfo');
-  // wx.removeStorageSync('userProfile');
   wx.removeStorageSync('openid');
-  // wx.removeStorageSync('credentials');
 }
-
-// export function getSubscriberInfo() {
-//   return storeE.get('subscriberInfo');
-// }
 
 export function getUserProfile() {
   return storeE.get('userProfile');
@@ -60,10 +47,6 @@ export function getUserId() {
   return storeE.get('openid');
 }
 
-// export function getCredentials() {
-//   return storeE.get('credentials');
-// }
-
 export function getUserInfo() {
   let userProfile = getUserProfile();
   if (!userProfile) {
@@ -71,49 +54,14 @@ export function getUserInfo() {
   }
   return {
     userId: getUserId(),
-    // apiToken: getCugeApiToken(),
-    // gender: userProfile.gender === 'male' ? 'M' : 'F',
     username: userProfile.nickName,
     avatarSrc: userProfile.avatarUrl
   };
 }
 
-// export function getCugeApiToken() {
-//   let credentials = getCredentials();
-//   if (!credentials) {
-//     console.log('@@no credentials');
-//     return null;
-//   }
-//   let accessToken = credentials.accessToken;
-//   console.log('@@accessToken: ' + JSON.stringify(accessToken));
-//   let hours12 = 43200000;
-//   if (new Date(accessToken.created).getTime() + accessToken.ttl * 1000 > Date.now() + hours12) {
-//     return accessToken.id;
-//   }
-//   console.log('@@credentials expired.');
-//   return null;
-// }
-
 export function isLoggedIn() {
   let userInfo = getUserInfo();
   return !FORCE_LOGIN && userInfo && userInfo.userId && userInfo.username && userInfo.avatarSrc;
-}
-
-// export function isSubscriber() {
-//   let subscriberInfo = getSubscriberInfo();
-//   return subscriberInfo && subscriberInfo.subscribe;
-// }
-
-export function saveFromPath(fromPath) {
-  storeE.set('fromPath', fromPath, 10000);
-}
-
-export function getFromPath() {
-  return storeE.get('fromPath');
-}
-
-export function removeFromPath() {
-  wx.removeStorageSync('fromPath');
 }
 
 export function authFromServer(authCode, userInfoResult) {
@@ -121,11 +69,11 @@ export function authFromServer(authCode, userInfoResult) {
   // console.log(authCode, userInfoResult);
   return new Promise((resolve, reject) => {
     wx.request({
-      url: appConfig.apiBase + 'getOpenId',
+      url: appConfig.apiBase + 'yp-xcx-getOpenId',
       method: 'GET',
       data: {
         "code": authCode,
-        "hotelId": +appConfig.hotelId
+        "custName": appConfig.custName
       },
       header: {
         'content-type': 'application/json'
@@ -146,6 +94,25 @@ export function authFromServer(authCode, userInfoResult) {
       }
     });
   });
+}
+
+// 如果没有同意 获取头像，再次发起请求
+export function authorizeUserInfo() {
+  return new Promise((resolve, reject) => { 
+    wx.authorizeAsync({
+      scope: 'scope.userInfo'
+    }).catch((error) => {
+      console.log(error);   
+      return reject(error);
+    }).then(res => {
+      return resolve(res);
+    })
+  })
+}
+
+// 认证会员
+export function certificationMemberFromServer() {
+  return true
 }
 
 export function wxappLogin() {
@@ -174,7 +141,6 @@ export function ensureLoggedIn() {
   return new Promise((resolve, reject) => {
     if (isLoggedIn()) {
       console.log('LoggedIn already');
-      // console.log('getCugeApiToken: ' + getCugeApiToken());
       return resolve();
     }
 

@@ -2,7 +2,7 @@ import Promise from '../utils/npm/bluebird.min';
 
 const methodNamesToPromisify = [
 
-  // 'authorize',
+  'authorize',
   // 'getSetting',
   // 'uploadFile',
   // 'downloadFile',
@@ -68,7 +68,7 @@ const methodNamesToPromisify = [
   // 'getExtConfig',
   // 'login',
   // 'checkSession',
-  // 'getUserInfo',
+  'getUserInfo',
   'requestPayment',
   // 'showShareMenu',
   // 'hideShareMenu',

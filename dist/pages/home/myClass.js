@@ -36,5 +36,17 @@ Page({
   
   },
 
+  getMyClass() {
+    
+
+  },
+  bindClassStatusTap(e) {
+
+    var index = e.currentTarget.id;
+    // if () {
+          
+    // }
+
+  }
   
 })

@@ -138,3 +138,17 @@ export function formatShareCourseDetails(list) {
     videoList: videoList
   }
 }
+
+// 我的订单
+export function formatMyOrderList(list) {
+  return list.map(item => this.formatMyOrderListItem(item))
+}
+export function formatMyOrderListItem(item) {
+  return {
+    orderName: '会员卡购买 (一年卡)',
+    orderTime: '2018-01-01 18:00',
+    orderId: '199372897',
+    price: 2000,
+    orderStatus: '已付款'
+  }
+}

@@ -2,7 +2,7 @@ import Promise from '../utils/npm/bluebird.min';
 import * as appConfig from '../app-config';
 import * as AuthService from './auth-service';
 
-export function wxRequestP(method, url, contentType, data = {}, accessToken = '') {
+export function wxRequestP(method, url, contentType, data = {}, accessToken ) {
 
   if (contentType == 'application/json') {
     wx.showLoading({
@@ -14,42 +14,42 @@ export function wxRequestP(method, url, contentType, data = {}, accessToken = ''
     })
   }
 
-  // console.log('@@wxRequestP access_token: ' + accessToken)
-  // data.access_token = accessToken
-  return new Promise((resolve, reject) => {
-    wx.request({
-      url,
-      method,
-      data,
-      header: {
-        'content-type': contentType,
-        'access_token': accessToken
-      },
-      success(res) {
-        // console.log(' succeed: ' + JSON.stringify(res.data))
-        if (+res.statusCode >= 200 && +res.statusCode < 400) {
-          // console.log(url + ' succeed: ' + JSON.stringify(res.data))
-          console.log(url + ' succeed: ' + JSON.stringify(res))
+  if (accessToken) {
+    return new Promise((resolve, reject) => {
+      wx.request({
+        url,
+        method,
+        data,
+        header: {
+          'content-type': contentType,
+        },
+        success(res) {
+          // console.log(' succeed: ' + JSON.stringify(res.data))
+          if (+res.statusCode >= 200 && +res.statusCode < 400) {
+            // console.log(url + ' succeed: ' + JSON.stringify(res.data))
+            console.log(url + ' succeed: ' + JSON.stringify(res))
+            wx.hideLoading()
+            // wx.stopPullDownRefresh()
+            return resolve(res.data)
+          } else {
+            console.log(url + " failed: " + JSON.stringify(res.data))
+            // wx.hideLoading()
+            return reject(res.data)
+          }
+        },
+        fail(error) {
           wx.hideLoading()
-          // wx.stopPullDownRefresh()
-          return resolve(res.data)
-        } else {
-          console.log(url + " failed: " + JSON.stringify(res.data))
-          // wx.hideLoading()
-          return reject(res.data)
+          return reject(error)
         }
-      },
-      fail(error) {
-        wx.hideLoading()
-        return reject(error)
-      }
+      })
     })
-  })
+  }
+
 }
 
 export function wxJsonBackendRequestP(method, endpoint, data = {}) {
   // data.appid = appConfig.appId
-  return wxRequestP(method, appConfig.apiBase + endpoint, 'application/json', data)
+  return wxRequestP(method, appConfig.apiBase + endpoint, 'application/json', data, AuthService.certificationMemberFromServer())
 }
 
 export function wxJsonBackendGetRequestP(endpoint, data) {

@@ -3,8 +3,7 @@
 
 .head-view {
     width: 100%;
-    height: 200rpx;
-    padding: 50rpx 0 0;
+    padding: 50rpx 0 15rpx;
     text-align: center;
     margin-bottom: 20rpx;
     background-color: #2f2d45;
@@ -22,6 +21,17 @@
     border-radius: 50%;
 }
 
+.certification-btn {
+    width: 140rpx;
+    height: 40rpx;
+    line-height: 40rpx;
+    border: 1rpx #BAB9C7 solid;
+    border-radius: 20rpx;
+    color: #FFEF5A;
+    font-size: 26rpx;
+    margin: 0 auto 10rpx;
+}
+
 .x-item-view {
     text-align: center;
     margin-bottom: 20rpx;
@@ -35,3 +45,21 @@
     height: 50rpx;
 }
 
+/* 会员认证弹窗 */
+.confirm-view {
+    margin: 37% 10%;
+}
+.confirm-view .text-view {
+    padding:30rpx;
+    border-bottom:1rpx #262439 solid;
+    color: #FFEF5A;
+    font-size: 32rpx;
+}
+.confirm-view .input-view {
+    padding: 40rpx;
+}
+.confirm-view .input-view input {
+    padding:10rpx;
+    border:1rpx #393752 solid;
+    text-align:left;
+}

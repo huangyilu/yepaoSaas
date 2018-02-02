@@ -1,16 +1,13 @@
 {
   "pages": [
+    
     "pages/home/home",
     "pages/home/classSchedule",
-    
     "pages/home/classScheduleDetails",
-    
     "pages/home/myClassDetails",
-    
     "pages/home/personalTrainer",
     "pages/home/onlinePaymentForClass",
     "pages/home/onlinePaymentForCard",
-    
     "pages/mine/selectedMem",
     "pages/mine/infoTransfer",
     "pages/mine/myMember/memberInfoRegistration",
@@ -21,7 +18,6 @@
     "pages/home/buyMembershipCard",
     "pages/home/membershipCard",
     "pages/home/myClass",
-    
     "pages/mine/courseShare/courseShareDetails",
     "pages/mine/mine",
     "pages/message/message",
@@ -32,7 +28,8 @@
     "pages/mine/myCoach/myCoachListView",
     "pages/mine/courseShare/courseShare",
     "pages/message/messageDetails",
-    "pages/home/selectedCoach"
+    "pages/home/selectedCoach",
+    "pages/mine/myOrderListView"
     
   ],
   "window": {

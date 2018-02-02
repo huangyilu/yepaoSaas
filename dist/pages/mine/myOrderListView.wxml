@@ -1,0 +1,11 @@
+<!--pages/mine/myOrderListView.wxml-->
+
+<import src="../../templates/order-item/order-item.wxml"/>
+
+<view class='bg-view'>
+
+  <block wx:for='{{ orderList }}' wx:for-item='order' id='{{ index }}' wx:key='{{ index }}'>
+  <template is='order-item' data='{{ ...order, index }}' />
+  </block>
+
+</view>
