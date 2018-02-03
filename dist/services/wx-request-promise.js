@@ -66,7 +66,7 @@ export function wxStaticGetRequestP(url, contentType = 'application/json') {
 
 
 export function wxUrlencodedBackendRequestP(method, endpoint, data = {}) {
-  return wxRequestP(method, appConfig.apiBase + endpoint, 'application/x-www-form-urlencoded', data)
+  return wxRequestP(method, appConfig.apiBase + endpoint, 'application/x-www-form-urlencoded', data, AuthService.certificationMemberFromServer())
 }
 export function wxUrlencodedBackenPostRequestP(endpoint, data) {
   return wxUrlencodedBackendRequestP('POST', endpoint, data)

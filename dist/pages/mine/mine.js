@@ -61,7 +61,8 @@ Page({
 
     isCertificationMem: false,
     isCertificationMemHidden: true,
-    confirmText: '会员认证'
+    confirmText: '会员认证',
+    memTelephone: ''
   },
 
   /**
@@ -80,6 +81,11 @@ Page({
       });
       console.log('getUserInfo ***' + JSON.stringify(userInfo));
     });
+    if (AuthService.getMemberInfo()) {
+      this.setData({
+        isCertificationMem: true
+      })
+    }
   },
   bindAvatarTap () {
     var me = this;
@@ -118,6 +124,21 @@ Page({
     var id = e.currentTarget.id;
     if (id == 'a') {
       // 确定 认证
+      mineService.queryCertificationMember(this.data.memTelephone).then((result) => {
+
+        console.log('queryCertificationMember *** ' + JSON.stringify(result));
+        if (result.rs == 'Y') {
+          this.setData({
+            isCertificationMemHidden: true,
+            isCertificationMem: true
+          })
+          // 保存认证结果
+          AuthService.saveMemberInfo(result.result[0]);
+        }
+
+      }).catch((error) => {
+        console.log(error);
+      })
       
     } else {
       // 取消
@@ -126,6 +147,11 @@ Page({
       })
     }
   },
+  bindCerMemInput (e) {
+    this.setData({
+      memTelephone: e.detail.value 
+    })
+  }
 
   
 

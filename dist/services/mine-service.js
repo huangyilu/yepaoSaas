@@ -1,5 +1,6 @@
 import Promise from '../utils/npm/bluebird.min';
 import * as appConfig from '../app-config';
+import * as AuthService from 'auth-service';
 import {
   wxJsonBackendPostRequestP as jsonPostRequest
 }
@@ -20,12 +21,22 @@ import {
 }
   from 'wx-request-promise';
 
+
+
+// 会员认证
+export function queryCertificationMember(phone) {
+  return jsonGetRequest('yp-xcx-login', {
+    custName: appConfig.custName,
+    phone: phone
+  })
+}
+
 // teacher / get-mem  fit-exchange-gym
 // 我是教练 查询 私教会员  /fit-login-backend
 export function queryMyMembers() {
   return jsonGetRequest('getMem', {
     custName: appConfig.custName,
-    gym: "zjs"
+    gym: AuthService.getMemberInfo().gym
   })
 }
 
@@ -36,9 +47,9 @@ export function queryMyMembers() {
 export function queryCourseCustomization(customizeDateString, memId) {
   return jsonGetRequest('getCourseCustomization', {
     custName: appConfig.custName,
-    gym: "zjs",
+    gym: AuthService.getMemberInfo().gym,
     ptId: '59ba4cc655040f3865e14b64',
-    memId: memId,
+    memId: AuthService.getMemberInfo().memId,
     customizeDateString: customizeDateString
   })
 }
@@ -47,9 +58,9 @@ export function queryCourseCustomization(customizeDateString, memId) {
 export function uploadCourseCustomization(customizeDateString, memId, customizeLevel, customizeParts) {
   return urlencodePostRequest('saveCourseCustomization', {
     custName: appConfig.custName,
-    gym: "zjs",
+    gym: AuthService.getMemberInfo().gym,
     ptId: '59ba4cc655040f3865e14b64',
-    memId: memId,
+    memId: AuthService.getMemberInfo().memId,
     customizeDateString: customizeDateString,
     customizeLevel: customizeLevel,
     customizeParts: customizeParts
@@ -60,9 +71,9 @@ export function uploadCourseCustomization(customizeDateString, memId, customizeL
 export function queryCourseCustomizationDetail(customizeDateString, memId) {
   return jsonGetRequest('getCourseCustomizationDetail', {
     custName: appConfig.custName,
-    gym: "zjs",
+    gym: AuthService.getMemberInfo().gym,
     ptId: '59ba4cc655040f3865e14b64',
-    memId: memId,
+    memId: AuthService.getMemberInfo().memId,
     customizeDateString: customizeDateString
   })
 }
@@ -71,9 +82,9 @@ export function queryCourseCustomizationDetail(customizeDateString, memId) {
 export function uploadShareCourse(shareCourseIds, memId) {
   return urlencodePostRequest('shareCourse', {
     custName: appConfig.custName,
-    gym: "zjs",
+    gym: AuthService.getMemberInfo().gym,
     ptId: '59ba4cc655040f3865e14b64',
-    memId: memId,
+    memId: AuthService.getMemberInfo().memId,
     shareCourseIds: shareCourseIds
   })
 }
@@ -84,17 +95,17 @@ export function uploadShareCourse(shareCourseIds, memId) {
 export function queryShareCourse(memId) {
   return jsonGetRequest('getShareCourseList', {
     custName: appConfig.custName,
-    gym: "zjs",
-    memId: '59e8636e3d20231e641ac64f'
+    gym: AuthService.getMemberInfo().gym,
+    memId: AuthService.getMemberInfo().memId
   })
 }
 // 课程共享 详情
 export function queryShareCourseDetail(memId) {
   return jsonGetRequest('getShareCourseDetail', {
     custName: appConfig.custName,
-    gym: "zjs",
+    gym: AuthService.getMemberInfo().gym,
     ptId: '59ba4cc655040f3865e14b64',
-    memId: '59e8636e3d20231e641ac64f',
+    memId: AuthService.getMemberInfo().gym.memId,
   })
 }
 
@@ -102,6 +113,6 @@ export function queryShareCourseDetail(memId) {
 export function queryMyOrder() {
   return jsonGetRequest('', {
     custName: appConfig.custName,
-    gym: "zjs",
+    gym: AuthService.getMemberInfo().gym,
   })
 }

@@ -48,8 +48,22 @@
    <!-- 收起按钮  -->
   <image class='popUps-cancel-btn' src='../../../images/icon/delete_back.png' bindtap='bindCloseVideoShowTap'></image>
 
+  <video class='video' 
+        autoplay='false' 
+        id="{{ videoIndex }}" 
+        src="{{ videoUrlsBrowse[videoIndex].srcString }}" 
+        bindended='bindVideoPalyEnded'
+        bindfullscreenchange='bindVideoFullscreenChange'>
+    <cover-view hidden='{{ contlBtnHidden }}' id="{{ videoIndex }}" class="pre-btn-invideo" bindtap='bindPreVideoTap'>上一个</cover-view>
+    <cover-view hidden='{{ contlBtnHidden }}' id="{{ videoIndex }}" class="next-btn-invideo" bindtap='bindNextVideoTap'>下一个</cover-view>
+  </video>
+
+  
+  <view id="{{ videoIndex }}" class="pre-btn" bindtap='bindPreVideoTap'>上一个</view>
+  <view id="{{ videoIndex }}" class="next-btn" bindtap='bindNextVideoTap'>下一个</view>
+
    <!-- 视频  -->
-  <view class="we-container">
+  <!-- <view class="we-container">
     <view class="we-wrapper"
       bindtouchstart="touchstart"
       bindtouchmove="touchmove"
@@ -57,11 +71,14 @@
       animation="{{ animationData }}">
       <block wx:for="{{ videoUrlsBrowse }}" wx:key="{{ index }}">
       <view class="we-slide" >
-        <video class='video' autoplay='false' id="{{ index }}" src="{{ item.srcString }}" bindended='bindVideoPalyEnded'></video>
+        <video class='video' autoplay='false' id="{{ index }}" src="{{ item.srcString }}" bindended='bindVideoPalyEnded'>
+          <cover-view class="pre-btn">上一个</cover-view>
+          <cover-view class="next-btn">下一个</cover-view>
+        </video>
       </view>
       </block>
     </view> 
-  </view> 
+  </view>  -->
   
 </view> 
 

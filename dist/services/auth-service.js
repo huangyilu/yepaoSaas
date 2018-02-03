@@ -29,6 +29,19 @@ var storeE = {
   }
 };
 
+// 保存 会员信息
+export function saveMemberInfo(result) {
+  var memInfo = {
+    memId: result.mem_id,
+    custName: result.cust_name,
+    gym: result.gym
+  }
+  storeE.set('memInfo', memInfo, EXPIRATION_MILLISECONDS);
+}
+export function getMemberInfo() {
+  return storeE.get('memInfo');
+}
+
 export function saveAuthInfo(authInfo, userProfile) {
   let openId = authInfo.openId;
   storeE.set('userProfile', userProfile.userInfo, EXPIRATION_MILLISECONDS);
@@ -82,7 +95,7 @@ export function authFromServer(authCode, userInfoResult) {
         console.log("wxappauth result: " + JSON.stringify(res));
         if (+res.statusCode === 200) {
           console.log('wxappauth succeed: ' + JSON.stringify(res.data));
-          saveAuthInfo(res.data, userInfoResult);
+          saveAuthInfo(res.data.resultMap, userInfoResult);
           return resolve();
         } else {
           console.log("wxappauth failed: " + res.statusCode);

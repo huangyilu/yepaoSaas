@@ -22,8 +22,12 @@ Page({
     // 浏览视频
     videoIconUrl: '../../../images/icon/delete_back.png',
     showVideoHidden: true,
-    videoIndex: 1,
-    videoUrlsBrowse: []
+    videoIndex: 0,
+    videoUrlsBrowse: [],
+    startVideo: false,
+
+    contlBtnHidden: true
+    
   },
 
   /**
@@ -41,6 +45,33 @@ Page({
     
   },
 
+  bindPreVideoTap (e) {
+    var index = +e.currentTarget.id; //当前播放的视频id
+
+    if (index == this.data.videoUrlsBrowse.length) {
+
+    } else {
+      index = index - 1;
+      this.setData({
+        videoIndex: index
+      })
+    }
+
+    console.log('index ..' + index);
+  },
+  bindNextVideoTap (e) {
+      
+    var index = +e.currentTarget.id; //当前播放的视频id
+    if (index < this.data.videoUrlsBrowse.length) {
+      index = index + 1;
+      this.setData({
+        videoIndex: index
+      })
+    }
+
+    console.log('pre index ..' + index);
+  },
+
   // 取数据
   getCourseCustomizationDetail() {
 
@@ -55,7 +86,7 @@ Page({
           courseLevel: result.result[0].customize_level
         })
 
-        this.initWeSwiper(formatlist.videoUrlsBrowse);
+        // this.initWeSwiper(formatlist.videoUrlsBrowse);
 
         console.log('formatlist.videoUrlsBrowse *** ' + JSON.stringify(formatlist.videoUrlsBrowse));
       }
@@ -136,12 +167,13 @@ Page({
     var y = e.currentTarget.dataset.inindex;
 
     var index = x * 2 + y + 1;
-    console.log('播放 视频 。。。' + index);
+    console.log('单独 播放 视频 。。。' + (+index)-1);
     
-    this.weswiper.slideTo(index-1);
+    // this.weswiper.slideTo(index-1);
 
     this.setData({
-      showVideoHidden: false
+      showVideoHidden: false,
+      videoIndex: (+index)-1
     })
   },
   // 选择 视频
@@ -169,8 +201,11 @@ Page({
 
     } else {
       // 开始 从头 播放视频
+      console.log('从头 播放视频 .. ');
       this.setData({
-        showVideoHidden: false
+        showVideoHidden: false,
+        startVideo: true,
+        videoIndex: 0,
       })
 
     }
@@ -181,17 +216,26 @@ Page({
     
     var index = +e.currentTarget.id;
 
-    // pause
-    var videoContext = wx.createVideoContext(index,this);
-    videoContext.pause();
-
-    if (index < this.data.videoUrlsBrowse.length - 1) {
-      index = index + 1;
-      var videoContext = wx.createVideoContext(index,this);
-      videoContext.pause();
+    if (this.data.startVideo) {
+      if (index < this.data.videoUrlsBrowse.length) {
+        index = index + 1;
+        this.setData({
+          videoIndex: index
+        })
+      }
     }
 
-    this.weswiper.slideTo(index);
+    // pause
+    // var videoContext = wx.createVideoContext(index,this);
+    // videoContext.pause();
+
+    // if (index < this.data.videoUrlsBrowse.length - 1) {
+    //   index = index + 1;
+    //   var videoContext = wx.createVideoContext(index,this);
+    //   videoContext.pause();
+    // }
+
+    // this.weswiper.slideTo(index);
 
     console.log('bindVideoPalyEnded ...' + index);
 
@@ -199,8 +243,25 @@ Page({
   bindCloseVideoShowTap (e) {
 
     this.setData({
-      showVideoHidden: true
+      showVideoHidden: true,
+      startVideo: false,
+      videoIndex: 0
     })
+
+  },
+  bindVideoFullscreenChange (e) {
+
+    var direction = e.detail.direction;
+    console.log(direction);
+    if (direction == 'horizontal') {
+      this.setData({
+        contlBtnHidden: false
+      })
+    } else {
+      this.setData({
+        contlBtnHidden: true
+      })
+    }
 
   },
 

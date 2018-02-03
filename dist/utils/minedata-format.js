@@ -41,8 +41,8 @@ export function formatPrivateMemberListItem(item) {
     name: item.mem_name,
     headimg: item.app_head ? item.app_head : '../../../images/icon/default_headimg.png',
     period: {
-      last: 8,
-      total: 12
+      last: item.remain_times ? item.remain_times : 0,
+      total: item.buy_times ? item.buy_times : 0
     },
     cardName: item.card_name ? item.card_name : ''
   }

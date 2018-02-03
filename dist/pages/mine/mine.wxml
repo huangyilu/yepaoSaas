@@ -42,7 +42,7 @@
     
       <view class='text-view'>{{ confirmText }}</view>
       <view class='input-view'>
-        <input placeholder-style='color:#BAB9C7;' placeholder='请输入会员手机号'></input>
+        <input placeholder-style='color:#BAB9C7;' placeholder='请输入会员手机号' bindinput='bindCerMemInput'></input>
       </view>
       <view class='weui-flex'>
         <view class='btn weui-flex__item' id='q' bindtap='bindConfirmBoxBtnTap'>取消</view>
