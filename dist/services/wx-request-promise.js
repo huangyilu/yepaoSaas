@@ -43,7 +43,7 @@ export function wxRequestP(method, url, contentType, data = {}, accessToken ) {
         }
       })
     })
-  }
+  } 
 
 }
 

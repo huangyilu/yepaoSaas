@@ -54,13 +54,19 @@
         src="{{ videoUrlsBrowse[videoIndex].srcString }}" 
         bindended='bindVideoPalyEnded'
         bindfullscreenchange='bindVideoFullscreenChange'>
-    <cover-view hidden='{{ contlBtnHidden }}' id="{{ videoIndex }}" class="pre-btn-invideo" bindtap='bindPreVideoTap'>上一个</cover-view>
-    <cover-view hidden='{{ contlBtnHidden }}' id="{{ videoIndex }}" class="next-btn-invideo" bindtap='bindNextVideoTap'>下一个</cover-view>
+    <cover-view hidden='{{ contlBtnHidden }}' id="{{ videoIndex }}" bindtap='bindPreVideoTap'>
+      <cover-image class="pre-btn-img" src="../../../images/icon/mine/prev_video.png" />
+    </cover-view>
+    <cover-view hidden='{{ contlBtnHidden }}' id="{{ videoIndex }}" bindtap='bindNextVideoTap'>
+      <cover-image class="next-btn-img" src="../../../images/icon/mine/next_video.png" />
+    </cover-view>
   </video>
 
-  
-  <view id="{{ videoIndex }}" class="pre-btn" bindtap='bindPreVideoTap'>上一个</view>
-  <view id="{{ videoIndex }}" class="next-btn" bindtap='bindNextVideoTap'>下一个</view>
+  <view class='foot-view weui-flex'>
+    <view id="{{ videoIndex }}" class="pre-btn weui-flex__item" bindtap='bindPreVideoTap'>上一个</view>
+    <view id="{{ videoIndex }}" class="pre-btn weui-flex__item" bindtap='bindNextVideoTap'>下一个</view>
+  </view>
+
 
    <!-- 视频  -->
   <!-- <view class="we-container">
