@@ -61,7 +61,6 @@ Page({
 
     isCertificationMem: false,
     isCertificationMemHidden: true,
-    confirmText: '会员认证',
     memTelephone: ''
   },
 
@@ -73,6 +72,22 @@ Page({
     this.bindGetUserInfo();
 
   },
+  onShow: function (options) {
+    // 查询是否认证会员
+    this.getCertifiMem();
+  },
+
+  bindNavigateTap(e) {
+    if (!this.data.isCertificationMem) {
+      this.setData({
+        isCertificationMemHidden: false
+      })
+    } else {
+      wx.navigateTo({
+        url: e.currentTarget.id,
+      })
+    }
+  },
 
   bindGetUserInfo () {
     app.getUserInfo(userInfo => {
@@ -81,11 +96,6 @@ Page({
       });
       console.log('getUserInfo ***' + JSON.stringify(userInfo));
     });
-    if (AuthService.getMemberInfo()) {
-      this.setData({
-        isCertificationMem: true
-      })
-    }
   },
   bindAvatarTap () {
     var me = this;
@@ -104,13 +114,36 @@ Page({
 
   // 健身历程
   bindFitLcTap () {
-    
+    if (!this.data.isCertificationMem) {
+      this.setData({
+        isCertificationMemHidden: false
+      })
+    } else {
+      
+    }
   },
   // 体测数据
   bindFitDataTap () {
-
+    if (!this.data.isCertificationMem) {
+      this.setData({
+        isCertificationMemHidden: false
+      })
+    } else {
+      
+    }
   },
 
+  // 查询是否认证会员
+  getCertifiMem() {
+    if (AuthService.getMemberInfo()) {
+      this.setData({
+        isCertificationMem: true
+      })
+      console.log('已认证会员');
+    } else {
+      console.log('未认证会员');
+    }
+  },
   // 会员认证
   bindCertificationTap (e) {
     if (!this.data.isCertificationMem) {
@@ -124,17 +157,12 @@ Page({
     var id = e.currentTarget.id;
     if (id == 'a') {
       // 确定 认证
-      mineService.queryCertificationMember(this.data.memTelephone).then((result) => {
+      AuthService.queryCertificationMember(this.data.memTelephone).then((result) => {
 
-        console.log('queryCertificationMember *** ' + JSON.stringify(result));
-        if (result.rs == 'Y') {
-          this.setData({
-            isCertificationMemHidden: true,
-            isCertificationMem: true
-          })
-          // 保存认证结果
-          AuthService.saveMemberInfo(result.result[0]);
-        }
+        this.setData({
+          isCertificationMemHidden: true,
+          isCertificationMem: true
+        })
 
       }).catch((error) => {
         console.log(error);

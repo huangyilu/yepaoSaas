@@ -1,5 +1,7 @@
 <!--pages/club/club.wxml-->
 
+<import src="../../templates/certification-box/certification-box.wxml"/>
+
 <view class='bg-view'>
 
   <!-- 轮播图 -->
@@ -31,4 +33,9 @@
   <!-- 推荐活动 -->
   <view class='empty-view'>暂无推荐活动</view>
 
+</view>
+
+<!-- 认证弹窗 -->
+<view hidden='{{ isCertificationMemHidden }}'>
+  <template is='certification-box' data=''/>
 </view>

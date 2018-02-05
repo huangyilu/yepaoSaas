@@ -10,6 +10,7 @@
 @import 'templates/article-item/article-item.wxss';
 @import 'templates/search-item/search-item.wxss';
 @import 'templates/remind-box/remind-box.wxss';
+@import 'templates/certification-box/certification-box.wxss';
 
 @import 'utils/weSwiper/weSwiper.wxss';
 

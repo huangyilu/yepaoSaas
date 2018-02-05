@@ -42,6 +42,7 @@ export function getMemberInfo() {
   return storeE.get('memInfo');
 }
 
+// 保存opneid
 export function saveAuthInfo(authInfo, userProfile) {
   let openId = authInfo.openId;
   storeE.set('userProfile', userProfile.userInfo, EXPIRATION_MILLISECONDS);
@@ -123,11 +124,6 @@ export function authorizeUserInfo() {
   })
 }
 
-// 认证会员
-export function certificationMemberFromServer() {
-  return true
-}
-
 export function wxappLogin() {
   return new Promise((resolve, reject) => {
     wx.login({
@@ -162,5 +158,57 @@ export function ensureLoggedIn() {
     });
   });
 }
+
+// 认证会员
+export function certificationMemberFromServer() {
+  return true
+}
+
+// 会员认证
+export function queryCertificationMember(phone) {
+  wx.showLoading({
+    title: '认证中',
+  })
+  return new Promise((resolve, reject) => {
+    wx.request({
+      url: appConfig.apiBase + 'yp-xcx-login',
+      method: 'GET',
+      data: {
+        'custName': appConfig.custName,
+        'phone': phone
+      },
+      header: {
+        'content-type': 'application/json'
+      },
+      success: function (res) {
+        console.log("wxappauth result: " + JSON.stringify(res));
+        if (+res.statusCode === 200) {
+          console.log('wxappauth succeed: ' + JSON.stringify(res.data));
+          saveMemberInfo(res.data.result[0]);
+          wx.hideLoading();
+          wx.showToast({
+            title: '认证成功',
+            icon: 'success',
+            duration: 2000
+          });
+          return resolve(true);
+        } else {
+          console.log("wxappauth failed: " + res.statusCode);
+          wx.showToast({
+            title: '认证失败',
+            icon: 'success',
+            duration: 2000
+          });
+          return reject(+res.statusCode);
+        }
+      },
+      fail: function (error) {
+        return reject(error);
+      }
+    });
+  });
+}
+
+
 
 // code 0016FrSw0fuhgi1ie2Sw0qAcSw06FrS0

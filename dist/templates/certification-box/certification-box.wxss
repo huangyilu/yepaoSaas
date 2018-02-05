@@ -1,0 +1,20 @@
+
+
+/* 会员认证弹窗 */
+.confirm-view {
+    margin: 37% 10%;
+}
+.confirm-view .text-view {
+    padding:30rpx;
+    border-bottom:1rpx #262439 solid;
+    color: #FFEF5A;
+    font-size: 32rpx;
+}
+.confirm-view .input-view {
+    padding: 40rpx;
+}
+.confirm-view .input-view input {
+    padding:10rpx;
+    border:1rpx #393752 solid;
+    text-align:left;
+}

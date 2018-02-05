@@ -3,13 +3,13 @@
 
   <!-- 我的 带向右按钮的 cell -->
   <block wx:if='{{ yItems }}' wx:for='{{ yItems }}' wx:key='*this'>
-  <navigator class='imgText-cell' hidden='{{ item.ishidden }}' style='{{ item.style }}' url="{{ item.navigateUrl }}" hover-class="none">
+  <view class='imgText-cell' hidden='{{ item.ishidden }}' style='{{ item.style }}' id='{{ item.navigateUrl }}' bindtap='bindNavigateTap'>
   
     <image class='left-icon' src='{{ item.iconUrl }}'></image>
     <text>{{ item.name }}</text>
     <image hidden='{{ rightItemHidden }}' class='right-icon' src='{{ rightItemHidden ? "" : "../../images/icon/arrow_right.png" }}'></image>
   
-  </navigator>
+  </view>
   </block>
 
   <!-- 共享详情 带 视频icon 的cell -->

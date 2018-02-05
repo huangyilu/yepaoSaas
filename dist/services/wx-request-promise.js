@@ -28,7 +28,7 @@ export function wxRequestP(method, url, contentType, data = {}, accessToken ) {
           if (+res.statusCode >= 200 && +res.statusCode < 400) {
             // console.log(url + ' succeed: ' + JSON.stringify(res.data))
             console.log(url + ' succeed: ' + JSON.stringify(res))
-            wx.hideLoading()
+            wx.hideLoading();
             // wx.stopPullDownRefresh()
             return resolve(res.data)
           } else {
@@ -43,7 +43,15 @@ export function wxRequestP(method, url, contentType, data = {}, accessToken ) {
         }
       })
     })
-  } 
+  } else {
+    wx.hideLoading();
+
+    wx.showToast({
+      title: '未认证会员',
+      icon: 'none',
+      duration: 2000
+    })
+  }
 
 }
 

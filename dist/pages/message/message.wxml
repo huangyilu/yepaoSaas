@@ -1,7 +1,7 @@
 <!--pages/fitnessCircle/fitnessCircle.wxml-->
 
 <import src="../../templates/article-item/article-item.wxml"/>
-
+<import src="../../templates/certification-box/certification-box.wxml"/>
 
 <view class='bg-view'>
 
@@ -9,4 +9,9 @@
     <template is='article-item' data='{{ ...arts, index }}'/>
   </block>
 
+</view>
+
+<!-- 认证弹窗 -->
+<view hidden='{{ isCertificationMemHidden }}'>
+  <template is='certification-box' data=''/>
 </view>

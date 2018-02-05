@@ -1,66 +1,69 @@
 // pages/club/club.js
+
+import * as AuthService from '../../services/auth-service';
+
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    swiperImgUrls: ['http://img2.imgtn.bdimg.com/it/u=3390152407,4060777889&fm=27&gp=0.jpg', 'http://img2.imgtn.bdimg.com/it/u=3390152407,4060777889&fm=27&gp=0.jpg', 'http://img2.imgtn.bdimg.com/it/u=3390152407,4060777889&fm=27&gp=0.jpg']
+    swiperImgUrls: ['http://img2.imgtn.bdimg.com/it/u=3390152407,4060777889&fm=27&gp=0.jpg', 'http://img2.imgtn.bdimg.com/it/u=3390152407,4060777889&fm=27&gp=0.jpg', 'http://img2.imgtn.bdimg.com/it/u=3390152407,4060777889&fm=27&gp=0.jpg'],
+
+    // 会员认证
+    isCertificationMem: false,
+    isCertificationMemHidden: true,
+    memTelephone: '',
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+    
+  },
+  onShow: function (options) {
+    // 查询是否认证会员
+    this.getCertifiMem();
   },
 
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-  
+  // 查询是否认证会员
+  getCertifiMem() {
+    if (AuthService.getMemberInfo()) {
+      this.setData({
+        isCertificationMem: true
+      })
+      console.log('已认证会员');
+    } else {
+      console.log('未认证会员');
+    }
   },
+  //会员认证 取消/确认
+  bindConfirmBoxBtnTap(e) {
+    var id = e.currentTarget.id;
+    if (id == 'a') {
+      // 确定 认证
+      AuthService.queryCertificationMember(this.data.memTelephone).then((result) => {
 
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-  
+        this.setData({
+          isCertificationMemHidden: true,
+          isCertificationMem: true
+        })
+
+      }).catch((error) => {
+        console.log(error);
+      })
+
+    } else {
+      // 取消
+      this.setData({
+        isCertificationMemHidden: true
+      })
+    }
   },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-  
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-  
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-  
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-  
+  bindCerMemInput(e) {
+    this.setData({
+      memTelephone: e.detail.value
+    })
   }
 })
