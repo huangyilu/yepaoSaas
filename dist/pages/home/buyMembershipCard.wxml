@@ -32,7 +32,7 @@
         <view class='price-btn'>总计¥{{ totalPrice }}</view> 
       </view>
       <view class='weui-flex__item'>
-        <view class='buy-btn'>立即购买</view>
+        <view class='buy-btn' bindtap='bindBuyBtnTap'>立即购买</view>
       </view>
     </view>
   </view>

@@ -26,28 +26,28 @@ Page({
         navigateUrl: 'myCoach/myCoachListView',
         ishidden: false
       },
-      {
-        iconUrl: '../../images/icon/mine/coach.png',
-        name: '我是会籍',
-        navigateUrl: 'myMember/myMember',
-        ishidden: false
-      },
+      // {
+      //   iconUrl: '../../images/icon/mine/coach.png',
+      //   name: '我是会籍',
+      //   navigateUrl: 'myMember/myMember',
+      //   ishidden: false
+      // },
       {
         iconUrl: '../../images/icon/mine/member.png',
         name: '课程共享',
         navigateUrl: 'courseShare/courseShare',
         ishidden: false
       },
-      {
-        iconUrl: '../../images/icon/mine/recommend.png',
-        name: '会员推荐',
-        navigateUrl: '',
-        ishidden: false
-      },
+      // {
+      //   iconUrl: '../../images/icon/mine/recommend.png',
+      //   name: '会员推荐',
+      //   navigateUrl: '',
+      //   ishidden: false
+      // },
       {
         iconUrl: '../../images/icon/mine/myorder.png',
         name: '我的订单',
-        navigateUrl: '',
+        navigateUrl: 'myOrderListView',
         ishidden: false
       },
       {

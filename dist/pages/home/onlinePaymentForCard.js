@@ -8,16 +8,16 @@ Page({
     cardType: '月卡',
     orderId: '000000000',
     price: 1900,
-    finalPrice: 1800,
+    finalPrice: 1900,
     vouchers: [
       {
-        price: 100,
+        price: 200,
         name: '100抵200',
-        checked: true
+        checked: false
       },
       {
-        price: 100,
-        name: '100抵200',
+        price: 300,
+        name: '150抵300',
         checked: false
       }
     ]
@@ -41,14 +41,20 @@ Page({
   bindVouchersTap (e) {
     var index = e.currentTarget.id;
     var vouchers = this.data.vouchers;
+    var finalPrice = this.data.finalPrice;
 
     vouchers.forEach(item => {
       item.checked = false;
       vouchers[index].checked = true;
+
+      if (item.checked == true) {
+        finalPrice = this.data.price - item.price
+      }
     })
 
     this.setData({
-      vouchers: vouchers
+      vouchers: vouchers,
+      finalPrice: finalPrice
     })
 
   }

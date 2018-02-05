@@ -1,7 +1,9 @@
 {
   "pages": [
-    
     "pages/home/home",
+    "pages/club/memberActivities",
+    "pages/club/club",
+    
     "pages/home/classSchedule",
     "pages/home/classScheduleDetails",
     "pages/home/myClassDetails",
@@ -21,7 +23,6 @@
     "pages/mine/courseShare/courseShareDetails",
     "pages/mine/mine",
     "pages/message/message",
-    "pages/club/club",
     "pages/mine/myCoach/privateMember",
     "pages/mine/myCoach/courseTraining",
     "pages/mine/myCoach/courseCustom",

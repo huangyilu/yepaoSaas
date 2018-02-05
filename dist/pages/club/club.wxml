@@ -1,6 +1,7 @@
 <!--pages/club/club.wxml-->
 
 <import src="../../templates/certification-box/certification-box.wxml"/>
+<import src="../../templates/club-item/club-item.wxml"/>
 
 <view class='bg-view'>
 
@@ -19,19 +20,27 @@
   <!-- item -->
   <view class='club-item-view'>
     <view class='weui-flex'>
-      <view class='weui-flex__item club-item'>
-        <image class='club-item-icon' src='../../images/icon/club/club_dynamic.png'></image>
+      <view class='weui-flex__item club-item' bindtap='bindMemberActivitiesTap'>
+        <image class='club-item-icon' src='../../images/icon/club/member_Activities.png'></image>
         <view>会员活动</view>
       </view>
       <view class='weui-flex__item club-item'>
-        <image class='club-item-icon' src='../../images/icon/club/member_Activities.png'></image>
+        <image class='club-item-icon' src='../../images/icon/club/club_dynamic.png'></image>
         <view>俱乐部动态</view>
       </view>
     </view>
   </view>
 
   <!-- 推荐活动 -->
-  <view class='empty-view'>暂无推荐活动</view>
+  <view wx:if='{{ clubList.length > 0 }}'>
+    <view class='recommend-title-view'>推荐活动</view>
+    <view >
+      <template is='club-item' data='{{ clubList }}'/>
+    </view>
+  </view>
+
+  <view wx:else class='empty-view'>暂无推荐活动</view>
+
 
 </view>
 

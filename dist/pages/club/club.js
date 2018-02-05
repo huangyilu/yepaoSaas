@@ -14,6 +14,25 @@ Page({
     isCertificationMem: false,
     isCertificationMemHidden: true,
     memTelephone: '',
+
+    clubList: [
+      {
+        titleImg: 'http://img2.imgtn.bdimg.com/it/u=3390152407,4060777889&fm=27&gp=0.jpg',
+        deadline: '01-12 10:34',
+        status: '进行中',
+        title: '新春甩肉季，我们来约"惠"',
+        totalPeople: 10,
+        nowPeople: 2,
+      },
+      {
+        titleImg: 'http://img2.imgtn.bdimg.com/it/u=3390152407,4060777889&fm=27&gp=0.jpg',
+        deadline: '01-12 10:34',
+        status: '已完成',
+        title: '新春甩肉季，我们来约"惠"',
+        totalPeople: 10,
+        nowPeople: 2,
+      }
+    ]
   },
 
   /**
@@ -64,6 +83,12 @@ Page({
   bindCerMemInput(e) {
     this.setData({
       memTelephone: e.detail.value
+    })
+  },
+
+  bindMemberActivitiesTap(e) {
+    wx.navigateTo({
+      url: 'memberActivities',
     })
   }
 })

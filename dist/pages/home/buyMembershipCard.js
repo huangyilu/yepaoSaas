@@ -62,6 +62,12 @@ Page({
       protocolChecked: !this.data.protocolChecked
     })
 
+  },
+
+  bindBuyBtnTap (e) {
+    wx.navigateTo({
+      url: 'onlinePaymentForCard',
+    })
   }
 
 })
