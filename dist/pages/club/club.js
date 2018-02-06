@@ -87,8 +87,25 @@ Page({
   },
 
   bindMemberActivitiesTap(e) {
-    wx.navigateTo({
-      url: 'memberActivities',
-    })
+    if (this.data.isCertificationMem) {
+      wx.navigateTo({
+        url: 'memberActivities',
+      })
+    } else {
+      this.setData({
+        isCertificationMemHidden: false
+      })
+    }
+  },
+  bindClubDynamicsTap (e) {
+    if (this.data.isCertificationMem) {
+      wx.navigateTo({
+        url: 'clubDynamics',
+      })
+    } else {
+      this.setData({
+        isCertificationMemHidden: false
+      })
+    }
   }
 })

@@ -24,7 +24,7 @@
         <image class='club-item-icon' src='../../images/icon/club/member_Activities.png'></image>
         <view>会员活动</view>
       </view>
-      <view class='weui-flex__item club-item'>
+      <view class='weui-flex__item club-item' bindtap='bindClubDynamicsTap'>
         <image class='club-item-icon' src='../../images/icon/club/club_dynamic.png'></image>
         <view>俱乐部动态</view>
       </view>

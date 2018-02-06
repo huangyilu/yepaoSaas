@@ -1,0 +1,29 @@
+/* pages/club/memberActivitiesDetails.wxss */
+
+
+.title-view .img {
+    width: 100%;
+    height: 400rpx;
+}
+.title-view .down-view {
+    height: 100rpx;
+    line-height: 100rpx;
+    background-color: #fcf428;
+    color: black;
+    font-size: 28rpx;
+    text-align: right;
+    padding: 0 2.5%;
+    position: absolute;
+    width: 95%;
+    top: 300rpx;
+}
+.timer-text {
+    width: 45rpx;
+    height: 45rpx;
+    line-height: 45rpx;
+    text-align: center;
+    background-color: white;
+    color: #e44837;
+    display: inline-block;
+    margin-right: 10rpx;
+}

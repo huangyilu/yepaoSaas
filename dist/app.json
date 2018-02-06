@@ -1,9 +1,10 @@
 {
   "pages": [
+    
     "pages/home/home",
+    "pages/club/memberActivitiesDetails",
     "pages/club/memberActivities",
     "pages/club/club",
-    
     "pages/home/classSchedule",
     "pages/home/classScheduleDetails",
     "pages/home/myClassDetails",
@@ -30,7 +31,10 @@
     "pages/mine/courseShare/courseShare",
     "pages/message/messageDetails",
     "pages/home/selectedCoach",
-    "pages/mine/myOrderListView"
+    "pages/mine/myOrderListView",
+    "pages/club/clubDynamics",
+    "pages/club/clubDynamicsDetails",
+    "pages/mine/myCoach/registerCustomers"
     
   ],
   "window": {

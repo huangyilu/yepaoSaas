@@ -1,0 +1,16 @@
+<!--pages/club/memberActivitiesDetails.wxml-->
+
+<view class='bg-view'>
+
+  <view class='title-view'>
+    <view>
+      <image class='img' mode='aspectFill' src='{{ titleImg }}'></image>
+      <view class='down-view'>距离结束时间还剩 
+        <view class='timer-text'>{{ days }}</view>天 
+        <view class='timer-text'>{{ mints }}</view>分 
+        <view class='timer-text'>{{ second }}</view>秒 
+      </view>
+    </view>
+  </view>
+
+</view>
