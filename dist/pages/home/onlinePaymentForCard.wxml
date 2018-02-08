@@ -7,24 +7,25 @@
     <view class='title-cell fs36'>会员卡购买</view>
 
     <view class='order-view'>
-      <view>会员卡类型 <text>{{ cardType }}</text> </view>
-      <view>订单号 <text>{{ orderId }}</text> </view>
-      <view>订单金额 <text>¥{{ price }}</text> </view>
+      <view>会员卡类型 <text>{{ cardInfo.cardType }}</text> </view>
+      <view>订单号 <text>{{ cardInfo.orderNo }}</text> </view>
+      <view>订单金额 <text>¥{{ cardInfo.price }}</text> </view>
     </view>
 
-    <view class='cashVoucher-view'>
+    <view wx:if='{{ cardInfo.vouchers != "无定金抵扣" }}' class='cashVoucher-view'>
       <view>购卡定金抵扣</view>
-      <view wx:for='{{ vouchers }}' wx:key='{{ index }}' id='{{ index }}' bindtap='bindVouchersTap'>
+      <view wx:for='{{ cardInfo.vouchers }}' wx:key='{{ index }}' data-preFeeId='{{ item.preFeeId }}' id='{{ index }}' bindtap='bindVouchersTap'>
         <image class='vouchers' src='../../images/icon/home/vouchers.png'></image>
         <text>{{ item.name }}</text>
         <image class='checked-icon' src='../../images/icon/{{ item.checked ? "checked" : "unchecked" }}.png'></image>
       </view>
     </view>
+    
 
-    <view class='pay-view'>还需支付 <text class='price-text'>¥{{ finalPrice }}</text> </view>
+    <view class='pay-view'>还需支付 <text class='price-text'>¥{{ cardInfo.finalPrice }}</text> </view>
 
   </view>
 
-  <view class='foot-btn-view'>微信支付</view>
+  <view class='foot-btn-view' bindtap='bindFinalWXPayTap'>微信支付</view>
 
 </view>

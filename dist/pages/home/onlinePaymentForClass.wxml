@@ -27,7 +27,7 @@
       <text class='yeColor'>{{ classInfo.coachName }}</text>
     </view>
     <view>课程类型 <text class='whiteColor'>{{ classInfo.classType }}</text> </view>
-    <view>订单号 <text class='whiteColor'>{{ classInfo.orderId }}</text> </view>
+    <view>订单号 <text class='whiteColor'>{{ classInfo.orderNo }}</text> </view>
     <view>订单金额 <text class='yeColor'>¥{{ classInfo.price }}</text> </view>
   </view>
 

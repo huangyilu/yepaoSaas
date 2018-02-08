@@ -6,11 +6,46 @@ export function formatBuyMemCard(list) {
 }
 export function formatBuyMemCardItem(item) {
   return {
+    cardId: item.id ? item.id : '',
     bgimg: item.picUrlString ? item.picUrlString : '',
     carPrice: item.fee ? +item.fee : 0,
     carName: item.card_name ? item.card_name : '',
     checked: false
   }
+}
+
+// 在线支付
+export function formatOnlinePaymentForCard(item) {
+  return {
+    cardType: CARDFORMAT[item.card_type],
+    orderId: item.xcx_order_id, //订单ID
+    orderNo: item.indent_no, //订单号
+    userCardId: item.user_card_id,
+    price: item.ca_amt,
+    finalPrice: item.ca_amt, //暂时,后面要计算定金抵扣的情况
+    vouchers: item.pre_fee == '无定金抵扣' ? item.pre_fee :  this.formatOnlinePaymentForCardVouchers(item.pre_fee) ,
+    preFeeId: ''
+  }
+}
+export function formatOnlinePaymentForCardVouchers(list) {
+  return list.map(item => this.formatOnlinePaymentForCardVouchersItem(item))
+}
+export function formatOnlinePaymentForCardVouchersItem(item) {
+  return {
+    preFeeId: item.id,
+    price: item.user_amt,
+    name: item.pay_amt + '抵' + item.user_amt,
+    checked: false
+  }
+}
+
+// 会员卡 类型 转换
+export const CARDFORMAT = {
+  '001': '时间卡',
+  '002': '储值卡',
+  '003': '次卡',
+  '005': '体验券',
+  '006': '私教卡'
 }
 
 // 我的会员卡
@@ -61,10 +96,40 @@ export function formatRecommendCourse(list) {
 }
 export function formatRecommendCourseItem(item) {
   return {
+    cardId: item.id,
     headimg: item.headUrlString ? item.headUrlString : '',
     courseName: item.card_name ? item.card_name : '',
     price: item.app_amt ? item.app_amt : 0,
     courseTime: item.times ? item.times : 0
+  }
+}
+
+// 推荐课程购买
+export function formatOnlinePaymentForClass(item) {
+  return {
+    headimg: item.headUrlString ? item.headUrlString : '',
+    courseName: item.card_name,
+    price: item.fee,
+    courseTime: item.times,
+    coachName: '请选择教练',
+    classType: CARDFORMAT[item.card_type],
+    orderId: item.xcx_order_id,
+    orderNo: item.indent_no,
+    cardId: item.user_card_id,
+    checked: true
+  }
+}
+
+// 教练列表
+export function formatCoachList(list) {
+  return list.map(item => this.formatCoachListItem(item))
+}
+export function formatCoachListItem(item) {
+  return {
+    coachId: item.id,
+    name: item.pt_name,
+    headimg: 'http://img2.imgtn.bdimg.com/it/u=3390152407,4060777889&fm=27&gp=0.jpg',
+    tel: 'tel: ' + item.phone
   }
 }
 
@@ -76,13 +141,13 @@ export function formatClassScheduleItem(item) {
   return {
     planId: item.plan_id ? item.plan_id : 0,
     planDetailId: item.plan_detail_id ? item.plan_detail_id : 0,
-    classImg: 'http://img2.imgtn.bdimg.com/it/u=3390152407,4060777889&fm=27&gp=0.jpg',
-    headimg: 'http://img2.imgtn.bdimg.com/it/u=3390152407,4060777889&fm=27&gp=0.jpg',
+    headimg: item.privateTeacher.appHeadString ? item.privateTeacher.appHeadString : '',
     className: item.plan_name ? item.plan_name : '',
     classTime: item.start_time + '-' + item.end_time,
     teacherName: item.privateTeacher ? item.privateTeacher.name : '',
-    teacherScore: ['star', 'star', 'star', 'star', ''],
-    allowSignUp: item.remainNum ? item.remainNum : 0
+    teacherScore: ['star', 'star', 'star', 'star', 'star'],
+    allowSignUp: item.remainNum ? item.remainNum : 0,
+    reserveFlag: item.reserveFlag ? item.reserveFlag : ''
   }
 }
 
@@ -95,9 +160,10 @@ export function formatClassScheduleDetail(item) {
     classPepoNum: item.remainNum,
     classDetail: item.plan.summary,
     address: item.plan.addr_name,
-    coachHeadImg: item.privateTeacher.appHeadString ? item.privateTeacher.appHeadString : 'http://img2.imgtn.bdimg.com/it/u=3390152407,4060777889&fm=27&gp=0.jpg',
+    coachHeadImg: item.privateTeacher.appHeadString ? item.privateTeacher.appHeadString : '',
     coachName: item.privateTeacher.name,
     coachIntroduction: item.privateTeacher.summary,
+    reserveFlag: item.reserveFlag
   }
 }
 
@@ -107,13 +173,17 @@ export function formatMyClass(list) {
 }
 export function formatMyClassItem(item) {
   return {
-    headimg: 'http://img2.imgtn.bdimg.com/it/u=3390152407,4060777889&fm=27&gp=0.jpg',
-    className: '肚皮舞',
+    orderId: item.order_id,
+    headimg: item.appHeadString,
+    className: item.plan_name,
     classType: '团',
-    teacherName: '子不语',
-    finishedPeriod: '0',
-    totalPeriod: '2',
-    classTime: '2018-01-20 14:00-15:00',
-    classStatus: '取消团课'
+    teacherName: item.pt_name,
+    classTime: item.lesson_time + ' ' + item.start_time + '-' + item.end_time,
+    classStatus: CLASSSTATUSFORMAT[item.state]
   }
+}
+export const CLASSSTATUSFORMAT = {
+  '001': '取消团课',
+  '002': '已取消',
+  '003': '已完成'
 }

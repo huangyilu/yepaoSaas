@@ -57,7 +57,7 @@ export function getUserProfile() {
   return storeE.get('userProfile');
 }
 
-export function getUserId() {
+export function getOpenId() {
   return storeE.get('openid');
 }
 
@@ -67,7 +67,7 @@ export function getUserInfo() {
     return null;
   }
   return {
-    userId: getUserId(),
+    openId: getOpenId(),
     username: userProfile.nickName,
     avatarSrc: userProfile.avatarUrl
   };
@@ -75,7 +75,7 @@ export function getUserInfo() {
 
 export function isLoggedIn() {
   let userInfo = getUserInfo();
-  return !FORCE_LOGIN && userInfo && userInfo.userId && userInfo.username && userInfo.avatarSrc;
+  return !FORCE_LOGIN && userInfo && userInfo.openId && userInfo.username && userInfo.avatarSrc;
 }
 
 export function authFromServer(authCode, userInfoResult) {

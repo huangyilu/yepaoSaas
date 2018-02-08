@@ -42,7 +42,7 @@
 
       <!-- 右 -->
       <view>
-        <view class='appt-btn'>预约</view>
+        <view id='{{ index }}' data-plandetailid='{{ item.planDetailId }}' data-planid='{{ item.planId }}' class='{{ item.reserveFlag ? "appted-btn" : "appt-btn" }}' bindtap='{{ item.reserveFlag ? "" : "bindClassCalendarCellTap" }}'>{{ item.reserveFlag ? '已预约' : '预约' }}</view>
       </view>
 
     </view>

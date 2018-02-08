@@ -5,6 +5,22 @@
     width: 100%;
     height: 400rpx;
 }
+.title-view .share-btn {
+    padding: 0;
+    width:60rpx;
+    height:60rpx;
+    position:absolute;
+    top:20rpx;
+    right:2.5%;
+    background-color: rgba(1, 1, 1, 0);
+}
+.title-view .share-btn:after{
+    border-style: none;
+}
+.title-view .share-icon {
+    width: 100%;
+    height: 100%;
+}
 .title-view .down-view {
     height: 100rpx;
     line-height: 100rpx;
@@ -26,4 +42,80 @@
     color: #e44837;
     display: inline-block;
     margin-right: 10rpx;
+}
+
+.introduction-view {
+    background-color: #2F2D45;
+    padding: 20rpx 30rpx;
+    font-size: 26rpx;
+    color: #BAB9C7;
+}
+.introduction-view .people-icon {
+    width: 39rpx;
+    height: 26rpx;
+    margin-right: 20rpx;
+    float:left;
+    margin-top:5rpx;
+}
+.introduction-view .intr-text {
+    padding: 15rpx 0;
+}
+
+.card-view {
+    background-color: #2F2D45;
+    border: 1rpx #262439 solid;
+    border-right-style: none;
+    border-left-style: none;
+    padding: 0 0 30rpx;
+}
+.card-view .name-view {
+    height: 200rpx;
+}
+.card-view .card-item {
+    width: 600rpx;
+    height: 260rpx;
+    margin: 30rpx auto 0;
+    border-radius: 10rpx;
+    background-color: #050507;
+    overflow: hidden;
+}
+.card-view .card-item .name {
+    margin-bottom: 20rpx;
+    font-size: 36rpx;
+}
+.card-view .card-item .name-view {
+    height: 165rpx;
+    margin: 35rpx 30rpx 0;
+    font-size: 28rpx;
+}
+.card-view .card-item .originalPrice {
+    border:1rpx #BAB9C7 solid;
+    line-height:9rpx;
+    height:6rpx;
+    display:inline-block;
+    padding:0 5rpx;
+    margin-right:30rpx;
+    border-left-style:none;
+    border-right-style:none;
+    color: #BAB9C7;
+}
+.card-view .buy-btn {
+    width: 600rpx;
+    text-align: center;
+    height: 60rpx;
+    background-color: #FCF428;
+    color: black;
+    line-height: 60rpx;
+}
+
+.content-view {
+    padding: 20rpx 30rpx;
+    background-color: #2F2D45;
+    font-size: 26rpx;
+    color: #BAB9C7;
+}
+.content-view .title {
+    font-size: 32rpx;
+    color: white;
+    padding-bottom: 15rpx;
 }

@@ -43,6 +43,16 @@
     margin-top: 57rpx;
     text-align: center;
 }
+.appted-btn {
+    width: 100rpx;
+    height: 50rpx;
+    line-height: 50rpx;
+    color: #BAB9C7;
+    border-radius: 6rpx;
+    border: 1rpx #BAB9C7 solid;
+    margin-top: 57rpx;
+    text-align: center;
+}
 .star-view .star-icon {
     width: 18rpx;
     height: 16rpx;

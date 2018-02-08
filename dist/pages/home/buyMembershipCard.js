@@ -11,7 +11,9 @@ Page({
     carList: [],
     totalPrice: 0,
 
-    protocolChecked: true
+    protocolChecked: true,
+
+
   },
 
   /**
@@ -38,14 +40,13 @@ Page({
 
     var index = e.currentTarget.id;
     var carList = this.data.carList;
-
-    carList[index].checked = !carList[index].checked;
-
     var price = 0;
+
     carList.forEach(car => {
-      
+      car.checked = false;
+      carList[index].checked = true;
       if (car.checked) {
-        price = price + car.carPrice
+        price = car.carPrice
       }
     })
 
@@ -65,9 +66,21 @@ Page({
   },
 
   bindBuyBtnTap (e) {
-    wx.navigateTo({
-      url: 'onlinePaymentForCard',
+
+    var carList = this.data.carList;
+    var cardid = '';
+    var cardPrice = 0;
+    carList.forEach(car => {
+      if (car.checked) {
+        cardid = car.cardId;
+        cardPrice = car.carPrice;
+      }
     })
+
+    wx.navigateTo({
+      url: 'onlinePaymentForCard?cardid=' + cardid + '&cardPrice=' + cardPrice,
+    })
+
   }
 
 })

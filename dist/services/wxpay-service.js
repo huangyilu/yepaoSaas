@@ -12,49 +12,70 @@ import {
 }
 from 'wx-request-promise';
 
-// 待付款 
-export function getBrandWCPayRequestParams(dic) {
-  return urlencodePostRequest('pay/prepay', dic);
-}
-// 付尾款
-export function getBrandWCFinalyPayRequestParams(orderid, openid, obligation) {
-  return urlencodePostRequest('pay/payed', {
-    orderId: orderid,
-    openId: openid,
-    hotelId: +appConfig.hotelId,
-    obligation: obligation
-  });
-}
-
-export function makeFinalPay(orderid, openid, obligation) {
-  return getBrandWCFinalyPayRequestParams(orderid, openid, obligation).then((orderParams) => {
-    if (orderParams.result == true) {
-      return requestPayment(orderParams);
-    } else {
-      wx.showToast({
-        title: '支付失败!',
-        icon: 'success',
-        duration: 5000
-      })
-      return false
-    }
+// 课程购买
+export function uploadBuyClassPay(payDic) {
+  return urlencodePostRequest('yp-xcx-submitBuyCourseOrder', {
+    custName: appConfig.custName,
+    gym: AuthService.getMemberInfo().gym,
+    memId: AuthService.getMemberInfo().memId,
+    cardId: payDic.cardId
   })
 }
 
-export function makePayment(payDic) {
+// 会员卡购买
+export function uploadBuyCardPrepay(payDic) {
+  return urlencodePostRequest('yp-xcx-buyCardPrepay', {
+    custName: appConfig.custName,
+    gym: AuthService.getMemberInfo().gym,
+    userCardId: payDic.userCardId,
+    xcxOrderId: payDic.xcxOrderId,
+    preFeeId: payDic.preFeeId,
+    openId: AuthService.getOpenId(),
+    orderPrice: payDic.orderPrice
+  })
+}
+
+// 取消支付
+export function uploadFailPayment(payDic) {
+  return urlencodePostRequest('yp-xcx-failBuyCard', {
+    gym: AuthService.getMemberInfo().gym,
+    userCardId: payDic.userCardId,
+    xcxOrderId: payDic.xcxOrderId
+  })
+}
+
+// 在线购卡
+export function makeMemCardPayment(payDic) {
   return new Promise((resolve, reject) => {
-    getBrandWCPayRequestParams(payDic).then((orderParams) => {
+    uploadBuyCardPrepay(payDic).then((orderParams) => {
 
       if (orderParams.result) {
-
-        wx.setStorageSync('prepayOrderParams', orderParams)
-
-        return resolve(requestPayment(orderParams));
-
+        return resolve(requestPayment(orderParams.orderInfoMap));
       } else {
 
         wx.showToast({
           title: '下单失败!',
+          icon: 'success',
+          duration: 5000
+        })
+        return reject(orderParams.errorNum)
+      }
+
+    })
+  })
+}
+
+// 课程购买
+export function makeClassPayment(payDic) {
+  return new Promise((resolve, reject) => {
+    uploadBuyClassPay(payDic).then((orderParams) => {
+
+      if (orderParams.result) {
+        return resolve(requestPayment(orderParams.orderInfoMap));
+      } else {
+
+        wx.showToast({
+          title: '购买失败!',
           icon: 'success',
           duration: 5000
         })
@@ -92,6 +113,7 @@ export function requestPayment(orderParams) {
         console.log('@@Pay complete: ' + JSON.stringify(res))
         if (res.errMsg == 'requestPayment:ok') {
         } else if (res.errMsg == 'requestPayment:fail cancel') {
+          
           wx.showToast({
             title: '您已取消支付！',
             icon: 'success',
@@ -104,14 +126,14 @@ export function requestPayment(orderParams) {
             icon: 'success',
             duration: 5000
           })
-          resolve(false)
+          reject(false)
         } else {
           wx.showToast({
             title: '支付失败!',
             icon: 'success',
             duration: 5000
           })
-          resolve(false)
+          reject(false)
         }
 
       }

@@ -21,31 +21,49 @@ Page({
   onLoad: function (options) {
 
   
+    this.getMyClass();
+  
+  },
+
+  getMyClass() {
+    
     homeService.queryMyClass().then((result) => {
 
       console.log('queryMyClass *** ' + JSON.stringify(result));
       if (result.rs == 'Y') {
         this.setData({
-          // carList: homedata.formatMyMemCard(result.cards)
+          myclassList: homedata.formatMyClass(result.result)
         })
       }
 
     }).catch((error) => {
       console.log(error);
     })
-  
-  },
-
-  getMyClass() {
-    
-
   },
   bindClassStatusTap(e) {
 
+    var orderId = e.currentTarget.dataset.orderid;
     var index = e.currentTarget.id;
-    // if () {
-          
-    // }
+    var myclassList = this.data.myclassList;
+
+    homeService.uploadCancelMyClass(orderId).then((result) => {
+
+      console.log('uploadCancelMyClass *** ' + JSON.stringify(result));
+      if (result.errCode == 0) {
+        myclassList[index].classStatus = '已取消';
+        this.setData({
+          myclassList: myclassList
+        })
+      } else {
+        wx.showModal({
+          title: '取消失败',
+          content: result.errMsg,
+        })
+      }
+
+    }).catch((error) => {
+      console.log(error);
+    })
 
   }
   

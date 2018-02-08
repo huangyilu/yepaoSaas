@@ -71,3 +71,15 @@
     color: #BAB9C7;
     border-bottom: 2rpx #262439 solid;
 }
+.foot-appt-btn-view {
+    width: 100%;
+    height: 100rpx;
+    line-height: 100rpx;
+    text-align: center;
+    background-color: #BAB9C7;
+    font-size: 32rpx;
+    color: white;
+    position: fixed;
+    bottom: 0;
+    z-index: 12;
+}

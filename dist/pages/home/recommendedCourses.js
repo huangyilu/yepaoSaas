@@ -84,13 +84,15 @@ Page({
 
   bindRecoCellTap(e) {
       var index = e.currentTarget.id;
-      
       wx.navigateTo({
-        url: 'onlinePaymentForClass?id=' + index,
+        url: 'onlinePaymentForClass?cardid=' + index + '&price=' + e.currentTarget.dataset.price,
       })
   },
 
-  bindBuyTap () {
-    
+  bindBuyTap(e) {
+    var index = e.currentTarget.id;
+    wx.navigateTo({
+      url: 'onlinePaymentForClass?cardid=' + index + '&price=' + e.currentTarget.dataset.price,
+    })
   },
 })

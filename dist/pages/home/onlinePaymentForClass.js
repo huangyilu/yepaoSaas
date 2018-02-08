@@ -1,4 +1,8 @@
 // pages/home/onlinePaymentForClass.js
+
+import * as homedata from '../../utils/homedata-format';
+import * as homeService from '../../services/home-service';
+
 Page({
 
   /**
@@ -6,16 +10,7 @@ Page({
    */
   data: {
     
-    classInfo: {
-      headimg: 'http://img2.imgtn.bdimg.com/it/u=3390152407,4060777889&fm=27&gp=0.jpg',
-      courseName: '搏击训练',
-      price: 100,
-      courseTime: 2,
-      coachName: '朱永磊',
-      classType: '私教课',
-      orderId: '909309e02343',
-      checked: true
-    },
+    classInfo: {},
 
     remindText: '',
 
@@ -27,6 +22,23 @@ Page({
    */
   onLoad: function (options) {
 
+    this.setData({
+      cardId: options.cardid ? options.cardid : null,
+      price: options.price ? options.price : null
+    })
+    
+    homeService.uploadBuyClassPay(this.data.cardId, this.data.price).then((result) => {
+
+      console.log('uploadBuyClassPay *** ' + JSON.stringify(result));
+      if (result.errCode == 0) {
+        this.setData({
+          classInfo: homedata.formatOnlinePaymentForClass(result.returnResult)
+        })
+      }
+
+    }).catch((error) => {
+      console.log(error);
+    })
   
   },
 
@@ -36,7 +48,8 @@ Page({
       var coach = wx.getStorageSync('buyCourseSelectCoach');
       this.setData({
         buyCourseSelectCoach: coach,
-        'classInfo.name': coach.name
+        'classInfo.coachName': coach.name,
+        selectCoachInfo: coach
       })
       wx.removeStorage({
         key: 'buyCourseSelectCoach',

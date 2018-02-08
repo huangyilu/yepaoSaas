@@ -107,5 +107,11 @@ Page({
         isCertificationMemHidden: false
       })
     }
+  },
+
+  bindClubCellTap(e) {
+    wx.navigateTo({
+      url: 'memberActivitiesDetails',
+    })
   }
 })

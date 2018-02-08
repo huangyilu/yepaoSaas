@@ -1,29 +1,22 @@
 // pages/home/selectedCoach.js
+import * as homedata from '../../utils/homedata-format';
+import * as homeService from '../../services/home-service';
+
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    searchList: [
-      {
-        name: '马敏',
-        headimg: 'http://img2.imgtn.bdimg.com/it/u=3390152407,4060777889&fm=27&gp=0.jpg',
-        tel: 'tel: 188****7126'
-      },
-      {
-        name: '马敏',
-        headimg: 'http://img2.imgtn.bdimg.com/it/u=3390152407,4060777889&fm=27&gp=0.jpg',
-        tel: 'tel: 188****7126'
-      }
-    ]
+    searchList: [],
+    searchText: ''
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+
   },
 
   bindSearchItemTap (e) {
@@ -39,5 +32,28 @@ Page({
     // 保存所选教练
     wx.setStorageSync('buyCourseSelectCoach', searchList[index]);
 
+  },
+
+  bindSearchInput (e) {
+    
+    var value = e.detail.value;
+    this.setData({
+      searchText: value
+    })
+  },
+
+  bindConfiSearchTap() {
+    homeService.queryCoachList(this.data.searchText).then((result) => {
+
+      console.log('queryCoachList *** ' + JSON.stringify(result));
+      if (result.errCode == 0) {
+        this.setData({
+          searchList: homedata.formatCoachList(result.ptList)
+        })
+      }
+
+    }).catch((error) => {
+      console.log(error);
+    })
   }
 })

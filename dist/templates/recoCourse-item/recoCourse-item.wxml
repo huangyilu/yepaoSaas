@@ -3,11 +3,11 @@
 
   <view class='recocell-view weui-flex'>
 
-    <view class='head-img-view' id='{{ index }}' bindtap='bindRecoCellTap'>
+    <view class='head-img-view' data-price='{{ price }}' id='{{ cardId }}' bindtap='bindRecoCellTap'>
       <image mode='aspectFill' src='{{ headimg }}'></image>
     </view>
 
-    <view class='weui-flex__item' id='{{ index }}' bindtap='bindRecoCellTap'>
+    <view class='weui-flex__item' data-price='{{ price }}' id='{{ cardId }}' bindtap='bindRecoCellTap'>
       <view class='name-text'>{{ courseName }}</view>
       <view class='info-text'> 
         ¥{{ price }}
@@ -15,7 +15,7 @@
       </view>
     </view>
 
-    <view class='btn-view' id='{{ index }}' bindtap='bindBuyTap'>
+    <view class='btn-view' data-price='{{ price }}' id='{{ cardId }}' bindtap='bindBuyTap'>
       <view>购买</view>
     </view>
     

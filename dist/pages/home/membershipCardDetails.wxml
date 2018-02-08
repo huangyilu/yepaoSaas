@@ -1,8 +1,8 @@
 <!--pages/home/membershipCardDetails.wxml-->
 
-<view class='bg-view'>
+<view wx:if='{{ carDetail }}' class='bg-view'>
   
-  <view class='title-view'>
+  <view class='title-view' >
     <view class='car-cell' bindtap='bindCarCellTap'>
       <image class='bg-img' src='{{ carDetail.bgimg }}'></image>
       <view class='info-view'>
@@ -21,9 +21,9 @@
     <view>开卡时间：{{ carDetail.openingTime }}</view>
   </view>
 
-  <view class='renewFee-view' bindtap='bindRenewFeeTap'>
+  <!-- <view class='renewFee-view' bindtap='bindRenewFeeTap'>
     <text>续费</text>
     <image class='right-icon' src='../../images/icon/arrow_right.png'></image>
-  </view>
+  </view> -->
 
 </view>

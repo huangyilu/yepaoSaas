@@ -21,7 +21,7 @@
 }
 .info-view .name-text{
     font-size: 34rpx;
-    margin-bottom: 10rpx;
+    margin-bottom: 30rpx;
     color: white;
 }
 

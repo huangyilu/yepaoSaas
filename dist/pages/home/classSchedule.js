@@ -113,6 +113,29 @@ Page({
 
   },
 
+  // 预约课程
+  bindClassCalendarCellTap(e) {
+    var planId = e.currentTarget.dataset.planid;
+    var planDetailId = e.currentTarget.dataset.plandetailid;
+    var index = e.currentTarget.id;
+    var courseList = this.data.courseList;
+
+    homeService.uploadMemJoinClassSchedule(planDetailId, planId).then((result) => {
+
+      console.log('uploadMemJoinClassSchedule *** ' + JSON.stringify(result));
+      if (result.rs == 'Y') {
+        courseList[index].reserveFlag = true;
+        this.setData({
+          courseList: courseList
+        })
+      }
+
+    }).catch((error) => {
+      console.log(error);
+    })
+
+  },
+
   // 点击事件 navbar
   bindNavbarTabTap (e) {
 

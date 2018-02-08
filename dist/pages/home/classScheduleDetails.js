@@ -49,6 +49,20 @@ Page({
   // 预约
   bindClassScheduleApptTap () {
     
+
+    homeService.uploadMemJoinClassSchedule(this.data.planDetailId, this.data.planId).then((result) => {
+
+      console.log('uploadMemJoinClassSchedule *** ' + JSON.stringify(result));
+      if (result.rs == 'Y') {
+        // this.setData({
+        //   courseList: homedata.formatClassSchedule(result.planList)
+        // })
+      }
+
+    }).catch((error) => {
+      console.log(error);
+    })
+
   }
 
 
