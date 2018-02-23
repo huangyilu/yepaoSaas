@@ -11,13 +11,13 @@
   <!-- 性别选择 -->
   <view wx:if='{{ types == "other" }}' id='{{ id }}' class='textInput-view'>
     <view class='title-view'>{{ title }}</view>
-    <view class='gender-view'>
-      <image wx:if='{{ placeholder == "boy" }}' class='checked-icon' src='../../../images/icon/checked.png'></image>
+    <view class='gender-view' id='male' bindtap='bindSelectGenderTap'>
+      <image wx:if='{{ placeholder == true }}' class='checked-icon' src='../../../images/icon/checked.png'></image>
       <view wx:else class='checked-view'></view>
       <text>男</text>
     </view>
-    <view class='gender-view'>
-      <image wx:if='{{ placeholder == "girl" }}' class='checked-icon' src='../../../images/icon/checked.png'></image>
+    <view class='gender-view' id='female' bindtap='bindSelectGenderTap'>
+      <image wx:if='{{ placeholder == false }}' class='checked-icon' src='../../../images/icon/checked.png'></image>
       <view wx:else class='checked-view'></view>
       <text>女</text>
     </view>

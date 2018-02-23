@@ -48,6 +48,14 @@ export function formatPrivateMemberListItem(item) {
   }
 }
 
+// 私教会员 -- 资料登记
+export function formatMemInfoRegistCards(list) {
+  return list.map(item => this.formatMemInfoRegistCardsItem(item))
+}
+export function formatMemInfoRegistCardsItem(item) {
+  return item.card_name
+}
+
 // 判断 日期 属于 今天 昨天 不是今年
 export function formatDifferentTypesDate (timeStr) {
   // +timeStr 
@@ -151,4 +159,20 @@ export function formatMyOrderListItem(item) {
     price: 2000,
     orderStatus: '已付款'
   }
+}
+
+// 资料移交
+export function formatInfoTransfer(list) {
+  return list.map(item => this.formatInfoTransferItem(item))
+}
+export function formatInfoTransferItem(item) {
+  return {
+    checked: false,
+    name: item.mem_name,
+    gender: FORMATGENDER[item.sex]
+  }
+}
+export const FORMATGENDER = {
+  'male': 'boy',
+  'female': 'girl',
 }

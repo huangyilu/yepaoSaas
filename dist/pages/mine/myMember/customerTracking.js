@@ -16,7 +16,7 @@ Page({
     sliderLeft: 0,
     navbarTabs:['意向','成交','快到期','已到期'],
 
-    telephoneHidden: true,
+    activeTitle: '',
     customerTrackList: [
       {
         headimg: 'http://img2.imgtn.bdimg.com/it/u=3390152407,4060777889&fm=27&gp=0.jpg',

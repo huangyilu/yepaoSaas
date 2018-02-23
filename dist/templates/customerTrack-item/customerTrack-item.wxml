@@ -20,7 +20,7 @@
   </view>
 
   <view>
-    <image hidden='{{ telephoneHidden }}' class='telephone-icon' src='../../../images/icon/mine/telephone.png'></image>
+    <image wx:if='{{  }}' class='telephone-icon' src='../../../images/icon/mine/telephone.png'></image>
   </view>
 
 </view>

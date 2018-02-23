@@ -20,7 +20,7 @@ Page({
       {
         iconUrl: '../../../images/icon/mine/work_transfer.png',
         name: '资料移交',
-        navigateUrl: 'myCoach/myMember'
+        navigateUrl: '../infoTransfer'
       }
     ]
   },
@@ -32,5 +32,9 @@ Page({
   
   },
 
-  
+  bindNavigateTap(e) {
+    wx.navigateTo({
+      url: e.currentTarget.id,
+    })
+  }
 })

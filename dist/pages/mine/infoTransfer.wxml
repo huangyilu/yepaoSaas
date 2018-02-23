@@ -15,7 +15,7 @@
       <text class='name-text'>{{ item.name }}</text>
       <image class='gender-icon' src='../../../images/icon/mine/{{ item.gender }}.png'></image>
 
-      <text class='info-text'>跟单员：{{ item.merchandiser }} <text class='yeColor'>({{ item.merserStatus }})</text></text>
+      <!-- <text class='info-text'>跟单员：{{ item.merchandiser }} <text class='yeColor'>({{ item.merserStatus }})</text></text> -->
     </view>
     </block>
 
@@ -23,7 +23,7 @@
 
   <view class='weui-flex foot-view'>
   
-    <view class='weui-flex__item' bindtap='bindAverageTap'>平均移交</view>
+    <!-- <view class='weui-flex__item' bindtap='bindAverageTap'>平均移交</view> -->
     <view class='yeBgColor blackColor weui-flex__item' bindtap='bindSpecifiedTap'>指定移交</view>
 
   </view>

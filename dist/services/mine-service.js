@@ -40,7 +40,7 @@ export function queryMyMembers() {
   })
 }
 
-// 我是教练
+// 我是教练 
 
 
 // 定制课程 memId 私教会员ID ptId 教练ID
@@ -89,6 +89,42 @@ export function uploadShareCourse(shareCourseIds, memId) {
   })
 }
 
+/**我是会籍 */
+// 资料登记 获取意向卡
+export function queryGymUsableCards() {
+  return jsonGetRequest('yp-xcx-getGymUsableCards', {
+    custName: appConfig.custName,
+    gym: AuthService.getMemberInfo().gym,
+  })
+}
+
+// 资料登记 保存信息 memId
+export function uploadMcRegisterMem(cust) {
+  return urlencodePostRequest('yp-xcx-mcRegisterMem', {
+    custName: appConfig.custName,
+    gym: AuthService.getMemberInfo().gym,
+    mcId: AuthService.getMemberInfo().memId,
+    memName: cust.name,
+    sex: cust.gender,
+    birthday: cust.birthday,
+    phone: cust.phone,
+    fitPurpose: cust.fitPurpose,
+    intentionCard: cust.intentionCard,
+    checkinTimes: cust.checkinTimes,
+    userType: cust.userType,
+    addr: cust.address,
+    remark: cust.remark
+  })
+}
+
+// 资料移交
+export function queryMems() {
+  return jsonGetRequest('yp-xcx-mc-queryMember', {
+    custName: appConfig.custName,
+    gym: AuthService.getMemberInfo().gym,
+    mcId: AuthService.getMemberInfo().memId
+  })
+}
 
 /** 课程共享 */
 // 获取 课程共享 列表

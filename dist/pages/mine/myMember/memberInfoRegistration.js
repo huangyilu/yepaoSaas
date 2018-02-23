@@ -1,4 +1,7 @@
 // pages/mine/myMember/memberInfoRegistration.js
+import * as minedata from '../../../utils/minedata-format';
+import * as mineService from '../../../services/mine-service';
+
 Page({
 
   /**
@@ -17,9 +20,9 @@ Page({
       {
         id: 1,
         title: '性别',
-        placeholder: 'girl',
+        placeholder: true,
         types: "other",
-        value: ''
+        value: 'male'
       },
       {
         id: 2,
@@ -38,20 +41,13 @@ Page({
       },
       {
         id: 4,
-        title: '客户体态',
-        placeholder: '请填写客户体态',
-        types: "txtInput",
-        value: ''
-      },
-      {
-        id: 5,
         title: '健身目的',
         placeholder: '请填写健身目的',
         types: "txtInput",
         value: ''
       },
       {
-        id: 6,
+        id: 5,
         title: '意向卡',
         placeholder: '请选择意向卡',
         types: "txtPicker",
@@ -59,7 +55,7 @@ Page({
         value: ''
       },
       {
-        id: 7,
+        id: 6,
         title: '健身时间',
         placeholder: '请选择健身时间',
         types: "txtPicker",
@@ -67,15 +63,7 @@ Page({
         value: ''
       },
       {
-        id: 8,
-        title: '客户来源',
-        placeholder: '请选择客户来源',
-        types: "txtPicker",
-        pickerArr: ['定金客户', '自然访客', '外场资源', '电话咨询', '转客户介绍', '其他请备注'],
-        value: ''
-      },
-      {
-        id: 9,
+        id: 7,
         title: '客户类型',
         placeholder: '请选择客户类型',
         types: "txtPicker",
@@ -83,14 +71,14 @@ Page({
         value: ''
       },
       {
-        id: 10,
+        id: 8,
         title: '登记地址',
         placeholder: '请填写登记地址',
         types: "txtInput",
         value: ''
       },
       {
-        id: 11,
+        id: 9,
         title: '备注信息',
         placeholder: '',
         types: "txtInput",
@@ -100,7 +88,8 @@ Page({
 
     pickerViewHidden: true,
     pickerValueTitle: '',
-    pickerList: []
+    pickerList: [],
+    pickerListIndex: null
   },
 
   /**
@@ -108,15 +97,37 @@ Page({
    */
   onLoad: function (options) {
   
-    
+    mineService.queryGymUsableCards().then((result) => {
+
+      console.log('queryGymUsableCards *** ' + JSON.stringify(result));
+      if (result.errCode == 0) {
+        this.setData({
+          'textInputItems[5].pickerArr': minedata.formatMemInfoRegistCards(result.cardList)
+        })
+      }
+
+    }).catch((error) => {
+      console.log(error);
+    })
 
   },
   
+  // 性别选择
+  bindSelectGenderTap(e) {
+    this.setData({
+      'textInputItems[1].value': e.currentTarget.id,
+      'textInputItems[1].placeholder': !this.data.textInputItems[1].placeholder,
+    })
+  },
   // 点击 选择框 
   bindTextPickerTap (e) {
     var index = e.currentTarget.id;
     var textInputItems = this.data.textInputItems;
     var pickerList = [];
+
+    this.setData({
+      pickerListIndex: index
+    })
 
     if (index == 2) {
       this.setThisMonthPicArr();
@@ -135,7 +146,7 @@ Page({
 
   },
   // 取消 、确定选择器
-  bindPickerConfirmTap (e) {
+  bindPickerConfirmTap(e) {
     this.setData({
       pickerViewHidden: true
     })
@@ -150,9 +161,7 @@ Page({
   bindPickerChange (e) {
 
     var val = e.detail.value;
-
     this.setPickerTextInputItemValue(val);
-
   },
 
   setPickerTextInputItemValue(val) {
@@ -249,6 +258,55 @@ Page({
   bindSaveInfoBtnTap() {
 
     var textInputItems = this.data.textInputItems;
+    var isTextEmpt = false; //false 是填写完整
+    textInputItems.forEach(item => {
+      if (item.value == '') {
+        wx.showToast({
+          title: '不要留空哦~',
+          icon: 'none'
+        })
+        isTextEmpt = true;
+      }
+    })
+    var custDic = {
+      memName: textInputItems[0].value,
+      sex: textInputItems[1].value,
+      birthday: textInputItems[2].value,
+      phone: textInputItems[3].value,
+      fitPurpose: textInputItems[4].value,
+      intentionCard: textInputItems[5].value,
+      checkinTimes: textInputItems[6].value,
+      userType: textInputItems[7].value,
+      addr: textInputItems[8].value,
+      remark: textInputItems[9].value
+    }
+    console.log('custdic ... ' + JSON.stringify(custDic));
+
+    if (!isTextEmpt) {
+
+      mineService.uploadMcRegisterMem(custDic).then((result) => {
+
+        console.log('uploadMcRegisterMem *** ' + JSON.stringify(result));
+        wx.showToast({
+          title: '保存成功！',
+          icon: 'success',
+          duration: 2500,
+          success: function (res) {
+            wx.navigateBack({
+              delta: 1
+            })
+          }
+        })
+
+      }).catch((error) => {
+        wx.showToast({
+          title: error.errMsg,
+          icon: 'none'
+        })
+        console.log(error);
+      })
+
+    }
     
 
   }

@@ -1,4 +1,8 @@
 // pages/mine/myMember/infoTransfer.js
+
+import * as minedata from '../../utils/minedata-format';
+import * as mineService from '../../services/mine-service';
+
 Page({
 
   /**
@@ -8,28 +12,27 @@ Page({
     confirmText: '确定将选择的会员移交给马敏吗？',
     confirmBoxHidden: true,
     
-    infoTranList: [
-      {
-        checked: false,
-        name: '张迪',
-        gender: 'boy',
-        merchandiser: '马敏',
-        merserStatus: '在职'
-      },
-      {
-        checked: true,
-        name: '张迪',
-        gender: 'girl',
-        merchandiser: '马敏',
-        merserStatus: '在职'
-      }
-    ]
+    infoTranList: []
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+
+
+    // 查询 会员列表
+    mineService.queryMems().then((result) => {
+
+      console.log('queryMems *** ' + JSON.stringify(result));
+      this.setData({
+        infoTranList: minedata.formatInfoTransfer(result.memList)
+      })
+
+    }).catch((error) => {
+      console.log(error);
+    })
+
   
   },
 

@@ -34,7 +34,10 @@ export function saveMemberInfo(result) {
   var memInfo = {
     memId: result.mem_id,
     custName: result.cust_name,
-    gym: result.gym
+    gym: result.gym,
+    pt: result.pt,
+    mc: result.mc,
+    sm: result.sm
   }
   storeE.set('memInfo', memInfo, EXPIRATION_MILLISECONDS);
 }
@@ -184,31 +187,46 @@ export function queryCertificationMember(phone) {
         console.log("wxappauth result: " + JSON.stringify(res));
         if (+res.statusCode === 200) {
           console.log('wxappauth succeed: ' + JSON.stringify(res.data));
-          saveMemberInfo(res.data.result[0]);
-          wx.hideLoading();
-          wx.showToast({
-            title: '认证成功',
-            icon: 'success',
-            duration: 2000
-          });
-          return resolve(true);
+
+          if (res.data.errCode == 0) {
+            saveMemberInfo(res.data.memInfo);
+            showSuccessFailToast(true);
+            return resolve(true);
+          } else {
+            showSuccessFailToast(false);
+            return reject(false);
+          }
+          
         } else {
           console.log("wxappauth failed: " + res.statusCode);
-          wx.showToast({
-            title: '认证失败',
-            icon: 'success',
-            duration: 2000
-          });
+          showSuccessFailToast(false);
           return reject(+res.statusCode);
         }
       },
       fail: function (error) {
+        showSuccessFailToast(false);
         return reject(error);
       }
     });
   });
 }
 
+export function showSuccessFailToast (code) {
+  wx.hideLoading();
+  if (code == true) {
+    wx.showToast({
+      title: '认证成功',
+      icon: 'success',
+      duration: 2000
+    });
+  } else {
+    wx.showToast({
+      title: '认证失败！查无此会员！',
+      icon: 'none',
+      duration: 2000
+    });
+  }
+}
 
 
 // code 0016FrSw0fuhgi1ie2Sw0qAcSw06FrS0

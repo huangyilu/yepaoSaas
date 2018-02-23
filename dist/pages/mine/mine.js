@@ -11,6 +11,7 @@ Page({
    */
   data: {
     userInfo: null,
+    memInfo: null,
 
     rightItemHidden: false,
     yItems: [
@@ -24,14 +25,14 @@ Page({
         iconUrl: '../../images/icon/mine/coach.png',
         name: '我是教练',
         navigateUrl: 'myCoach/myCoachListView',
-        ishidden: false
+        ishidden: true
       },
-      // {
-      //   iconUrl: '../../images/icon/mine/coach.png',
-      //   name: '我是会籍',
-      //   navigateUrl: 'myMember/myMember',
-      //   ishidden: false
-      // },
+      {
+        iconUrl: '../../images/icon/mine/coach.png',
+        name: '我是会籍',
+        navigateUrl: 'myMember/myMember',
+        ishidden: true
+      },
       {
         iconUrl: '../../images/icon/mine/member.png',
         name: '课程共享',
@@ -77,6 +78,21 @@ Page({
     this.getCertifiMem();
   },
 
+  // 构造按钮列表
+  setMyYItems() {
+    var memInfo = AuthService.getMemberInfo();
+    var yItems = this.data.yItems;
+    if (memInfo.pt == 'Y') {
+      yItems[2].ishidden = false;
+    }
+    if (memInfo.mc == 'Y') {
+      yItems[1].ishidden = false;
+    }
+    this.setData({
+      yItems: yItems
+    })
+  },
+
   bindNavigateTap(e) {
     if (!this.data.isCertificationMem) {
       this.setData({
@@ -100,13 +116,16 @@ Page({
   bindAvatarTap () {
     var me = this;
     // 微信授权
-
     if (!this.data.userInfo) {
       AuthService.authorizeUserInfo().then((res) => {
         console.log('authorizeUserInfo...' + JSON.stringify(res));
         me.bindGetUserInfo();
       }).catch(error => {
-        console.log('Not authorizeUserInfo In');
+        console.log('Not authorizeUserInfo In'+JSON.stringify(error));
+        wx.showModal({
+          title: '提示',
+          content: '你曾拒绝授权，请过段时间再进行授权。',
+        })
       });
     }
 
@@ -135,10 +154,13 @@ Page({
 
   // 查询是否认证会员
   getCertifiMem() {
-    if (AuthService.getMemberInfo()) {
+    var memInfo = AuthService.getMemberInfo();
+    if (memInfo) {
       this.setData({
-        isCertificationMem: true
+        isCertificationMem: true,
+        memInfo: memInfo
       })
+      this.setMyYItems();
       console.log('已认证会员');
     } else {
       console.log('未认证会员');
@@ -158,7 +180,8 @@ Page({
     if (id == 'a') {
       // 确定 认证
       AuthService.queryCertificationMember(this.data.memTelephone).then((result) => {
-
+        
+        this.setMyYItems();
         this.setData({
           isCertificationMemHidden: true,
           isCertificationMem: true

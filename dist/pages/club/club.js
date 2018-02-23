@@ -102,8 +102,14 @@ Page({
   },
 
   bindClubCellTap(e) {
-    wx.navigateTo({
-      url: 'memberActivitiesDetails',
-    })
+    if (this.data.isCertificationMem) {
+      wx.navigateTo({
+        url: 'memberActivitiesDetails',
+      })
+    } else {
+      this.setData({
+        isCertificationMemHidden: false
+      })
+    }
   }
 })

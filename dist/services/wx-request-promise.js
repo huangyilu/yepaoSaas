@@ -29,11 +29,18 @@ export function wxRequestP(method, url, contentType, data = {}, accessToken ) {
             // console.log(url + ' succeed: ' + JSON.stringify(res.data))
             console.log(url + ' succeed: ' + JSON.stringify(res))
             wx.hideLoading();
+
+            if (res.data.errCode == 0) {
+              return resolve(res.data)
+            } else {
+              return reject(res.data)
+            }
+            
             // wx.stopPullDownRefresh()
-            return resolve(res.data)
+            
           } else {
             console.log(url + " failed: " + JSON.stringify(res.data))
-            // wx.hideLoading()
+            wx.hideLoading()
             return reject(res.data)
           }
         },
