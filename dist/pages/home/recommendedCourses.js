@@ -1,6 +1,6 @@
 // pages/home/recommendedCourses.js
 
-var sliderWidth = 140; // 需要设置slider的宽度，用于计算中间位置
+var sliderWidth = 96; // 需要设置slider的宽度，用于计算中间位置
 import * as homedata from '../../utils/homedata-format';
 import * as homeService from '../../services/home-service';
 

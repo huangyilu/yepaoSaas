@@ -50,6 +50,12 @@ Page({
         this.setData({
           searchList: homedata.formatCoachList(result.ptList)
         })
+      } else if (result.errMsg == '无教练！') {
+        wx.showToast({
+          title: '查无此教练',
+          icon: 'none',
+          duration: 2000
+        })
       }
 
     }).catch((error) => {

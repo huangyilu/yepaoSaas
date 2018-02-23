@@ -8,7 +8,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    titleImg: 'http://img2.imgtn.bdimg.com/it/u=3390152407,4060777889&fm=27&gp=0.jpg',
+    titleImg: '../../images/bg_img/xcsr.png',
     days: 0,
     hour: 0,
     mints: 0,
@@ -90,9 +90,15 @@ Page({
   },
 
   bindCardItemTap(e) {
-      wx.navigateTo({
-        url: '../home/onlinePaymentForCard',
-      })
+    // wx.navigateTo({
+    //   url: '../home/onlinePaymentForCard',
+    // })
+
+    wx.showToast({
+      icon: 'none',
+      title: '活动已结束！'
+    })
+
   },
   /**
    * 用户点击右上角分享
@@ -100,7 +106,7 @@ Page({
   onShareAppMessage: function () {
     return {
       title: this.data.activitiesTitle,
-      path: '/page/club/memberActivitiesDetails',
+      path: 'pages/club/memberActivitiesDetails',
       success: function (res) {
         // 转发成功
         console.log('转发成功');

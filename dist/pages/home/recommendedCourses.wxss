@@ -34,7 +34,7 @@
 }
 .weui-navbar__title {
     padding: 0 15rpx;
-    display: block;
+    /* display: block; */
 }
 .weui-navbar__title.weui-bar__item_on {
     border-bottom-style: none; 

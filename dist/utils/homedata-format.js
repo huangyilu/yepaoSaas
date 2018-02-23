@@ -64,13 +64,13 @@ export function formatMyMemCardItem(item) {
 // 会员卡详情
 export function formatMyMemCardDetails(item) {
   return {
-    bgimg: '../../images/icon/home/car/card_bg.png',
-    carPrice: 1000,
-    carName: '一年卡',
-    carType: '年卡',
-    timeLeft: '365',
-    effectiveTime: '2019.01.09',
-    openingTime: '2018.01.09'
+    bgimg: item.picUrlString ? item.picUrlString : '',
+    carPrice: item.real_amt ? item.real_amt / 100 : '',
+    carName: item.card_name ? item.card_name : '',
+    carType: CARDFORMAT[item.card_type],
+    timeLeft: item.days ? item.days : '',
+    effectiveTime: item.deadline ? item.deadline : '',
+    openingTime: item.active_time ? item.active_time : ''
   }
 }
 

@@ -1,7 +1,10 @@
 <!--pages/club/clubDynamics.wxml-->
 
+<import src="../../templates/empty-view/empty-view.wxml"/>
+
 <view class='bg-view'>
 
+  <view wx:if='{{ clubdyList.length > 0 }}'>
   <view class='clubdy-cell' wx:for='{{ clubdyList }}' wx:key='{{ index }}' id='{{ item.id }}' >
     
     <view class='weui-flex' bindtap='bindClubdyCellTap'>
@@ -28,5 +31,9 @@
     </view>
 
   </view>
+  </view>
+
+  <!-- 无 更多 -->
+  <template wx:else is='empty-view' data='{{ emptyText, emptyIcon }}'/>
 
 </view>

@@ -10,7 +10,7 @@
         <text >截止时间 {{ item.deadline }}</text>
 
         <text class='club-status-text'>{{ item.status }}</text>
-        <image class='club-status-icon' src='../../images/icon/club/{{ item.status == "已完成" ? "colourless_bg" : "yellow_bg" }}.png'></image>
+        <image class='club-status-icon' src='../../images/icon/club/{{ item.status == "已结束" ? "colourless_bg" : "yellow_bg" }}.png'></image>
       </view>
 
       <view class='weui-flex'>

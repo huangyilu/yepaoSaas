@@ -20,9 +20,9 @@ Page({
 
       console.log('queryMyCardsDetail *** ' + JSON.stringify(result));
       if (result.rs == 'Y') {
-        // this.setData({
-        //   carList: homedata.formatMyMemCardDetails(result.cards)
-        // })
+        this.setData({
+          carDetail: homedata.formatMyMemCardDetails(result.cards)
+        })
       }
 
     }).catch((error) => {

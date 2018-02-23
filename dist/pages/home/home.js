@@ -23,7 +23,7 @@ Page({
   onLoad: function (options) {
     
     wx.setNavigationBarTitle({
-      title: '古德菲力·深圳',
+      title: '也跑',
     })
   },
   onShow: function (options) {

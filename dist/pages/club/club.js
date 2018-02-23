@@ -8,7 +8,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    swiperImgUrls: ['http://img2.imgtn.bdimg.com/it/u=3390152407,4060777889&fm=27&gp=0.jpg', 'http://img2.imgtn.bdimg.com/it/u=3390152407,4060777889&fm=27&gp=0.jpg', 'http://img2.imgtn.bdimg.com/it/u=3390152407,4060777889&fm=27&gp=0.jpg'],
+    swiperImgUrls: ['../../images/bg_img/ban.jpg'],
 
     // 会员认证
     isCertificationMem: false,
@@ -17,20 +17,12 @@ Page({
 
     clubList: [
       {
-        titleImg: 'http://img2.imgtn.bdimg.com/it/u=3390152407,4060777889&fm=27&gp=0.jpg',
-        deadline: '01-12 10:34',
-        status: '进行中',
+        titleImg: '../../images/bg_img/xcsr.png',
+        deadline: '02-25 10:34',
+        status: '已结束',
         title: '新春甩肉季，我们来约"惠"',
         totalPeople: 10,
-        nowPeople: 2,
-      },
-      {
-        titleImg: 'http://img2.imgtn.bdimg.com/it/u=3390152407,4060777889&fm=27&gp=0.jpg',
-        deadline: '01-12 10:34',
-        status: '已完成',
-        title: '新春甩肉季，我们来约"惠"',
-        totalPeople: 10,
-        nowPeople: 2,
+        nowPeople: 10,
       }
     ]
   },

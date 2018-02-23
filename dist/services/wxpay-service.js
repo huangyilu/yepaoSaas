@@ -12,13 +12,26 @@ import {
 }
 from 'wx-request-promise';
 
-// 课程购买
+// 课程购买 下单
 export function uploadBuyClassPay(payDic) {
   return urlencodePostRequest('yp-xcx-submitBuyCourseOrder', {
     custName: appConfig.custName,
     gym: AuthService.getMemberInfo().gym,
     memId: AuthService.getMemberInfo().memId,
     cardId: payDic.cardId
+  })
+}
+
+// 课程购买 支付
+export function uploadBuyClassPrepay(payDic) {
+  return urlencodePostRequest('yp-xcx-buyCoursePrepay', {
+    custName: appConfig.custName,
+    gym: AuthService.getMemberInfo().gym,
+    userCardId: payDic.userCardId,
+    xcxOrderId: payDic.xcxOrderId,
+    ptId: payDic.ptId,
+    openId: AuthService.getOpenId(),
+    orderPrice: payDic.orderPrice
   })
 }
 
@@ -68,7 +81,7 @@ export function makeMemCardPayment(payDic) {
 // 课程购买
 export function makeClassPayment(payDic) {
   return new Promise((resolve, reject) => {
-    uploadBuyClassPay(payDic).then((orderParams) => {
+    uploadBuyClassPrepay(payDic).then((orderParams) => {
 
       if (orderParams.result) {
         return resolve(requestPayment(orderParams.orderInfoMap));

@@ -50,13 +50,13 @@ Page({
         navigateUrl: 'myOrderListView',
         ishidden: false
       },
-      {
-        iconUrl: '../../images/icon/mine/setting.png',
-        name: '设置',
-        style: 'margin-top:20rpx;',
-        navigateUrl: '',
-        ishidden: false
-      }
+      // {
+      //   iconUrl: '../../images/icon/mine/setting.png',
+      //   name: '设置',
+      //   style: 'margin-top:20rpx;',
+      //   navigateUrl: '',
+      //   ishidden: false
+      // }
     ],
 
     isCertificationMem: false,
