@@ -3,6 +3,8 @@
 
 <import src="../../../templates/customerTrack-item/customerTrack-item.wxml"/>
 <import src="../../../templates/empty-view/empty-view.wxml"/>
+<import src="../../../templates/intention-item/intention-item.wxml"/>
+<import src="../../../templates/intention-item/intention-leftbox.wxml"/>
 
 
 <view class='bg-view'>
@@ -27,9 +29,16 @@
 <!-- 选项一 开始 -->
     <view class="weui-tab__content" hidden="{{ activeIndex != 0 }}">
       <!-- 选项一 内容 -->
-      <block wx:if='{{ customerTrackList.length > 0 }}'>
-      <block wx:for='{{ customerTrackList }}' wx:for-item='cutl' wx:key='{{ index }}'>
-        <template is="customerTrack-item" data="{{ ...cutl }}"/> 
+
+      <!-- 提示 -->
+      <view class='up-remind-view weui-flex'>
+        <view class='weui-flex__item'>加油哦！快把意向成员变为会员吧！</view>
+        <view><image class='filter-icon' src='../../../images/icon/mine/filter.png'></image></view>
+      </view>
+
+      <block wx:if='{{ intentionList.length > 0 }}'>
+      <block wx:for='{{ intentionList }}' wx:for-item='intl' wx:key='{{ index }}'>
+        <template is="intention-item" data="{{ ...intl }}"/> 
       </block>
       </block>
       
@@ -40,7 +49,7 @@
 
 <!-- 选项二 开始 -->
     <view class="weui-tab__content" hidden="{{ activeIndex != 1 }}">
-      <view class='remind-view'>加油哦！今天已成交{{ customerTrackList.length }}单啦！</view>
+      <view class='up-remind-view'>加油哦！今天已成交{{ customerTrackList.length }}单啦！</view>
       <!-- 选项二 内容 -->
       <block wx:if='{{ customerTrackList.length > 0 }}'>
       <block wx:for='{{ customerTrackList }}' wx:for-item='cutl' wx:key='{{ index }}'>
@@ -54,7 +63,7 @@
 
 <!-- 选项三 开始 -->
     <view class="weui-tab__content" hidden="{{ activeIndex != 2 }}">
-    <view class='remind-view'>两个月内ta们就到期了！快去提醒ta们吧！</view>
+    <view class='up-remind-view'>两个月内ta们就到期了！快去提醒ta们吧！</view>
       <!-- 选项三 内容 -->
       <block wx:if='{{ customerTrackList.length > 0 }}'>
       <block wx:for='{{ customerTrackList }}' wx:for-item='cutl' wx:key='{{ index }}'>
@@ -80,6 +89,11 @@
 <!-- 选项四 结束 -->
 
   </view>
+</view>
+
+<!-- 意向 侧面 弹窗  -->
+<view>
+  <template is='intention-leftbox' data='{{ leftboxList }}'/> 
 </view>
 
 </view>

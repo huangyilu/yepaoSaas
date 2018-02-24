@@ -126,6 +126,16 @@ export function queryMems() {
   })
 }
 
+// 资料移交 -- 选择人员
+export function queryMcs(telName) {
+  return jsonGetRequest('yp-xcx-mc-queryMC', {
+    custName: appConfig.custName,
+    gym: AuthService.getMemberInfo().gym,
+    mcId: AuthService.getMemberInfo().memId,
+    telName: telName
+  })
+}
+
 /** 课程共享 */
 // 获取 课程共享 列表
 export function queryShareCourse(memId) {

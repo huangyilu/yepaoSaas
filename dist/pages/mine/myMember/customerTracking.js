@@ -34,7 +34,35 @@ Page({
       }
     ],
 
-    
+    intentionList: [
+      {
+        headimg: 'http://img2.imgtn.bdimg.com/it/u=3390152407,4060777889&fm=27&gp=0.jpg',
+        title: '【会籍跟单】张迪',
+        text: '第一次跟单',
+        memId: 0
+      },
+      {
+        headimg: 'http://img2.imgtn.bdimg.com/it/u=3390152407,4060777889&fm=27&gp=0.jpg',
+        title: '【会籍跟单】张迪',
+        text: '第一次跟单',
+        memId: 0
+      }
+    ],
+
+    leftboxList: [
+      {
+        title: '性别',
+        cots: ['男','女']
+      },
+      {
+        title: '客户类型',
+        cots: ['重要客户', '一般客户','次要客户']
+      },
+      {
+        title: '健身时间',
+        cots: ['上午', '下午', '晚上']
+      }
+    ]
   },
 
   /**
@@ -55,7 +83,7 @@ Page({
     this.setData({
       activeIndex: e.currentTarget.id,
       sliderOffset: e.currentTarget.offsetLeft
-    });
+    })
   },
 
 

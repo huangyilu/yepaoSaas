@@ -2,6 +2,7 @@
 
 import * as minedata from '../../utils/minedata-format';
 import * as mineService from '../../services/mine-service';
+import { Base64 } from '../../utils/urlsafe-base64';
 
 Page({
 
@@ -12,7 +13,9 @@ Page({
     confirmText: '确定将选择的会员移交给马敏吗？',
     confirmBoxHidden: true,
     
-    infoTranList: []
+    infoTranList: [],
+
+    infoTransferSelectMem: null
   },
 
   /**
@@ -35,6 +38,18 @@ Page({
 
   
   },
+  onShow: function (options) {
+    var meminfo = wx.getStorageSync('infoTransferSelectMem');
+    if (meminfo) {
+      console.log('infoTransferSelectMem .. ' + JSON.stringify(meminfo));
+      this.setData({
+        infoTransferSelectMem: meminfo
+      })
+      wx.removeStorage({
+        key: 'infoTransferSelectMem',
+      })
+    }
+  },
 
   bindInfoCellTap (e) {
     var index = e.currentTarget.id;
@@ -49,19 +64,38 @@ Page({
   },
 
   // 平均移交
-  bindAverageTap (e) {
+  // bindAverageTap (e) {
 
-    this.setData({
-      confirmBoxHidden: false
-    })
+  //   this.setData({
+  //     confirmBoxHidden: false
+  //   })
 
-  },
+  // },
   // 指定移交 去选择 会员 指定移交
   bindSpecifiedTap (e) {
 
-    wx.navigateTo({
-      url: '',
+    var infoTranList = this.data.infoTranList;
+    var isSelectMem = false;
+    var selectMems = [];
+    infoTranList.forEach(item => {
+      if (item.checked) {
+        selectMems.push(item);
+        isSelectMem = true;
+      }
     })
+
+    let qsSetMems = Base64.encodeURI(JSON.stringify(selectMems)); 
+
+    if (isSelectMem) {
+      wx.navigateTo({
+        url: 'selectedMem?qsSetMems=' + qsSetMems,
+      })
+    } else {
+      wx.showToast({
+        icon: 'none',
+        title: '请选择会员！',
+      })
+    }
 
   }
 

@@ -15,5 +15,5 @@
 }
 
 .name-text {
-    margin-right: 80rpx;
+    margin-right: 30rpx;
 }

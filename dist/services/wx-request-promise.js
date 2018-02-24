@@ -45,7 +45,11 @@ export function wxRequestP(method, url, contentType, data = {}, accessToken ) {
           }
         },
         fail(error) {
-          wx.hideLoading()
+          wx.hideLoading();
+          wx.showToast({
+            icon: 'none',
+            title: error.errMsg,
+          })
           return reject(error)
         }
       })

@@ -1,7 +1,5 @@
 <!--pages/mine/myMember/infoTransfer.wxml-->
 
-<import src="../../templates/confirm-box/confirm-box.wxml"/>
-
 <view class='bg-view'>
 
   <view class='infoTransfer-bgview'>
@@ -26,13 +24,7 @@
     <!-- <view class='weui-flex__item' bindtap='bindAverageTap'>平均移交</view> -->
     <view class='yeBgColor blackColor weui-flex__item' bindtap='bindSpecifiedTap'>指定移交</view>
 
-  </view>
-
-  <!-- 弹窗确定 -->
-  <view hidden='{{ confirmBoxHidden }}'>
-    <template is="confirm-box" data="{{ confirmText }}"/>
-  </view>
-  
+  </view>  
 
 </view>
 

@@ -169,10 +169,27 @@ export function formatInfoTransferItem(item) {
   return {
     checked: false,
     name: item.mem_name,
-    gender: FORMATGENDER[item.sex]
+    gender: FORMATGENDER[item.sex],
+    memId: item.mem_id
   }
 }
 export const FORMATGENDER = {
   'male': 'boy',
   'female': 'girl',
+}
+// 选择会籍 移交
+export function formatInfoTransferSelectMem(list) {
+  return list.map(item => this.formatInfoTransferSelectMemItem(item))
+}
+export function formatInfoTransferSelectMemItem(item) {
+  return {
+    name: item.mem_name,
+    headimg: item.appHeadString ? '../../images/icon/default_headimg.png' : item.appHeadString,
+    tel: 'tel: ' + this.formatHidPhone(item.phone),
+    realTel: item.phone
+  }
+}
+// 电话隐藏 格式转换
+export function formatHidPhone(phone) {
+   return phone.slice(0, 3) + '****' + phone.slice(7)
 }

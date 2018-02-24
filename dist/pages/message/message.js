@@ -1,6 +1,8 @@
 // pages/fitnessCircle/fitnessCircle.js
 
 import * as AuthService from '../../services/auth-service';
+import * as messageService from '../../services/message-service';
+import * as messagedata from '../../utils/messagedata-format';
 
 Page({
 
@@ -11,50 +13,7 @@ Page({
     emptyText: '暂无消息',
     emptyIcon: '../../images/bg_img/no_data.png',
 
-    articleItems: [
-      // {
-      //   leftImg: '../../images/icon/message/booking_class.png',
-      //   title: '消课',
-      //   content: '【马敏】您好，您在收银台消课【搏击瘦身】',
-      //   time: '08:09'
-      // },
-      // {
-      //   leftImg: '../../images/icon/message/private_lessons.png',
-      //   title: '预约私教课',
-      //   content: '您预约了团课【搏击训练】，教练【江上清素】给您快乐',
-      //   time: '2017-12-09'
-      // },
-      // {
-      //   leftImg: '../../images/icon/message/pay_for_buy.png',
-      //   title: '会员购课',
-      //   content: '您预约了团课【搏击训练】，购买节数【10节】',
-      //   time: '01-09'
-      // },
-      // {
-      //   leftImg: '../../images/icon/message/buy_card.png',
-      //   title: '会员购卡',
-      //   content: '您预约了团课【搏击训练】，购买节数【10节】',
-      //   time: '08:09'
-      // },
-      // {
-      //   leftImg: '../../images/icon/message/fire_class.png',
-      //   title: '消课',
-      //   content: '您预约了团课【搏击训练】，购买节数【10节】',
-      //   time: '08:09'
-      // },
-      // {
-      //   leftImg: '../../images/icon/message/pay_for_leave.png',
-      //   title: '付费请假',
-      //   content: '您预约了团课【搏击训练】，购买节数【10节】',
-      //   time: '08:09'
-      // },
-      // {
-      //   leftImg: '../../images/icon/message/refund_card.png',
-      //   title: '会员退卡',
-      //   content: '您预约了团课【搏击训练】，购买节数【10节】',
-      //   time: '08:09'
-      // }
-    ],
+    articleItems: [],
 
     // 会员认证
     isCertificationMem: false,
@@ -66,6 +25,16 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+
+    messageService.quaryMessage().then((result) => {
+
+      this.setData({
+        articleItems: messagedata.formatMessageList(result.result)
+      })
+
+    }).catch((error) => {
+      console.log(error);
+    })
     
   },
   onShow: function (options) {

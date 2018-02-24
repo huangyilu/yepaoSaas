@@ -23,8 +23,7 @@
 .gender-icon {
     width: 33rpx;
     height: 33rpx;
-    margin-left: 20rpx;
-    margin-top: 9rpx;
+    margin-top: 11rpx;
     position: absolute;
 }
 

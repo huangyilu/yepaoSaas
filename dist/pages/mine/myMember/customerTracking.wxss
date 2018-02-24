@@ -1,6 +1,8 @@
 /* pages/mine/myMember/customerTracking.wxss */
 
 @import '../../../templates/customerTrack-item/customerTrack-item.wxss';
+@import '../../../templates/intention-item/intention-item.wxss';
+@import '../../../templates/intention-item/intention-leftbox.wxss';
 
 .weui-tab {
     margin-top: -11rpx;
@@ -37,7 +39,14 @@
     border-bottom-style: none; 
 }
 
-.remind-view {
+.up-remind-view {
     padding: 0 30rpx 20rpx;
     color: #848296;
+}
+
+.filter-icon {
+    width: 42rpx;
+    height: 46rpx;
+    margin: auto;
+    display: block;
 }
