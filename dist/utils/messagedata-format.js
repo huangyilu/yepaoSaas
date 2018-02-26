@@ -2,30 +2,25 @@
 import moment from './npm/moment';
 
 // 判断 日期 属于 今天 昨天 不是今年
-export function formatDifferentTypesDate(timeStr) {
-  // +timeStr 
-
-  // var newstr = moment(+timeStr).format('X');
-
-  // console.log('' + newstr);
-
-  // var newStr = '';
-  // var nowStr = moment().format('YYYY-MM-DD');
+export function formatDifferentTypesDate(oldStr) {
+  // +timeStr
+  var newStr = '';
+  var nowStr = moment().format('YYYY-MM-DD');
   // var oldStr = moment(+timeStr).format('YYYY-MM-DD');
 
-  // var isBeforeToday = moment(oldStr).isBefore(nowStr);
-  // var isBeforeThisYear = moment(oldStr).isBefore(nowStr, 'year');
+  var isBeforeToday = moment(oldStr).isBefore(nowStr);
+  var isBeforeThisYear = moment(oldStr).isBefore(nowStr, 'year');
 
-  // if (isBeforeToday) {
-  //   newStr = moment(oldStr).format('MM-DD');
-  // } else {
-  //   newStr = moment(+timeStr).format('HH:mm');
-  // }
-  // if (isBeforeThisYear) {
-  //   newStr = moment(oldStr).format('YYYY-MM-DD');
-  // }
-  // console.log('newStr ... ' + newStr);
-  // return newStr;
+  if (isBeforeToday) {
+    newStr = moment(oldStr).format('MM-DD');
+  } else {
+    newStr = moment(+timeStr).format('HH:mm');
+  }
+  if (isBeforeThisYear) {
+    newStr = moment(oldStr).format('YYYY-MM-DD');
+  }
+  console.log('newStr ... ' + newStr);
+  return newStr;
 }
 
 // 消息列表
@@ -34,8 +29,9 @@ export function formatMessageList(list) {
 }
 export function formatMessageListItem(item) {
   return {
-    newMessNum: item.totalNum,
+    newMessNum: item.totalNum > 99 ? '99+' : item.totalNum,
     mesgId: item.message.id,
+    mesgType: item.message.msg_type,
     leftImg: CHANGEMESSAGETYPEIMG[item.message.msg_type],
     title: CHANGEMESSAGETYPE[item.message.msg_type],
     content: item.message.msg_content,
@@ -61,4 +57,16 @@ export const CHANGEMESSAGETYPEIMG = {
   'mem_buy_card': '../../images/icon/message/buy_card.png',
   'mem_fee_hoilday': '../../images/icon/message/pay_leave.png',
   'mem_remove_card': '../../images/icon/message/refund_card.png',
+}
+
+// 消息详情列表
+export function formatMessageDetailsList(list) {
+  return list.map(item => this.formatMessageDetailsListItem(item))
+}
+export function formatMessageDetailsListItem(item) {
+  return {
+    title: CHANGEMESSAGETYPE[item.msg_type],
+    time: this.formatDifferentTypesDate(item.send_time),
+    content: item.msg_content
+  }
 }

@@ -33,7 +33,7 @@
       <!-- 提示 -->
       <view class='up-remind-view weui-flex'>
         <view class='weui-flex__item'>加油哦！快把意向成员变为会员吧！</view>
-        <view><image class='filter-icon' src='../../../images/icon/mine/filter.png'></image></view>
+        <view><image class='filter-icon' src='../../../images/icon/mine/filter.png' bindtap='bindFilterSearchTap'></image></view>
       </view>
 
       <block wx:if='{{ intentionList.length > 0 }}'>
@@ -92,7 +92,7 @@
 </view>
 
 <!-- 意向 侧面 弹窗  -->
-<view>
+<view hidden='{{ leftboxHidden }}'>
   <template is='intention-leftbox' data='{{ leftboxList }}'/> 
 </view>
 

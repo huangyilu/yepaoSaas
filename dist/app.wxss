@@ -55,6 +55,13 @@ page {
     background-color: #2f2d45;
     color: white;
 }
+.foot-view .left-btn {
+    background-color: #2F2D45;
+}
+.foot-view .right-btn {
+    background-color: #FCF428;
+    color: black;
+}
 
 /* 弹窗背景 */
 .popUps-bgview {
@@ -117,6 +124,9 @@ page {
 }
 .blackColor {
     color: black;
+}
+.bgblueColor {
+    color: #2f2d45;
 }
 
 .yeBgColor {

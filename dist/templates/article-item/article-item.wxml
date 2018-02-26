@@ -3,7 +3,7 @@
 
 <template name='article-item'>
 
-  <view class='article-cell' id='{{ index }}' bindtap='bindArticleCellTap'>
+  <view class='article-cell' data-title='{{ title }}' data-mesgtype='{{ mesgType }}' id='{{ mesgId }}' bindtap='bindArticleCellTap'>
   
     <image class='left-icon' src='{{ leftImg }}'></image>
 
@@ -13,6 +13,7 @@
         <text class='time-text'>{{ time }}</text>
       </view>
       <view class='down-view'>{{ content }}</view>
+      <view wx:if='{{ newMessNum > 0 }}' class='remind-rou {{ newMessNum.length > 2 ? "remind-rou-long" : "" }}'>{{ newMessNum }}</view>
     </view>
     
   </view>

@@ -28,4 +28,21 @@
     -webkit-line-clamp: 1;
     color: #BAB9C7;
     font-size: 28rpx;
+    margin-right: 70rpx;
+}
+
+.remind-rou {
+    float:right;
+    background-color:#E44837;
+    font-size:24rpx;
+    border-radius:50%;
+    margin-top:-30rpx;
+    padding:2rpx;
+    width:36rpx;
+    height:36rpx;
+    text-align:center;
+}
+.remind-rou-long {
+    width: 50rpx;
+    border-radius: 18rpx;
 }

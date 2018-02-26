@@ -3,6 +3,7 @@
 import * as AuthService from '../../services/auth-service';
 import * as messageService from '../../services/message-service';
 import * as messagedata from '../../utils/messagedata-format';
+import moment from '../../utils/npm/moment';
 
 Page({
 
@@ -49,10 +50,8 @@ Page({
         isCertificationMemHidden: false
       })
     } else {
-      var index = e.currentTarget.id;
-      var articleItems = this.data.articleItems;
       wx.navigateTo({
-        url: 'messageDetails?title=' + articleItems[index].title,
+        url: 'messageDetails?mesgtype=' + e.currentTarget.dataset.mesgtype + '&title=' + e.currentTarget.dataset.title,
       })
     }
 

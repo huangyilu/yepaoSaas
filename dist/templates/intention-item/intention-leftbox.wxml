@@ -7,13 +7,13 @@
     <view class='leftbox-view'>
       
       <!-- 单选几种 -->
-      <block wx:for='{{ leftboxList }}' wx:for-item='lbl' wx:key='{{ index }}'>
+      <block wx:for='{{ leftboxList }}' wx:for-item='lbl' wx:for-index='x' wx:key='{{ x }}'>
       <view class='box-item'>
         <view class='title'>{{ lbl.title }}</view>
         <view class='weui-flex'>
-          <block wx:for='{{ lbl.cots }}' wx:key='{{ index }}'>
+          <block wx:for='{{ lbl.cots }}' wx:for-index='y' wx:key='{{ y }}'>
           <view class='weui-flex__item'>
-            <view class='cots-btn'>{{ item }}</view>
+            <view data-x='{{ x }}' data-y='{{ y }}'  class='cots-btn {{ item.checked ? "checked-cots-btn" : "" }} ' bindtap='bindLeftBoxBtnTap'>{{ item.name }}</view>
           </view>
           </block>
         </view>
@@ -23,13 +23,13 @@
       <!-- 关键时间 -->
       <view class='leftbox-input-view'>
         <text>关键词</text>
-        <input class='leftbox-input' placeholder-style='color:#BAB9C7;' placeholder='可以搜索手机号、名字'></input>
+        <input class='leftbox-input' placeholder-style='color:#BAB9C7;' placeholder='可以搜索手机号、名字' bindinput='bindLeftBoxKeyWordInput'></input>
       </view>
 
       <!-- 底部按钮 -->
       <view class='foot-view weui-flex'>
-        <view class='weui-flex__item reset-btn'>重置</view>
-        <view class='weui-flex__item conf-btn'>确定</view>
+        <view class='weui-flex__item reset-btn' bindtap='bindResetSearchTap'>重置</view>
+        <view class='weui-flex__item conf-btn' bindtap='bindConfirmSearchTap'>确定</view>
       </view>
 
     </view>

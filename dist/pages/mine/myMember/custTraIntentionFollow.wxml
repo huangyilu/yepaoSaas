@@ -1,0 +1,26 @@
+<!--pages/mine/myMember/custTraIntentionFollow.wxml-->
+
+
+<view class='bg-view'>
+
+  <view class='head-view'>
+    <image class='headimg' src='{{ headimg }}'></image>
+    <view>{{ custName }}</view>
+  </view>
+
+  <view class='textarea-view'>
+    <text hidden='{{ txtPlaContentHidden }}' >请输入跟单内容</text>
+    <textarea data-type='content' bindfocus='bindTextareaFocus'></textarea>
+  </view>
+
+  <view class='textarea-view'>
+    <text hidden='{{ txtPlaAttentionHidden }}' >请输入下次跟单内容与注意事项</text>
+    <textarea data-type='attention' bindfocus='bindTextareaFocus'></textarea>
+  </view>
+
+</view>
+
+<view class='foot-view weui-flex'>
+  <view class='left-btn weui-flex__item'>取消</view>
+  <view class='right-btn weui-flex__item'>提交</view>
+</view>

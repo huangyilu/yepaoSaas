@@ -31,12 +31,12 @@ export function queryCertificationMember(phone) {
   })
 }
 
-// teacher / get-mem  fit-exchange-gym
-// 我是教练 查询 私教会员  /fit-login-backend
+// 我是教练 查询 私教会员  
 export function queryMyMembers() {
-  return jsonGetRequest('getMem', {
+  return jsonGetRequest('yp-xcx-pt-getMem', {
     custName: appConfig.custName,
-    gym: AuthService.getMemberInfo().gym
+    gym: AuthService.getMemberInfo().gym,
+    myId: AuthService.getMemberInfo().memId
   })
 }
 
@@ -45,7 +45,7 @@ export function queryMyMembers() {
 
 // 定制课程 memId 私教会员ID ptId 教练ID
 export function queryCourseCustomization(customizeDateString, memId) {
-  return jsonGetRequest('getCourseCustomization', {
+  return jsonGetRequest('yp-xcx-pt-getCourseCustomization', {
     custName: appConfig.custName,
     gym: AuthService.getMemberInfo().gym,
     ptId: '59ba4cc655040f3865e14b64',
@@ -56,7 +56,7 @@ export function queryCourseCustomization(customizeDateString, memId) {
 
 // 存入 定制的 课程
 export function uploadCourseCustomization(customizeDateString, memId, customizeLevel, customizeParts) {
-  return urlencodePostRequest('saveCourseCustomization', {
+  return urlencodePostRequest('yp-xcx-pt-saveCourseCustomization', {
     custName: appConfig.custName,
     gym: AuthService.getMemberInfo().gym,
     ptId: '59ba4cc655040f3865e14b64',
@@ -69,7 +69,7 @@ export function uploadCourseCustomization(customizeDateString, memId, customizeL
 
 // 查看定制的课程
 export function queryCourseCustomizationDetail(customizeDateString, memId) {
-  return jsonGetRequest('getCourseCustomizationDetail', {
+  return jsonGetRequest('yp-xcx-pt-getCourseCustomizationDetail', {
     custName: appConfig.custName,
     gym: AuthService.getMemberInfo().gym,
     ptId: '59ba4cc655040f3865e14b64',
@@ -80,7 +80,7 @@ export function queryCourseCustomizationDetail(customizeDateString, memId) {
 
 // 共享定制的课程
 export function uploadShareCourse(shareCourseIds, memId) {
-  return urlencodePostRequest('shareCourse', {
+  return urlencodePostRequest('yp-xcx-pt-shareCourse', {
     custName: appConfig.custName,
     gym: AuthService.getMemberInfo().gym,
     ptId: '59ba4cc655040f3865e14b64',
@@ -92,7 +92,7 @@ export function uploadShareCourse(shareCourseIds, memId) {
 /**我是会籍 */
 // 资料登记 获取意向卡
 export function queryGymUsableCards() {
-  return jsonGetRequest('yp-xcx-getGymUsableCards', {
+  return jsonGetRequest('yp-xcx-mc-getGymUsableCards', {
     custName: appConfig.custName,
     gym: AuthService.getMemberInfo().gym,
   })
@@ -100,7 +100,7 @@ export function queryGymUsableCards() {
 
 // 资料登记 保存信息 memId
 export function uploadMcRegisterMem(cust) {
-  return urlencodePostRequest('yp-xcx-mcRegisterMem', {
+  return urlencodePostRequest('yp-xcx-mc-registerMem', {
     custName: appConfig.custName,
     gym: AuthService.getMemberInfo().gym,
     mcId: AuthService.getMemberInfo().memId,
@@ -139,7 +139,7 @@ export function queryMcs(telName) {
 /** 课程共享 */
 // 获取 课程共享 列表
 export function queryShareCourse(memId) {
-  return jsonGetRequest('getShareCourseList', {
+  return jsonGetRequest('yp-xcx-getShareCourseList', {
     custName: appConfig.custName,
     gym: AuthService.getMemberInfo().gym,
     memId: AuthService.getMemberInfo().memId
@@ -147,7 +147,7 @@ export function queryShareCourse(memId) {
 }
 // 课程共享 详情
 export function queryShareCourseDetail(memId) {
-  return jsonGetRequest('getShareCourseDetail', {
+  return jsonGetRequest('yp-xcx-getShareCourseDetail', {
     custName: appConfig.custName,
     gym: AuthService.getMemberInfo().gym,
     ptId: '59ba4cc655040f3865e14b64',

@@ -49,20 +49,57 @@ Page({
       }
     ],
 
+    leftboxHidden: true,
     leftboxList: [
       {
         title: '性别',
-        cots: ['男','女']
+        cots: [
+          {
+            name: '男',
+            checked: false
+          },
+          {
+            name: '女',
+            checked: false
+          }
+        ]
       },
       {
         title: '客户类型',
-        cots: ['重要客户', '一般客户','次要客户']
+        cots: [
+          {
+            name: '重要客户',
+            checked: false
+          },
+          {
+            name: '一般客户',
+            checked: false
+          },
+          {
+            name: '次要客户',
+            checked: false
+          }
+        ]
       },
       {
         title: '健身时间',
-        cots: ['上午', '下午', '晚上']
+        cots: [
+          {
+            name: '上午',
+            checked: false
+          },
+          {
+            name: '中午',
+            checked: false
+          },
+          {
+            name: '晚上',
+            checked: false
+          }
+        ]
       }
-    ]
+    ],
+    searchKeyWord: ''
   },
 
   /**
@@ -86,5 +123,73 @@ Page({
     })
   },
 
+  // 右侧 筛选
+  bindFilterSearchTap(e) {
+
+    this.setData({
+      leftboxHidden: false
+    })
+    
+  },
+  // 右弹窗按钮 点击事件
+  bindLeftBoxBtnTap(e) {
+
+    var x = e.currentTarget.dataset.x;
+    var y = e.currentTarget.dataset.y;
+
+    var leftboxList = this.data.leftboxList;
+    leftboxList[x].cots.forEach(ctsitem => {
+      ctsitem.checked = false;
+      leftboxList[x].cots[y].checked = true;
+    })
+    
+    this.setData({
+      leftboxList: leftboxList
+    })
+
+  },
+  // 关键词搜索
+  bindLeftBoxKeyWordInput(e) {
+    this.setData({
+      searchKeyWord: e.detail.value
+    })
+  },
+
+  // 确定 搜索
+  bindConfirmSearchTap() {
+
+    var leftboxList = this.data.leftboxList;
+    var searchKeyWord = this.data.searchKeyWord;
+
+    this.setData({
+      leftboxHidden: true
+    })
+
+  },
+
+  // 重置 搜索
+  bindResetSearchTap() {
+
+    var leftboxList = this.data.leftboxList;
+    var searchKeyWord = this.data.searchKeyWord;
+
+    leftboxList.forEach(lblitem => {
+      lblitem.cots.forEach(ctsitem => {
+        ctsitem.checked = false
+      })
+    })
+
+    this.setData({
+      leftboxList: leftboxList,
+      leftboxHidden: true
+    })
+  },
+
+  // 意向 点击
+  bindIntentionCellTap() {
+    wx.navigateTo({
+      url: 'customerTrackingIntention',
+    })
+  }
 
 })
