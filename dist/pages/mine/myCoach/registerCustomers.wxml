@@ -15,9 +15,9 @@
     </view>
   </view>
 
-  <view class='weui-flex foot-view' >
-    <view class='weui-flex__item cancel-btn' >取消</view>
-    <view class='weui-flex__item join-btn' >加入任务列表</view>
+  <view class='foot-view' >
+    <view class='left-btn' >取消</view>
+    <view class='right-btn' >加入任务列表</view>
   </view>
 
 </view>

@@ -27,6 +27,15 @@ Page({
    */
   onLoad: function (options) {
 
+  },
+  onShow: function (options) {
+    // 查询是否认证会员
+    this.getCertifiMem();
+    // 获取消息列表
+    this.getMessageList();
+  },
+
+  getMessageList() {
     messageService.quaryMessage().then((result) => {
 
       this.setData({
@@ -36,25 +45,6 @@ Page({
     }).catch((error) => {
       console.log(error);
     })
-    
-  },
-  onShow: function (options) {
-    // 查询是否认证会员
-    this.getCertifiMem();
-  },
-
-  bindArticleCellTap (e) {
-
-    if (!this.data.isCertificationMem) {
-      this.setData({
-        isCertificationMemHidden: false
-      })
-    } else {
-      wx.navigateTo({
-        url: 'messageDetails?mesgtype=' + e.currentTarget.dataset.mesgtype + '&title=' + e.currentTarget.dataset.title,
-      })
-    }
-
   },
   // 查询是否认证会员
   getCertifiMem() {
@@ -94,5 +84,18 @@ Page({
     this.setData({
       memTelephone: e.detail.value
     })
+  },
+  bindArticleCellTap(e) {
+
+    if (!this.data.isCertificationMem) {
+      this.setData({
+        isCertificationMemHidden: false
+      })
+    } else {
+      wx.navigateTo({
+        url: 'messageDetails?mesgtype=' + e.currentTarget.dataset.mesgtype + '&title=' + e.currentTarget.dataset.title,
+      })
+    }
+
   }
 })

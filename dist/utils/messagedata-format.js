@@ -30,12 +30,12 @@ export function formatMessageList(list) {
 export function formatMessageListItem(item) {
   return {
     newMessNum: item.totalNum > 99 ? '99+' : item.totalNum,
-    mesgId: item.message.id,
-    mesgType: item.message.msg_type,
-    leftImg: CHANGEMESSAGETYPEIMG[item.message.msg_type],
-    title: CHANGEMESSAGETYPE[item.message.msg_type],
-    content: item.message.msg_content,
-    time: this.formatDifferentTypesDate(item.message.send_time)
+    mesgId: item.message ? item.message.id : '',
+    mesgType: item.message.msg_type ? item.message.msg_type : '',
+    leftImg: item.message.msg_type ? CHANGEMESSAGETYPEIMG[item.message.msg_type] : '',
+    title: item.message.msg_type ? CHANGEMESSAGETYPE[item.message.msg_type] : '',
+    content: item.message.msg_content ? item.message.msg_content : '',
+    time: item.message.send_time ? this.formatDifferentTypesDate(item.message.send_time) : ''
   }
 }
 

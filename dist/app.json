@@ -1,10 +1,11 @@
 {
   "pages": [
+    "pages/home/home",
     "pages/mine/myMember/custTraIntentionFollow",
     "pages/mine/myMember/custTraIntentionPrepay",
     "pages/mine/myMember/customerTrackingIntention",
     "pages/mine/myMember/customerTracking",
-    "pages/home/home",
+    
     "pages/club/memberActivitiesDetails",
     "pages/club/memberActivities",
     "pages/club/club",

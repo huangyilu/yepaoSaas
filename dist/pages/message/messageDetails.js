@@ -22,12 +22,20 @@ Page({
       title: options.title ? options.title : '消息',
     })
 
+    // 获取消息列表
     messageService.quaryMessageDetails(options.mesgtype).then((result) => {
 
       this.setData({
         mesgCarItems: messagedata.formatMessageDetailsList(result.result)
       })
 
+    }).catch((error) => {
+      console.log(error);
+    })
+
+    // 更新消息 状态
+    messageService.updateMessageState(e.currentTarget.dataset.mesgtype).then((result) => {
+      console.log('更新消息状态成功');
     }).catch((error) => {
       console.log(error);
     })

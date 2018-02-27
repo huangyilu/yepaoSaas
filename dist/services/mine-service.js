@@ -122,7 +122,7 @@ export function queryMems() {
   return jsonGetRequest('yp-xcx-mc-queryMember', {
     custName: appConfig.custName,
     gym: AuthService.getMemberInfo().gym,
-    mcId: AuthService.getMemberInfo().memId
+    myId: AuthService.getMemberInfo().memId
   })
 }
 
@@ -131,7 +131,7 @@ export function queryMcs(telName) {
   return jsonGetRequest('yp-xcx-mc-queryMC', {
     custName: appConfig.custName,
     gym: AuthService.getMemberInfo().gym,
-    mcId: AuthService.getMemberInfo().memId,
+    myId: AuthService.getMemberInfo().memId,
     telName: telName
   })
 }

@@ -54,13 +54,22 @@ page {
     text-align: center;
     background-color: #2f2d45;
     color: white;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
 }
 .foot-view .left-btn {
     background-color: #2F2D45;
+    -webkit-box-flex:1;
+    -webkit-flex:1;
+    flex:1;
 }
 .foot-view .right-btn {
     background-color: #FCF428;
     color: black;
+    -webkit-box-flex:1;
+    -webkit-flex:1;
+    flex:1;
 }
 
 /* 弹窗背景 */
