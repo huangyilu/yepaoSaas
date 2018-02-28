@@ -136,6 +136,43 @@ export function queryMcs(telName) {
   })
 }
 
+// 资料移交 -- 确定移交
+export function uploadInfoTransferConfirm(mcId, ids) {
+  return urlencodePostRequest('yp-xcx-mc-changeToMC', {
+    custName: appConfig.custName,
+    gym: AuthService.getMemberInfo().gym,
+    mcId: mcId,
+    ids: ids
+  })
+}
+
+// 客户跟踪 -- 成交
+export function queryCustTrackDeal() {
+  return jsonGetRequest('yp-xcx-mc-getTodayDeal', {
+    custName: appConfig.custName,
+    gym: AuthService.getMemberInfo().gym,
+    myId: AuthService.getMemberInfo().memId
+  })
+}
+
+// 客户跟踪 -- 快到期
+export function queryCustTrackCloseDeadline() {
+  return jsonGetRequest('yp-xcx-mc-getCloseToDeadline', {
+    custName: appConfig.custName,
+    gym: AuthService.getMemberInfo().gym,
+    myId: AuthService.getMemberInfo().memId
+  })
+}
+
+// 客户跟踪 -- 已到期
+export function queryCustTrackAlreadyDeadline() {
+  return jsonGetRequest('yp-xcx-mc-getAlreadyDeadline', {
+    custName: appConfig.custName,
+    gym: AuthService.getMemberInfo().gym,
+    myId: AuthService.getMemberInfo().memId
+  })
+}
+
 /** 课程共享 */
 // 获取 课程共享 列表
 export function queryShareCourse(memId) {

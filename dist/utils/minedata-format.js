@@ -183,6 +183,7 @@ export function formatInfoTransferSelectMem(list) {
 }
 export function formatInfoTransferSelectMemItem(item) {
   return {
+    id: item.mem_id,
     name: item.mem_name,
     headimg: item.appHeadString ? '../../images/icon/default_headimg.png' : item.appHeadString,
     tel: 'tel: ' + this.formatHidPhone(item.phone),
@@ -192,4 +193,26 @@ export function formatInfoTransferSelectMemItem(item) {
 // 电话隐藏 格式转换
 export function formatHidPhone(phone) {
    return phone.slice(0, 3) + '****' + phone.slice(7)
+}
+
+// 客户跟踪 
+export function formatCustTrackingDeal(list) {
+  return list.map(item => this.formatCustTrackingDealItem(item))
+}
+export function formatCustTrackingDealItem(item) {
+  return {
+    headimg: item.appHeadString != 'null' ? item.appHeadString : '../../../images/icon/default_headimg.png',
+    name: item.mem_name,
+    cardType: item.card_name,
+    remainNum: this.formatCustTrackingDeaDays(item),
+    gender: FORMATGENDER[item.sex],
+    phonecall: item.phone
+  }
+}
+export function formatCustTrackingDeaDays(item) {
+  if (item.remain_days) {
+    return '剩余天数：' + item.remain_days;
+  } else if (item.past_days) {
+    return '过期天数：' + item.past_days;
+  }
 }

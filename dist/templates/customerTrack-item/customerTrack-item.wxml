@@ -15,12 +15,12 @@
     </view>
     <view class='info-text'>
       <text>成交卡种：{{ cardType }}</text>
-      <text>剩余天数：{{ remainNum }}</text>
+      <text>{{ remainNum }}</text>
     </view>
   </view>
 
   <view>
-    <image wx:if='{{  }}' class='telephone-icon' src='../../../images/icon/mine/telephone.png'></image>
+    <image hidden='{{ !telephoneHidden }}' class='telephone-icon' src='../../../images/icon/mine/telephone.png' id='{{ phonecall }}' bindtap='bindPhonecall'></image>
   </view>
 
 </view>

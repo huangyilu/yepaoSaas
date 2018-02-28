@@ -15,7 +15,10 @@ Page({
     confirmBoxHidden: true,
 
     // 上一页所选会员
-    mems: []
+    mems: [],
+
+    // 本次所选的会籍
+    thisMc: {}
   },
 
   /**
@@ -62,7 +65,8 @@ Page({
     // 弹窗询问是否确定
     this.setData({
       confirmText: '确定将选择的会员移交给' + searchList[index].name + '吗？',
-      confirmBoxHidden: false
+      confirmBoxHidden: false,
+      thisMc: searchList[index]
     })
 
   },
@@ -70,8 +74,18 @@ Page({
   bindConfirmBoxBtnTap(e) {
     var id = e.currentTarget.id;
     if (id == 'a') {
+      var mems = this.data.mems;
+      var idsArr = [];
+      var ids = '';
+      mems.forEach(item => {
+        idsArr.push(item.memId);
+      })
+      ids = idsArr.join(',');
+      var mcId = this.data.thisMc.id;
+      console.log('mc ... ' + JSON.stringify(mcId));
+      console.log('ids ... ' + JSON.stringify(ids));
       // 确定
-      // AuthService.queryCertificationMember(this.data.memTelephone).then((result) => {
+      mineService.uploadInfoTransferConfirm(mcId, ids).then((result) => {
 
         this.setData({
           confirmBoxHidden: true
@@ -81,9 +95,9 @@ Page({
           delta: 1
         })
 
-      // }).catch((error) => {
-      //   console.log(error);
-      // })
+      }).catch((error) => {
+        console.log(error);
+      })
 
     } else {
       // 取消

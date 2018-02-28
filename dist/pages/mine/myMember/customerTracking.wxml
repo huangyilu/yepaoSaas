@@ -49,10 +49,10 @@
 
 <!-- 选项二 开始 -->
     <view class="weui-tab__content" hidden="{{ activeIndex != 1 }}">
-      <view class='up-remind-view'>加油哦！今天已成交{{ customerTrackList.length }}单啦！</view>
+      <view class='up-remind-view'>加油哦！今天已成交{{ dealList.length }}单啦！</view>
       <!-- 选项二 内容 -->
-      <block wx:if='{{ customerTrackList.length > 0 }}'>
-      <block wx:for='{{ customerTrackList }}' wx:for-item='cutl' wx:key='{{ index }}'>
+      <block wx:if='{{ dealList.length > 0 }}'>
+      <block wx:for='{{ dealList }}' wx:for-item='cutl' wx:key='{{ index }}'>
         <template is="customerTrack-item" data="{{ ...cutl }}"/> 
       </block>
       </block>
@@ -65,8 +65,8 @@
     <view class="weui-tab__content" hidden="{{ activeIndex != 2 }}">
     <view class='up-remind-view'>两个月内ta们就到期了！快去提醒ta们吧！</view>
       <!-- 选项三 内容 -->
-      <block wx:if='{{ customerTrackList.length > 0 }}'>
-      <block wx:for='{{ customerTrackList }}' wx:for-item='cutl' wx:key='{{ index }}'>
+      <block wx:if='{{ closeDeadlineList.length > 0 }}'>
+      <block wx:for='{{ closeDeadlineList }}' wx:for-item='cutl' wx:key='{{ index }}'>
         <template is="customerTrack-item" data="{{ ...cutl,telephoneHidden }}"/> 
       </block>
       </block>
@@ -78,9 +78,9 @@
 <!-- 选项四 开始 -->
     <view class="weui-tab__content" hidden="{{ activeIndex != 3 }}">
       <!-- 选项四 内容 -->
-      <block wx:if='{{ customerTrackList.length > 0 }}'>
-      <block wx:for='{{ customerTrackList }}' wx:for-item='cutl' wx:key='{{ index }}'>
-        <template is="customerTrack-item" data="{{ ...cutl }}"/> 
+      <block wx:if='{{ alreadyDeadlineList.length > 0 }}'>
+      <block wx:for='{{ alreadyDeadlineList }}' wx:for-item='cutl' wx:key='{{ index }}'>
+        <template is="customerTrack-item" data="{{ ...cutl,telephoneHidden }}"/> 
       </block>
       </block>
       <!-- 无 更多 -->

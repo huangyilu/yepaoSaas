@@ -1,5 +1,8 @@
 // pages/mine/myMember/customerTracking.js
 
+import * as minedata from '../../../utils/minedata-format';
+import * as mineService from '../../../services/mine-service';
+
 var sliderWidth = 96; // 需要设置slider的宽度，用于计算中间位置
 
 Page({
@@ -16,23 +19,15 @@ Page({
     sliderLeft: 0,
     navbarTabs:['意向','成交','快到期','已到期'],
 
+    telephoneHidden: true,
+
     activeTitle: '',
-    customerTrackList: [
-      {
-        headimg: 'http://img2.imgtn.bdimg.com/it/u=3390152407,4060777889&fm=27&gp=0.jpg',
-        name: '藏冬雨',
-        cardType: '一年卡',
-        remainNum: 318,
-        gender: 'boy'
-      },
-      {
-        headimg: 'http://img2.imgtn.bdimg.com/it/u=3390152407,4060777889&fm=27&gp=0.jpg',
-        name: '藏冬雨',
-        cardType: '一年卡',
-        remainNum: 310,
-        gender: 'girl'
-      }
-    ],
+    // 成交
+    dealList: [],
+    // 快到期
+    closeDeadlineList: [],
+    // 已到期
+    alreadyDeadlineList: [],
 
     intentionList: [
       {
@@ -121,6 +116,62 @@ Page({
       activeIndex: e.currentTarget.id,
       sliderOffset: e.currentTarget.offsetLeft
     })
+
+    switch (+e.currentTarget.id)
+    {
+      case 0 :
+        break;
+      case 1:
+        this.getDealList();
+        break;
+      case 2:
+        this.getCloseDeadlineList();
+        break;
+      case 3:
+        this.getAlreadyDeadlineList();
+        break;
+    }
+
+  },
+
+  // 获取数据
+  // 意向
+  getIntentionList() {
+    
+  },
+  // 成交
+  getDealList() {
+    mineService.queryCustTrackDeal().then((result) => {
+      // console.log('queryCustTrackDeal *** ' + JSON.stringify(result));
+      this.setData({
+        dealList: minedata.formatCustTrackingDeal(result.dealList)
+      })
+
+    }).catch((error) => {
+      console.log(error);
+    })
+  },
+  // 快到期
+  getCloseDeadlineList() {
+    mineService.queryCustTrackCloseDeadline().then((result) => {
+      // console.log('queryCustTrackCloseDeadline *** ' + JSON.stringify(result));
+      this.setData({
+        closeDeadlineList: minedata.formatCustTrackingDeal(result.dealList)
+      })
+    }).catch((error) => {
+      console.log(error);
+    })
+  },
+  // 已到期
+  getAlreadyDeadlineList() {
+    mineService.queryCustTrackAlreadyDeadline().then((result) => {
+      // console.log('queryCustTrackAlreadyDeadline *** ' + JSON.stringify(result));
+      this.setData({
+        alreadyDeadlineList: minedata.formatCustTrackingDeal(result.dealList)
+      })
+    }).catch((error) => {
+      console.log(error);
+    })
   },
 
   // 右侧 筛选
@@ -189,6 +240,13 @@ Page({
   bindIntentionCellTap() {
     wx.navigateTo({
       url: 'customerTrackingIntention',
+    })
+  },
+
+  // 打电话
+  bindPhonecall(e) {
+    wx.makePhoneCall({
+      phoneNumber: e.currentTarget.id,
     })
   }
 
