@@ -6,7 +6,6 @@ export function formatDifferentTypesDate(oldStr) {
   // +timeStr
   var newStr = '';
   var nowStr = moment().format('YYYY-MM-DD');
-  // var oldStr = moment(+timeStr).format('YYYY-MM-DD');
 
   var isBeforeToday = moment(oldStr).isBefore(nowStr);
   var isBeforeThisYear = moment(oldStr).isBefore(nowStr, 'year');
@@ -14,7 +13,7 @@ export function formatDifferentTypesDate(oldStr) {
   if (isBeforeToday) {
     newStr = moment(oldStr).format('MM-DD');
   } else {
-    newStr = moment(+timeStr).format('HH:mm');
+    newStr = moment(oldStr).format('HH:mm');
   }
   if (isBeforeThisYear) {
     newStr = moment(oldStr).format('YYYY-MM-DD');

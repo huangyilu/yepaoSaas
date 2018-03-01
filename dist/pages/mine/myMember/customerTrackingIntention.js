@@ -1,42 +1,15 @@
 // pages/mine/myMember/customerTrackingIntention.js
+import * as minedata from '../../../utils/minedata-format';
+import * as mineService from '../../../services/mine-service';
+import { Base64 } from '../../../utils/urlsafe-base64';
+
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    task: {
-      custHeadimg: '../../../images/icon/default_headimg.png',
-      custName: '张迪',
-      custGender: 'girl',
-      custPhone: '18136449610',
-      custBirth: '1993-01-01',
-      fitnessPurpose: '减肥',
-      intentionCard: '通用五年卡',
-      fitnessTime: '上午',
-      address: '苏州高新区滨河路',
-      remarks: '锻炼后需要拉伸',
-      followList: [
-        {
-          time: '2017-09-09',
-          title: '第一次跟单',
-          content: '这是我第一次跟单。今天只是合客户简单沟通了其需要减肥的需求，值得进一步跟进',
-          followMan: '跟单人：马敏'
-        },
-        {
-          time: '2017-09-09',
-          title: '第一次跟单',
-          content: '这是我第一次跟单。今天只是合客户简单沟通了其需要减肥的需求，值得进一步跟进',
-          followMan: '跟单人：马敏'
-        },
-        {
-          time: '2017-09-09',
-          title: '第一次跟单',
-          content: '这是我第一次跟单。今天只是合客户简单沟通了其需要减肥的需求，值得进一步跟进',
-          followMan: '跟单人：马敏'
-        }
-      ]
-    }
+    task: {}
   },
 
   /**
@@ -44,6 +17,18 @@ Page({
    */
   onLoad: function (options) {
   
+
+    mineService.queryCustTrackIntentionDetails(options.memId).then((result) => {
+      // console.log('queryCustTrackIntention *** ' + JSON.stringify(result));
+
+      this.setData({
+        task: minedata.formatCustTrackingIntentionDetail(result.potentialMemMap)
+      })
+
+    }).catch((error) => {
+      console.log(error);
+    })
+
   },
 
   // 拨打电话
@@ -54,14 +39,18 @@ Page({
   },
   // 预付定金
   bindPrepayTap (e) {
+    let qsTask = Base64.encodeURI(JSON.stringify(this.data.task)); 
     wx.navigateTo({
-      url: 'custTraIntentionPrepay',
+      url: 'custTraIntentionPrepay?qsTask=' + qsTask,
     })
   },
   // 跟单
   bindFollowTap (e) {
+
+    let qsTask = Base64.encodeURI(JSON.stringify(this.data.task)); 
+
     wx.navigateTo({
-      url: 'custTraIntentionFollow',
+      url: 'custTraIntentionFollow?qsTask=' + qsTask,
     })
   }
 

@@ -20,7 +20,7 @@ Page({
       {
         iconUrl: '../../../images/icon/mine/work_transfer.png',
         name: '资料移交',
-        navigateUrl: '../infoTransfer'
+        navigateUrl: '../infoTransfer?memIdentity=pt'
       },
       {
         iconUrl: '../../../images/icon/mine/private_member.png',
@@ -42,4 +42,5 @@ Page({
       url: e.currentTarget.id,
     })
   }
+
 })

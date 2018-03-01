@@ -208,7 +208,7 @@ Page({
     var picker_year = [],
       picker_month = [],
       picker_day = [];
-    for (var i = (now_year - 100); i <= now_year; i++) {
+    for (var i = (now_year - 70); i <= now_year; i++) {
       picker_year.push(i);
     }
     for (var i = 1; i <= 12; i++) {
@@ -277,7 +277,7 @@ Page({
       intentionCard: textInputItems[5].value,
       checkinTimes: textInputItems[6].value,
       userType: textInputItems[7].value,
-      addr: textInputItems[8].value,
+      address: textInputItems[8].value,
       remark: textInputItems[9].value
     }
     console.log('custdic ... ' + JSON.stringify(custDic));

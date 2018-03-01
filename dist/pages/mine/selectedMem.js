@@ -2,6 +2,7 @@
 import * as minedata from '../../utils/minedata-format';
 import * as mineService from '../../services/mine-service';
 import { Base64 } from '../../utils/urlsafe-base64';
+import * as AuthService from '../../services/auth-service';
 
 Page({
 
@@ -18,7 +19,11 @@ Page({
     mems: [],
 
     // 本次所选的会籍
-    thisMc: {}
+    thisMc: {},
+
+    memIdentity: '',
+
+    textInput: ''
   },
 
   /**
@@ -34,15 +39,72 @@ Page({
       console.log('选择的会员 ... ' + JSON.stringify(this.data.mems));
     }
 
+    if (options.memIdentity) {
+      this.setData({
+        memIdentity: options.memIdentity
+      })
+    }
+
   },
 
   bindTextInputConfirm(e) {
-    // 查询 会籍列表
-    mineService.queryMcs(e.detail.value).then((result) => {
+
+    this.setData({
+      textInput: e.detail.value
+    })
+    if (this.data.memIdentity == 'mc') {
+      this.getMCCustList();
+    } else if (this.data.memIdentity == 'pt') {
+      this.getPTCustList();
+    } else if (this.data.memIdentity == 'ptdjkhzl') {
+      this.getPTCustInfoList();
+    } 
+
+  },
+
+  // 会籍入口查询
+  getMCCustList() {
+    // 会籍 查询 会员列表
+    mineService.queryMcs(this.data.textInput).then((result) => {
 
       console.log('queryMcs *** ' + JSON.stringify(result));
       this.setData({
         searchList: minedata.formatInfoTransferSelectMem(result.mcList)
+      })
+
+    }).catch((error) => {
+      this.setData({
+        searchList: []
+      })
+      console.log(error);
+    })
+  },
+
+  // 教练入口查询
+  getPTCustList() {
+    // 教练 资料移交 查询 将要移交的教练
+    mineService.queryPtList(this.data.textInput).then((result) => {
+
+      console.log('queryPtList *** ' + JSON.stringify(result));
+      this.setData({
+        searchList: minedata.formatInfoTransferSelectMem(result.ptList)
+      })
+
+    }).catch((error) => {
+      this.setData({
+        searchList: []
+      })
+      console.log(error);
+    })
+  },
+
+  // 教练入口 登记客户资料 查询
+  getPTCustInfoList() {
+    mineService.queryRegisterCustSelectList(this.data.textInput).then((result) => {
+
+      console.log('queryRegisterCustSelectList *** ' + JSON.stringify(result));
+      this.setData({
+        searchList: minedata.formatInfoTransferSelectMem(result.memList)
       })
 
     }).catch((error) => {
@@ -59,9 +121,6 @@ Page({
 
     console.log('searchList[index] .. ' + JSON.stringify(searchList[index]));
 
-    // 保存所选 会籍
-    // wx.setStorageSync('infoTransferSelectMem', searchList[index]);
-
     // 弹窗询问是否确定
     this.setData({
       confirmText: '确定将选择的会员移交给' + searchList[index].name + '吗？',
@@ -74,6 +133,7 @@ Page({
   bindConfirmBoxBtnTap(e) {
     var id = e.currentTarget.id;
     if (id == 'a') {
+
       var mems = this.data.mems;
       var idsArr = [];
       var ids = '';
@@ -82,22 +142,25 @@ Page({
       })
       ids = idsArr.join(',');
       var mcId = this.data.thisMc.id;
+
       console.log('mc ... ' + JSON.stringify(mcId));
       console.log('ids ... ' + JSON.stringify(ids));
-      // 确定
-      mineService.uploadInfoTransferConfirm(mcId, ids).then((result) => {
 
-        this.setData({
-          confirmBoxHidden: true
-        })
+      if (this.data.memIdentity == 'mc') {
+    
+        this.bindMcConfirm(mcId, ids);
+      } else if (this.data.memIdentity == 'pt') {
+      
+        this.bindPtConfirm(mcId, ids);
+      } else if (this.data.memIdentity == 'ptdjkhzl') {
 
+        // 保存所选 会员
+        wx.setStorageSync('ptdjkhzlSelectCust', this.data.thisMc);
         wx.navigateBack({
           delta: 1
         })
 
-      }).catch((error) => {
-        console.log(error);
-      })
+      }
 
     } else {
       // 取消
@@ -105,6 +168,40 @@ Page({
         confirmBoxHidden: true
       })
     }
-  }
 
+    
+  },
+
+  // 会籍 -- 确定移交 上传
+  bindMcConfirm(mcId, ids) {
+    mineService.uploadInfoTransferConfirm(mcId, ids).then((result) => {
+
+      this.setData({
+        confirmBoxHidden: true
+      })
+
+      wx.navigateBack({
+        delta: 1
+      })
+
+    }).catch((error) => {
+      console.log(error);
+    })
+  },
+  // 教练 -- 确定移交 上传
+  bindPtConfirm(ptId, ids) {
+    mineService.uploadCoachChangeConfirm(ptId, ids).then((result) => {
+
+      this.setData({
+        confirmBoxHidden: true
+      })
+
+      wx.navigateBack({
+        delta: 1
+      })
+
+    }).catch((error) => {
+      console.log(error);
+    })
+  }
 })

@@ -1,4 +1,7 @@
 // pages/mine/myCoach/registerCustomers.js
+
+import * as mineService from '../../../services/mine-service';
+
 Page({
 
   /**
@@ -6,7 +9,11 @@ Page({
    */
   data: {
     textareaPlaceHidden: false,
-    taskContent: ''
+    taskContent: '',
+
+    selectCustName: '点击选择会员',
+
+    infoTransferSelectMem: null
   },
 
   /**
@@ -14,6 +21,19 @@ Page({
    */
   onLoad: function (options) {
   
+  },
+  onShow: function (options) {
+    var meminfo = wx.getStorageSync('ptdjkhzlSelectCust');
+    if (meminfo) {
+      console.log('ptdjkhzlSelectCust .. ' + JSON.stringify(meminfo));
+      this.setData({
+        infoTransferSelectMem: meminfo,
+        selectCustName: meminfo.name
+      })
+      wx.removeStorage({
+        key: 'ptdjkhzlSelectCust',
+      })
+    }
   },
 
   bindTextareaInpput(e) {
@@ -24,7 +44,7 @@ Page({
       textareaPlaceHidden: true
     })
   },
-  // 是去焦点时
+  // 失去焦点时
   bindTextareaBlur(e) {
     var value = e.detail.value;
     if (value == '') {
@@ -33,10 +53,24 @@ Page({
       })
     }
   },
-
+  // 选择会员
   bindSelectedMemTap () {
     wx.navigateTo({
-      url: '../selectedMem',
+      url: '../selectedMem?memIdentity=ptdjkhzl',
+    })
+  },
+  // 加入任务列表
+  bindJoinTaskListTap() {
+
+    mineService.uploadRegisterCust(this.data.infoTransferSelectMem.id, this.data.taskContent).then((result) => {
+
+      wx.navigateBack({
+        delta: 1
+      })
+
+    }).catch((error) => {
+      console.log(error);
     })
   }
+
 })

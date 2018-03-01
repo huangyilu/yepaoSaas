@@ -31,7 +31,7 @@ export function queryCertificationMember(phone) {
   })
 }
 
-// 我是教练 查询 私教会员  
+// 我是教练 -- 私教会员  
 export function queryMyMembers() {
   return jsonGetRequest('yp-xcx-pt-getMem', {
     custName: appConfig.custName,
@@ -40,8 +40,75 @@ export function queryMyMembers() {
   })
 }
 
-// 我是教练 
+// 我是教练 -- 客户资料登记 -- 选择会员 
+export function queryRegisterCustSelectList(telName) {
+  return jsonGetRequest('yp-xcx-pt-getNoPtMem', {
+    custName: appConfig.custName,
+    gym: AuthService.getMemberInfo().gym,
+    telName: telName
+  })
+}
 
+// 我是教练 -- 客户资料登记 -- 加入任务列表
+export function uploadRegisterCust(memId, content) {
+  return urlencodePostRequest('yp-xcx-pt-registerMem', {
+    custName: appConfig.custName,
+    gym: AuthService.getMemberInfo().gym,
+    myId: AuthService.getMemberInfo().memId,
+    memId: memId,
+    content: content
+  })
+}
+// 我是教练 -- 资料移交 yp-xcx-pt-queryMember
+export function queryCoachMemberList() {
+  return jsonGetRequest('yp-xcx-pt-queryMember', {
+    custName: appConfig.custName,
+    gym: AuthService.getMemberInfo().gym,
+    myId: AuthService.getMemberInfo().memId
+  })
+}
+// 我是教练 -- 资料移交 -- 查找移交的教练
+export function queryPtList(telName) {
+  return jsonGetRequest('yp-xcx-pt-queryPT', {
+    custName: appConfig.custName,
+    gym: AuthService.getMemberInfo().gym,
+    myId: AuthService.getMemberInfo().memId,
+    telName: telName
+  })
+}
+// 我是教练 -- 资料移交 -- 确定移交
+export function uploadCoachChangeConfirm(ptId, ids) {
+  return urlencodePostRequest('yp-xcx-pt-changeToPT', {
+    custName: appConfig.custName,
+    gym: AuthService.getMemberInfo().gym,
+    ptId: ptId,
+    ids: ids
+  })
+}
+// 我是教练 -- 客户跟踪 -- 成交
+export function queryCoachCustTrackDeal() {
+  return jsonGetRequest('yp-xcx-pt-getTodayDeal', {
+    custName: appConfig.custName,
+    gym: AuthService.getMemberInfo().gym,
+    myId: AuthService.getMemberInfo().memId,
+  })
+}
+// 我是教练 -- 客户跟踪 -- 快到期
+export function queryCoachCustTrackAlreadyDeadline() {
+  return jsonGetRequest('yp-xcx-pt-getCloseToDeadline', {
+    custName: appConfig.custName,
+    gym: AuthService.getMemberInfo().gym,
+    myId: AuthService.getMemberInfo().memId
+  })
+}
+// 我是教练 -- 客户跟踪 -- 已到期
+export function queryCoachCustTrackIntention() {
+  return jsonGetRequest('yp-xcx-pt-getAlreadyDeadline', {
+    custName: appConfig.custName,
+    gym: AuthService.getMemberInfo().gym,
+    myId: AuthService.getMemberInfo().memId
+  })
+}
 
 // 定制课程 memId 私教会员ID ptId 教练ID
 export function queryCourseCustomization(customizeDateString, memId) {
@@ -104,8 +171,8 @@ export function uploadMcRegisterMem(cust) {
     custName: appConfig.custName,
     gym: AuthService.getMemberInfo().gym,
     mcId: AuthService.getMemberInfo().memId,
-    memName: cust.name,
-    sex: cust.gender,
+    memName: cust.memName,
+    sex: cust.sex,
     birthday: cust.birthday,
     phone: cust.phone,
     fitPurpose: cust.fitPurpose,
@@ -173,9 +240,60 @@ export function queryCustTrackAlreadyDeadline() {
   })
 }
 
+// 客户跟踪 -- 意向
+export function queryCustTrackIntention(dic) {
+  dic.custName = appConfig.custName;
+  dic.gym = AuthService.getMemberInfo().gym;
+  dic.myId = AuthService.getMemberInfo().memId;
+  return jsonGetRequest('yp-xcx-mc-getPotentialMem', dic)
+}
+
+// 客户跟踪 -- 意向 -- 意向详情
+export function queryCustTrackIntentionDetails(memId) {
+  return jsonGetRequest('yp-xcx-mc-potentialMemDetail', {
+    custName: appConfig.custName,
+    gym: AuthService.getMemberInfo().gym,
+    myId: AuthService.getMemberInfo().memId,
+    memId: memId
+  })
+}
+// 客户跟踪-- 意向 -- 意向详情 -- 跟单
+export function uploadCustTrackIntentionFollow(memId, merchandiseContent, nextContent) {
+  return urlencodePostRequest('yp-xcx-mc-executeMerchandise', {
+    custName: appConfig.custName,
+    gym: AuthService.getMemberInfo().gym,
+    myId: AuthService.getMemberInfo().memId,
+    memId: memId,
+    merchandiseContent: merchandiseContent,
+    nextContent: nextContent
+    
+  })
+}
+// 客户跟踪-- 意向 -- 意向详情 -- 预付定金 查询
+export function queryCustTrackIntentionPrepay(memId) {
+  return jsonGetRequest('yp-xcx-mc-getPrefeeList', {
+    custName: appConfig.custName,
+    gym: AuthService.getMemberInfo().gym,
+    memId: memId
+  })
+}
+
+// 客户跟踪-- 意向 -- 意向详情 -- 预付 设置提交
+export function uploadCustTrackIntentionPrepay(memId,payAmt,userAmt) {
+  return urlencodePostRequest('yp-xcx-mc-savePrefee', {
+    custName: appConfig.custName,
+    gym: AuthService.getMemberInfo().gym,
+    myId: AuthService.getMemberInfo().memId,
+    memId: memId,
+    payAmt: payAmt,
+    userAmt: userAmt
+  })
+}
+
+
 /** 课程共享 */
 // 获取 课程共享 列表
-export function queryShareCourse(memId) {
+export function queryShareCourse() {
   return jsonGetRequest('yp-xcx-getShareCourseList', {
     custName: appConfig.custName,
     gym: AuthService.getMemberInfo().gym,
@@ -183,7 +301,7 @@ export function queryShareCourse(memId) {
   })
 }
 // 课程共享 详情
-export function queryShareCourseDetail(memId) {
+export function queryShareCourseDetail() {
   return jsonGetRequest('yp-xcx-getShareCourseDetail', {
     custName: appConfig.custName,
     gym: AuthService.getMemberInfo().gym,

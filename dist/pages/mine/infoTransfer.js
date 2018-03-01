@@ -15,7 +15,9 @@ Page({
     
     infoTranList: [],
 
-    infoTransferSelectMem: null
+    infoTransferSelectMem: null,
+
+    memIdentity: ''
   },
 
   /**
@@ -23,20 +25,16 @@ Page({
    */
   onLoad: function (options) {
 
-
-    // 查询 会员列表
-    mineService.queryMems().then((result) => {
-
-      console.log('queryMems *** ' + JSON.stringify(result));
-      this.setData({
-        infoTranList: minedata.formatInfoTransfer(result.memList)
-      })
-
-    }).catch((error) => {
-      console.log(error);
+    this.setData({
+      memIdentity: options.memIdentity ? options.memIdentity : ''
     })
 
-  
+    if (this.data.memIdentity == 'pt') {
+      this.getPtlist();
+    } else {
+      this.getMemlist();
+    }
+
   },
   onShow: function (options) {
     var meminfo = wx.getStorageSync('infoTransferSelectMem');
@@ -49,6 +47,38 @@ Page({
         key: 'infoTransferSelectMem',
       })
     }
+    if (this.data.memIdentity == 'pt') {
+      this.getPtlist();
+    } else {
+      this.getMemlist();
+    }
+  },
+
+  getMemlist() {
+    // 查询 会员列表
+    mineService.queryMems().then((result) => {
+
+      console.log('queryMems *** ' + JSON.stringify(result));
+      this.setData({
+        infoTranList: minedata.formatInfoTransfer(result.memList)
+      })
+
+    }).catch((error) => {
+      console.log(error);
+    })
+  },
+  getPtlist() {
+    // 查询 教练列表
+    mineService.queryCoachMemberList().then((result) => {
+
+      console.log('queryCoachMemberList *** ' + JSON.stringify(result));
+      this.setData({
+        infoTranList: minedata.formatInfoTransfer(result.memList)
+      })
+
+    }).catch((error) => {
+      console.log(error);
+    })
   },
 
   bindInfoCellTap (e) {
@@ -63,14 +93,6 @@ Page({
 
   },
 
-  // 平均移交
-  // bindAverageTap (e) {
-
-  //   this.setData({
-  //     confirmBoxHidden: false
-  //   })
-
-  // },
   // 指定移交 去选择 会员 指定移交
   bindSpecifiedTap (e) {
 
@@ -88,7 +110,7 @@ Page({
 
     if (isSelectMem) {
       wx.navigateTo({
-        url: 'selectedMem?qsSetMems=' + qsSetMems,
+        url: 'selectedMem?qsSetMems=' + qsSetMems + '&memIdentity=pt',
       })
     } else {
       wx.showToast({

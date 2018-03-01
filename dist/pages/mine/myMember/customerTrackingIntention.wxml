@@ -30,7 +30,7 @@
   </view>
 
   <!-- 跟单 列表 -->
-  <view class='follow-view'>
+  <view class='follow-view' hidden='{{ task.followList.length <= 0 }}'>
     <view class='zw-line'></view>
     <block wx:for='{{ task.followList }}' wx:key='{{ index }}'>
     <view class='follow-item'>

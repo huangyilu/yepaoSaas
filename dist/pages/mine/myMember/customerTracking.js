@@ -11,7 +11,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    emptyText: '暂无课程',
+    emptyText: '暂无数据',
     emptyIcon: '../../../images/bg_img/no_data.png',
 
     activeIndex: 0,
@@ -28,21 +28,9 @@ Page({
     closeDeadlineList: [],
     // 已到期
     alreadyDeadlineList: [],
-
-    intentionList: [
-      {
-        headimg: 'http://img2.imgtn.bdimg.com/it/u=3390152407,4060777889&fm=27&gp=0.jpg',
-        title: '【会籍跟单】张迪',
-        text: '第一次跟单',
-        memId: 0
-      },
-      {
-        headimg: 'http://img2.imgtn.bdimg.com/it/u=3390152407,4060777889&fm=27&gp=0.jpg',
-        title: '【会籍跟单】张迪',
-        text: '第一次跟单',
-        memId: 0
-      }
-    ],
+    // 意向
+    intentionList: [],
+    searchDic: {},
 
     leftboxHidden: true,
     leftboxList: [
@@ -107,6 +95,14 @@ Page({
       sliderLeft: (res.windowWidth / this.data.navbarTabs.length - sliderWidth) / 2
     })
 
+    // 会籍 -- 意向
+    this.getIntentionList();
+
+    // 教练 -- 意向
+    // this.getCoachIntentionList();
+
+    // 区分 会籍 和教练的入口 身份判断 再决定调用哪个接口
+
   },
 
   // 点击事件 navbar
@@ -120,6 +116,7 @@ Page({
     switch (+e.currentTarget.id)
     {
       case 0 :
+        this.getIntentionList();
         break;
       case 1:
         this.getDealList();
@@ -137,7 +134,20 @@ Page({
   // 获取数据
   // 意向
   getIntentionList() {
-    
+    mineService.queryCustTrackIntention(this.data.searchDic).then((result) => {
+      // console.log('queryCustTrackIntention *** ' + JSON.stringify(result));
+      this.setData({
+        intentionList: minedata.formatCustTrackingIntention(result.potentialMemList)
+      })
+      if (result.potentialMemList.length <= 0) {
+        this.setData({
+          emptyText: '暂无意向'
+        })
+      }
+
+    }).catch((error) => {
+      console.log(error);
+    })
   },
   // 成交
   getDealList() {
@@ -146,7 +156,11 @@ Page({
       this.setData({
         dealList: minedata.formatCustTrackingDeal(result.dealList)
       })
-
+      if (result.dealList.length <= 0) {
+        this.setData({
+          emptyText: '暂无成交'
+        })
+      }
     }).catch((error) => {
       console.log(error);
     })
@@ -158,6 +172,11 @@ Page({
       this.setData({
         closeDeadlineList: minedata.formatCustTrackingDeal(result.dealList)
       })
+      if (result.dealList.length <= 0) {
+        this.setData({
+          emptyText: '暂无快到期'
+        })
+      }
     }).catch((error) => {
       console.log(error);
     })
@@ -169,6 +188,11 @@ Page({
       this.setData({
         alreadyDeadlineList: minedata.formatCustTrackingDeal(result.dealList)
       })
+      if (result.dealList.length <= 0) {
+        this.setData({
+          emptyText: '暂无已到期'
+        })
+      }
     }).catch((error) => {
       console.log(error);
     })
@@ -189,10 +213,11 @@ Page({
     var y = e.currentTarget.dataset.y;
 
     var leftboxList = this.data.leftboxList;
+    
     leftboxList[x].cots.forEach(ctsitem => {
       ctsitem.checked = false;
-      leftboxList[x].cots[y].checked = true;
     })
+    leftboxList[x].cots[y].checked = !leftboxList[x].cots[y].checked;
     
     this.setData({
       leftboxList: leftboxList
@@ -201,8 +226,11 @@ Page({
   },
   // 关键词搜索
   bindLeftBoxKeyWordInput(e) {
+    var searchDic = this.data.searchDic;
+    searchDic.telName = e.detail.value;
     this.setData({
-      searchKeyWord: e.detail.value
+      searchKeyWord: e.detail.value,
+      searchDic: searchDic
     })
   },
 
@@ -211,10 +239,35 @@ Page({
 
     var leftboxList = this.data.leftboxList;
     var searchKeyWord = this.data.searchKeyWord;
+    var searchDic = this.data.searchDic;
 
-    this.setData({
-      leftboxHidden: true
+    // console.log('leftboxList ... ' + JSON.stringify(leftboxList));
+    leftboxList.forEach(cotsItem => {
+      cotsItem.cots.forEach(item => {
+        if (item.checked) {
+          switch (cotsItem.title)
+          {
+            case '性别' :
+              searchDic.sex = item.name;
+              break;
+            case '客户类型':
+              searchDic.userType = item.name;
+              break;
+            case '健身时间':
+              searchDic.checkinTimes = item.name;
+              break;
+          }
+        }
+      })
     })
+    console.log('searchDic ... ' + JSON.stringify(searchDic));
+    this.setData({
+      leftboxHidden: true,
+      searchDic: searchDic
+    })
+
+    // 启动搜索
+    this.getIntentionList();
 
   },
 
@@ -232,14 +285,17 @@ Page({
 
     this.setData({
       leftboxList: leftboxList,
-      leftboxHidden: true
+      leftboxHidden: true,
+      searchDic: {}
     })
+    // 启动搜索
+    this.getIntentionList();
   },
 
   // 意向 点击
-  bindIntentionCellTap() {
+  bindIntentionCellTap(e) {
     wx.navigateTo({
-      url: 'customerTrackingIntention',
+      url: 'customerTrackingIntention?memId=' + e.currentTarget.id,
     })
   },
 

@@ -1,6 +1,8 @@
 // pages/club/club.js
 
 import * as AuthService from '../../services/auth-service';
+import * as clubService from '../../services/club-service';
+import * as clubdata from '../../utils/clubdata-format';
 
 Page({
 
@@ -15,47 +17,17 @@ Page({
     isCertificationMemHidden: true,
     memTelephone: '',
 
-    clubList: [
-      {
-        titleImg: '../../images/bg_img/xcsr.png',
-        deadline: '02-25 10:34',
-        status: '已结束',
-        title: '新春甩肉季，我们来约"惠"',
-        totalPeople: 10,
-        nowPeople: 10,
-      },
-      {
-        titleImg: '../../images/bg_img/xcsr.png',
-        deadline: '02-25 10:34',
-        status: '已结束',
-        title: '新春甩肉季，我们来约"惠"',
-        totalPeople: 10,
-        nowPeople: 10,
-      },
-      {
-        titleImg: '../../images/bg_img/xcsr.png',
-        deadline: '02-25 10:34',
-        status: '已结束',
-        title: '新春甩肉季，我们来约"惠"',
-        totalPeople: 10,
-        nowPeople: 10,
-      },
-      {
-        titleImg: '../../images/bg_img/xcsr.png',
-        deadline: '02-25 10:34',
-        status: '已结束',
-        title: '新春甩肉季，我们来约"惠"',
-        totalPeople: 10,
-        nowPeople: 10,
-      },
-    ]
+    clubList: [],
+    clubListPageIndex: 1
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    
+
+    this.getClubList();
+
   },
   onShow: function (options) {
     // 查询是否认证会员
@@ -64,17 +36,25 @@ Page({
   // 上拉触底 加载
   onReachBottom: function (options) {
     console.log('到底啦！！');
-    var clubList = this.data.clubList;
-    clubList.push({
-        titleImg: '../../images/bg_img/xcsr.png',
-        deadline: '02-25 10:34',
-        status: '已结束',
-        title: '新的',
-        totalPeople: 10,
-        nowPeople: 10,
-    })
+
+    var clubListPageIndex = this.data.clubListPageIndex;
+    clubListPageIndex ++;
     this.setData({
-      clubList: clubList
+      clubListPageIndex: clubListPageIndex
+    })
+
+    this.getClubList();
+  },
+
+  // 查询推荐活动
+  getClubList() {
+    clubService.quaryClubList(this.data.clubListPageIndex).then((result) => {
+      this.setData({
+        clubList: clubdata.formatClubList(result.result, this.data.clubList)
+      })
+      console.log(' out ....' + JSON.stringify(this.data.clubList));
+    }).catch((error) => {
+      console.log(error);
     })
   },
 

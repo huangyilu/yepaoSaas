@@ -3,28 +3,28 @@
 <view class='bg-view'>
 
   <view class='head-view'>
-    <image class='headimg' src='{{ headimg }}'></image>
-    <view>{{ custName }}</view>
+    <image class='headimg' src='{{ task.custHeadimg }}'></image>
+    <view>{{ task.custName }}</view>
   </view>
 
   <view class='input-bgview'>
     <view class='input-view marbottom20 weui-flex'>
       <view><text>预付金额</text></view>
-      <view class='weui-flex__item'><input class=''></input></view>
+      <view class='weui-flex__item'><input type='number' bindinput='bindTextPrepayInput'></input></view>
     </view>
     <view class='input-view weui-flex'>
       <view><text>抵扣金额</text></view>
-      <view class='weui-flex__item'><input class=''></input></view>
+      <view class='weui-flex__item'><input type='number' bindinput='bindTextDeduInput'></input></view>
     </view>
   </view>
 
-  <view class='pre-view'>
+  <view class='pre-view' hidden='{{ prepayList.length <= 0 }}'>
     <view class='whiteColor fs30'>已付定金：</view>
     <view wx:for='{{ prepayList }}' wx:key='{{ index }}' class=''>
       <view> 
         支付{{ item.prePrice }}，
         可抵扣{{ item.deductiblePrice }}，
-        {{ item.isUsed ? '已使用' : '未使用' }}
+        {{ item.isUsed }}
       </view>
     </view>
   </view>
@@ -32,6 +32,6 @@
 </view>
 
 <view class='foot-view weui-flex'>
-  <view class='left-btn weui-flex__item'>取消</view>
-  <view class='right-btn weui-flex__item'>提交</view>
+  <view class='left-btn weui-flex__item' bindtap='bindCancelTap'>取消</view>
+  <view class='right-btn weui-flex__item' bindtap='bindPrepayConfirmTap'>提交</view>
 </view>

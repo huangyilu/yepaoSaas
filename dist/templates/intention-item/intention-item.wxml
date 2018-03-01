@@ -2,7 +2,7 @@
 
 <template name="intention-item">
 
-  <view class='int-cell weui-flex' bindtap='bindIntentionCellTap'>
+  <view class='int-cell weui-flex' id='{{ memId }}' bindtap='bindIntentionCellTap'>
     
     <view>
       <image class='headimg' mode='aspectFill' src='{{ headimg }}'></image>

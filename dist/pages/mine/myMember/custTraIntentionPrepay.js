@@ -1,30 +1,18 @@
 // pages/mine/myMember/custTraIntentionPrepay.js
+
+import * as minedata from '../../../utils/minedata-format';
+import * as mineService from '../../../services/mine-service';
+import { Base64 } from '../../../utils/urlsafe-base64';
+
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    headimg: '../../../images/icon/default_headimg.png',
-    custName: '张迪',
+    task: null,
 
-    prepayList: [
-      {
-        prePrice: 100,
-        deductiblePrice: 200,
-        isUsed: false
-      },
-      {
-        prePrice: 100,
-        deductiblePrice: 200,
-        isUsed: false
-      },
-      {
-        prePrice: 100,
-        deductiblePrice: 200,
-        isUsed: true
-      }
-    ],
+    prepayList: [],
 
   },
 
@@ -32,55 +20,62 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+    
+    if (options.qsTask) {
+      let qsTaskObj = Base64.decode(options.qsTask);
+      this.setData({
+        task: JSON.parse(qsTaskObj)
+      })
+      console.log('被跟单的会员 ... ' + JSON.stringify(this.data.task));
+    }
+    this.getPrepayList();
+
+  },
+  getPrepayList() {
+    mineService.queryCustTrackIntentionPrepay(this.data.task.memId).then((result) => {
+      // console.log('queryCustTrackIntentionPrepay *** ' + JSON.stringify(result));
+
+      this.setData({
+        prepayList: minedata.formatCustTrackingIntentionDetailPrepayList(result.preFeeList)
+      })
+
+    }).catch((error) => {
+      console.log(error);
+    })
   },
 
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-  
-  },
+  bindPrepayConfirmTap() {
+    if (this.data.prepayNum== '') {
+      wx.showToast({
+        title: '请填写预付金额',
+        icon: 'none'
+      })
+    } else if (this.data.deduNum == '') {
+      wx.showToast({
+        title: '请填写抵扣金额',
+        icon: 'none'
+      })
+    } else {
+      mineService.uploadCustTrackIntentionPrepay(this.data.task.memId, this.data.prepayNum, this.data.deduNum).then((result) => {
+        // console.log('uploadCustTrackIntentionPrepay *** ' + JSON.stringify(result));
+        // 刷新界面
+        this.getPrepayList();
 
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-  
+      }).catch((error) => {
+        console.log(error);
+      })
+    }
   },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-  
+  bindTextDeduInput(e) {
+    this.setData({
+      deduNum: e.detail.value
+    })
   },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-  
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-  
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-  
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-  
+  bindTextPrepayInput(e) {
+    this.setData({
+      prepayNum: e.detail.value
+    })
   }
+
+  
 })

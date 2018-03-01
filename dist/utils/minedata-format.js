@@ -216,3 +216,63 @@ export function formatCustTrackingDeaDays(item) {
     return '过期天数：' + item.past_days;
   }
 }
+// 意向
+export function formatCustTrackingIntention(list) {
+  return list.map(item => this.formatCustTrackingIntentionItem(item))
+}
+export function formatCustTrackingIntentionItem(item) {
+  return {
+    headimg: item.appHeadString != 'null' ? item.appHeadString : '../../../images/icon/default_headimg.png',
+    title: '【会籍跟单】' + item.mem_name,
+    text: item.content ? item.content : '暂无跟单', 
+    memId: item.id ? item.id : ''
+  }
+}
+
+// 意向详情
+export function formatCustTrackingIntentionDetail(item) {
+  return {
+    memId: item.id,
+    custHeadimg: item.appHeadString != 'null' ? item.appHeadString : '../../../images/icon/default_headimg.png',
+    custName: item.mem_name,
+    custGender: FORMATGENDER[item.sex],
+    custPhone: item.phone,
+    custBirth: item.birthday,
+    fitnessPurpose: item.fit_purpose,
+    intentionCard: item.wants,
+    fitnessTime: item.checkin_times,
+    address: item.addr,
+    remarks: item.remark,
+    followList: item.mainList != 'null' ? this.formatCustTrackingIntentionDetailFollowList(item.mainList) : []
+  }
+}
+
+// 跟单任务 跟单列表
+export function formatCustTrackingIntentionDetailFollowList(list) {
+  return list.map((item,num) => this.formatCustTrackingIntentionDetailFollowListItem(item,num,list.length))
+}
+export function formatCustTrackingIntentionDetailFollowListItem(item,num,length) {
+  return {
+    time: moment(item.op_time).format('MM-DD'),
+    title: '第' + (length-num) + '次跟单',
+    content: item.content ? item.content : '',
+    followMan: '跟单人：' + item.mc_name
+  }
+}
+
+// 跟单 -- 预付定金
+export function formatCustTrackingIntentionDetailPrepayList(list) {
+  return list.map(item => this.formatCustTrackingIntentionDetailPrepayListItem(item))
+}
+export function formatCustTrackingIntentionDetailPrepayListItem(item) {
+  return {
+    prePrice: item.pay_amt,
+    deductiblePrice: item.user_amt,
+    isUsed: CTIDPSTATE[item.state]
+  }
+}
+// 001 002已
+export const CTIDPSTATE = {
+  '001' : '未使用',
+  '002' : '已使用',
+}
