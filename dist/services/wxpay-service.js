@@ -57,15 +57,14 @@ export function uploadFailPayment(payDic) {
   })
 }
 
-// 在线购卡
+// 在线购卡 
 export function makeMemCardPayment(payDic) {
   return new Promise((resolve, reject) => {
     uploadBuyCardPrepay(payDic).then((orderParams) => {
 
-      if (orderParams.result) {
+      if (orderParams.errCode == 0) {
         return resolve(requestPayment(orderParams.orderInfoMap));
       } else {
-
         wx.showToast({
           title: '下单失败!',
           icon: 'success',
@@ -83,7 +82,7 @@ export function makeClassPayment(payDic) {
   return new Promise((resolve, reject) => {
     uploadBuyClassPrepay(payDic).then((orderParams) => {
 
-      if (orderParams.result) {
+      if (orderParams.errCode == 0) {
         return resolve(requestPayment(orderParams.orderInfoMap));
       } else {
 

@@ -15,7 +15,7 @@ Page({
       {
         iconUrl: '../../../images/icon/mine/customer_tracking.png',
         name: '客户跟踪',
-        navigateUrl: '../myMember/customerTracking'
+        navigateUrl: '../myMember/customerTracking?memIdentity=pt'
       },
       {
         iconUrl: '../../../images/icon/mine/work_transfer.png',

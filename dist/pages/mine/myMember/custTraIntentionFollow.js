@@ -19,7 +19,9 @@ Page({
     txtPlaAttentionHidden: false,
 
     txtPlaContent: '',
-    txtPlaAttention: ''
+    txtPlaAttention: '',
+
+    memIdentity: ''
   },
 
   /**
@@ -34,6 +36,13 @@ Page({
       })
       console.log('被跟单的会员 ... ' + JSON.stringify(this.data.task));
     }
+
+    if (options.memIdentity) {
+      this.setData({
+        memIdentity: options.memIdentity
+      })
+    }
+
   },
 
   bindTextareaFocus(e) {
@@ -62,15 +71,35 @@ Page({
   // 提交 跟单
   bindConfirmTap(e) {
 
+    if (this.data.memIdentity == 'pt') {
+      // 教练 跟单 提交
+      this.PtUploadFollow();
+    } else {
+      // 会籍 跟单 提交
+      this.McUploadFollow();
+    }
+
+  },
+  McUploadFollow() {
     mineService.uploadCustTrackIntentionFollow(this.data.task.memId, this.data.txtPlaContent, this.data.txtPlaAttention).then((result) => {
 
       wx.navigateBack({
-        delta: 1
+        delta: 2
       })
-      
+
     }).catch((error) => {
       console.log(error);
     })
+  },
+  PtUploadFollow() {
+    mineService.uploadCoachTrackIntentionFollow(this.data.task.memId, this.data.txtPlaContent, this.data.txtPlaAttention).then((result) => {
 
+      wx.navigateBack({
+        delta: 2
+      })
+
+    }).catch((error) => {
+      console.log(error);
+    })
   }
 })

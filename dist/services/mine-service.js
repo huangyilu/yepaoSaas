@@ -85,6 +85,7 @@ export function uploadCoachChangeConfirm(ptId, ids) {
     ids: ids
   })
 }
+
 // 我是教练 -- 客户跟踪 -- 成交
 export function queryCoachCustTrackDeal() {
   return jsonGetRequest('yp-xcx-pt-getTodayDeal', {
@@ -107,6 +108,34 @@ export function queryCoachCustTrackIntention() {
     custName: appConfig.custName,
     gym: AuthService.getMemberInfo().gym,
     myId: AuthService.getMemberInfo().memId
+  })
+}
+
+// 我是教练 -- 客户跟踪 -- 意向
+export function queryCoachTrackIntention(dic) {
+  dic.custName = appConfig.custName;
+  dic.gym = AuthService.getMemberInfo().gym;
+  dic.myId = AuthService.getMemberInfo().memId;
+  return jsonGetRequest('yp-xcx-pt-getPotentialMem', dic)
+}
+// 我是教练 -- 意向 -- 意向详情
+export function queryCoachTrackIntentionDetails(memId) {
+  return jsonGetRequest('yp-xcx-pt-potentialMemDetail', {
+    custName: appConfig.custName,
+    gym: AuthService.getMemberInfo().gym,
+    myId: AuthService.getMemberInfo().memId,
+    memId: memId
+  })
+}
+// 我是教练-- 意向 -- 意向详情 -- 跟单
+export function uploadCoachTrackIntentionFollow(memId, merchandiseContent, nextContent) {
+  return urlencodePostRequest('yp-xcx-pt-executeMerchandise', {
+    custName: appConfig.custName,
+    gym: AuthService.getMemberInfo().gym,
+    myId: AuthService.getMemberInfo().memId,
+    memId: memId,
+    merchandiseContent: merchandiseContent,
+    nextContent: nextContent
   })
 }
 
@@ -266,7 +295,6 @@ export function uploadCustTrackIntentionFollow(memId, merchandiseContent, nextCo
     memId: memId,
     merchandiseContent: merchandiseContent,
     nextContent: nextContent
-    
   })
 }
 // 客户跟踪-- 意向 -- 意向详情 -- 预付定金 查询
@@ -311,9 +339,10 @@ export function queryShareCourseDetail() {
 }
 
 // 我的订单
-export function queryMyOrder() {
-  return jsonGetRequest('', {
+export function queryMyOrderList() {
+  return jsonGetRequest('yp-xcx-getMyOrders', {
     custName: appConfig.custName,
     gym: AuthService.getMemberInfo().gym,
+    myId: AuthService.getMemberInfo().memId
   })
 }

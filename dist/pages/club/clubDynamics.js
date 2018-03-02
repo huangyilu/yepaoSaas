@@ -1,4 +1,7 @@
 // pages/club/clubDynamics.js
+import * as clubService from '../../services/club-service';
+import * as clubdata from '../../utils/clubdata-format';
+
 Page({
 
   /**
@@ -8,28 +11,8 @@ Page({
     emptyText: '暂无动态',
     emptyIcon: '../../images/bg_img/no_data.png',
 
-    clubdyList: [
-      // {
-      //   id: 0,
-      //   title: '健美的要点',
-      //   titleImg: 'http://img2.imgtn.bdimg.com/it/u=3390152407,4060777889&fm=27&gp=0.jpg',
-      //   content: '不管你是想要减肥、增重、增肌、增强体能肌力，踏出第一步的时候都面对...',
-      //   time: '2017-12-12 10:34',
-      //   author: '王艳',
-      //   goodNum: 111,
-      //   isGoodSelected: false
-      // },
-      // {
-      //   id: 1,
-      //   title: '健美的要点',
-      //   titleImg: 'http://img2.imgtn.bdimg.com/it/u=3390152407,4060777889&fm=27&gp=0.jpg',
-      //   content: '不管你是想要减肥、增重、增肌、增强体能肌力，踏出第一步的时候都面对...',
-      //   time: '2017-12-12 10:34',
-      //   author: '王艳',
-      //   goodNum: 111,
-      //   isGoodSelected: true
-      // }
-    ]
+    clubListPageIndex: 1,
+    clubdyList: []
   },
 
   /**
@@ -37,6 +20,31 @@ Page({
    */
   onLoad: function (options) {
   
+    this.getClubdyList();
+  },
+
+  // 上拉触底 加载
+  onReachBottom: function (options) {
+    console.log('到底啦！！');
+
+    var clubListPageIndex = this.data.clubListPageIndex;
+    clubListPageIndex++;
+    this.setData({
+      clubListPageIndex: clubListPageIndex
+    })
+
+    this.getClubdyList();
+  },
+
+  // 查询 俱乐部动态
+  getClubdyList() {
+    clubService.queryClubArticleList(this.data.clubListPageIndex).then((result) => {
+      // this.setData({
+      //   clubdyList: clubdata.formatClubList(result.result)
+      // })
+    }).catch((error) => {
+      console.log(error);
+    })
   },
 
   // 点赞

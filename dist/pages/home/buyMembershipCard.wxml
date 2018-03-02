@@ -17,7 +17,7 @@
     </block>
   </view>
 
-  <view class='foot-view'>
+  <view class='buy-foot-view'>
     <view class='weui-flex check-view'>
       
       <view bindtap='bindProtocolCheckedTap'>

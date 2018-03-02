@@ -9,17 +9,36 @@ Page({
    * 页面的初始数据
    */
   data: {
-    task: {}
+    task: {},
+    memIdentity: ''
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
 
-    mineService.queryCustTrackIntentionDetails(options.memId).then((result) => {
-      // console.log('queryCustTrackIntention *** ' + JSON.stringify(result));
+    if (options.memId) {
+      this.setData({
+        memId: options.memId
+      })
+    }
+    if (options.memIdentity) {
+      this.setData({
+        memIdentity: options.memIdentity
+      })
+      if (options.memIdentity == 'pt') {
+        this.getPtDetails();
+      } else {
+        this.getMcDetails();
+      }
+    }
+
+  },
+
+  // 教练 跟单详情
+  getPtDetails() {
+    mineService.queryCoachTrackIntentionDetails(this.data.memId).then((result) => {
 
       this.setData({
         task: minedata.formatCustTrackingIntentionDetail(result.potentialMemMap)
@@ -28,7 +47,18 @@ Page({
     }).catch((error) => {
       console.log(error);
     })
+  },
+  // 会籍 跟单详情
+  getMcDetails() {
+    mineService.queryCustTrackIntentionDetails(this.data.memId).then((result) => {
 
+      this.setData({
+        task: minedata.formatCustTrackingIntentionDetail(result.potentialMemMap)
+      })
+
+    }).catch((error) => {
+      console.log(error);
+    })
   },
 
   // 拨打电话
@@ -50,7 +80,7 @@ Page({
     let qsTask = Base64.encodeURI(JSON.stringify(this.data.task)); 
 
     wx.navigateTo({
-      url: 'custTraIntentionFollow?qsTask=' + qsTask,
+      url: 'custTraIntentionFollow?qsTask=' + qsTask + '&memIdentity=' + this.data.memIdentity,
     })
   }
 

@@ -1,26 +1,14 @@
 // pages/mine/myOrderListView.js
+import * as minedata from '../../utils/minedata-format';
+import * as mineService from '../../services/mine-service';
+
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-      orderList: [
-        {
-          orderName: '会员卡购买 (一年卡)',
-          orderTime: '2018-01-01 18:00',
-          orderId: '199372897',
-          price: 2000,
-          orderStatus: '已付款'
-        },
-        {
-          orderName: '课程购买 (搏击训练)',
-          orderTime: '2018-01-01 18:00',
-          orderId: '199372897',
-          price: 2000,
-          orderStatus: '已付款'
-        }
-      ]
+    orderList: []
   },
 
   /**
@@ -28,54 +16,18 @@ Page({
    */
   onLoad: function (options) {
   
+    
+
+    mineService.queryMyOrderList().then((result) => {
+      this.setData({
+        orderList: minedata.formatMyOrderList(result.orderList)
+      })
+    }).catch((error) => {
+      console.log(error);
+    })
+
   },
 
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
   
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
   
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-  
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-  
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-  
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-  
-  }
 })

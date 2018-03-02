@@ -82,7 +82,9 @@ Page({
         ]
       }
     ],
-    searchKeyWord: ''
+    searchKeyWord: '',
+
+    memIdentity: ''
   },
 
   /**
@@ -95,16 +97,23 @@ Page({
       sliderLeft: (res.windowWidth / this.data.navbarTabs.length - sliderWidth) / 2
     })
 
-    // 会籍 -- 意向
-    this.getIntentionList();
+    if (options.memIdentity) {
+      this.setData({
+        memIdentity: options.memIdentity
+      })
+      console.log('身份 为 ：' + options.memIdentity);
+    }
 
-    // 教练 -- 意向
-    // this.getCoachIntentionList();
-
-    // 区分 会籍 和教练的入口 身份判断 再决定调用哪个接口
+    if (options.memIdentity == 'pt') {
+      // 教练 -- 意向
+      this.getCoachIntentionList();
+    } else {
+      // 会籍 -- 意向
+      this.getIntentionList();
+    }
 
   },
-
+  
   // 点击事件 navbar
   bindNavbarTabTap(e) {
 
@@ -113,31 +122,47 @@ Page({
       sliderOffset: e.currentTarget.offsetLeft
     })
 
-    switch (+e.currentTarget.id)
-    {
-      case 0 :
-        this.getIntentionList();
-        break;
-      case 1:
-        this.getDealList();
-        break;
-      case 2:
-        this.getCloseDeadlineList();
-        break;
-      case 3:
-        this.getAlreadyDeadlineList();
-        break;
+    if (this.data.memIdentity == 'pt') {
+      switch (+e.currentTarget.id) {
+        case 0:
+          this.getCoachIntentionList();
+          break;
+        case 1:
+          this.getCoachDealList();
+          break;
+        case 2:
+          this.getCoachCloseDeadlineList();
+          break;
+        case 3:
+          this.getCoachAlreadyDeadlineList();
+          break;
+      }
+    } else {
+      switch (+e.currentTarget.id) {
+        case 0:
+          this.getIntentionList();
+          break;
+        case 1:
+          this.getDealList();
+          break;
+        case 2:
+          this.getCloseDeadlineList();
+          break;
+        case 3:
+          this.getAlreadyDeadlineList();
+          break;
+      }
     }
+
 
   },
 
-  // 获取数据
+  // 获取数据 会籍
   // 意向
   getIntentionList() {
     mineService.queryCustTrackIntention(this.data.searchDic).then((result) => {
-      // console.log('queryCustTrackIntention *** ' + JSON.stringify(result));
       this.setData({
-        intentionList: minedata.formatCustTrackingIntention(result.potentialMemList)
+        intentionList: minedata.formatCustTrackingIntention(result.potentialMemList, 'mc')
       })
       if (result.potentialMemList.length <= 0) {
         this.setData({
@@ -185,6 +210,68 @@ Page({
   getAlreadyDeadlineList() {
     mineService.queryCustTrackAlreadyDeadline().then((result) => {
       // console.log('queryCustTrackAlreadyDeadline *** ' + JSON.stringify(result));
+      this.setData({
+        alreadyDeadlineList: minedata.formatCustTrackingDeal(result.dealList)
+      })
+      if (result.dealList.length <= 0) {
+        this.setData({
+          emptyText: '暂无已到期'
+        })
+      }
+    }).catch((error) => {
+      console.log(error);
+    })
+  },
+
+  // 获取数据 教练
+  // 意向
+  getCoachIntentionList() {
+    mineService.queryCoachTrackIntention(this.data.searchDic).then((result) => {
+      this.setData({
+        intentionList: minedata.formatCustTrackingIntention(result.potentialMemList, 'pt')
+      })
+      if (result.potentialMemList.length <= 0) {
+        this.setData({
+          emptyText: '暂无意向'
+        })
+      }
+    }).catch((error) => {
+      console.log(error);
+    })
+  },
+  // 成交
+  getCoachDealList() {
+    mineService.queryCoachCustTrackDeal().then((result) => {
+      this.setData({
+        dealList: minedata.formatCustTrackingDeal(result.dealList)
+      })
+      if (result.dealList.length <= 0) {
+        this.setData({
+          emptyText: '暂无成交'
+        })
+      }
+    }).catch((error) => {
+      console.log(error);
+    })
+  },
+  // 快到期
+  getCoachCloseDeadlineList() {
+    mineService.queryCoachCustTrackAlreadyDeadline().then((result) => {
+      this.setData({
+        closeDeadlineList: minedata.formatCustTrackingDeal(result.dealList)
+      })
+      if (result.dealList.length <= 0) {
+        this.setData({
+          emptyText: '暂无快到期'
+        })
+      }
+    }).catch((error) => {
+      console.log(error);
+    })
+  },
+  // 已到期
+  getCoachAlreadyDeadlineList() {
+    mineService.queryCoachCustTrackIntention().then((result) => {
       this.setData({
         alreadyDeadlineList: minedata.formatCustTrackingDeal(result.dealList)
       })
@@ -266,8 +353,13 @@ Page({
       searchDic: searchDic
     })
 
-    // 启动搜索
-    this.getIntentionList();
+    if (this.data.memIdentity == 'pt') {
+      // 启动搜索 教练
+      this.getCoachIntentionList();
+    } else {
+      // 启动搜索 会籍
+      this.getIntentionList();
+    }
 
   },
 
@@ -288,14 +380,20 @@ Page({
       leftboxHidden: true,
       searchDic: {}
     })
-    // 启动搜索
-    this.getIntentionList();
+
+    if (this.data.memIdentity == 'pt') {
+      // 启动搜索 教练
+      this.getCoachIntentionList();
+    } else {
+      // 启动搜索 会籍
+      this.getIntentionList();
+    }
   },
 
   // 意向 点击
   bindIntentionCellTap(e) {
     wx.navigateTo({
-      url: 'customerTrackingIntention?memId=' + e.currentTarget.id,
+      url: 'customerTrackingIntention?memId=' + e.currentTarget.id + '&memIdentity=' + this.data.memIdentity,
     })
   },
 

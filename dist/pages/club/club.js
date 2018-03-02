@@ -48,7 +48,7 @@ Page({
 
   // 查询推荐活动
   getClubList() {
-    clubService.quaryClubList(this.data.clubListPageIndex).then((result) => {
+    clubService.quaryClubList(this.data.clubListPageIndex, 'N').then((result) => {
       this.setData({
         clubList: clubdata.formatClubList(result.result, this.data.clubList)
       })

@@ -38,7 +38,7 @@
     right: 60rpx;
 }
 
-.foot-view {
+.buy-foot-view {
     position: fixed;
     bottom: 0;
     width: 100%;
@@ -55,7 +55,7 @@
     height: 30rpx;
     line-height: 30rpx;
 }
-.foot-view .check-icon {
+.buy-foot-view .check-icon {
     width: 30rpx;
     height: 30rpx;
     float: left;

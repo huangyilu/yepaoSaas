@@ -49,6 +49,6 @@
 
 <!-- foot -->
 <view class='foot-view weui-flex'>
-  <view class='weui-flex__item left-btn' bindtap='bindPrepayTap'>预付定金</view>
+  <view class='weui-flex__item left-btn' hidden='{{ memIdentity == "pt" }}' bindtap='bindPrepayTap'>预付定金</view>
   <view class='weui-flex__item right-btn' bindtap='bindFollowTap'>跟单</view>
 </view>

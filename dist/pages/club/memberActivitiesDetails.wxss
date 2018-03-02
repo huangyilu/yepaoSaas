@@ -76,7 +76,7 @@
     height: 260rpx;
     margin: 30rpx auto 0;
     border-radius: 10rpx;
-    background-color: #050507;
+    background-color: rgba(5, 5, 7, 0.2);
     overflow: hidden;
 }
 .card-view .card-item .name {

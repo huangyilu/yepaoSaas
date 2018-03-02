@@ -12,25 +12,6 @@ export const FORMATNUMTOCHNESE = {
   '7': '日',
 }
 
-// 我是教练
-export const privateMemberList = [
-  {
-    name: '朱有为',
-    headimg: 'http://img2.imgtn.bdimg.com/it/u=3390152407,4060777889&fm=27&gp=0.jpg',
-    period: {
-      surplus: 8,
-      total: 12
-    }
-  },
-  {
-    name: '朱有为',
-    headimg: 'http://img2.imgtn.bdimg.com/it/u=3390152407,4060777889&fm=27&gp=0.jpg',
-    period: {
-      surplus: 8,
-      total: 12
-    }
-  }
-]
 // 私教会员
 export function formatPrivateMemberList(list) {
   return list.map(item => this.formatPrivateMemberListItem(item))
@@ -147,20 +128,6 @@ export function formatShareCourseDetails(list) {
   }
 }
 
-// 我的订单
-export function formatMyOrderList(list) {
-  return list.map(item => this.formatMyOrderListItem(item))
-}
-export function formatMyOrderListItem(item) {
-  return {
-    orderName: '会员卡购买 (一年卡)',
-    orderTime: '2018-01-01 18:00',
-    orderId: '199372897',
-    price: 2000,
-    orderStatus: '已付款'
-  }
-}
-
 // 资料移交
 export function formatInfoTransfer(list) {
   return list.map(item => this.formatInfoTransferItem(item))
@@ -217,16 +184,20 @@ export function formatCustTrackingDeaDays(item) {
   }
 }
 // 意向
-export function formatCustTrackingIntention(list) {
-  return list.map(item => this.formatCustTrackingIntentionItem(item))
+export function formatCustTrackingIntention(list, memIdentity) {
+  return list.map(item => this.formatCustTrackingIntentionItem(item, memIdentity))
 }
-export function formatCustTrackingIntentionItem(item) {
+export function formatCustTrackingIntentionItem(item, memIdentity) {
   return {
     headimg: item.appHeadString != 'null' ? item.appHeadString : '../../../images/icon/default_headimg.png',
-    title: '【会籍跟单】' + item.mem_name,
+    title: '【' + MEMIDCHANGE[memIdentity] +'跟单】' + item.mem_name,
     text: item.content ? item.content : '暂无跟单', 
     memId: item.id ? item.id : ''
   }
+}
+export const MEMIDCHANGE = {
+  'pt' : '教练',
+  'mc' : '会籍'
 }
 
 // 意向详情
@@ -275,4 +246,28 @@ export function formatCustTrackingIntentionDetailPrepayListItem(item) {
 export const CTIDPSTATE = {
   '001' : '未使用',
   '002' : '已使用',
+}
+
+// 我的订单
+export function formatMyOrderList(list) {
+  return list.map(item => this.formatMyOrderListItem(item))
+}
+export function formatMyOrderListItem(item) {
+  return {
+    orderName: ORDERTYPE[item.order_type] + ' （' + item.card_name + '）',
+    orderTime: moment(item.order_time).format('YYYY-MM-DD hh:mm'),
+    orderId: item.id,
+    price: item.ca_amt/100,
+    orderStatus: ORDERSTATE[item.state]
+  }
+}
+
+export const ORDERSTATE = {
+  '001' : '已完成',
+  '002' : '未付款',
+  '003' : '已取消',
+}
+export const ORDERTYPE = {
+  '购卡' : '会员卡购买',
+  '购课' : '课程购买',
 }

@@ -121,12 +121,24 @@ Page({
 
     console.log('searchList[index] .. ' + JSON.stringify(searchList[index]));
 
-    // 弹窗询问是否确定
     this.setData({
-      confirmText: '确定将选择的会员移交给' + searchList[index].name + '吗？',
-      confirmBoxHidden: false,
       thisMc: searchList[index]
     })
+
+    if (this.data.memIdentity != 'ptdjkhzl') {
+      // 弹窗询问是否确定
+      this.setData({
+        confirmText: '确定将选择的会员移交给' + searchList[index].name + '吗？',
+        confirmBoxHidden: false
+      })
+    } else {
+
+      // 保存所选 会员
+      wx.setStorageSync('ptdjkhzlSelectCust', this.data.thisMc);
+      wx.navigateBack({
+        delta: 1
+      })
+    }
 
   },
 
@@ -152,14 +164,6 @@ Page({
       } else if (this.data.memIdentity == 'pt') {
       
         this.bindPtConfirm(mcId, ids);
-      } else if (this.data.memIdentity == 'ptdjkhzl') {
-
-        // 保存所选 会员
-        wx.setStorageSync('ptdjkhzlSelectCust', this.data.thisMc);
-        wx.navigateBack({
-          delta: 1
-        })
-
       }
 
     } else {
