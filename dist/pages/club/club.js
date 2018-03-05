@@ -124,7 +124,7 @@ Page({
   bindClubCellTap(e) {
     if (this.data.isCertificationMem) {
       wx.navigateTo({
-        url: 'memberActivitiesDetails',
+        url: 'memberActivitiesDetails?activeId=' + e.currentTarget.id,
       })
     } else {
       this.setData({

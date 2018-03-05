@@ -4,7 +4,7 @@
   <view class='club-cell-view'>
 
     <block wx:for='{{ clubList }}' wx:key='{{ index }}'>
-    <view class='club-cell' bindtap='bindClubCellTap'>
+    <view class='club-cell' id='{{ item.activeId }}' bindtap='bindClubCellTap'>
 
       <view class='club-title'>
         <text >截止时间 {{ item.deadline }}</text>

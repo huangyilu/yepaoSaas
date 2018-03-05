@@ -22,9 +22,6 @@ Page({
    */
   onLoad: function (options) {
     
-    wx.setNavigationBarTitle({
-      title: '也跑',
-    })
   },
   onShow: function (options) {
     // 查询是否认证会员

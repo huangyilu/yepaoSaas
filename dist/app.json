@@ -1,11 +1,12 @@
 {
   "pages": [
+    
     "pages/home/home",
     "pages/mine/myMember/custTraIntentionFollow",
     "pages/mine/myMember/custTraIntentionPrepay",
     "pages/mine/myMember/customerTrackingIntention",
     "pages/mine/myMember/customerTracking",
-    
+    "pages/club/clubDynamicsDetails",
     "pages/club/memberActivitiesDetails",
     "pages/club/memberActivities",
     "pages/club/club",
@@ -36,7 +37,7 @@
     "pages/home/selectedCoach",
     "pages/mine/myOrderListView",
     "pages/club/clubDynamics",
-    "pages/club/clubDynamicsDetails",
+    
     "pages/mine/myCoach/registerCustomers"
     
     

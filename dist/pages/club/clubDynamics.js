@@ -39,9 +39,9 @@ Page({
   // 查询 俱乐部动态
   getClubdyList() {
     clubService.queryClubArticleList(this.data.clubListPageIndex).then((result) => {
-      // this.setData({
-      //   clubdyList: clubdata.formatClubList(result.result)
-      // })
+      this.setData({
+        clubdyList: clubdata.formatClubDynamicsList(result.result, this.data.clubdyList)
+      })
     }).catch((error) => {
       console.log(error);
     })

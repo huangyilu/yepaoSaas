@@ -252,7 +252,7 @@ Page({
   bindVideoFullscreenChange (e) {
 
     var direction = e.detail.direction;
-    console.log(direction);
+    console.log('横屏 。。 ' + direction);
     if (direction == 'horizontal') {
       this.setData({
         contlBtnHidden: false
@@ -296,7 +296,7 @@ Page({
       }
 
     }).catch((error) => {
-      console.log(error);
+      console.log('uploadShareCourse error' + error);
     })
 
   }

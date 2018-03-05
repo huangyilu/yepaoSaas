@@ -40,3 +40,12 @@ export function queryClubArticleList(pageNum) {
     pageNum: pageNum,
   })
 }
+
+// 会员活动 详情 
+export function queryClubActiveDetail(activeId) {
+  return jsonGetRequest('yp-xcx-getArticleDetail', {
+    custName: appConfig.custName,
+    gym: AuthService.getMemberInfo().gym,
+    activeId: activeId
+  })
+}

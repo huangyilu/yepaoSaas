@@ -1,10 +1,12 @@
 /* pages/club/clubDynamicsDetail.wxss */
 
+@import '../../templates/article/article.wxss';
+
 .bg-view {
     background-color: #2f2d45;
     height: 100%;
 }
-.article-view {
+/* .article-view {
     padding: 30rpx;
     font-size: 26rpx;
     color: #BAB9C7;
@@ -37,4 +39,4 @@
     color: white;
     font-size: 32rpx;
     padding-bottom: 20rpx;
-}
+} */

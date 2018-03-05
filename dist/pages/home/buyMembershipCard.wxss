@@ -15,6 +15,7 @@
     width: 690rpx;
     height: 320rpx;
     position: absolute;
+    border-radius: 15rpx;
 }
 .icon-img {
     width: 81rpx;

@@ -13,7 +13,7 @@
       </view>
       <view class='weui-flex__item title-text-view'>
         <view class='title-text'>{{ item.title }}</view>
-        <view>{{ item.content }}</view>
+        <view class='content-text'>{{ item.content }}</view>
       </view>
     </view>
 
@@ -23,10 +23,10 @@
       </view>
       <view class='weui-flex__item author-view'>
         <text>作者：{{ item.author }}</text>
-        <view class='good-view' id='{{ index }}' bindtap='bindGoodSelectedTap'>
+        <!-- <view class='good-view' id='{{ index }}' bindtap='bindGoodSelectedTap'>
           <image class='good-icon' src='../../images/icon/club/{{ item.isGoodSelected ? "zan_y" : "zan_g" }}.png'></image>
           <text class='{{ item.isGoodSelected ? "yeColor" : "" }}'>{{ item.goodNum }}</text>
-        </view>
+        </view> -->
       </view>
     </view>
 

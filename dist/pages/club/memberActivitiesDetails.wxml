@@ -1,15 +1,15 @@
 <!--pages/club/memberActivitiesDetails.wxml-->
 
-<view class='bg-view'>
+<view class='bg-view' wx:if='{{ activities != null }}'>
 
   <view class='title-view'>
     <view>
       <button class='share-btn' open-type='share'>
         <image class='share-icon' src='../../images/icon/club/share.png' ></image>
       </button>
-      <image class='img' mode='aspectFill' src='{{ titleImg }}'></image>
+      <image class='img' mode='aspectFill' src='{{ activities.titleImg }}'></image>
       <view wx:if='{{ !clock }}' class='down-view'>
-        距离结束时间还剩  
+        {{ activities.timeTitle }}
         <view class='timer-text'>{{ days }}</view>天
         <view class='timer-text'>{{ hour }}</view>时 
         <view class='timer-text'>{{ mints }}</view>分 
@@ -20,17 +20,17 @@
   </view>
 
   <view class='introduction-view'>
-    <view class='fs36 whiteColor'>{{ activitiesTitle  }}</view>
-    <view class='intr-text'>简介：{{ activitiesIntroduction }}</view>
+    <view class='fs36 whiteColor'>{{ activities.title  }}</view>
+    <view class='intr-text'>简介：{{ activities.introduction }}</view>
     <view>
       <image class='people-icon' src='../../images/icon/club/people.png'></image>
-      <text>{{ nowNum }}/{{ totalNum }}</text>
+      <text>{{ activities.nowNum }}/{{ activities.totalNum }}</text>
     </view>
   </view>
 
   <view class='card-view'>
   
-    <view class='card-item' wx:for='{{ cards }}' wx:key='{{ index }}' bindtap='bindCardItemTap'>
+    <view class='card-item' wx:for='{{ activities.cards }}' wx:key='{{ index }}' bindtap='bindCardItemTap'>
       <view class='name-view'>
         <view class='name'>{{ item.cardName }}</view>
         <text class='originalPrice'>原价：{{ item.originalPrice }}</text>
@@ -43,7 +43,8 @@
 
   <view class='content-view'>
     <view class='title'>活动详情</view>
-    <view class='content'>{{ activitiesDetails }}</view>
+    <view class='content'>{{ activities.activitiesDetails }}</view>
   </view>
 
 </view>
+

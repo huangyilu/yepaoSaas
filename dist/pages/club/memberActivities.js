@@ -50,7 +50,7 @@ Page({
 
   bindClubCellTap(e) {
     wx.navigateTo({
-      url: 'memberActivitiesDetails',
+      url: 'memberActivitiesDetails?activeId=' + e.currentTarget.id,
     })
   }
 })

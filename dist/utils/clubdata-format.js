@@ -26,6 +26,7 @@ export function formatDifferentTypesDate(oldStr) {
 export function formatClubList(list, clubList) {
   list.forEach(item => {
     clubList.push({
+      activeId: item.id,
       titleImg: item.pic_url,
       deadline: this.formatDifferentTypesDate(item.end_time),
       status: FORMATCLUBSTATU[item.state],
@@ -45,18 +46,69 @@ export const FORMATCLUBSTATU = {
 }
 
 // 俱乐部 动态
-export function formatClubDynamicsList(list) {
-  return list.map(item => this.formatClubDynamicsListItem(item))
+export function formatClubDynamicsList(list, clubList) {
+  list.forEach(item => {
+    clubList.push({
+      id: item.id,
+      title: item.title,
+      titleImg: 'http://img2.imgtn.bdimg.com/it/u=3390152407,4060777889&fm=27&gp=0.jpg',
+      // item.pic_url
+      content: item.content,
+      time: moment(item.create_time).format('YYYY-MM-DD'),
+      author: '王艳',
+      isGoodSelected: true
+    });
+  })
+  return clubList
 }
-export function formatClubDynamicsListItem(item) {
+
+// 会员活动 详情
+export function formatClubDetail(item) {
   return {
-    id: 1,
-    title: '健美的要点',
-    titleImg: 'http://img2.imgtn.bdimg.com/it/u=3390152407,4060777889&fm=27&gp=0.jpg',
-    content: '不管你是想要减肥、增重、增肌、增强体能肌力，踏出第一步的时候都面对...',
-    time: '2017-12-12 10:34',
-    author: '王艳',
-    // goodNum: 111,
-    isGoodSelected: true
+    titleImg: item.pic_url,
+    endtime: formatTimerTime(item.state, item),
+    timeTitle: FORMATTIMETITLE[item.state],
+    title: item.title,
+    introduction: item.summary,
+    nowNum: 2,
+    totalNum: item.num,
+
+    cards: item.cards ? this.formatClubDetailCards(item.cards) : [],
+    activitiesDetails: item.content
   }
+}
+export function formatTimerTime(state,item) {
+  if (state == 'ready') {
+    return moment(item.start_time).format('x')
+  } else {
+    return moment(item.end_time).format('x')
+  }
+}
+export function formatClubDetailCards(list) {
+  return list.map((item,x) => this.formatClubDetailCardsItem(item,x))
+}
+export function formatClubDetailCardsItem(item,x) {
+  return {
+    cardName: '项目' + CHNNUMCHANGE[x+1] + '：' + item.prj_name,
+    originalPrice: item.price,
+    currentPrice: item.act_price
+  }
+}
+export const CHNNUMCHANGE = {
+  '1': '一',
+  '2': '二',
+  '3': '三',
+  '4': '四',
+  '5': '五',
+  '6': '六',
+  '7': '七',
+  '8': '八',
+  '9': '九',
+  '10': '十'
+}
+export const FORMATTIMETITLE = {
+  'start': '距离结束时间还剩',
+  'ready': '距离开始时间还剩',
+  'end': '活动已结束',
+  'join': '距离结束时间还剩'
 }

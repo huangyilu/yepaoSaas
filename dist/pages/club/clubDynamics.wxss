@@ -15,6 +15,7 @@
 }
 .clubdy-cell .title-text-view {
     margin-top: 20rpx;
+    width: 440rpx;
 }
 .clubdy-cell .title-text {
     font-size: 30rpx;
@@ -36,4 +37,10 @@
 }
 .clubdy-cell .author-view {
     text-align: right;
+}
+.clubdy-cell .content-text{
+    overflow:hidden;
+    display:-webkit-box;
+    -webkit-box-orient:vertical;
+    -webkit-line-clamp:2; 
 }

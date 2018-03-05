@@ -63,7 +63,7 @@
 
 <!-- 选项三 开始 -->
     <view class="weui-tab__content" hidden="{{ activeIndex != 2 }}">
-    <view class='up-remind-view'>两个月内ta们就到期了！快去提醒ta们吧！</view>
+      <view class='up-remind-view'>两个月内ta们就到期了！快去提醒ta们吧！</view>
       <!-- 选项三 内容 -->
       <block wx:if='{{ closeDeadlineList.length > 0 }}'>
       <block wx:for='{{ closeDeadlineList }}' wx:for-item='cutl' wx:key='{{ index }}'>
@@ -77,6 +77,7 @@
 
 <!-- 选项四 开始 -->
     <view class="weui-tab__content" hidden="{{ activeIndex != 3 }}">
+      <view class='up-remind-view'>ta们到期啦！快去联系ta们吧！</view>
       <!-- 选项四 内容 -->
       <block wx:if='{{ alreadyDeadlineList.length > 0 }}'>
       <block wx:for='{{ alreadyDeadlineList }}' wx:for-item='cutl' wx:key='{{ index }}'>

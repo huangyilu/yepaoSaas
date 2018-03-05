@@ -1,8 +1,11 @@
 <!--pages/club/clubDynamicsDetail.wxml-->
+<import src="../../templates/article/article.wxml"/>
 
 <view class='bg-view'>
 
-  <view class='article-view'>
+  <template is="article" data="{{ title: article.title, poster: article.poster, author: article.author, introduction: article.introduction, contents: article.contents }}"/>
+
+  <!-- <view class='article-view'>
 
     <view class='article-title-view'>
       <view class='article-title'>{{ article.title }}</view>
@@ -25,6 +28,6 @@
       <view>{{ article.contents }}</view>
     </view>
 
-  </view>
+  </view> -->
 
 </view>

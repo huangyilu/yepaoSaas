@@ -146,6 +146,13 @@ Page({
 
     }).catch((error) => {
       console.log(error);
+
+      if (this.data.muscleManImg == '') {
+        this.setData({
+          muscleManImg: error.muscleManImg
+        })
+      }
+
     })
 
   },
