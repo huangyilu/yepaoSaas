@@ -3,6 +3,7 @@
 import moment from '../../utils/npm/moment';
 import * as clubService from '../../services/club-service';
 import * as clubdata from '../../utils/clubdata-format';
+import * as AuthService from '../../services/auth-service';
 
 var timer;
 
@@ -18,6 +19,9 @@ Page({
     second: 0,
     clock: false,
     activities: null,
+
+    activeId: '',
+    gym: null
   },
 
   /**
@@ -25,10 +29,18 @@ Page({
    */
   onLoad: function (options) {
     
+    this.setData({
+      activeId: options.activeId,
+      gym: AuthService.getMemberInfo() ? AuthService.getMemberInfo().gym : ''
+    })
+
+    if (options.gym) {
+      this.setData({
+        gym: options.gym
+      })
+    }
 
     this.getClubDetail(options.activeId);
-
-    
 
   },
   onUnload: function (options) {
@@ -37,7 +49,7 @@ Page({
 
   // 详情
   getClubDetail(activeId) {
-    clubService.queryClubActiveDetail(activeId).then((result) => {
+    clubService.queryClubActiveDetail(activeId,this.data.gym).then((result) => {
       this.setData({
         activities: clubdata.formatClubDetail(result.result)
       })
@@ -85,7 +97,7 @@ Page({
     var min = Math.floor(second / 60 % 60);
     // 秒
     var sec = Math.floor(second % 60);
-    // console.log(' *** ' + day + "天" + hr + "小时" + min + "分钟" + sec + "秒" );
+    console.log(' *** ' + day + "天" + hr + "小时" + min + "分钟" + sec + "秒" );
     that.setData({
       days: day,
       hour: hr,
@@ -95,26 +107,31 @@ Page({
   },
 
   bindCardItemTap(e) {
-    // wx.navigateTo({
-    //   url: '../home/onlinePaymentForCard',
-    // })
 
-    wx.showToast({
-      icon: 'none',
-      title: '活动已结束！'
+
+    wx.navigateTo({
+      url: '../home/onlinePaymentForCard',
     })
+
+    // wx.showToast({
+    //   icon: 'none',
+    //   title: '活动已结束！'
+    // })
 
   },
   /**
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
+    var me = this;
     return {
-      title: this.data.activitiesTitle,
-      path: 'pages/club/memberActivitiesDetails',
+      title: me.data.activities.title,
+      path: 'pages/club/memberActivitiesDetails?activeId=' + me.data.activeId + '&gym=' + me.data.gym,
       success: function (res) {
         // 转发成功
-        console.log('转发成功');
+        console.log('转发成功 title.. ' + me.data.activities.title);
+        console.log('转发成功 activeId.. ' + me.data.activeId);
+        console.log('转发成功 activeId.. ' + me.data.gym);
       },
       fail: function (res) {
         // 转发失败

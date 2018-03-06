@@ -34,17 +34,6 @@ export function queryOnlineCards() {
   })
 }
 
-// 在线购卡 点击立即支付 
-export function uploadOnlineCardOrder(cardId, cardPrice) {
-  return urlencodePostRequest('yp-xcx-submitBuyCardOrder', {
-    custName: appConfig.custName,
-    gym: AuthService.getMemberInfo().gym,
-    memId: AuthService.getMemberInfo().memId,
-    cardId: cardId,
-    fee: cardPrice
-  })
-}
-
 // 我的会员卡
 export function queryMyCards() {
   return jsonGetRequest('yp-xcx-getMyCards', {

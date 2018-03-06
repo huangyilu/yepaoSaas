@@ -12,6 +12,13 @@ import {
 }
 from 'wx-request-promise';
 
+// 俱乐部 会员活动 营销活动 买卡 下单
+// export function uploadBuyMemActivite() {
+//   return urlencodePostRequest('', {
+
+//   })
+// }
+
 // 课程购买 下单
 export function uploadBuyClassPay(payDic) {
   return urlencodePostRequest('yp-xcx-submitBuyCourseOrder', {
@@ -32,6 +39,17 @@ export function uploadBuyClassPrepay(payDic) {
     ptId: payDic.ptId,
     openId: AuthService.getOpenId(),
     orderPrice: payDic.orderPrice
+  })
+}
+
+// 在线购卡 下单
+export function uploadOnlineCardOrder(cardId, cardPrice) {
+  return urlencodePostRequest('yp-xcx-submitBuyCardOrder', {
+    custName: appConfig.custName,
+    gym: AuthService.getMemberInfo().gym,
+    memId: AuthService.getMemberInfo().memId,
+    cardId: cardId,
+    fee: cardPrice
   })
 }
 

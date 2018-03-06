@@ -29,7 +29,7 @@
   </view>
 
   <!-- foot-view -->
-  <view class='foot-btn-view' bindtap='bindMakeUpTap'>
+  <view class='foot-view' bindtap='bindMakeUpTap'>
     {{ courseShare ? '立即分享' : '开始' }}
   </view>
 

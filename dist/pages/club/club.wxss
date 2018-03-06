@@ -14,7 +14,7 @@
 .club-item-view {
     width: 100%;
     text-align: center;
-    background-color: #2f2d45;
+    background-color: #22233A;
     font-size: 28rpx;
 }
 .club-item {

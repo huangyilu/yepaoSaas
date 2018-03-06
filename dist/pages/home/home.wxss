@@ -1,13 +1,17 @@
 /* pages/home/home.wxss */
 
+
+page {
+    background-color: #22233a;
+}
 .logo-view {
     width: 100%;
     text-align: center;
 }
 .logo-view .logo-img {
-    width: 620rpx;
-    height: 150rpx;
-    margin: 50rpx 0;
+    width: 400rpx;
+    height: 90rpx;
+    margin: 100rpx auto 50rpx;
 }
 
 /* .title-view {
@@ -18,35 +22,18 @@
     background-color: #2f2d45;
 } */
 
-.tab-view {
+/* .tab-view {
     margin: 50rpx 50rpx 0;
-}
+} */
 .tab-item {
     text-align: center;
-    padding: 60rpx 0;
-    border-bottom: 1rpx #848296 solid;
+    padding: 15rpx 0;
+    margin: 30rpx;
+    border: 4rpx rgba(132, 130, 150, 0.2) solid;
+    font-size: 32rpx;
+    border-radius: 8rpx;
 }
-.tab-icon-buyvip {
-    width: 47rpx;
-    height: 35rpx;
-}
-.tab-icon-mycar {
-    width: 43rpx;
-    height: 45rpx;
-}
-.tab-icon-gclass {
-    width: 49rpx;
-    height: 42rpx;
-}
-.tab-icon-appt {
-    width: 47rpx;
-    height: 47rpx;
-}
-.tab-icon-private_trainer {
-    width: 50rpx;
-    height: 41rpx;
-}
-.tab-icon-recomclass {
-    width: 49rpx;
-    height: 49rpx;
+.tab-icon {
+    width: 90rpx;
+    height: 90rpx;
 }

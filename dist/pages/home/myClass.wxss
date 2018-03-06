@@ -29,7 +29,7 @@
     margin-bottom: 20rpx;
     padding: 0 30rpx 0;
     color: #BAB9C7;
-    background-color: #2f2d45;
+    background-color: #22233A;
     font-size: 28rpx;
     height: 250rpx;
 }
@@ -37,8 +37,8 @@
     width: 150rpx;
     height: 50rpx;
     line-height: 50rpx;
-    color: #FCF428;
-    border: 1rpx #FCF428 solid;
+    color: #FF904C;
+    border: 1rpx #FF904C solid;
     border-radius: 6rpx;
     text-align: center;
     float: right;

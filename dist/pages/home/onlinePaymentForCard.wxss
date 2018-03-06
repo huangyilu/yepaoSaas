@@ -6,7 +6,7 @@
     line-height: 120rpx;
     font-size: 32rpx;
     padding: 0 30rpx;
-    background-color: #2f2d45;
+    background-color: #22233A;
     border-top: 1rpx #262439 solid;
 }
 
@@ -24,8 +24,8 @@
     height: 100rpx;
     line-height: 100rpx;
     padding: 0 30rpx;
-    background-color: #2f2d45;
-    border-top: 1rpx #262439 solid;
+    background-color: #22233A;
+    margin-top: 2rpx;
 }
 .order-view text {
     float: right;
@@ -33,7 +33,7 @@
 }
 .price-text {
     float: right;
-    color: #FCF428;
+    color: #FF904C;
 }
 
 .cashVoucher-view {
@@ -44,8 +44,8 @@
     line-height: 100rpx;
     font-size: 32rpx;
     padding: 0 30rpx;
-    background-color: #2f2d45;
-    border-top: 1rpx #262439 solid;
+    background-color: #22233A;
+    margin-top: 10rpx;
 }
 
 .pay-view {
@@ -53,7 +53,7 @@
     line-height: 100rpx;
     font-size: 32rpx;
     padding: 0 30rpx;
-    background-color: #2f2d45;
-    border-top: 1rpx #262439 solid;
+    background-color: #22233A;
+    margin-top: 10rpx;
     color: #BAB9C7;
 }

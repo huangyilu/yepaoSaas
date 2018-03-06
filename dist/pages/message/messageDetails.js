@@ -34,7 +34,7 @@ Page({
     })
 
     // 更新消息 状态
-    messageService.updateMessageState(e.currentTarget.dataset.mesgtype).then((result) => {
+    messageService.updateMessageState(options.mesgtype).then((result) => {
       console.log('更新消息状态成功');
     }).catch((error) => {
       console.log(error);

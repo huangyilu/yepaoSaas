@@ -42,10 +42,10 @@ export function queryClubArticleList(pageNum) {
 }
 
 // 会员活动 详情 
-export function queryClubActiveDetail(activeId) {
+export function queryClubActiveDetail(activeId, gym) {
   return jsonGetRequest('yp-xcx-getArticleDetail', {
     custName: appConfig.custName,
-    gym: AuthService.getMemberInfo().gym,
+    gym: gym ? gym : AuthService.getMemberInfo().gym,
     activeId: activeId
   })
 }

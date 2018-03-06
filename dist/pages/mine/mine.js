@@ -15,30 +15,36 @@ Page({
 
     rightItemHidden: false,
     yItems: [
+      // {
+      //   iconUrl: '../../images/icon/mine/fit_calen.png',
+      //   name: '健身计划',
+      //   navigateUrl: '',
+      //   ishidden: true
+      // },
       {
-        iconUrl: '../../images/icon/mine/fit_calen.png',
-        name: '健身计划',
-        navigateUrl: '',
-        ishidden: true
+        iconUrl: '../../images/icon/mine/my_card.png',
+        name: '我的会员卡',
+        navigateUrl: '../home/membershipCard',
+        ishidden: false
       },
       {
-        iconUrl: '../../images/icon/mine/coach.png',
-        name: '我是教练',
-        navigateUrl: 'myCoach/myCoachListView',
-        ishidden: true
-      },
-      {
-        iconUrl: '../../images/icon/mine/coach.png',
-        name: '我是会籍',
+        iconUrl: '../../images/icon/mine/my_membership.png',
+        name: '我是会籍', 
         navigateUrl: 'myMember/myMember',
         ishidden: true
       },
       {
-        iconUrl: '../../images/icon/mine/member.png',
-        name: '课程共享',
-        navigateUrl: 'courseShare/courseShare',
-        ishidden: false
+        iconUrl: '../../images/icon/mine/my_coach.png',
+        name: '我是教练',
+        navigateUrl: 'myCoach/myCoachListView',
+        ishidden: true
       },
+      // {
+      //   iconUrl: '../../images/icon/mine/member.png',
+      //   name: '课程共享',
+      //   navigateUrl: 'courseShare/courseShare',
+      //   ishidden: false
+      // },
       // {
       //   iconUrl: '../../images/icon/mine/recommend.png',
       //   name: '会员推荐',
@@ -46,18 +52,18 @@ Page({
       //   ishidden: false
       // },
       {
-        iconUrl: '../../images/icon/mine/myorder.png',
+        iconUrl: '../../images/icon/mine/my_order.png',
         name: '我的订单',
         navigateUrl: 'myOrderListView',
         ishidden: false
       },
-      // {
-      //   iconUrl: '../../images/icon/mine/setting.png',
-      //   name: '设置',
-      //   style: 'margin-top:20rpx;',
-      //   navigateUrl: '',
-      //   ishidden: false
-      // }
+      {
+        iconUrl: '../../images/icon/mine/my_setting.png',
+        name: '设置',
+        style: 'margin-top:20rpx;',
+        navigateUrl: '',
+        ishidden: false
+      }
     ],
 
     isCertificationMem: false,

@@ -2,7 +2,7 @@
 .textInput-view {
     height: 90rpx;
     line-height: 90rpx;
-    background-color: #2F2D45;
+    background-color: #22233A;
     padding: 0 30rpx;
     margin-bottom: 5rpx;
 }

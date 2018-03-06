@@ -26,6 +26,6 @@
 
   </view>
 
-  <view class='foot-btn-view' bindtap='bindFinalWXPayTap'>微信支付</view>
+  <view class='foot-view' bindtap='bindFinalWXPayTap'>微信支付</view>
 
 </view>

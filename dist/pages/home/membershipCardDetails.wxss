@@ -37,7 +37,7 @@
     margin-top: 60rpx;
     padding: 0 30rpx 15rpx 0;
     margin-bottom: 20rpx;
-    border-bottom: 2px #fff561 solid;
+    border-bottom: 2px #22233A solid;
 }
 .car-cell .check-icon {
     width: 37rpx;

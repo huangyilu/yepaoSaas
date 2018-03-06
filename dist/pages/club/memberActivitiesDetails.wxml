@@ -28,13 +28,14 @@
     </view>
   </view>
 
-  <view class='card-view'>
+  <view class='card-view' wx:if='{{ activities.cards.length > 0 }}'>
   
-    <view class='card-item' wx:for='{{ activities.cards }}' wx:key='{{ index }}' bindtap='bindCardItemTap'>
+    <view class='card-item' wx:for='{{ activities.cards }}' wx:key='{{ index }}' bindtap='bindCardItemTap'>      
+      <image class='card-bgimg' src='../../images/icon/club/card_bg.jpg'></image>
       <view class='name-view'>
         <view class='name'>{{ item.cardName }}</view>
         <text class='originalPrice'>原价：{{ item.originalPrice }}</text>
-        <text class='currentPrice yeColor'>现价：{{ item.currentPrice }}</text>
+        <text class='currentPrice'>现价：{{ item.currentPrice }}</text>
       </view>
       <view class='buy-btn'>立即购买</view>
     </view>

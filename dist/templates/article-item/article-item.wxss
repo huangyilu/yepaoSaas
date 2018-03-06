@@ -1,7 +1,7 @@
 
 .article-cell {
     padding: 30rpx;
-    background-color: #2F2D45;
+    background-color: #22233A;
     margin-top: 2rpx;
 }
 

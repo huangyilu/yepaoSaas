@@ -26,8 +26,9 @@
     color: #848296;
 }
 .weui-navbar__slider {
-    background-color: #fcf428;
-    height: 1px;
+    background-color:#FF904C;
+    height:4rpx;
+    border-radius:2rpx;
 }
 .weui-navbar__title {
     padding: 0 15rpx;

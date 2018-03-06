@@ -6,7 +6,7 @@
     padding: 50rpx 0 15rpx;
     text-align: center;
     margin-bottom: 20rpx;
-    background-color: #2f2d45;
+    background-color: #22233A;
 }
 .head-img-view {
     width: 100rpx;
@@ -27,7 +27,7 @@
     line-height: 40rpx;
     border: 1rpx #BAB9C7 solid;
     border-radius: 20rpx;
-    color: #FFEF5A;
+    color: #FF904C;
     font-size: 26rpx;
     margin: 0 auto 10rpx;
 }
@@ -35,7 +35,7 @@
 .x-item-view {
     text-align: center;
     margin-bottom: 20rpx;
-    background-color: #2f2d45;
+    background-color: #22233A;
 }
 .mine-x-item {
     padding: 20rpx 0 10rpx; 

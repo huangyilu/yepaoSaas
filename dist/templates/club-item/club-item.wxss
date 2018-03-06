@@ -2,14 +2,14 @@
 
 .club-cell {
     padding: 0 30rpx;
-    background-color: #2F2D45;
+    background-color: #22233A;
     margin-bottom: 20rpx;
 }
 
 .club-title {
     height: 80rpx;
     line-height: 80rpx;
-    border-bottom: 2rpx #262439 solid;
+    border-bottom: 2rpx #0F1029 solid;
 }
 
 .club-status-icon {
@@ -18,7 +18,6 @@
     float: right;
 }
 .club-status-text {
-    color: black;
     font-size: 26rpx;
     position: absolute;
     right: 40rpx;
@@ -32,7 +31,7 @@
 .people-view {
     margin-top:30rpx;
     font-size:26rpx;
-    color:#BAB9C7;
+    color: #BAB9C7;
 }
 .people-icon {
     width: 39rpx;

@@ -45,6 +45,6 @@
   
   </view>
 
-  <view class='{{ classDetails.reserveFlag ? "foot-appt-btn-view" : "foot-btn-view" }}' bindtap='{{ classDetails.reserveFlag ? "" : "bindClassScheduleApptTap" }}'>{{ classDetails.reserveFlag ? '已预约' : '预约' }}</view>
+  <view class='{{ classDetails.reserveFlag ? "foot-gray-view" : "foot-view" }}' bindtap='{{ classDetails.reserveFlag ? "" : "bindClassScheduleApptTap" }}'>{{ classDetails.reserveFlag ? '已预约' : '预约' }}</view>
 
 </view>

@@ -28,7 +28,7 @@ Page({
       cardPrice: options.cardPrice ? options.cardPrice : 0
     })
 
-    homeService.uploadOnlineCardOrder(this.data.cardId, this.data.cardPrice).then((result) => {
+    wxPayService.uploadOnlineCardOrder(this.data.cardId, this.data.cardPrice).then((result) => {
 
       console.log('uploadOnlineCardOrder *** ' + JSON.stringify(result));
       if (result.rs == 'Y') {
