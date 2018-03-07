@@ -2,7 +2,7 @@
 
 .infoTransfer-cell {
     padding: 30rpx;
-    background-color: #2f2d45;
+    background-color: #22233A;
     margin-top: 2rpx;
 }
 .checked-view {

@@ -19,12 +19,7 @@
 
   </view>
 
-  <view class='weui-flex foot-view'>
-  
-    <!-- <view class='weui-flex__item' bindtap='bindAverageTap'>平均移交</view> -->
-    <view class='yeBgColor blackColor weui-flex__item' bindtap='bindSpecifiedTap'>指定移交</view>
-
-  </view>  
+  <view class='foot-view' bindtap='bindSpecifiedTap'>指定移交</view>
 
 </view>
 

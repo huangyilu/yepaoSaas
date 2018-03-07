@@ -41,11 +41,20 @@ export function queryClubArticleList(pageNum) {
   })
 }
 
-// 会员活动 详情 
+// 会员活动 详情 /yp-xcx-getActiveDetail
 export function queryClubActiveDetail(activeId, gym) {
-  return jsonGetRequest('yp-xcx-getArticleDetail', {
+  return jsonGetRequest('yp-xcx-getActiveDetail', {
     custName: appConfig.custName,
     gym: gym ? gym : AuthService.getMemberInfo().gym,
     activeId: activeId
+  })
+}
+
+// 俱乐部动态 文章 详情 getArticleDetail?
+export function queryClubArticleDetail(articleId, gym) {
+  return jsonGetRequest('yp-xcx-getArticleDetail', {
+    custName: appConfig.custName,
+    gym: gym ? gym : AuthService.getMemberInfo().gym,
+    articleId: articleId,
   })
 }

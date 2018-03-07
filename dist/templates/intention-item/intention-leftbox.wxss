@@ -36,7 +36,7 @@
 .box-item .title {
     margin-top: 20rpx;
 }
-.leftbox-input-view {
+.leftbox-input-view {  
     margin-top: 20rpx;
 }
 .leftbox-input {

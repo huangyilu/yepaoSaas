@@ -1,4 +1,5 @@
 // pages/club/clubDynamics.js
+
 import * as clubService from '../../services/club-service';
 import * as clubdata from '../../utils/clubdata-format';
 
@@ -69,7 +70,7 @@ Page({
   // 俱乐部动态详情
   bindClubdyCellTap (e) {
     wx.navigateTo({
-      url: 'clubDynamicsDetails',
+      url: 'clubDynamicsDetails?articleId=' + e.currentTarget.id,
     })
   }
 })

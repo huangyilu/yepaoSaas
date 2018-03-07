@@ -7,7 +7,7 @@
   <view wx:if='{{ clubdyList.length > 0 }}'>
   <view class='clubdy-cell' wx:for='{{ clubdyList }}' wx:key='{{ index }}' id='{{ item.id }}' >
     
-    <view class='weui-flex' bindtap='bindClubdyCellTap'>
+    <view class='weui-flex' id='{{ item.id }}' bindtap='bindClubdyCellTap'>
       <view>
         <image class='titleImg' mode='aspectFill' src='{{ item.titleImg }}'></image>
       </view>
@@ -22,7 +22,7 @@
         <text>{{ item.time }}</text>
       </view>
       <view class='weui-flex__item author-view'>
-        <text>作者：{{ item.author }}</text>
+        <text>{{ item.author }}</text>
         <!-- <view class='good-view' id='{{ index }}' bindtap='bindGoodSelectedTap'>
           <image class='good-icon' src='../../images/icon/club/{{ item.isGoodSelected ? "zan_y" : "zan_g" }}.png'></image>
           <text class='{{ item.isGoodSelected ? "yeColor" : "" }}'>{{ item.goodNum }}</text>

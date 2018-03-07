@@ -49,6 +49,6 @@
 
 </view>
 
-<view hidden='{{ isCertificationMemHidden }}'>
-  <template is='certification-box' data=''/>
-</view>
+<!-- <view hidden='{{ isCertificationMemHidden }}'>  -->
+  <template is='certification-box' data='{{ reminTitle, codeText, placeholderText, isGYMListHidden, gymList, memTelephone, cerInputNum  }}'/>
+<!-- </view>   -->

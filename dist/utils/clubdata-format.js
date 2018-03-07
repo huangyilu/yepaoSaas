@@ -51,15 +51,34 @@ export function formatClubDynamicsList(list, clubList) {
     clubList.push({
       id: item.id,
       title: item.title,
-      titleImg: 'http://img2.imgtn.bdimg.com/it/u=3390152407,4060777889&fm=27&gp=0.jpg',
-      // item.pic_url
+      titleImg: item.pic_url,
       content: item.content,
       time: moment(item.create_time).format('YYYY-MM-DD'),
-      author: '王艳',
+      author: item.author ? '作者：' + item.author : '',
       isGoodSelected: true
     });
   })
   return clubList
+}
+
+// 俱乐部动态详情
+export function formatClubDynamicsListDetail(item) {
+  return {
+    title: item.title,
+    author: item.author ? '作者：' + item.author : '',
+    introduction: item.summary,
+    poster: item.pic_url,
+    contents: [
+      {
+        styleClass: 'section-title',
+        content: '内容详情',
+      },
+      {
+        content: item.content,
+      }
+    ]
+
+  }
 }
 
 // 会员活动 详情

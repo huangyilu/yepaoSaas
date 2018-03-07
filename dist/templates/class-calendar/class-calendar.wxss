@@ -147,7 +147,7 @@
 }
 
 .yel-bg {
-    background-color: #fcf428;
+    background-color: #FF904C;
     color: white;
     border-radius: 50%;
 }

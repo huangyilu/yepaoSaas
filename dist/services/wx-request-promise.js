@@ -33,6 +33,10 @@ export function wxRequestP(method, url, contentType, data = {}, accessToken ) {
             if (res.data.errCode == 0) {
               return resolve(res.data)
             } else {
+              wx.showToast({
+                icon: 'none',
+                title: res.data.errMsg,
+              })
               return reject(res.data)
             }
             

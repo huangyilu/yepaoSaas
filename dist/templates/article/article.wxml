@@ -4,7 +4,7 @@
   <view class="article-title">{{ title }}</view>
 
   <!-- 作者 简介 -->
-  <view wx:if="{{ author }}" class='author-introduction-view'>作者：{{ author }}</view>
+  <view wx:if="{{ author }}" class='author-introduction-view'>{{ author }}</view>
   <view wx:if="{{ introduction }}" class='author-introduction-view'>简介：{{ introduction }}</view>
 
   <!-- 第一张 海报 -->

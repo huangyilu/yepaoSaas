@@ -140,3 +140,18 @@ export function uploadCancelMyClass(orderId) {
     orderId: orderId
   })
 }
+
+// 发送手机验证码 验证手机 
+export function queryPhoneCode(phone) {
+  return jsonGetRequest('yp-xcx-sms-memberRegisterAuth', {
+    custName: appConfig.custName,
+    phone: phone
+  })
+}
+
+// 验证码 验证接口
+export function uploadPhoneCode(inputCode) {
+  return urlencodePostRequest('yp-xcx-sms-smsAuth', {
+    inputCode: inputCode
+  })
+}

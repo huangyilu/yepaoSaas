@@ -5,16 +5,47 @@
     margin: 37% 10%;
 }
 .confirm-view .text-view {
-    padding:30rpx;
-    border-bottom:1rpx #262439 solid;
-    color: #FFEF5A;
-    font-size: 32rpx;
+    padding: 30rpx;
+    border-bottom: 1rpx black solid;
+    color: #FF904c;
 }
 .confirm-view .input-view {
-    padding: 40rpx;
+    padding: 30rpx 40rpx;
 }
 .confirm-view .input-view input {
-    padding:10rpx;
-    border:1rpx #393752 solid;
+    padding: 10rpx 15rpx;
+    border: 1rpx #393752 solid;
+    text-align: left;
+    height: 65rpx;
+    line-height: 65rpx;
+}
+.confirm-view .input-view .code-text {
+    padding: 10rpx 15rpx;
+    border: 1rpx #393752 solid;
+    border-left-style: none;
+    border-radius: 5rpx;
+    font-size: 26rpx;
+    height: 65rpx;
+    line-height: 65rpx;
+}
+.confirm-view .remind-text-up {
+    margin: 30rpx 40rpx 0;
+    text-align: left;
+    color: #848296;
+    font-size: 28rpx;
+}
+.confirm-view .remind-text-down {
+    margin: 0 40rpx 30rpx;
+    text-align: left;
+    color: #848296;
+    font-size: 28rpx;
+}
+
+.confirm-view .gym-cell {
+    padding:30rpx;
     text-align:left;
+}
+.confirm-view .checked-box {
+    width: 37rpx;
+    height: 37rpx;
 }

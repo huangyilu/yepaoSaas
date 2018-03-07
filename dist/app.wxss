@@ -153,6 +153,10 @@ page {
     text-align: center;
 }
 
+.txt-left {
+    text-align: left;
+}
+
 /* 二级文字 */
 .second-txt-fscolor {
     font-size: 28rpx;
