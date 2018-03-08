@@ -29,6 +29,7 @@ var storeE = {
   }
 };
 
+// 保存新登记 潜客会员信息
 // 保存 会员信息
 export function saveMemberInfo(result) {
   var memInfo = {
@@ -72,8 +73,14 @@ export function getUserInfo() {
   return {
     openId: getOpenId(),
     username: userProfile.nickName,
+    gender: FORMATGENDER[userProfile.gender],
     avatarSrc: userProfile.avatarUrl
   };
+}
+export const FORMATGENDER = {
+  '1' : 'male',
+  '2' : 'female',
+  '0' : 'male'
 }
 
 export function isLoggedIn() {
@@ -135,6 +142,7 @@ export function wxappLogin() {
         wx.getUserInfo({
           success: function (res) {
             console.log('getUserInfo result: ' + JSON.stringify(res));
+            storeE.set('userProfile', res.userInfo, EXPIRATION_MILLISECONDS);
             return resolve({ authCode: loginResult.code, userInfoResult: res });
           },
           fail: function (error) {

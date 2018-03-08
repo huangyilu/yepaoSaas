@@ -187,3 +187,15 @@ export const CLASSSTATUSFORMAT = {
   '002': '已取消',
   '003': '已完成'
 }
+
+// 获取 gym list
+export function formatGYMList(list) {
+  return list.map(item => this.formatGYMListItem(item))
+}
+export function formatGYMListItem(item) {
+  return {
+    gymId: item.gym_id,
+    name: item.gym_name,
+    checked: false
+  }
+}

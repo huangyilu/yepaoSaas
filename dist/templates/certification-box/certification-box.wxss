@@ -48,4 +48,8 @@
 .confirm-view .checked-box {
     width: 37rpx;
     height: 37rpx;
+    margin-top: 6rpx;
+}
+.confirm-view .gym-cell-scrollview {
+    height: 380rpx;
 }

@@ -42,6 +42,13 @@ Page({
 
     this.getClubDetail(options.activeId);
 
+    // 验证 查看的人 是否是会员，若不是，则注册 。用转发的人的gym
+
+    console.log('options .. ' + JSON.stringify(options));
+    
+
+    
+
   },
   onUnload: function (options) {
     clearTimeout(timer);
@@ -61,12 +68,13 @@ Page({
 
   // 活动 结束倒计时
   activitiesCountdown(that, state) {
-    var EndTime = this.data.activities.endtime;
+    var EndTime = this.data.activities.endTime;
+    var StartTime = this.data.activities.startTime;
     var NowTime = new Date().getTime();
     var total_micro_second = EndTime - NowTime || [];
 
     if (state == 'ready') {
-      total_micro_second = NowTime - EndTime || [];
+      total_micro_second = StartTime - NowTime || [];
     }
     // console.log('EndTime: ' + EndTime);
     // console.log('剩余时间：' + total_micro_second);
@@ -97,7 +105,7 @@ Page({
     var min = Math.floor(second / 60 % 60);
     // 秒
     var sec = Math.floor(second % 60);
-    console.log(' *** ' + day + "天" + hr + "小时" + min + "分钟" + sec + "秒" );
+    // console.log(' *** ' + day + "天" + hr + "小时" + min + "分钟" + sec + "秒" );
     that.setData({
       days: day,
       hour: hr,
@@ -132,6 +140,7 @@ Page({
         console.log('转发成功 title.. ' + me.data.activities.title);
         console.log('转发成功 activeId.. ' + me.data.activeId);
         console.log('转发成功 activeId.. ' + me.data.gym);
+        // console.log('转发成功 res.. ' + JSON.stringify(res));
       },
       fail: function (res) {
         // 转发失败

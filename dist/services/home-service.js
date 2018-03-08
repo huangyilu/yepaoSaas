@@ -150,8 +150,27 @@ export function queryPhoneCode(phone) {
 }
 
 // 验证码 验证接口
-export function uploadPhoneCode(inputCode) {
+export function uploadPhoneCode(inputCode, phone) {
   return urlencodePostRequest('yp-xcx-sms-smsAuth', {
-    inputCode: inputCode
+    inputCode: inputCode,
+    phone: phone
   })
+}
+
+// 获取场馆列表
+export function queryGYMList() {
+  return jsonGetRequest('yp-xcx-login-getGymList', {
+    custName: appConfig.custName,
+  })
+}
+
+// 提交 登录 潜客会员
+export function uploadNewMem(infoDic) {
+  var newInfo = {};
+  newInfo.custName = appConfig.custName;
+  newInfo.gym = infoDic.gym;
+  newInfo.phone = infoDic.memTelephone;
+  newInfo.sex = AuthService.getUserInfo().gender;
+  newInfo.nickName = AuthService.getUserInfo().username;
+  return urlencodePostRequest('yp-xcx-login-register', newInfo)
 }

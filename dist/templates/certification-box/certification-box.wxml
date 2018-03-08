@@ -23,12 +23,14 @@
       <!-- 门店列表 -->
       <view wx:if='{{ isGYMListHidden }}'>
       
+        <scroll-view class='gym-cell-scrollview' scroll-y='true'>
         <view class='gym-cell weui-flex' wx:for='{{ gymList }}' wx:key='{{ index }}'  id='{{ index }}' bindtap='bindGymCellTap'>
           <view class='weui-flex__item'>{{ item.name }}</view>
           <image class='checked-box' 
           src='{{ item.checked ? "../../images/icon/home/car/card_choose.png" : "../../images/icon/video_unchoose.png" }}'></image>
         </view>
-      
+        </scroll-view>
+
       </view>
 
       <view class='weui-flex'>

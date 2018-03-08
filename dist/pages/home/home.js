@@ -2,6 +2,7 @@
 
 import * as AuthService from '../../services/auth-service';
 import * as homeService from '../../services/home-service';
+import * as homedata from '../../utils/homedata-format';
 
 Page({
 
@@ -12,30 +13,28 @@ Page({
 
     // 会员认证
     isCertificationMem: false,
+
+    // 是否 进行 会员认证
     isCertificationMemHidden: true,
+
     memTelephone: '',
+    telephoneCode: '',
     reminTitle: '会员认证',
     codeText: '',
     placeholderText: '请输入会员手机号',
-    getCode: false,
-    isGYMListHidden: false,
     cerInputNum: '',
     codeNum: 60,
     isAollowCodeTap: true,
-    gymList: [
-      {
-        name: '苏州也跑旗舰店',
-        checked: true
-      },
-      {
-        name: '苏州也跑狮山店',
-        checked: false
-      },
-      {
-        name: '苏州也跑园区店',
-        checked: false
-      }
-    ]
+    gymList: [],
+
+    // 确定 验证 会员手机号
+    isConfiMemPhone: true,
+    // 确定 验证码
+    isConfiCode: false,
+    // 确定 门店
+    isConfiGym: false,
+    // 门店 是否隐藏 
+    isGYMListHidden: false
 
   },
 
@@ -80,21 +79,19 @@ Page({
     var id = e.currentTarget.id;
     if (id == 'a') {
 
-      if (this.data.getCode) {
-
-        // 获取验证码 并验证后 下一步获取门店列表 并做选择
-
-        // 验证 验证码是否正确
-        // if (this.data.memTelephone != '') {
-          this.confirmPhoneCode();
-        // } else {
-
-        // }
-        
-
-      }  else {
-        // 确定认证
+      // 1、确定验证 会员
+      if (this.data.isConfiMemPhone) {
         this.confirmCertification();
+      }
+
+      // 2、确定 验证 验证码
+      if (this.data.isConfiCode) {
+        this.confirmPhoneCode();
+      }
+
+      // 3、确定门店
+      if (this.data.isConfiGym) {
+        this.confirmNewMemInfo();
       }
 
     } else {
@@ -110,7 +107,6 @@ Page({
   bindGetPhoneCodeTap() {
 
     this.setData({
-      getCode: true,
       placeholderText: '请输入验证码'
     })
 
@@ -147,9 +143,9 @@ Page({
     
     homeService.queryPhoneCode(this.data.memTelephone).then((result) => {
 
-      // 发送成功后
+      // 验证码发送成功
       this.setData({
-        getCode: true
+        isConfiCode: true
       })
 
     }).catch((error) => {
@@ -158,11 +154,15 @@ Page({
   },
   confirmPhoneCode() {
     
-    homeService.uploadPhoneCode(this.data.memTelephone).then((result) => {
-
+    homeService.uploadPhoneCode(this.data.telephoneCode, this.data.memTelephone).then((result) => {
+      
+      // 验证码 验证成功
       this.setData({
-        isGYMListHidden: true
+        isConfiGym: true,
+        isConfiCode: false
       })
+      // 获取 gym list 
+      this.getGYMList();
 
     }).catch((error) => {
       console.log(error);
@@ -184,14 +184,49 @@ Page({
         reminTitle: '您还不是会员！',
         codeText: '获取验证码',
         placeholderText: '请输入验证码',
-        cerInputNum: ''
+        cerInputNum: '',
+        // 认证 会员失败 之后
+        isConfiMemPhone: false
       })
 
       console.log(error);
     })
   },
+  getGYMList() {
 
-  // 新注册会员 门店选择
+    homeService.queryGYMList().then((result) => {
+
+      this.setData({
+        gymList: homedata.formatGYMList(result.gymList),
+        isGYMListHidden: true
+      })
+
+    }).catch((error) => {
+      console.log(error);
+    })
+
+  },
+  confirmNewMemInfo() {
+    var infoDic = {};
+    infoDic.memTelephone = this.data.memTelephone;
+    infoDic.gym = this.data.gym;
+
+    homeService.uploadNewMem(infoDic).then((result) => {
+
+      this.setData({
+        isCertificationMemHidden: true,
+        isCertificationMem: true
+      })
+      // 保存 会员信息
+      AuthService.saveMemberInfo(result.newMem);
+
+
+    }).catch((error) => {
+      console.log(error);
+    })
+  },
+
+  // 登录 潜客会员 门店选择
   bindGymCellTap(e) {
     var gymList = this.data.gymList;
     var index = e.currentTarget.id;
@@ -200,13 +235,20 @@ Page({
     })
     gymList[index].checked = true;
     this.setData({
-      gymList: gymList
+      gymList: gymList,
+      gym: gymList[index].gym
     })
   },
 
   bindCerMemInput(e) {
-    this.setData({
-      memTelephone: e.detail.value
-    })
+    if (this.data.codeText != '') {
+      this.setData({
+        telephoneCode: e.detail.value
+      })
+    } else {
+      this.setData({
+        memTelephone: e.detail.value
+      })
+    }
   }
 })

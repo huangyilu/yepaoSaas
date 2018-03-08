@@ -85,7 +85,8 @@ export function formatClubDynamicsListDetail(item) {
 export function formatClubDetail(item) {
   return {
     titleImg: item.pic_url,
-    endtime: formatTimerTime(item.state, item),
+    endTime: moment(item.end_time).format('x'),
+    startTime: moment(item.start_time).format('x'),
     timeTitle: FORMATTIMETITLE[item.state],
     title: item.title,
     introduction: item.summary,
@@ -96,13 +97,13 @@ export function formatClubDetail(item) {
     activitiesDetails: item.content
   }
 }
-export function formatTimerTime(state,item) {
-  if (state == 'ready') {
-    return moment(item.start_time).format('x')
-  } else {
-    return moment(item.end_time).format('x')
-  }
-}
+// export function formatTimerTime(state,item) {
+//   if (state == 'ready') {
+//     return moment(item.start_time).format('x')
+//   } else {
+//     return moment(item.end_time).format('x')
+//   }
+// }
 export function formatClubDetailCards(list) {
   return list.map((item,x) => this.formatClubDetailCardsItem(item,x))
 }
