@@ -2,9 +2,13 @@
 
 import * as mineService from '../../services/mine-service';
 import * as AuthService from '../../services/auth-service';
+import certificationBox from '../../templates/certification-box/certification-box'
 
+/**
+ * 页面的初始数据
+ */
 var app = getApp();
-Page({
+let pageOptions = {
 
   /**
    * 页面的初始数据
@@ -57,18 +61,16 @@ Page({
         navigateUrl: 'myOrderListView',
         ishidden: false
       },
-      {
-        iconUrl: '../../images/icon/mine/my_setting.png',
-        name: '设置',
-        style: 'margin-top:20rpx;',
-        navigateUrl: '',
-        ishidden: false
-      }
+      // {
+      //   iconUrl: '../../images/icon/mine/my_setting.png',
+      //   name: '设置',
+      //   style: 'margin-top:20rpx;',
+      //   navigateUrl: '',
+      //   ishidden: false
+      // }
     ],
 
-    isCertificationMem: false,
-    isCertificationMemHidden: true,
-    memTelephone: ''
+
   },
 
   /**
@@ -79,11 +81,19 @@ Page({
     this.bindGetUserInfo();
 
   },
-  onShow: function (options) {
-    // 查询是否认证会员
-    this.getCertifiMem();
+  onReady() {
+    certificationBox.setParent(this)
   },
-
+  getCertifiMem(that) {
+    if (AuthService.getMemberInfo()) {
+      this.setData({
+        isCertificationMem: true
+      })
+      console.log('*已认证会员*');
+    } else {
+      console.log('*未认证会员*');
+    }
+  },
   // 构造按钮列表
   setMyYItems() {
     var memInfo = AuthService.getMemberInfo();
@@ -102,7 +112,7 @@ Page({
   bindNavigateTap(e) {
     if (!this.data.isCertificationMem) {
       this.setData({
-        isCertificationMemHidden: false
+        'certificationBoxData.isCertificationMemHidden': false
       })
     } else {
       wx.navigateTo({
@@ -136,12 +146,21 @@ Page({
     }
 
   },
+  bindCertificationTap() {
+    if (!this.data.isCertificationMem) {
+      this.setData({
+        'certificationBoxData.isCertificationMemHidden': false
+      })
+    } else {
+      
+    }
+  },
 
   // 健身历程
   bindFitLcTap () {
     if (!this.data.isCertificationMem) {
       this.setData({
-        isCertificationMemHidden: false
+        'certificationBoxData.isCertificationMemHidden': false
       })
     } else {
       
@@ -151,65 +170,18 @@ Page({
   bindFitDataTap () {
     if (!this.data.isCertificationMem) {
       this.setData({
-        isCertificationMemHidden: false
+        'certificationBoxData.isCertificationMemHidden': false
       })
     } else {
       
     }
   },
 
-  // 查询是否认证会员
-  getCertifiMem() {
-    var memInfo = AuthService.getMemberInfo();
-    if (memInfo) {
-      this.setData({
-        isCertificationMem: true,
-        memInfo: memInfo
-      })
-      this.setMyYItems();
-      console.log('已认证会员');
-    } else {
-      console.log('未认证会员');
-    }
-  },
-  // 会员认证
-  bindCertificationTap (e) {
-    if (!this.data.isCertificationMem) {
-      this.setData({
-        isCertificationMemHidden: false
-      })
-    }
-  },
-  //会员认证 取消/确认
-  bindConfirmBoxBtnTap (e) {
-    var id = e.currentTarget.id;
-    if (id == 'a') {
-      // 确定 认证
-      AuthService.queryCertificationMember(this.data.memTelephone).then((result) => {
-        
-        this.setMyYItems();
-        this.setData({
-          isCertificationMemHidden: true,
-          isCertificationMem: true
-        })
 
-      }).catch((error) => {
-        console.log(error);
-      })
-      
-    } else {
-      // 取消
-      this.setData({
-        isCertificationMemHidden: true
-      })
-    }
-  },
-  bindCerMemInput (e) {
-    this.setData({
-      memTelephone: e.detail.value 
-    })
-  }
 
-  
+}
 
-})
+certificationBox.bindData(pageOptions)
+certificationBox.bindListeners(pageOptions)
+
+Page(pageOptions)

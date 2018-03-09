@@ -196,6 +196,7 @@ export function formatGYMListItem(item) {
   return {
     gymId: item.gym_id,
     name: item.gym_name,
+    gym: item.gym,
     checked: false
   }
 }

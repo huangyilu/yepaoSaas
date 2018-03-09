@@ -3,19 +3,15 @@
 import * as AuthService from '../../services/auth-service';
 import * as clubService from '../../services/club-service';
 import * as clubdata from '../../utils/clubdata-format';
-
-Page({
+import certificationBox from '../../templates/certification-box/certification-box'
 
   /**
    * 页面的初始数据
    */
+let pageOptions = {
+
   data: {
     swiperImgUrls: ['../../images/bg_img/ban.jpg'],
-
-    // 会员认证
-    isCertificationMem: false,
-    isCertificationMemHidden: true,
-    memTelephone: '',
 
     clubList: [],
     clubListPageIndex: 1
@@ -26,13 +22,23 @@ Page({
    */
   onLoad: function (options) {
 
-    this.getClubList();
+  },
+  onReady() {
+    certificationBox.setParent(this)
+  },
+  getCertifiMem(that) {
+    if (AuthService.getMemberInfo()) {
+      this.setData({
+        isCertificationMem: true
+      })
+      // 获取消息列表
+      this.getClubList();
+      console.log('*已认证会员*');
+    } else {
+      console.log('*未认证会员*');
+    }
+  },
 
-  },
-  onShow: function (options) {
-    // 查询是否认证会员
-    this.getCertifiMem();
-  },
   // 上拉触底 加载
   onReachBottom: function (options) {
     console.log('到底啦！！');
@@ -43,7 +49,9 @@ Page({
       clubListPageIndex: clubListPageIndex
     })
 
-    this.getClubList();
+    if (this.data.isCertificationMem) {
+      this.getClubList();
+    }
   },
 
   // 查询推荐活动
@@ -58,46 +66,6 @@ Page({
     })
   },
 
-  // 查询是否认证会员
-  getCertifiMem() {
-    if (AuthService.getMemberInfo()) {
-      this.setData({
-        isCertificationMem: true
-      })
-      console.log('已认证会员');
-    } else {
-      console.log('未认证会员');
-    }
-  },
-  //会员认证 取消/确认
-  bindConfirmBoxBtnTap(e) {
-    var id = e.currentTarget.id;
-    if (id == 'a') {
-      // 确定 认证
-      AuthService.queryCertificationMember(this.data.memTelephone).then((result) => {
-
-        this.setData({
-          isCertificationMemHidden: true,
-          isCertificationMem: true
-        })
-
-      }).catch((error) => {
-        console.log(error);
-      })
-
-    } else {
-      // 取消
-      this.setData({
-        isCertificationMemHidden: true
-      })
-    }
-  },
-  bindCerMemInput(e) {
-    this.setData({
-      memTelephone: e.detail.value
-    })
-  },
-
   bindMemberActivitiesTap(e) {
     if (this.data.isCertificationMem) {
       wx.navigateTo({
@@ -105,7 +73,7 @@ Page({
       })
     } else {
       this.setData({
-        isCertificationMemHidden: false
+        'certificationBoxData.isCertificationMemHidden': false
       })
     }
   },
@@ -116,7 +84,7 @@ Page({
       })
     } else {
       this.setData({
-        isCertificationMemHidden: false
+        'certificationBoxData.isCertificationMemHidden': false
       })
     }
   },
@@ -128,8 +96,13 @@ Page({
       })
     } else {
       this.setData({
-        isCertificationMemHidden: false
+        'certificationBoxData.isCertificationMemHidden': false
       })
     }
   }
-})
+}
+
+certificationBox.bindData(pageOptions)
+certificationBox.bindListeners(pageOptions)
+
+Page(pageOptions)

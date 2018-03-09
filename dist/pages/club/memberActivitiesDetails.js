@@ -42,10 +42,10 @@ Page({
 
     this.getClubDetail(options.activeId);
 
-    // 验证 查看的人 是否是会员，若不是，则注册 。用转发的人的gym
-
-    console.log('options .. ' + JSON.stringify(options));
+    // 验证 查看的人 是否是会员，若不是，则调用注册 。用转发的人的gym
     
+    console.log('options .. ' + JSON.stringify(options));
+    // 1、检验是否是会员
 
     
 
@@ -117,14 +117,17 @@ Page({
   bindCardItemTap(e) {
 
 
-    wx.navigateTo({
-      url: '../home/onlinePaymentForCard',
-    })
+    // wx.navigateTo({
+    //   url: '../home/onlinePaymentForCard',
+    // })
 
     // wx.showToast({
     //   icon: 'none',
     //   title: '活动已结束！'
     // })
+
+    // 当 转发出去 点击的人 打算点击买卡的时候 再请求注册 会员
+    
 
   },
   /**

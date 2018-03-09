@@ -198,21 +198,21 @@ export function queryCertificationMember(phone) {
 
           if (res.data.errCode == 0) {
             saveMemberInfo(res.data.memInfo);
-            showSuccessFailToast(true);
+            showSuccessFailToast('000');
             return resolve(true);
           } else {
-            showSuccessFailToast(false);
+            showSuccessFailToast('001');
             return reject(false);
           }
           
         } else {
           console.log("wxappauth failed: " + res.statusCode);
-          showSuccessFailToast(false);
+          showSuccessFailToast('002');
           return reject(+res.statusCode);
         }
       },
       fail: function (error) {
-        showSuccessFailToast(false);
+        showSuccessFailToast('002');
         return reject(error);
       }
     });
@@ -221,17 +221,23 @@ export function queryCertificationMember(phone) {
 
 export function showSuccessFailToast (code) {
   wx.hideLoading();
-  if (code == true) {
+  if (code == '000') {
     wx.showToast({
       title: '认证成功',
       icon: 'success',
-      duration: 2000
+      duration: 1000
     });
-  } else {
+  } else if (code == '001') {
     wx.showToast({
       title: '认证失败！查无此会员！',
       icon: 'none',
-      duration: 2000
+      duration: 800
+    });
+  } else {
+    wx.showToast({
+      title: '请求失败！',
+      icon: 'none',
+      duration: 1000
     });
   }
 }

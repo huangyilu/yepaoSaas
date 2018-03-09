@@ -8,6 +8,9 @@ Page({
    * 页面的初始数据
    */
   data: {
+    emptyText: '没有您的订单',
+    emptyIcon: '../../images/bg_img/no_data.png',
+
     orderList: []
   },
 

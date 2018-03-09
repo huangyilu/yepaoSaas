@@ -35,11 +35,7 @@
 
   </view>
 
-  
-  <!-- 认证弹窗 -->
-  <view hidden='{{ isCertificationMemHidden }}'>
-    <template is='certification-box' data=''/>
-  </view>
-
-
 </view>
+
+<!-- 认证弹窗 -->
+<template is='certification-box' data='{{ ...certificationBoxData  }}'/>

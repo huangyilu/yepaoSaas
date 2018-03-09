@@ -3,7 +3,7 @@
 <template name='certification-box'>
 
   <!-- 认证弹窗 -->
-  <view class='confirm-bgview'>
+  <view hidden='{{ isCertificationMemHidden }}' class='confirm-bgview'>
     <view class='confirm-view'>
 
       <view class='text-view'>{{ reminTitle }}</view>
@@ -17,7 +17,7 @@
           </view>
           <view wx:if='{{ codeText != "" }}' class='code-text' bindtap='bindGetPhoneCodeTap'>{{ codeText }}</view>
         </view>
-        <view class='remind-text-down'>即刻验证手机号成为会员</view>
+        <view wx:if='{{ codeText != "" }}' class='remind-text-down'>即刻验证手机号成为会员</view>
       </view>
 
       <!-- 门店列表 -->
@@ -34,8 +34,8 @@
       </view>
 
       <view class='weui-flex'>
-        <view class='btn weui-flex__item' id='q' bindtap='bindConfirmBoxBtnTap'>取消</view>
-        <view class='confirmBtn btn weui-flex__item' id='a' bindtap='bindConfirmBoxBtnTap'>确定</view>
+        <view class='btn weui-flex__item' bindtap='bindCancelBoxBtnTap'>取消</view>
+        <view class='confirmBtn btn weui-flex__item' bindtap='bindConfirmBoxBtnTap'>确定</view>
       </view>
 
     </view>

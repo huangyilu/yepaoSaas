@@ -2,7 +2,7 @@
 
 /* 会员认证弹窗 */
 .confirm-view {
-    margin: 37% 10%;
+    margin: 30% 10%;
 }
 .confirm-view .text-view {
     padding: 30rpx;

@@ -1,11 +1,11 @@
 
 
 // 正式服
-// export const apiBase = 'https://91yesrun.com/Saas/'
+export const apiBase = 'https://91yesrun.com/Saas/'
 // 线上 测试服
 // export const apiBase = 'http://47.97.104.141/Saas/'
 // 本地 测试服
-export const apiBase = 'http://192.168.1.38:8080/Saas/'
+// export const apiBase = 'http://192.168.1.162:8080/Saas/'
 
 // 本地 老朱 电脑
 // export const apiBase = 'http://192.168.1.80:8080/Saas/'
