@@ -11,6 +11,8 @@ import certificationBox from '../../templates/certification-box/certification-bo
 let pageOptions = {
 
   data: {
+    isCertificationMem: false,
+    isCertificationMemHidden: true
   },
 
   /**
@@ -21,7 +23,9 @@ let pageOptions = {
   },
   onReady() {
     certificationBox.setParent(this)
-    
+  },
+  onShow() {
+    this.getCertifiMem();
   },
   getCertifiMem(that) {
     if (AuthService.getMemberInfo()) {
@@ -40,6 +44,10 @@ let pageOptions = {
       this.setData({
         'certificationBoxData.isCertificationMemHidden': false
       })
+      // certificationBox.setThisData({
+      //   name: 'isCertificationMemHidden',
+      //   data: false
+      // });
     } else {
       wx.navigateTo({
         url: url,

@@ -11,8 +11,8 @@
     </view>
     <view class='phone-view'>
       <view class='padbotm10'>
-        电<text class='bgblueColor'>占位</text>话：<text class='yeColor'>{{ task.custPhone }}</text>
-        <image class='phone-icon' src='../../../images/icon/telephone.png' bindtap='bindCustPhonecallTap'></image>
+        电<text class='bgblueColor'>占位</text>话：<text class='mainColor'>{{ task.custPhone }}</text>
+        <image class='phone-icon' src='../../../images/icon/mine/telephone.png' bindtap='bindCustPhonecallTap'></image>
       </view>
       <view>出生日期：<text class='whiteColor'>{{ task.custBirth }}</text></view>
     </view>

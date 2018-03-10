@@ -15,9 +15,9 @@
     </view>
   </view>
 
-  <view class='foot-view' >
-    <view class='left-btn' >取消</view>
-    <view class='right-btn' bindtap='bindJoinTaskListTap'>加入任务列表</view>
+  <view class='foot-view weui-flex' >
+    <view class='left-btn weui-flex__item' >取消</view>
+    <view class='right-btn weui-flex__item' bindtap='bindJoinTaskListTap'>加入任务列表</view>
   </view>
 
 </view>

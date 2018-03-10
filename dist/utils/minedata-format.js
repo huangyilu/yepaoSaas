@@ -38,11 +38,10 @@ export function formatMemInfoRegistCardsItem(item) {
 }
 
 // 判断 日期 属于 今天 昨天 不是今年
-export function formatDifferentTypesDate (timeStr) {
+export function formatDifferentTypesDate(oldStr) {
   // +timeStr 
   var newStr = '';
   var nowStr = moment().format('YYYY-MM-DD');
-  var oldStr = moment(+timeStr).format('YYYY-MM-DD');
 
   var isBeforeToday = moment(oldStr).isBefore(nowStr);
   var isBeforeThisYear = moment(oldStr).isBefore(nowStr, 'year');
@@ -50,7 +49,7 @@ export function formatDifferentTypesDate (timeStr) {
   if (isBeforeToday) {
     newStr = moment(oldStr).format('MM-DD');
   } else {
-    newStr = moment(+timeStr).format('HH:mm');
+    newStr = moment(oldStr).format('HH:mm');
   }
   if (isBeforeThisYear) {
     newStr = moment(oldStr).format('YYYY-MM-DD');
@@ -104,7 +103,7 @@ export function formatShareCourseListItem(item) {
   return {
     id: item.ptId,
     title: '教练' + item.teacherName + '的课程共享',
-    time: this.formatDifferentTypesDate(item.create_date)
+    time: item.create_date ? this.formatDifferentTypesDate(item.create_date) : ''
   }
 }
 
@@ -115,7 +114,7 @@ export function formatShareCourseDetails(list) {
   list.forEach(item => {
     newList.push({
       ishidden: false,
-      time: this.formatDifferentTypesDate(item.create_date),
+      time: this.formatDifferentTypesDate(item.courseShare.create_date),
       details: item.mediaUrlList
     })
     videoList.push(item.mediaUrlList);

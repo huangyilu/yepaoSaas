@@ -4,7 +4,7 @@
     height: 100rpx;
     line-height: 100rpx;
     padding: 0 30rpx;
-    background-color: #2f2d45;
+    background-color: #22233A;
     border-bottom: 1rpx #262439 solid;
 }
 .rec-cell .title {
@@ -14,7 +14,7 @@
 .content-view {
     height: 300rpx;
     padding: 30rpx;
-    background-color: #2f2d45;
+    background-color: #22233A;
 }
 .content-view textarea {
     width: 500rpx;
@@ -30,7 +30,7 @@
 }
 
 .cancel-btn {
-    background-color: #2f2d45;
+    background-color: #22233A;
 }
 .join-btn {
     background-color: #fcf428;

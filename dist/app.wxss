@@ -69,7 +69,6 @@ page {
 }
 .foot-view .right-btn {
     background-color: #FF904C;
-    color: black;
     /* -webkit-box-flex:1;
     -webkit-flex:1;
     flex:1; */
@@ -138,7 +137,7 @@ page {
     color: black;
 }
 .bgblueColor {
-    color: #2f2d45;
+    color: #22233A;
 }
 .mainColor {
     color: #FF904C;
@@ -188,7 +187,7 @@ page {
 
 /* 暂无 XXX */
 .empty-view {
-    background-color: #2f2d45;
+    background-color: #22233A;
     padding: 10rpx 30rpx;
     margin-top: 20rpx;
 }

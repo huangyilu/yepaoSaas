@@ -12,6 +12,10 @@
     </view>
     <view class='certification-btn' style='{{ isCertificationMem ? "color:#bab9c7" : "" }}' bindtap='bindCertificationTap'>{{ isCertificationMem ? "已认证" : "未认证" }}</view>
     <view class='text'>{{ userInfo.nickName ? userInfo.nickName : "点击头像授权" }}</view>
+    <!-- 清除会员认证 缓存 测试 -->
+    <!-- <view class='clear-cer-btn' bindtap='bindClearCertiTap'>
+      清除认证缓存
+    </view> -->
   </view>
 
   <!-- x 排列 item-->

@@ -2,7 +2,7 @@
 
 .search-cell {
     padding: 30rpx 35rpx;
-    background-color: #2f2d45;
+    background-color: #22233A;
     margin-top: 4rpx;
 }
 .head-img {

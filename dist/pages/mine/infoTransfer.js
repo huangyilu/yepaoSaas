@@ -65,6 +65,9 @@ Page({
 
     }).catch((error) => {
       console.log(error);
+      this.setData({
+        infoTranList: []
+      })
     })
   },
   getPtlist() {

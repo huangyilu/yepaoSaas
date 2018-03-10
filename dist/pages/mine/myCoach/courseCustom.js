@@ -36,7 +36,7 @@ Page({
         styles: ''
       },
       {
-        body: '两肩',
+        body: '胸背',
         selected: false,
         styles: 'top-left-btn'
       },
@@ -65,7 +65,9 @@ Page({
     footBtnTitle: '生成',
     isAllowCreate: false,
     isSelectedLevel: false,
-    isSelectedBody: false
+    isSelectedBody: false,
+
+    courseCustomizationId: ''
   },
 
   /**
@@ -98,12 +100,14 @@ Page({
     var bodyItem = this.data.bodyItem;
     var levelItem = this.data.levelItem;
     var footBtnTitle = this.data.footBtnTitle;
+    var courseCustomizationId = '';
     mineService.queryCourseCustomization(customizeDateString, memId).then((result) => {
 
       console.log('queryCourseCustomization *** ' + JSON.stringify(result));
       if (result.result.length > 0) {
 
         var bodys = result.result[0].customize_parts.split(',');
+        courseCustomizationId = result.result[0].id;
         levelItem.forEach(item => {
           if (item.level == result.result[0].customize_level) {
             item.selected = true;
@@ -122,14 +126,6 @@ Page({
 
         footBtnTitle = '查看';
 
-      } else {
-        levelItem.forEach(item => {
-          item.selected = false;
-        })
-        bodyItem.forEach(item => {
-          item.selected = false;
-        })
-        footBtnTitle = '生成';
       }
 
       if (this.data.muscleManImg == '') {
@@ -141,7 +137,8 @@ Page({
       this.setData({
         levelItem: levelItem,
         bodyItem: bodyItem,
-        footBtnTitle: footBtnTitle
+        footBtnTitle: footBtnTitle,
+        courseCustomizationId: courseCustomizationId
       })
 
     }).catch((error) => {
@@ -150,6 +147,22 @@ Page({
       if (this.data.muscleManImg == '') {
         this.setData({
           muscleManImg: error.muscleManImg
+        })
+      } 
+
+      if (error.errCode == 2) {
+        levelItem.forEach(item => {
+          item.selected = false;
+        })
+        bodyItem.forEach(item => {
+          item.selected = false;
+        })
+        footBtnTitle = '生成';
+        this.setData({
+          levelItem: levelItem,
+          bodyItem: bodyItem,
+          footBtnTitle: footBtnTitle,
+          courseCustomizationId: ''
         })
       }
 
@@ -208,7 +221,8 @@ Page({
     this.setData({
       levelItem: levelItem,
       customizeLevel: levelItem[index].level,
-      isSelectedLevel: true
+      isSelectedLevel: true,
+      footBtnTitle: '生成'
     })
   },
   bindCourseBtnItemTap (e) {
@@ -223,7 +237,8 @@ Page({
     })
     this.setData({
       bodyItem: bodyItem,
-      isSelectedBody: isSelectedBody
+      isSelectedBody: isSelectedBody,
+      footBtnTitle: '生成'
     })
   },
   bindMakeUpTap (e) {
@@ -270,14 +285,12 @@ Page({
       }
     })
 
-    mineService.uploadCourseCustomization(this.data.yearMonthDay, this.data.memId, this.data.customizeLevel, customizeParts).then((result) => {
+    mineService.uploadCourseCustomization(this.data.yearMonthDay, this.data.memId, this.data.customizeLevel, customizeParts, this.data.courseCustomizationId).then((result) => {
 
       console.log('uploadCourseCustomization *** ' + JSON.stringify(result));
-      if (result.rs == 'Y') {
-        wx.navigateTo({
-          url: 'courseTraining?memId=' + this.data.memId + '&customizeDateString=' + this.data.yearMonthDay,
-        })
-      }
+      wx.navigateTo({
+        url: 'courseTraining?memId=' + this.data.memId + '&customizeDateString=' + this.data.yearMonthDay,
+      })
 
     }).catch((error) => {
       console.log(error);

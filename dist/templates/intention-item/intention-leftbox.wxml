@@ -27,7 +27,7 @@
       </view>
 
       <!-- 底部按钮 -->
-      <view class='foot-view weui-flex'>
+      <view class='let-foot-view weui-flex'>
         <view class='weui-flex__item reset-btn' bindtap='bindResetSearchTap'>重置</view>
         <view class='weui-flex__item conf-btn' bindtap='bindConfirmSearchTap'>确定</view>
       </view>

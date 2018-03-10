@@ -25,7 +25,7 @@
         <text>{{ item.author }}</text>
         <!-- <view class='good-view' id='{{ index }}' bindtap='bindGoodSelectedTap'>
           <image class='good-icon' src='../../images/icon/club/{{ item.isGoodSelected ? "zan_y" : "zan_g" }}.png'></image>
-          <text class='{{ item.isGoodSelected ? "yeColor" : "" }}'>{{ item.goodNum }}</text>
+          <text class='{{ item.isGoodSelected ? "mainColor" : "" }}'>{{ item.goodNum }}</text>
         </view> -->
       </view>
     </view>

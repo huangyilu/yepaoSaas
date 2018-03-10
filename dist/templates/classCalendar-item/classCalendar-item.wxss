@@ -1,7 +1,7 @@
 
 .classCalendar-cell{
     height: 240rpx;
-    background-color: #2f2d45;
+    background-color: #22233A;
     padding: 0 30rpx;
     margin-top: 20rpx;
 }

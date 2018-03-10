@@ -11,6 +11,7 @@ import * as AuthService from '../../services/auth-service';
 let parent
 let parentDataKey
 let mytimer
+let certificationThis = this
 
 export default {
   setParent(p) {
@@ -115,7 +116,10 @@ export default {
 
         // 1、确定验证 会员
         if (parent.data[parentDataKey].isConfiMemPhone) {
-          this.confirmCertification();
+          // 判空
+          if (parent.data[parentDataKey].memTelephone != '') {
+            this.confirmCertification();
+          } 
         }
 
         // 2、确定 验证 验证码
@@ -143,7 +147,7 @@ export default {
     let onHide = pageOptions.onHide;
     let me = this;
     pageOptions.onReady = function (options) {
-
+      me.setParent(this)
       console.log('##called certificationbox. onReady' )
       onReady && onReady.call(this, options)
       // 查询是否认证会员
@@ -185,7 +189,7 @@ export default {
       // 门店 是否隐藏 
       isGYMListHidden: newData.name == 'isGYMListHidden' ? newData.data : parent.data[parentDataKey].isGYMListHidden
     }
-    parent.setData(data)
+    parent.setData(data);
   },
 
   // 检查是否认证会员
@@ -228,10 +232,6 @@ export default {
           name: 'placeholderText',
           data: '请输入验证码'
         })
-        // this.setThisData({
-        //   name: 'cerInputNum',
-        //   data: ''
-        // })
         this.setThisData({
           name: 'isConfiMemPhone',
           data: false

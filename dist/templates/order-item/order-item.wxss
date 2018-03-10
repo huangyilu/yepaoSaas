@@ -1,7 +1,7 @@
 
 .order-cell {
     padding: 0 30rpx 20rpx;
-    background-color: #2f2d45;
+    background-color: #22233A;
     margin-top: 20rpx;
 }
 .order-cell .title-view {

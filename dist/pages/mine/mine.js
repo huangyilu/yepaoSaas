@@ -70,7 +70,8 @@ let pageOptions = {
       // }
     ],
 
-
+    isCertificationMem: false,
+    isCertificationMemHidden: true
   },
 
   /**
@@ -84,15 +85,23 @@ let pageOptions = {
   onReady() {
     certificationBox.setParent(this)
   },
+  onShow() {
+    this.getCertifiMem();
+  },
   getCertifiMem(that) {
     if (AuthService.getMemberInfo()) {
       this.setData({
         isCertificationMem: true
       })
+      // 控制 按钮显示
+      this.setMyYItems();
       console.log('*已认证会员*');
     } else {
       console.log('*未认证会员*');
     }
+  },
+  bindClearCertiTap() {
+    
   },
   // 构造按钮列表
   setMyYItems() {

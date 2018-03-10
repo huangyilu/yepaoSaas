@@ -4,9 +4,9 @@
 
 <view class='bg-view'>
 
-  <view class='courseShare-cell-view' bindtap='bindCourseCellTap'>
+  <view class='courseShare-cell-view' >
     <block wx:for='{{ courseShareList }}' wx:key='{{ index }}'>
-    <view class='courseShare-cell'>
+    <view class='courseShare-cell' id='{{ item.id }}' bindtap='bindCourseCellTap'>
       <view>{{ item.title }}</view>
       <view class='time'>{{ item.time }}</view>
     </view>

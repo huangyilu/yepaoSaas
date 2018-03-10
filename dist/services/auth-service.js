@@ -43,6 +43,7 @@ export function saveMemberInfo(result) {
   storeE.set('memInfo', memInfo, EXPIRATION_MILLISECONDS);
 }
 export function getMemberInfo() {
+  console.log('getMemberInfo = ' + JSON.stringify(storeE.get('memInfo')));
   return storeE.get('memInfo');
 }
 

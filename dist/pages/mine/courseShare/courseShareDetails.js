@@ -28,24 +28,23 @@ Page({
    */
   onLoad: function (options) {
 
-    this.getCourseShareDetails();
+    this.getCourseShareDetails(options.ptId);
 
   },
 
-  getCourseShareDetails() {
-    mineService.queryShareCourseDetail().then((result) => {
+  getCourseShareDetails(ptId) {
+    mineService.queryShareCourseDetail(ptId).then((result) => {
 
-      // console.log('queryShareCourseDetail *** ' + JSON.stringify(result));
-      if (result.rs == 'Y') {
-        var formatList = minedata.formatShareCourseDetails(result.courseShareDetailList);
-        this.setData({
-          shareDetailList: formatList.courseList,
-          videoUrlsBrowse: formatList.videoList
-        })
-        // console.log('queryShareCourseDetail *** ' + JSON.stringify(this.data.shareDetailList));
+    // console.log('queryShareCourseDetail *** ' + JSON.stringify(result));
+      var formatList = minedata.formatShareCourseDetails(result.courseShareDetailList);
+      this.setData({
+        shareDetailList: formatList.courseList,
+        videoUrlsBrowse: formatList.videoList
+      })
+      // console.log('queryShareCourseDetail *** ' + JSON.stringify(this.data.shareDetailList));
 
-        this.initWeSwiper(formatList.videoList);
-      }
+      this.initWeSwiper(formatList.videoList);
+      
 
     }).catch((error) => {
       console.log(error);

@@ -24,8 +24,7 @@ import {
 // 消息 列表
 export function quaryMessage() {
   return jsonGetRequest('yp-xcx-getAllMemMsg', {
-    // memId: AuthService.getMemberInfo().memId,
-    memId: '5a5eb7133782b10c18462eb9',
+    memId: AuthService.getMemberInfo().memId,
     custName: appConfig.custName,
     gym: AuthService.getMemberInfo().gym,
   })
@@ -34,7 +33,7 @@ export function quaryMessage() {
 // 消息 详情
 export function quaryMessageDetails(msgType) {
   return jsonGetRequest('yp-xcx-getMemMsgDetail', {
-    memId: '5a5eb7133782b10c18462eb9',
+    memId: AuthService.getMemberInfo().memId,
     // msgId: msgId,
     msgType: msgType,
     custName: appConfig.custName,
@@ -45,7 +44,7 @@ export function quaryMessageDetails(msgType) {
 // 消息更新状态 
 export function updateMessageState(msgType) {
   return jsonGetRequest('yp-xcx-updateMsgState', {
-    memId: '5a5eb7133782b10c18462eb9',
+    memId: AuthService.getMemberInfo().memId,
     msgType: msgType,
     custName: appConfig.custName,
     gym: AuthService.getMemberInfo().gym

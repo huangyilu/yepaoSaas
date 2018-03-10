@@ -35,7 +35,8 @@
 
   <!-- 分享 成功 提醒 -->
   <view wx:if='{{ courseShareSuccess }}' class='share-success-remind-view'>
-    <view class='share-success-remind-btn'>您已将选中视频分享给张三</view>
+    <!-- <view class='share-success-remind-btn'>您已将选中视频分享给{{ shareMemName }}</view> -->
+    <view class='share-success-remind-btn'>视频分享成功!</view> 
   </view>
 
 </view>

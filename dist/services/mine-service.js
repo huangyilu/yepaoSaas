@@ -144,22 +144,23 @@ export function queryCourseCustomization(customizeDateString, memId) {
   return jsonGetRequest('yp-xcx-pt-getCourseCustomization', {
     custName: appConfig.custName,
     gym: AuthService.getMemberInfo().gym,
-    ptId: '59ba4cc655040f3865e14b64',
-    memId: AuthService.getMemberInfo().memId,
+    ptId: AuthService.getMemberInfo().memId,
+    memId: memId,
     customizeDateString: customizeDateString
   })
 }
 
 // 存入 定制的 课程
-export function uploadCourseCustomization(customizeDateString, memId, customizeLevel, customizeParts) {
+export function uploadCourseCustomization(customizeDateString, memId, customizeLevel, customizeParts, courseCustomizationId) {
   return urlencodePostRequest('yp-xcx-pt-saveCourseCustomization', {
     custName: appConfig.custName,
     gym: AuthService.getMemberInfo().gym,
-    ptId: '59ba4cc655040f3865e14b64',
-    memId: AuthService.getMemberInfo().memId,
+    ptId: AuthService.getMemberInfo().memId,
+    memId: memId,
     customizeDateString: customizeDateString,
     customizeLevel: customizeLevel,
-    customizeParts: customizeParts
+    customizeParts: customizeParts,
+    courseCustomizationId: courseCustomizationId
   })
 }
 
@@ -168,8 +169,8 @@ export function queryCourseCustomizationDetail(customizeDateString, memId) {
   return jsonGetRequest('yp-xcx-pt-getCourseCustomizationDetail', {
     custName: appConfig.custName,
     gym: AuthService.getMemberInfo().gym,
-    ptId: '59ba4cc655040f3865e14b64',
-    memId: AuthService.getMemberInfo().memId,
+    ptId: AuthService.getMemberInfo().memId,
+    memId: memId,
     customizeDateString: customizeDateString
   })
 }
@@ -179,8 +180,8 @@ export function uploadShareCourse(shareCourseIds, memId) {
   return urlencodePostRequest('yp-xcx-pt-shareCourse', {
     custName: appConfig.custName,
     gym: AuthService.getMemberInfo().gym,
-    ptId: '59ba4cc655040f3865e14b64',
-    memId: AuthService.getMemberInfo().memId,
+    ptId: AuthService.getMemberInfo().memId,
+    memId: memId,
     shareCourseIds: shareCourseIds
   })
 }
@@ -329,12 +330,12 @@ export function queryShareCourse() {
   })
 }
 // 课程共享 详情
-export function queryShareCourseDetail() {
+export function queryShareCourseDetail(ptId) {
   return jsonGetRequest('yp-xcx-getShareCourseDetail', {
     custName: appConfig.custName,
     gym: AuthService.getMemberInfo().gym,
-    ptId: '59ba4cc655040f3865e14b64',
-    memId: AuthService.getMemberInfo().gym.memId,
+    ptId: ptId,
+    memId: AuthService.getMemberInfo().memId,
   })
 }
 

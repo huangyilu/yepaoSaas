@@ -42,7 +42,7 @@ Page({
   bindCourseCellTap (e) {
 
     wx.navigateTo({
-      url: 'courseShareDetails',
+      url: 'courseShareDetails?ptId=' + e.currentTarget.id,
     })
 
   }

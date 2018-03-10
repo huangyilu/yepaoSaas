@@ -10,17 +10,17 @@ Page({
       {
         iconUrl: '../../../images/icon/mine/member_registration.png',
         name: '会员登记',
-        navigateUrl: 'memberInfoRegistration'
+        navigateUrl: 'memberInfoRegistration?memIdentity=pt'
       },
       {
         iconUrl: '../../../images/icon/mine/customer_tracking.png',
         name: '客户跟踪',
-        navigateUrl: 'customerTracking'
+        navigateUrl: 'customerTracking?memIdentity=pt'
       },
       {
         iconUrl: '../../../images/icon/mine/work_transfer.png',
         name: '资料移交',
-        navigateUrl: '../infoTransfer'
+        navigateUrl: '../infoTransfer?memIdentity=pt'
       }
     ]
   },

@@ -13,7 +13,7 @@
         <view class='weui-flex__item'>作者：{{ article.author }}</view>
         <view class='weui-flex__item good-view' id='{{ index }}' bindtap='bindGoodSelectedTap'>
           <image class='good-icon' src='../../images/icon/club/{{ article.isGoodSelected ? "zan_y" : "zan_g" }}.png'></image>
-          <text class='{{ article.isGoodSelected ? "yeColor" : "" }}'>{{ article.goodNum }}</text>
+          <text class='{{ article.isGoodSelected ? "mainColor" : "" }}'>{{ article.goodNum }}</text>
         </view>
       </view>
       <view class='article-introduction'>简介：{{ article.introduction }}</view>

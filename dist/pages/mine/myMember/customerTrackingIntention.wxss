@@ -12,7 +12,7 @@
 }
 
 .baseinfo-view {
-    background-color: #2F2D45;
+    background-color: #22233A;
     padding: 20rpx;
     font-size: 32rpx;
     margin-bottom: 2rpx;
@@ -49,7 +49,7 @@
 
 .maininfo-view {
     color: #BAB9C7;
-    background-color: #2F2D45;
+    background-color: #22233A;
     padding: 20rpx;
     font-size: 28rpx;
     margin-bottom: 2rpx;
@@ -61,7 +61,7 @@
 .follow-view {
     padding-left: 70rpx;
     padding-right: 20rpx;
-    background-color: #2F2D45;
+    background-color: #22233A;
 }
 .follow-item {
     border-left: 2rpx #848296 solid;
@@ -74,7 +74,7 @@
     width: 24rpx;
     height: 24rpx;
     border-radius: 50%;
-    background-color: #FCF428;
+    background-color: #FF904C;
     float: left;
     margin-left: -37rpx;
     margin-top: 10rpx;

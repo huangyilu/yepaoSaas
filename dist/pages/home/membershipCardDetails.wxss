@@ -11,10 +11,6 @@
 .orderinfo-view view {
     margin-bottom: 5rpx;
 }
-.renewFee-view {
-    padding: 30rpx;
-    background-color: #2f2d45;
-}
 
 .car-cell {
     position: relative;

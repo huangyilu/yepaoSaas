@@ -3,11 +3,11 @@
 .bg-view {
     margin-bottom: 120rpx;
     height: 90%;
-    background-color: #2f2d45;
+    background-color: #22233A;
 }
 .head-view {
     padding: 30rpx;
-    background-color: #2f2d45;
+    background-color: #22233A;
     font-size: 32rpx;
     text-align: center;
 }
@@ -21,7 +21,7 @@
 }
 .textarea-view {
     height: 200rpx;
-    background-color: #2f2d45;
+    background-color: #22233A;
     padding: 30rpx 0;
 }
 .textarea-view text {

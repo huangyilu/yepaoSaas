@@ -19,7 +19,7 @@
 .weui-navbar__item {
     padding: 15rpx 0; 
     margin-right: 2rpx;
-    background-color: #2f2d45;
+    background-color: #22233A;
     border-style: none;
 }
 .weui-navbar__item.weui-bar__item_on {

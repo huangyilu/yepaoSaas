@@ -11,10 +11,13 @@ import certificationBox from '../../templates/certification-box/certification-bo
 let pageOptions = {
 
   data: {
-    swiperImgUrls: ['../../images/bg_img/ban.jpg'],
+    swiperImgUrls: ['../../images/bg_img/banner1.png', '../../images/bg_img/banner2.png','../../images/bg_img/banner3.png'],
 
     clubList: [],
-    clubListPageIndex: 1
+    clubListPageIndex: 1,
+
+    isCertificationMem: false,
+    isCertificationMemHidden: true
   },
 
   /**
@@ -25,6 +28,9 @@ let pageOptions = {
   },
   onReady() {
     certificationBox.setParent(this)
+  },
+  onShow() {
+    this.getCertifiMem();
   },
   getCertifiMem(that) {
     if (AuthService.getMemberInfo()) {
@@ -75,6 +81,10 @@ let pageOptions = {
       this.setData({
         'certificationBoxData.isCertificationMemHidden': false
       })
+      // certificationBox.setThisData({
+      //   name: 'isCertificationMemHidden',
+      //   data: false
+      // });
     }
   },
   bindClubDynamicsTap (e) {
@@ -83,9 +93,13 @@ let pageOptions = {
         url: 'clubDynamics',
       })
     } else {
-      this.setData({
-        'certificationBoxData.isCertificationMemHidden': false
-      })
+      // this.setData({
+      //   'certificationBoxData.isCertificationMemHidden': false
+      // })
+      certificationBox.setThisData({
+        name: 'isCertificationMemHidden',
+        data: false
+      });
     }
   },
 
@@ -95,9 +109,13 @@ let pageOptions = {
         url: 'memberActivitiesDetails?activeId=' + e.currentTarget.id,
       })
     } else {
-      this.setData({
-        'certificationBoxData.isCertificationMemHidden': false
-      })
+      // this.setData({
+      //   'certificationBoxData.isCertificationMemHidden': false
+      // })
+      certificationBox.setThisData({
+        name: 'isCertificationMemHidden',
+        data: false
+      });
     }
   }
 }

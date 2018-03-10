@@ -2,7 +2,7 @@
 .private-cell {
     height: 120rpx;
     line-height: 120rpx;
-    background-color: #2f2d45;
+    background-color: #22233A;
     color: white;
     margin-top: 10rpx;
 }

@@ -16,6 +16,9 @@ let pageOptions = {
     emptyIcon: '../../images/bg_img/no_data.png',
 
     articleItems: [],
+
+    isCertificationMem: false,
+    isCertificationMemHidden: true
   },
 
   /**
@@ -26,6 +29,9 @@ let pageOptions = {
   },
   onReady() {
     certificationBox.setParent(this)
+  },
+  onShow() {
+    this.getCertifiMem();
   },
   getCertifiMem(that) {
     if (AuthService.getMemberInfo()) {
