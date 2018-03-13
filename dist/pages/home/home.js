@@ -44,10 +44,6 @@ let pageOptions = {
       this.setData({
         'certificationBoxData.isCertificationMemHidden': false
       })
-      // certificationBox.setThisData({
-      //   name: 'isCertificationMemHidden',
-      //   data: false
-      // });
     } else {
       wx.navigateTo({
         url: url,

@@ -26,6 +26,8 @@ export function quaryClubList(pageNum, forMem) {
   return jsonGetRequest('yp-xcx-getActivePageInfo', {
     custName: appConfig.custName,
     gym: AuthService.getMemberInfo().gym,
+    // gym: 'zjs',
+    // memId: '5a5ee39e3782b10c1846340c',
     memId: AuthService.getMemberInfo().memId,
     pageNum: pageNum,
     forMem: forMem
@@ -43,11 +45,15 @@ export function queryClubArticleList(pageNum) {
 
 // 会员活动 详情 /yp-xcx-getActiveDetail
 export function queryClubActiveDetail(activeId, gym) {
-  return jsonGetRequest('yp-xcx-getActiveDetail', {
+  var newDic = {
     custName: appConfig.custName,
     gym: gym ? gym : AuthService.getMemberInfo().gym,
-    activeId: activeId
-  })
+    activeId: activeId,
+  }
+  if (AuthService.getMemberInfo()) {
+    newDic.memId = AuthService.getMemberInfo().memId
+  }
+  return jsonGetRequest('yp-xcx-getActiveDetail', newDic)
 }
 
 // 俱乐部动态 文章 详情 getArticleDetail?

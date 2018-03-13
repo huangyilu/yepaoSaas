@@ -20,7 +20,6 @@ Page({
    */
   onLoad: function (options) {
 
-   
     this.setData({
       planId: options.planId ? options.planId : 0,
       planDetailId: options.planDetailId ? options.planDetailId : 0
@@ -34,12 +33,9 @@ Page({
 
     homeService.queryClassScheduleDetail(this.data.planId, this.data.planDetailId).then((result) => {
 
-      console.log('queryClassScheduleDetail *** ' + JSON.stringify(result));
-      if (result.rs == 'Y') {
-        this.setData({
-          classDetails: homedata.formatClassScheduleDetail(result.result)
-        })
-      }
+      this.setData({
+        classDetails: homedata.formatClassScheduleDetail(result.result)
+      })
 
     }).catch((error) => {
       console.log(error);
@@ -49,15 +45,15 @@ Page({
   // 预约
   bindClassScheduleApptTap () {
     
-
     homeService.uploadMemJoinClassSchedule(this.data.planDetailId, this.data.planId).then((result) => {
 
-      console.log('uploadMemJoinClassSchedule *** ' + JSON.stringify(result));
-      if (result.rs == 'Y') {
-        // this.setData({
-        //   courseList: homedata.formatClassSchedule(result.planList)
-        // })
-      }
+      wx.showToast({
+        icon: 'none',
+        title: '预约成功',
+      })
+      wx.navigateBack({
+        delta: 1
+      })
 
     }).catch((error) => {
       console.log(error);

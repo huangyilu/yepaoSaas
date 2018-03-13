@@ -15,7 +15,7 @@
     <!-- 清除会员认证 缓存 测试 -->
     <!-- <view class='clear-cer-btn' bindtap='bindClearCertiTap'>
       清除认证缓存
-    </view> -->
+    </view>  -->
   </view>
 
   <!-- x 排列 item-->

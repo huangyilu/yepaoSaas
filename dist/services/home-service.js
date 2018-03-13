@@ -53,7 +53,7 @@ export function queryMyCardsDetail(cardId) {
   })
 }
 
-// 私人教练
+// 我的教练
 export function queryMyPersonalCoach() {
   return jsonGetRequest('yp-xcx-getMyPrivateTeacher', {
     custName: appConfig.custName,
@@ -68,17 +68,6 @@ export function queryRecomdCourse(cardType) {
     custName: appConfig.custName,
     gym: AuthService.getMemberInfo().gym,
     cardType: cardType
-  })
-}
-
-// 课程购买 点击支付
-export function uploadBuyClassPay(cardId, price) {
-  return urlencodePostRequest('yp-xcx-submitBuyCourseOrder', {
-    custName: appConfig.custName,
-    gym: AuthService.getMemberInfo().gym,
-    memId: AuthService.getMemberInfo().memId,
-    cardId: cardId,
-    fee: price
   })
 }
 

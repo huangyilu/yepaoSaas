@@ -3,7 +3,7 @@
 
 <template name='article-item'>
 
-  <view class='article-cell' data-title='{{ title }}' data-mesgtype='{{ mesgType }}' id='{{ mesgId }}' bindtap='bindArticleCellTap'>
+  <view class='article-cell' hidden='{{ !title }}' data-title='{{ title }}' data-mesgtype='{{ mesgType }}' id='{{ mesgId }}' bindtap='bindArticleCellTap'>
   
     <image class='left-icon' src='{{ leftImg }}'></image>
 

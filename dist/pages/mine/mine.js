@@ -101,7 +101,7 @@ let pageOptions = {
     }
   },
   bindClearCertiTap() {
-    
+    wx.clearStorage();
   },
   // 构造按钮列表
   setMyYItems() {

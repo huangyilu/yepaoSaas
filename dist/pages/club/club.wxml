@@ -6,6 +6,8 @@
 <view class='bg-view'>
 
   <!-- 轮播图 -->
+  <view wx:if='{{ swiperImgUrls.length > 0 }}'>
+  
   <swiper class='swiper' indicator-dots="true"
           indicator-color="#ffffff"
           indicator-active-color="#FF904C"
@@ -29,6 +31,8 @@
         <view>俱乐部动态</view>
       </view>
     </view>
+  </view>
+
   </view>
 
   <!-- 推荐活动 -->

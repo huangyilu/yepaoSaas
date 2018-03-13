@@ -80,7 +80,7 @@ export function formatPersonalTrainer(list) {
 }
 export function formatPersonalTrainerItem(item) {
   return {
-    headImg: item.picUrlString ? item.picUrlString : '',
+    headImg: item.picUrlString ? item.picUrlString : '../../images/icon/default_headimg.png',
     coachName: item.teacherName ? item.teacherName : '',
     className: item.card_name ? item.card_name : '',
     remainTimes: item.remain_times ? item.remain_times : 0,
@@ -97,7 +97,7 @@ export function formatRecommendCourse(list) {
 export function formatRecommendCourseItem(item) {
   return {
     cardId: item.id,
-    headimg: item.headUrlString ? item.headUrlString : '',
+    headimg: item.headUrlString != 'null' ? item.headUrlString : '../../images/icon/default_headimg.png',
     courseName: item.card_name ? item.card_name : '',
     price: item.app_amt ? item.app_amt : 0,
     courseTime: item.times ? item.times : 0
@@ -128,7 +128,7 @@ export function formatCoachListItem(item) {
   return {
     coachId: item.id,
     name: item.pt_name,
-    headimg: 'http://img2.imgtn.bdimg.com/it/u=3390152407,4060777889&fm=27&gp=0.jpg',
+    headimg: item.appHeadString == 'null' ? '../../images/icon/default_headimg.png' : item.appHeadString,
     tel: 'tel: ' + item.phone
   }
 }
@@ -141,7 +141,7 @@ export function formatClassScheduleItem(item) {
   return {
     planId: item.plan_id ? item.plan_id : 0,
     planDetailId: item.plan_detail_id ? item.plan_detail_id : 0,
-    headimg: item.privateTeacher.appHeadString ? item.privateTeacher.appHeadString : '',
+    headimg: item.privateTeacher.appHeadString != 'null' ? item.privateTeacher.appHeadString : '../../images/icon/default_headimg.png',
     className: item.plan_name ? item.plan_name : '',
     classTime: item.start_time + '-' + item.end_time,
     teacherName: item.privateTeacher ? item.privateTeacher.name : '',
@@ -160,7 +160,7 @@ export function formatClassScheduleDetail(item) {
     classPepoNum: item.remainNum,
     classDetail: item.plan.summary,
     address: item.plan.addr_name,
-    coachHeadImg: item.privateTeacher.appHeadString ? item.privateTeacher.appHeadString : '',
+    coachHeadImg: item.privateTeacher.appHeadString != 'null' ? item.privateTeacher.appHeadString : '../../images/icon/default_headimg.png',
     coachName: item.privateTeacher.name,
     coachIntroduction: item.privateTeacher.summary,
     reserveFlag: item.reserveFlag
@@ -174,8 +174,8 @@ export function formatMyClass(list) {
 export function formatMyClassItem(item) {
   return {
     orderId: item.order_id,
-    headimg: item.appHeadString,
-    className: item.plan_name,
+    headimg: item.appHeadString == 'null' ? '../../images/icon/default_headimg.png' : item.appHeadString,
+    className: item.plan_name, 
     classType: '团',
     teacherName: item.pt_name,
     classTime: item.lesson_time + ' ' + item.start_time + '-' + item.end_time,

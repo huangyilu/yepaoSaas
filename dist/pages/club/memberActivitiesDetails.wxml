@@ -1,5 +1,7 @@
 <!--pages/club/memberActivitiesDetails.wxml-->
 
+<import src="../../templates/certification-box/certification-box.wxml"/>
+
 <view class='bg-view' wx:if='{{ activities != null }}'>
 
   <view class='title-view'>
@@ -30,7 +32,7 @@
 
   <view class='card-view' wx:if='{{ activities.cards.length > 0 }}'>
   
-    <view class='card-item' wx:for='{{ activities.cards }}' wx:key='{{ index }}' bindtap='bindCardItemTap'>      
+    <view class='card-item' data-cards='{{ item }}' wx:for='{{ activities.cards }}' wx:key='{{ index }}' bindtap='bindCardItemTap'>      
       <image class='card-bgimg' src='../../images/icon/club/card_bg.jpg'></image>
       <view class='name-view'>
         <view class='name'>{{ item.cardName }}</view>
@@ -49,3 +51,5 @@
 
 </view>
 
+<!-- 认证弹窗 -->
+<template is='certification-box' data='{{ ...certificationBoxData  }}'/>

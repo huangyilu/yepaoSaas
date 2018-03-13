@@ -11,7 +11,7 @@ import certificationBox from '../../templates/certification-box/certification-bo
 let pageOptions = {
 
   data: {
-    swiperImgUrls: ['../../images/bg_img/banner1.png', '../../images/bg_img/banner2.png','../../images/bg_img/banner3.png'],
+    swiperImgUrls: [],
 
     clubList: [],
     clubListPageIndex: 1,
@@ -24,21 +24,34 @@ let pageOptions = {
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
   },
-  onReady() {
+  onReady: function (options) {
     certificationBox.setParent(this)
   },
-  onShow() {
+  onShow: function (options) {
     this.getCertifiMem();
+    if (this.data.isCertificationMem) {
+      // 获取消息列表
+      this.getClubList();
+    }
+  },
+  onUnload: function (options) {
+    this.setData({
+      clubList: [],
+      clubListPageIndex: 1
+    })
+  },
+  onHide: function (options) {
+    this.setData({
+      clubList: [],
+      clubListPageIndex: 1
+    })
   },
   getCertifiMem(that) {
     if (AuthService.getMemberInfo()) {
       this.setData({
         isCertificationMem: true
       })
-      // 获取消息列表
-      this.getClubList();
       console.log('*已认证会员*');
     } else {
       console.log('*未认证会员*');
@@ -64,9 +77,9 @@ let pageOptions = {
   getClubList() {
     clubService.quaryClubList(this.data.clubListPageIndex, 'N').then((result) => {
       this.setData({
-        clubList: clubdata.formatClubList(result.result, this.data.clubList)
+        clubList: clubdata.formatClubList(result.result, this.data.clubList),
+        swiperImgUrls: result.clubImages
       })
-      console.log(' out ....' + JSON.stringify(this.data.clubList));
     }).catch((error) => {
       console.log(error);
     })
@@ -81,25 +94,17 @@ let pageOptions = {
       this.setData({
         'certificationBoxData.isCertificationMemHidden': false
       })
-      // certificationBox.setThisData({
-      //   name: 'isCertificationMemHidden',
-      //   data: false
-      // });
     }
   },
-  bindClubDynamicsTap (e) {
+  bindClubDynamicsTap(e) {
     if (this.data.isCertificationMem) {
       wx.navigateTo({
         url: 'clubDynamics',
       })
     } else {
-      // this.setData({
-      //   'certificationBoxData.isCertificationMemHidden': false
-      // })
-      certificationBox.setThisData({
-        name: 'isCertificationMemHidden',
-        data: false
-      });
+      this.setData({
+        'certificationBoxData.isCertificationMemHidden': false
+      })
     }
   },
 
@@ -109,13 +114,9 @@ let pageOptions = {
         url: 'memberActivitiesDetails?activeId=' + e.currentTarget.id,
       })
     } else {
-      // this.setData({
-      //   'certificationBoxData.isCertificationMemHidden': false
-      // })
-      certificationBox.setThisData({
-        name: 'isCertificationMemHidden',
-        data: false
-      });
+      this.setData({
+        'certificationBoxData.isCertificationMemHidden': false
+      })
     }
   }
 }

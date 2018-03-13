@@ -4,10 +4,12 @@ import moment from '../../utils/npm/moment';
 import * as clubService from '../../services/club-service';
 import * as clubdata from '../../utils/clubdata-format';
 import * as AuthService from '../../services/auth-service';
+import certificationBox from '../../templates/certification-box/certification-box'
+import { Base64 } from '../../utils/urlsafe-base64';
 
 var timer;
 
-Page({
+let pageOptions = {
 
   /**
    * 页面的初始数据
@@ -21,7 +23,9 @@ Page({
     activities: null,
 
     activeId: '',
-    gym: null
+    gym: null,
+
+    isCertificationMem: false
   },
 
   /**
@@ -46,17 +50,38 @@ Page({
     
     console.log('options .. ' + JSON.stringify(options));
     // 1、检验是否是会员
-
+    this.getCertifiMem();
     
 
   },
   onUnload: function (options) {
     clearTimeout(timer);
   },
+  onReady() {
+    certificationBox.setParent(this)
+  },
+  getCertifiMem() {
+    if (AuthService.getMemberInfo()) {
+      this.setData({
+        isCertificationMem: true
+      })
+      console.log('*已认证会员*');
+    } else {
+      console.log('*未认证会员*');
+    }
+    this.setData({
+      'certificationBoxData.isCertificationMemHidden': true
+    })
+  },
 
   // 详情
   getClubDetail(activeId) {
     clubService.queryClubActiveDetail(activeId,this.data.gym).then((result) => {
+      if (result.result.state == 'end') {
+        this.setData({
+          clock: true
+        })
+      }
       this.setData({
         activities: clubdata.formatClubDetail(result.result)
       })
@@ -116,19 +141,64 @@ Page({
 
   bindCardItemTap(e) {
 
+    if (this.data.activities.timeTitle == '活动已结束') {
+      wx.showToast({
+        icon: 'none',
+        title: '活动已结束！'
+      })
+    } else {
+      // 当 转发出去 点击的人 打算点击买卡的时候 再请求注册 会员
+      if (this.data.isCertificationMem) {
+        // 已认证 会员 
+        console.log('已认证 会员 .. ');
 
-    // wx.navigateTo({
-    //   url: '../home/onlinePaymentForCard',
-    // })
+        if (this.data.activities.state == 'join') {
+          wx.showToast({
+            icon: 'none',
+            title: '您已参加过此活动！'
+          })
+        } else {
 
-    // wx.showToast({
-    //   icon: 'none',
-    //   title: '活动已结束！'
-    // })
+          if (e.currentTarget.dataset.cards.cardType == '005' || e.currentTarget.dataset.cards.cardType == '006') {
+            // 一种是走的 购买课程
+            var qsCard = Base64.encodeURI(JSON.stringify(e.currentTarget.dataset.cards));
+            wx.navigateTo({
+              url: '../home/onlinePaymentForClass?cards=' + qsCard,
+            })
+          } else {
+            // 一种是走的 购买卡
+            var qsCard = Base64.encodeURI(JSON.stringify(e.currentTarget.dataset.cards));
+            wx.navigateTo({
+              url: '../home/onlinePaymentForCard?cards=' + qsCard,
+            })
+          } 
+        }
 
-    // 当 转发出去 点击的人 打算点击买卡的时候 再请求注册 会员
-    
+      } else {
+        // 未认证 会员
+        // 请求 微信授权
+        this.getWXAuthorization();
+        // 请求会员认证
+        this.getMyCertification();
+        console.log('未认证 会员 .. ');
+      }
+    }
 
+  },
+  // 请求 微信授权
+  getWXAuthorization() {
+    AuthService.wxappLogin().then(() => {
+      console.log('LoggedIn.');
+    }).catch(error => {
+      console.log('Not Logged In');
+    });
+    console.log('请求 微信授权 .. ');
+  },
+  // 请求会员认证
+  getMyCertification() {
+    this.setData({
+      'certificationBoxData.isCertificationMemHidden': false
+    })
   },
   /**
    * 用户点击右上角分享
@@ -151,4 +221,9 @@ Page({
       }
     }
   }
-})
+}
+
+certificationBox.bindData(pageOptions)
+certificationBox.bindListeners(pageOptions)
+
+Page(pageOptions)

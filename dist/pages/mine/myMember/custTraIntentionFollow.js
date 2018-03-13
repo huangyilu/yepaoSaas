@@ -71,12 +71,24 @@ Page({
   // 提交 跟单
   bindConfirmTap(e) {
 
-    if (this.data.memIdentity == 'pt') {
-      // 教练 跟单 提交
-      this.PtUploadFollow();
+    if (this.data.txtPlaContent == '') {
+      wx.showToast({
+        icon: 'none',
+        title: '不可以留空哦~',
+      })
+    } else if (this.data.txtPlaAttention == '') {
+      wx.showToast({
+        icon: 'none',
+        title: '不可以留空哦~',
+      })
     } else {
-      // 会籍 跟单 提交
-      this.McUploadFollow();
+      if (this.data.memIdentity == 'pt') {
+        // 教练 跟单 提交
+        this.PtUploadFollow();
+      } else {
+        // 会籍 跟单 提交
+        this.McUploadFollow();
+      }
     }
 
   },

@@ -12,21 +12,37 @@ import {
 }
 from 'wx-request-promise';
 
-// 俱乐部 会员活动 营销活动 买卡 下单
-// export function uploadBuyMemActivite() {
-//   return urlencodePostRequest('', {
 
+// yp - xcx - submitBuyCourseOrder
+// getUserInfo
+
+// 课程购买 点击支付
+// export function uploadBuyClassPay(cardId, price) {
+//   return urlencodePostRequest('yp-xcx-submitBuyCourseOrder', {
+//     custName: appConfig.custName,
+//     gym: AuthService.getMemberInfo().gym,
+//     memId: AuthService.getMemberInfo().memId,
+//     cardId: cardId,
+//     fee: price
 //   })
 // }
 
 // 课程购买 下单
-export function uploadBuyClassPay(payDic) {
-  return urlencodePostRequest('yp-xcx-submitBuyCourseOrder', {
+export function uploadBuyClassPay(dic) {
+  var newDic = {
     custName: appConfig.custName,
     gym: AuthService.getMemberInfo().gym,
     memId: AuthService.getMemberInfo().memId,
-    cardId: payDic.cardId
-  })
+  }
+  newDic.cardId = dic.cardId;
+  newDic.fee = dic.fee;
+  if (dic.actId) {
+    newDic.actId = dic.actId;
+  }
+  newDic.newMemName = AuthService.getUserInfo().username;
+  newDic.newSex = AuthService.getUserInfo().gender;
+
+  return urlencodePostRequest('yp-xcx-submitBuyCourseOrder', newDic)
 }
 
 // 课程购买 支付
@@ -43,17 +59,24 @@ export function uploadBuyClassPrepay(payDic) {
 }
 
 // 在线购卡 下单
-export function uploadOnlineCardOrder(cardId, cardPrice) {
-  return urlencodePostRequest('yp-xcx-submitBuyCardOrder', {
+export function uploadOnlineCardOrder(dic) {
+  var newDic = {
     custName: appConfig.custName,
     gym: AuthService.getMemberInfo().gym,
     memId: AuthService.getMemberInfo().memId,
-    cardId: cardId,
-    fee: cardPrice
-  })
+  }
+  newDic.cardId = dic.cardId;
+  newDic.fee = dic.fee;
+  if (dic.actId) {
+    newDic.actId = dic.actId;
+  }
+  newDic.newMemName = AuthService.getUserInfo().username;
+  newDic.newSex = AuthService.getUserInfo().gender;
+
+  return urlencodePostRequest('yp-xcx-submitBuyCardOrder', newDic)
 }
 
-// 会员卡购买
+// 会员卡购买 activeRecId
 export function uploadBuyCardPrepay(payDic) {
   return urlencodePostRequest('yp-xcx-buyCardPrepay', {
     custName: appConfig.custName,
@@ -68,11 +91,16 @@ export function uploadBuyCardPrepay(payDic) {
 
 // 取消支付
 export function uploadFailPayment(payDic) {
-  return urlencodePostRequest('yp-xcx-failBuyCard', {
+  var newDic = {
     gym: AuthService.getMemberInfo().gym,
-    userCardId: payDic.userCardId,
-    xcxOrderId: payDic.xcxOrderId
-  })
+    custName: appConfig.custName
+  }
+  newDic.userCardId = payDic.userCardId;
+  newDic.xcxOrderId = payDic.xcxOrderId;
+  if (payDic.activeRecId) {
+    newDic.activeRecId = payDic.activeRecId;
+  }
+  return urlencodePostRequest('yp-xcx-failBuyCard', newDic)
 }
 
 // 在线购卡 

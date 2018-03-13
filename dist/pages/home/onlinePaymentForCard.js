@@ -3,6 +3,7 @@
 import * as homedata from '../../utils/homedata-format';
 import * as homeService from '../../services/home-service';
 import * as wxPayService from '../../services/wxpay-service';
+import { Base64 } from '../../utils/urlsafe-base64';
 
 Page({
 
@@ -15,7 +16,9 @@ Page({
     cardPrice: '',
 
     // 是否支付成功
-    isSuccessPayment: false
+    isSuccessPayment: false,
+
+    actCards: []
   },
 
   /**
@@ -25,22 +28,44 @@ Page({
 
     this.setData({
       cardId: options.cardid ? options.cardid : '',
-      cardPrice: options.cardPrice ? options.cardPrice : 0
+      cardPrice: options.cardPrice ? options.cardPrice : 0,
+      actCard: options.cards ? JSON.parse(Base64.decode(options.cards)) : null
     })
 
-    wxPayService.uploadOnlineCardOrder(this.data.cardId, this.data.cardPrice).then((result) => {
+    console.log('actCard .. ' + JSON.stringify(this.data.actCard));
 
-      console.log('uploadOnlineCardOrder *** ' + JSON.stringify(result));
-      if (result.rs == 'Y') {
-        this.setData({
-          cardInfo: homedata.formatOnlinePaymentForCard(result.returnResult)
-        })
-      }
+    // if (this.data.actCard != null) {
+    //   if (this.data.actCard.cardType == '005' || this.data.actCard.cardType == '006') {
+    //     // 一种是走的 购买课程
+    //     this.getUploadOnlineClass();
+    //   } else {
+        // 一种是走的 购买卡
+        this.getUploadOnlineCard();
+    //   } 
+    // } else {
+    //   this.getUploadOnlineCard();
+    // }
+
+  },
+  getUploadOnlineCard() {
+    var newDic = {};
+    newDic.cardId = this.data.cardId;
+    newDic.fee = this.data.cardPrice;
+    if (this.data.actCard != null) {
+      newDic.actId = this.data.actCard.actId;
+      newDic.cardId = this.data.actCard.cardId;
+      newDic.fee = this.data.actCard.actPrice;
+    }
+    wxPayService.uploadOnlineCardOrder(newDic).then((result) => {
+
+      this.setData({
+        cardInfo: homedata.formatOnlinePaymentForCard(result.returnResult),
+        activeRecId: result.returnResult.activeRecId
+      })
 
     }).catch((error) => {
       console.log(error);
     })
-  
   },
 
   // 页面卸载
@@ -52,7 +77,8 @@ Page({
 
       var payInfo = {
         userCardId: this.data.cardInfo.userCardId,
-        xcxOrderId: this.data.cardInfo.orderId
+        xcxOrderId: this.data.cardInfo.orderId,
+        activeRecId: this.data.activeRecId
       }
       
       wxPayService.uploadFailPayment(payInfo).then((result) => {
@@ -100,6 +126,10 @@ Page({
       preFeeId: this.data.cardInfo.preFeeId,
       orderPrice: this.data.cardInfo.price
     }
+
+    // if () {
+
+    // }
 
     wxPayService.makeMemCardPayment(payInfo).then((result) => {
 

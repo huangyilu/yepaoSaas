@@ -3,6 +3,7 @@
 import * as homedata from '../../utils/homedata-format';
 import * as homeService from '../../services/home-service';
 import * as wxPayService from '../../services/wxpay-service';
+import { Base64 } from '../../utils/urlsafe-base64';
 
 Page({
 
@@ -31,22 +32,39 @@ Page({
 
     this.setData({
       cardId: options.cardid ? options.cardid : null,
-      price: options.price ? options.price : null
+      price: options.price ? options.price : null,
+      actCard: options.cards ? JSON.parse(Base64.decode(options.cards)) : null
     })
-    
-    homeService.uploadBuyClassPay(this.data.cardId, this.data.price).then((result) => {
+
+
+    this.uploadBuyClass();
+
+  
+  },
+
+  uploadBuyClass() {
+    // 两种情况，从正常购课进来--从活动界面进来
+    var newDic = {};
+    newDic.cardId = this.data.cardId;
+    newDic.fee = this.data.price;
+    if (this.data.actCard) {
+      newDic.actId = this.data.actCard.actId;
+      newDic.cardId = this.data.actCard.cardId;
+      newDic.fee = this.data.actCard.actPrice;
+    }
+    wxPayService.uploadBuyClassPay(newDic).then((result) => {
 
       console.log('uploadBuyClassPay *** ' + JSON.stringify(result));
       if (result.errCode == 0) {
         this.setData({
-          classInfo: homedata.formatOnlinePaymentForClass(result.returnResult)
+          classInfo: homedata.formatOnlinePaymentForClass(result.returnResult),
+          activeRecId: result.returnResult.activeRecId
         })
       }
 
     }).catch((error) => {
       console.log(error);
     })
-  
   },
 
   onShow: function (options) {
@@ -73,6 +91,8 @@ Page({
       var payInfo = {
         userCardId: this.data.classInfo.cardId,
         xcxOrderId: this.data.classInfo.orderId,
+        actCard: options.cards ? JSON.parse(Base64.decode(options.cards)) : null,
+        activeRecId: this.data.activeRecId
       }
 
       wxPayService.uploadFailPayment(payInfo).then((result) => {
@@ -84,6 +104,26 @@ Page({
       })
     }
 
+  },
+
+  getUploadOnlineClass() {
+    var newDic = {};
+    newDic.cardId = this.data.cardId;
+    newDic.fee = this.data.cardPrice;
+    if (this.data.actCard != null) {
+      newDic.actId = this.data.actCard.actId;
+      newDic.cardId = this.data.actCard.cardId;
+    }
+    wxPayService.uploadBuyClassPay(newDic).then((result) => {
+
+      this.setData({
+        cardInfo: homedata.formatOnlinePaymentForCard(result.returnResult),
+        activeRecId: result.returnResult.activeRecId
+      })
+
+    }).catch((error) => {
+      console.log(error);
+    })
   },
 
   // 教练选择

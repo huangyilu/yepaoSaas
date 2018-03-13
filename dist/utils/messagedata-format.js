@@ -30,11 +30,11 @@ export function formatMessageListItem(item) {
   return {
     newMessNum: item.totalNum > 99 ? '99+' : item.totalNum,
     mesgId: item.message ? item.message.id : '',
-    mesgType: item.message.msg_type ? item.message.msg_type : '',
-    leftImg: item.message.msg_type ? CHANGEMESSAGETYPEIMG[item.message.msg_type] : '',
-    title: item.message.msg_type ? CHANGEMESSAGETYPE[item.message.msg_type] : '',
-    content: item.message.msg_content ? item.message.msg_content : '',
-    time: item.message.send_time ? this.formatDifferentTypesDate(item.message.send_time) : ''
+    mesgType: item.message ? item.message.msg_type : '',
+    leftImg: item.message ? CHANGEMESSAGETYPEIMG[item.message.msg_type] : '',
+    title: item.message ? CHANGEMESSAGETYPE[item.message.msg_type] : '',
+    content: item.message ? item.message.msg_content : '',
+    time: item.message ? this.formatDifferentTypesDate(item.message.send_time) : ''
   }
 }
 

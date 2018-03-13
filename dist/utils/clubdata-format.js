@@ -88,6 +88,7 @@ export function formatClubDetail(item) {
     endTime: moment(item.end_time).format('x'),
     startTime: moment(item.start_time).format('x'),
     timeTitle: FORMATTIMETITLE[item.state],
+    state: item.state,
     title: item.title,
     introduction: item.summary,
     nowNum: 2,
@@ -97,21 +98,18 @@ export function formatClubDetail(item) {
     activitiesDetails: item.content
   }
 }
-// export function formatTimerTime(state,item) {
-//   if (state == 'ready') {
-//     return moment(item.start_time).format('x')
-//   } else {
-//     return moment(item.end_time).format('x')
-//   }
-// }
 export function formatClubDetailCards(list) {
   return list.map((item,x) => this.formatClubDetailCardsItem(item,x))
 }
 export function formatClubDetailCardsItem(item,x) {
   return {
     cardName: '项目' + CHNNUMCHANGE[x+1] + '：' + item.prj_name,
-    originalPrice: item.price,
-    currentPrice: item.act_price
+    originalPrice: item.price/100,
+    currentPrice: item.act_price/100,
+    cardId: item.prj_id,
+    actPrice: item.act_price/100,
+    actId: item.act_id,
+    cardType: item.prj_type
   }
 }
 export const CHNNUMCHANGE = {

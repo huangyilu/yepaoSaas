@@ -32,14 +32,16 @@ let pageOptions = {
   },
   onShow() {
     this.getCertifiMem();
+    if (this.data.isCertificationMem) {
+      // 获取消息列表
+      this.getMessageList();
+    }
   },
   getCertifiMem(that) {
     if (AuthService.getMemberInfo()) {
       this.setData({
         isCertificationMem: true
       })
-      // 获取消息列表
-      this.getMessageList();
       console.log('*已认证会员*');
     } else {
       console.log('*未认证会员*');
