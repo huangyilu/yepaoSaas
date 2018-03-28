@@ -1,6 +1,5 @@
 <!--pages/club/memberActivitiesDetails.wxml-->
 
-<import src="../../templates/certification-box/certification-box.wxml"/>
 
 <view class='bg-view' wx:if='{{ activities != null }}'>
 
@@ -52,4 +51,4 @@
 </view>
 
 <!-- 认证弹窗 -->
-<template is='certification-box' data='{{ ...certificationBoxData  }}'/>
+<certificationModal modal-hidden="{{ is_modal_Hidden }}" modal-isCertificationMem="{{ isCertificationMem }}" /> 

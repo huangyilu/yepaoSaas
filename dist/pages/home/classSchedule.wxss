@@ -18,9 +18,8 @@
 }
 .weui-navbar__item {
     padding: 15rpx 0; 
-    margin-right: 2rpx;
+    border-right: 4rpx #0f1029 solid;
     background-color: #22233A;
-    border-style: none;
 }
 .weui-navbar__item.weui-bar__item_on {
     color: #848296;
@@ -50,4 +49,8 @@
     bottom: 0;
     background-color: white;
     z-index: 1000;
+}
+
+.padding-bottem-521rpx {
+    padding-bottom: 564rpx;
 }

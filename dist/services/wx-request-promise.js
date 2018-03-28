@@ -2,16 +2,18 @@ import Promise from '../utils/npm/bluebird.min';
 import * as appConfig from '../app-config';
 import * as AuthService from './auth-service';
 
-export function wxRequestP(method, url, contentType, data = {}, accessToken ) {
+export function wxRequestP(method, url, contentType, data = {}, accessToken, noload) {
 
-  if (contentType == 'application/json') {
-    wx.showLoading({
-      title: '加载中',
-    })
-  } else {
-    wx.showLoading({
-      title: '提交中',
-    })
+  if (!noload) {
+    if (contentType == 'application/json') {
+      wx.showLoading({
+        title: '加载中',
+      })
+    } else {
+      wx.showLoading({
+        title: '提交中',
+      })
+    }
   }
 
   if (accessToken) {
@@ -74,13 +76,18 @@ export function wxRequestP(method, url, contentType, data = {}, accessToken ) {
 
 }
 
-export function wxJsonBackendRequestP(method, endpoint, data = {}) {
+export function wxJsonBackendRequestP(method, endpoint, data = {}, noload) {
   // data.appid = appConfig.appId
-  return wxRequestP(method, appConfig.apiBase + endpoint, 'application/json', data, AuthService.certificationMemberFromServer())
+  return wxRequestP(method, appConfig.apiBase + endpoint, 'application/json', data, AuthService.certificationMemberFromServer(), noload)
 }
 
 export function wxJsonBackendGetRequestP(endpoint, data) {
   return wxJsonBackendRequestP('GET', endpoint, data)
+}
+
+// 无 弹窗 提示 正在加载中
+export function wxJsonBackendGetRequestPNoLoading(endpoint, data) {
+  return wxJsonBackendRequestP('GET', endpoint, data, 'noloading')
 }
 
 export function wxJsonBackendPostRequestP(endpoint, data) {

@@ -2,7 +2,6 @@
 
 import * as mineService from '../../services/mine-service';
 import * as AuthService from '../../services/auth-service';
-import certificationBox from '../../templates/certification-box/certification-box'
 
 /**
  * 页面的初始数据
@@ -16,6 +15,9 @@ let pageOptions = {
   data: {
     userInfo: null,
     memInfo: null,
+
+    isCertificationMem: false,
+    is_modal_Hidden: true,
 
     rightItemHidden: false,
     yItems: [
@@ -68,10 +70,7 @@ let pageOptions = {
       //   navigateUrl: '',
       //   ishidden: false
       // }
-    ],
-
-    isCertificationMem: false,
-    isCertificationMemHidden: true
+    ]
   },
 
   /**
@@ -82,13 +81,10 @@ let pageOptions = {
     this.bindGetUserInfo();
 
   },
-  onReady() {
-    certificationBox.setParent(this)
-  },
   onShow() {
     this.getCertifiMem();
   },
-  getCertifiMem(that) {
+  getCertifiMem() {
     if (AuthService.getMemberInfo()) {
       this.setData({
         isCertificationMem: true
@@ -96,8 +92,10 @@ let pageOptions = {
       // 控制 按钮显示
       this.setMyYItems();
       console.log('*已认证会员*');
+      return true;
     } else {
       console.log('*未认证会员*');
+      return false;
     }
   },
   bindClearCertiTap() {
@@ -119,9 +117,9 @@ let pageOptions = {
   },
 
   bindNavigateTap(e) {
-    if (!this.data.isCertificationMem) {
+    if (!this.getCertifiMem()) {
       this.setData({
-        'certificationBoxData.isCertificationMemHidden': false
+        is_modal_Hidden: false
       })
     } else {
       wx.navigateTo({
@@ -156,9 +154,9 @@ let pageOptions = {
 
   },
   bindCertificationTap() {
-    if (!this.data.isCertificationMem) {
+    if (!this.getCertifiMem()) {
       this.setData({
-        'certificationBoxData.isCertificationMemHidden': false
+        is_modal_Hidden: false
       })
     } else {
       
@@ -167,9 +165,9 @@ let pageOptions = {
 
   // 健身历程
   bindFitLcTap () {
-    if (!this.data.isCertificationMem) {
+    if (!this.getCertifiMem()) {
       this.setData({
-        'certificationBoxData.isCertificationMemHidden': false
+        is_modal_Hidden: false
       })
     } else {
       
@@ -177,9 +175,9 @@ let pageOptions = {
   },
   // 体测数据
   bindFitDataTap () {
-    if (!this.data.isCertificationMem) {
+    if (!this.getCertifiMem()) {
       this.setData({
-        'certificationBoxData.isCertificationMemHidden': false
+        is_modal_Hidden: false
       })
     } else {
       
@@ -189,8 +187,5 @@ let pageOptions = {
 
 
 }
-
-certificationBox.bindData(pageOptions)
-certificationBox.bindListeners(pageOptions)
 
 Page(pageOptions)

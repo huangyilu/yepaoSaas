@@ -1,6 +1,5 @@
 /* pages/home/home.wxss */
 
-
 page {
     background-color: #22233a;
 }

@@ -4,7 +4,6 @@ import moment from '../../utils/npm/moment';
 import * as clubService from '../../services/club-service';
 import * as clubdata from '../../utils/clubdata-format';
 import * as AuthService from '../../services/auth-service';
-import certificationBox from '../../templates/certification-box/certification-box'
 import { Base64 } from '../../utils/urlsafe-base64';
 
 var timer;
@@ -25,7 +24,8 @@ let pageOptions = {
     activeId: '',
     gym: null,
 
-    isCertificationMem: false
+    isCertificationMem: false,
+    is_modal_Hidden: true
   },
 
   /**
@@ -57,9 +57,6 @@ let pageOptions = {
   onUnload: function (options) {
     clearTimeout(timer);
   },
-  onReady() {
-    certificationBox.setParent(this)
-  },
   getCertifiMem() {
     if (AuthService.getMemberInfo()) {
       this.setData({
@@ -70,7 +67,7 @@ let pageOptions = {
       console.log('*未认证会员*');
     }
     this.setData({
-      'certificationBoxData.isCertificationMemHidden': true
+      is_modal_Hidden: true
     })
   },
 
@@ -178,7 +175,7 @@ let pageOptions = {
         // 未认证 会员
         // 请求 微信授权
         this.getWXAuthorization();
-        // 请求会员认证
+        // 请求 会员认证
         this.getMyCertification();
         console.log('未认证 会员 .. ');
       }
@@ -197,7 +194,7 @@ let pageOptions = {
   // 请求会员认证
   getMyCertification() {
     this.setData({
-      'certificationBoxData.isCertificationMemHidden': false
+      is_modal_Hidden: false
     })
   },
   /**
@@ -222,8 +219,5 @@ let pageOptions = {
     }
   }
 }
-
-certificationBox.bindData(pageOptions)
-certificationBox.bindListeners(pageOptions)
 
 Page(pageOptions)

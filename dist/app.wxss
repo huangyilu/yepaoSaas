@@ -1,7 +1,7 @@
 /**app.wxss**/
 
 @import 'styles/weui.wxss';
-@import 'styles/icon.wxss';
+
 @import 'templates/star-item/star-item.wxss';
 @import 'templates/empty-view/empty-view.wxss';
 @import 'templates/imgText-item/imgText-item.wxss';
@@ -10,7 +10,6 @@
 @import 'templates/article-item/article-item.wxss';
 @import 'templates/search-item/search-item.wxss';
 @import 'templates/remind-box/remind-box.wxss';
-@import 'templates/certification-box/certification-box.wxss';
 
 @import 'utils/weSwiper/weSwiper.wxss';
 
@@ -20,8 +19,6 @@
 /* 最底层深色 背景色 #0f1029 */
 /* 页面 背景色 #22233a */
 /* 灰色文字 #848296 */
-
-
 
 page {
     width: 100%;
@@ -57,21 +54,12 @@ page {
     text-align: center;
     background-color: #FF904C;
     color: white;
-    /* display: -webkit-box;
-    display: -webkit-flex;
-    display: flex; */
 }
 .foot-view .left-btn {
     background-color: #2F2D45;
-    /* -webkit-box-flex:1;
-    -webkit-flex:1;
-    flex:1; */
 }
 .foot-view .right-btn {
     background-color: #FF904C;
-    /* -webkit-box-flex:1;
-    -webkit-flex:1;
-    flex:1; */
 }
 
 /* 弹窗背景 */
@@ -99,6 +87,22 @@ page {
     color: white;
 }
 
+/* 向右按钮 */
+.right-icon {
+    width: 20rpx;
+    height: 35rpx;
+    float: right;
+    margin-top: 45rpx;
+    margin-right: 30rpx;
+}
+
+/* 圆形 打钩 */
+.checked-icon {
+    width: 30rpx;
+    height: 30rpx;
+    float: right;
+    margin-top: 33rpx;
+}
 
 /* 字体 大小 */
 .fs36 {
@@ -190,4 +194,13 @@ page {
     background-color: #22233A;
     padding: 10rpx 30rpx;
     margin-top: 20rpx;
+}
+
+/* 加载更多 */
+.weui-loadmore_line {
+    border-top:1px solid #848296;
+}
+.weui-loadmore__tips_in-line {
+    background-color: #0f1029;
+    color: #848296;
 }

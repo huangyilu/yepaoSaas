@@ -1,6 +1,5 @@
 <!--pages/club/club.wxml-->
 
-<import src="../../templates/certification-box/certification-box.wxml"/>
 <import src="../../templates/club-item/club-item.wxml"/>
 
 <view class='bg-view'>
@@ -18,7 +17,7 @@
     </swiper-item>
   </block>
   </swiper>
-
+ 
   <!-- item --> 
   <view class='club-item-view'>
     <view class='weui-flex'>
@@ -41,12 +40,23 @@
     <view >
       <template is='club-item' data='{{ clubList }}'/>
     </view>
+
+    <!-- 上拉加载 内容 提示 -->
+    <view class="weui-loadmore" hidden='{{ loadMoreHidden }}'>
+      <view class="weui-loading"></view>
+      <view class="weui-loadmore__tips">正在加载</view>
+    </view>
+    <!-- 到底 提示 -->
+    <view class="weui-loadmore weui-loadmore_line" hidden='{{ loadMoreRemaindHidden }}'>
+      <view class="weui-loadmore__tips weui-loadmore__tips_in-line">到底啦</view>
+    </view>
+
   </view>
 
-  <view wx:else class='empty-view'>暂无推荐活动</view>
+  <view hidden='{{ clubList.length > 0 }}' class='empty-view'>暂无推荐活动</view>
 
 
 </view>
 
 <!-- 认证弹窗 -->
-<template is='certification-box' data='{{ ...certificationBoxData  }}'/>
+<certificationModal modal-hidden="{{ is_modal_Hidden }}" modal-isCertificationMem="{{ isCertificationMem }}" />  

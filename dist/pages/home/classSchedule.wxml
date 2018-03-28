@@ -54,7 +54,7 @@
 <!-- 选项三 结束 -->
 
 <!-- 选项四 开始 -->
-    <view class="weui-tab__content" hidden="{{ activeIndex != 3 }}">
+    <view class="weui-tab__content padding-bottem-521rpx" hidden="{{ activeIndex != 3 }}">
       <!-- 选项四 内容 -->
       <template wx:if='{{ courseList.length > 0 }}' is="classCalendar-item" data="{{ courseList }}"/> 
       <!-- 无 更多 -->

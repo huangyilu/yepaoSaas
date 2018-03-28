@@ -4,7 +4,6 @@ import * as AuthService from '../../services/auth-service';
 import * as messageService from '../../services/message-service';
 import * as messagedata from '../../utils/messagedata-format';
 import moment from '../../utils/npm/moment';
-import certificationBox from '../../templates/certification-box/certification-box'
 
   /**
    * 页面的初始数据
@@ -18,7 +17,7 @@ let pageOptions = {
     articleItems: [],
 
     isCertificationMem: false,
-    isCertificationMemHidden: true
+    is_modal_Hidden: true
   },
 
   /**
@@ -26,9 +25,6 @@ let pageOptions = {
    */
   onLoad: function (options) {
 
-  },
-  onReady() {
-    certificationBox.setParent(this)
   },
   onShow() {
     this.getCertifiMem();
@@ -48,10 +44,18 @@ let pageOptions = {
     }
   },
   getMessageList() {
-    messageService.quaryMessage().then((result) => {
-
+    messageService.quaryMessage('load').then((result) => {
+ 
       this.setData({
         articleItems: messagedata.formatMessageList(result.result)
+      })
+
+      result.result.forEach(item => {
+        if (item.totalNum < 0) {
+          wx.hideTabBarRedDot({
+            index: 2
+          });
+        }
       })
 
     }).catch((error) => {
@@ -63,7 +67,7 @@ let pageOptions = {
 
     if (!this.data.isCertificationMem) {
       this.setData({
-        'certificationBoxData.isCertificationMemHidden': false
+        is_modal_Hidden: false
       })
     } else {
       wx.navigateTo({
@@ -73,8 +77,5 @@ let pageOptions = {
 
   }
 }
-
-certificationBox.bindData(pageOptions)
-certificationBox.bindListeners(pageOptions)
 
 Page(pageOptions)

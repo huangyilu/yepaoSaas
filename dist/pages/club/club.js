@@ -3,7 +3,6 @@
 import * as AuthService from '../../services/auth-service';
 import * as clubService from '../../services/club-service';
 import * as clubdata from '../../utils/clubdata-format';
-import certificationBox from '../../templates/certification-box/certification-box'
 
   /**
    * 页面的初始数据
@@ -17,7 +16,10 @@ let pageOptions = {
     clubListPageIndex: 1,
 
     isCertificationMem: false,
-    isCertificationMemHidden: true
+    is_modal_Hidden: true,
+
+    loadMoreHidden: true,
+    loadMoreRemaindHidden: true
   },
 
   /**
@@ -25,14 +27,11 @@ let pageOptions = {
    */
   onLoad: function (options) {
   },
-  onReady: function (options) {
-    certificationBox.setParent(this)
-  },
   onShow: function (options) {
     this.getCertifiMem();
     if (this.data.isCertificationMem) {
-      // 获取消息列表
-      this.getClubList();
+      // 获取 活动列表
+      this.getClubList('load');
     }
   },
   onUnload: function (options) {
@@ -47,7 +46,7 @@ let pageOptions = {
       clubListPageIndex: 1
     })
   },
-  getCertifiMem(that) {
+  getCertifiMem() {
     if (AuthService.getMemberInfo()) {
       this.setData({
         isCertificationMem: true
@@ -65,23 +64,28 @@ let pageOptions = {
     var clubListPageIndex = this.data.clubListPageIndex;
     clubListPageIndex ++;
     this.setData({
-      clubListPageIndex: clubListPageIndex
+      clubListPageIndex: clubListPageIndex,
+      loadMoreHidden: false
     })
 
     if (this.data.isCertificationMem) {
-      this.getClubList();
+      this.getClubList('noload');
     }
   },
 
   // 查询推荐活动
-  getClubList() {
-    clubService.quaryClubList(this.data.clubListPageIndex, 'N').then((result) => {
+  getClubList(noload) {
+    clubService.quaryClubList(this.data.clubListPageIndex, 'N', noload).then((result) => {
       this.setData({
         clubList: clubdata.formatClubList(result.result, this.data.clubList),
         swiperImgUrls: result.clubImages
       })
     }).catch((error) => {
       console.log(error);
+      this.setData({
+        loadMoreHidden: true,
+        loadMoreRemaindHidden: false
+      })
     })
   },
 
@@ -92,7 +96,7 @@ let pageOptions = {
       })
     } else {
       this.setData({
-        'certificationBoxData.isCertificationMemHidden': false
+        is_modal_Hidden: false
       })
     }
   },
@@ -103,7 +107,7 @@ let pageOptions = {
       })
     } else {
       this.setData({
-        'certificationBoxData.isCertificationMemHidden': false
+        is_modal_Hidden: false
       })
     }
   },
@@ -115,13 +119,10 @@ let pageOptions = {
       })
     } else {
       this.setData({
-        'certificationBoxData.isCertificationMemHidden': false
+        is_modal_Hidden: false
       })
     }
   }
 }
-
-certificationBox.bindData(pageOptions)
-certificationBox.bindListeners(pageOptions)
 
 Page(pageOptions)

@@ -21,17 +21,31 @@ import {
 }
   from 'wx-request-promise';
 
+import {
+  wxJsonBackendGetRequestPNoLoading as jsonGetRequestNoload
+}
+  from 'wx-request-promise';
+
 // 俱乐部 首页 forMem: 传Y查询会员活动 ,传N查询首页的活动
-export function quaryClubList(pageNum, forMem) {
-  return jsonGetRequest('yp-xcx-getActivePageInfo', {
-    custName: appConfig.custName,
-    gym: AuthService.getMemberInfo().gym,
-    // gym: 'zjs',
-    // memId: '5a5ee39e3782b10c1846340c',
-    memId: AuthService.getMemberInfo().memId,
-    pageNum: pageNum,
-    forMem: forMem
-  })
+export function quaryClubList(pageNum, forMem, noload) {
+
+  if (noload == 'noload') {
+    return jsonGetRequestNoload('yp-xcx-getActivePageInfo', {
+      custName: appConfig.custName,
+      gym: AuthService.getMemberInfo().gym,
+      memId: AuthService.getMemberInfo().memId,
+      pageNum: pageNum,
+      forMem: forMem
+    })
+  } else {
+    return jsonGetRequest('yp-xcx-getActivePageInfo', {
+      custName: appConfig.custName,
+      gym: AuthService.getMemberInfo().gym,
+      memId: AuthService.getMemberInfo().memId,
+      pageNum: pageNum,
+      forMem: forMem
+    })
+  }
 }
 
 // 俱乐部动态
